@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="hy">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>REPLAST ARMENIA — SWOT & Porter 5 Forces Analytics</title>
+<!-- Подключение MathJax для безупречного рендеринга формул -->
+<script>
+  MathJax = {
+    tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] },
+    svg: { fontCache: 'global' }
+  };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+  :root {
+    --green: #36D66B;
+    --deep-green: #0A8F55;
+    --lime: #B7F36B;
+    --bg-dark: #07100C;
+    --card-bg: #11201A;
+    --border: #1B3329;
+    --text-light: #EAF2EE;
+    --text-dim: #A9B7B0;
+    --red: #FF5A5A;
+    --amber: #E6A100;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; touch-action: manipulation; }
+  body {
+    font-family: system-ui, -apple-system, sans-serif;
+    background: var(--bg-dark);
+    color: var(--text-light);
+    height: 100vh;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  #viewport {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    padding: 15px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .slide.active {
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 10;
+  }
+
+  header {
+    height: 50px;
+    background: #0b1711;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
+    flex-shrink: 0;
+  }
+  .logo { font-weight: 800; font-size: 16px; color: #fff; }
+  .logo span { color: var(--green); }
+
+  footer {
+    height: 60px;
+    background: #0b1711;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
+    flex-shrink: 0;
+  }
+
+  .nav-btn {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    color: var(--text-light);
+    padding: 10px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 13px;
+  }
+  .nav-btn:active { background: var(--border); }
+  .nav-btn.primary { background: var(--green); color: #04120a; border: none; }
+
+  .dots-container {
+    display: flex;
+    gap: 4px;
+    max-width: 40%;
+    overflow-x: auto;
+    padding: 4px;
+  }
+  .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--border);
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .dot.active { background: var(--green); transform: scale(1.3); }
+
+  h1 { font-size: 24px; color: var(--green); margin-bottom: 6px; }
+  h2 { font-size: 18px; color: #fff; margin-bottom: 12px; border-bottom: 2px solid var(--deep-green); padding-bottom: 4px; }
+  p, li { font-size: 13px; color: var(--text-dim); line-height: 1.5; }
+
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  @media (max-width: 768px) { 
+    .grid2, .grid3 { grid-template-columns: 1fr; }
+    .slide { padding: 12px; }
+  }
+
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px;
+  }
+  .card.highlight { border-color: var(--green); }
+
+  .table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11px;
+    margin-top: 6px;
+    min-width: 480px;
+  }
+  th, td {
+    padding: 6px 8px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  th { background: rgba(54, 214, 107, 0.1); color: var(--green); }
+
+  .badge {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: bold;
+  }
+  .badge.green { background: rgba(54, 214, 107, 0.2); color: var(--green); }
+  .badge.amber { background: rgba(230, 161, 0, 0.2); color: var(--amber); }
+  .badge.red { background: rgba(255, 90, 90, 0.2); color: var(--red); }
+
+  @media print {
+    body { overflow: visible; height: auto; background: #fff; color: #000; }
+    header, footer { display: none !important; }
+    .slide { position: relative !important; opacity: 1 !important; page-break-after: always; height: 100vh; background: #fff !important; color: #000 !important; }
+    .card { background: #f9f9f9 !important; border-color: #ddd !important; color: #000 !important; }
+    h1, h2, th { color: #008040 !important; }
+    p, li, td { color: #333 !important; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">REPLAST <span>ARMENIA</span></div>
+  <div id="slide-title" style="font-size: 11px; color: var(--text-dim)">1 / 14</div>
+</header>
+
+<main id="viewport">
+
+  <!-- Slide 1: Executive Summary -->
+  <section class="slide active">
+    <div>
+      <h1>REPLAST ARMENIA</h1>
+      <p style="font-size: 14px; color: #fff;">Արդյունաբերական վերամշակում և շրջանային արտադրություն</p>
+      <hr style="border-color: var(--border); margin: 10px 0;">
+      
+      <div class="grid2">
+        <div class="card highlight">
+          <h2 style="font-size: 15px;">Նախագծի Անձնագիր</h2>
+          <ul>
+            <li><b>Հեղինակ:</b> Հրաչյա Ասլանյան (NPUA, 3-րդ կուրս)</li>
+            <li><b>Տեղադրություն:</b> Մ2 մայրուղի (Երևանից 24–28 կմ)</li>
+            <li><b>Հողամաս / Շինություն:</b> 12,000 մ² / ~8,400 մ²</li>
+            <li><b>Արտադրական հզորություն:</b> 100–500 տոննա/ամիս</li>
+            <li><b>Աշխատակազմ:</b> 45–60 աշխատակից (2 հերթափոխ)</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h2 style="font-size: 15px;">Ինժեներական Ռեսուրսներ</h2>
+          <ul>
+            <li><b>Էլեկտրաէներգիա:</b> 450 կՎտ տեղակայված (180–260 կՎտ աշխ.)</li>
+            <li><b>Ջրամատակարարում:</b> 15 մ³/ժ (85% փակ շրջանառություն)</li>
+            <li><b>Գոլորշի / Օդ:</b> ~1.2 տ/ժ գոլորշի, 6 բար սեղմված օդ</li>
+            <li><b>Թիրախային պոլիմերներ:</b> PET, HDPE, LDPE, PP, PS</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 2: Mathematical Foundation -->
+  <section class="slide">
+    <div>
+      <h2>Մաթեմատիկական Մոդելը և Բանաձևերը</h2>
+      <div class="grid2">
+        <div class="card">
+          <h3>1. Կշիռներ և Ռեյտինգներ</h3>
+          <p>• Կշիռների նորմավորում: $\sum_{i=1}^{n} w_i = 1.0$</p>
+          <p>• IFE/EFE Ռեյտինգային սանդղակ: $r_i \in \{1, 2, 3, 4\}$</p>
+          <p>• Կշռված միավոր: $WS_i = w_i \times r_i$</p>
+          <p>• Ինտեգրալ ցուցանիշներ: $S_{\text{IFE}} = \sum WS_i$, $S_{\text{EFE}} = \sum WS_j$</p>
+        </div>
+        <div class="card highlight">
+          <h3>2. Ռազմավարական Վեկտոր</h3>
+          <p>• $X = \sum WS_{\text{Strengths}} - \sum WS_{\text{Weaknesses}}$</p>
+          <p>• $Y = \sum WS_{\text{Opportunities}} - \sum WS_{\text{Threats}}$</p>
+          <p>• Վեկտորի մոդուլ: $R = \sqrt{X^2 + Y^2}$</p>
+          <p>• Անկյուն: $\theta = \arctan(Y / X) \times (180^\circ / \pi)$</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 3: IFE Matrix -->
+  <section class="slide">
+    <div>
+      <h2>IFE Մատրիցա (Internal Factor Evaluation)</h2>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Ներքին Գործոն</th>
+              <th>Կշիռ ($w$)</th>
+              <th>Ռեյտինգ ($r$)</th>
+              <th>Կշռված ($WS$)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>S1</td><td>Փակ ցիկլով արտադրություն (թափոնից պատրաստի ապրանք)</td><td>0.12</td><td>4</td><td>0.48</td></tr>
+            <tr><td>S2</td><td>14 տեխնոլոգիական գոտիներ (NIR օպտիկա, 120 բար ֆիլտր)</td><td>0.10</td><td>4</td><td>0.40</td></tr>
+            <tr><td>S3</td><td>Լվացում և ցենտրիֆուգային չորացում (&lt;0.2% խոնավ.)</td><td>0.08</td><td>4</td><td>0.32</td></tr>
+            <tr><td>S4</td><td>85% փակ շրջանառու ջրամատակարարում</td><td>0.07</td><td>3</td><td>0.21</td></tr>
+            <tr><td>S5</td><td>Սեփական QC Լաբորատորիա (MFI, density)</td><td>0.06</td><td>4</td><td>0.24</td></tr>
+            <tr><td>S6</td><td>Դիվերսիֆիկացված պորտֆել (սալիկներ, պալետներ, արկղեր)</td><td>0.07</td><td>4</td><td>0.28</td></tr>
+            <tr><td>S7</td><td>Օպտիմալ տեղադրություն (Մ2, Երևանից 24–28 կմ)</td><td>0.05</td><td>3</td><td>0.15</td></tr>
+            <tr><td>S8</td><td>Ռեգիոնալ հումքային ապահովվածություն (100–500 տ/ամ)</td><td>0.05</td><td>3</td><td>0.15</td></tr>
+            <tr><td>W1</td><td>Կախվածություն հումքի մաքրությունից</td><td>0.10</td><td>2</td><td>0.20</td></tr>
+            <tr><td>W2</td><td>Բարձր էներգատարություն (450 կՎտ)</td><td>0.09</td><td>2</td><td>0.18</td></tr>
+            <tr><td>W3</td><td>Ակադեմիական/ստարտափ սկզբնական կարգավիճակ</td><td>0.08</td><td>2</td><td>0.16</td></tr>
+            <tr><td>W4</td><td>Սկզբնական կապիտալ ծախսերի (CAPEX) բարձր մակարդակ</td><td>0.06</td><td>1</td><td>0.06</td></tr>
+            <tr><td>W5</td><td>PVC-ի առկայության ռիսկ (&gt;160°C HCl անջատում)</td><td>0.07</td><td>2</td><td>0.14</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="margin-top: 8px;" class="card highlight">
+        <b>Ընդհանուր IFE Գումար ($S_{\text{IFE}}$): 2.97</b> (Գերազանցում է 2.50 միջին շեմը)
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 4: EFE Matrix -->
+  <section class="slide">
+    <div>
+      <h2>EFE Մատրիցա (External Factor Evaluation)</h2>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Արտաքին Գործոն</th>
+              <th>Կշիռ ($w$)</th>
+              <th>Ռեյտինգ ($r$)</th>
+              <th>Կշռված ($WS$)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>O1</td><td>Շինարարական և բարեկարգման ապրանքների աճող պահանջարկ</td><td>0.14</td><td>4</td><td>0.56</td></tr>
+            <tr><td>O2</td><td>Ներմուծման փոխարինում (պալետներ, արկղեր)</td><td>0.12</td><td>4</td><td>0.48</td></tr>
+            <tr><td>O3</td><td>Ագրոսեկտորի հետ երկարաժամկետ պայմանագրեր</td><td>0.10</td><td>3</td><td>0.30</td></tr>
+            <tr><td>O4</td><td>Պետական էկոլոգիական և ESG ծրագրեր</td><td>0.09</td><td>3</td><td>0.27</td></tr>
+            <tr><td>O5</td><td>Արտադրական հզորությունների մասշտաբավորում (3,600 մ²)</td><td>0.07</td><td>3</td><td>0.21</td></tr>
+            <tr><td>O6</td><td>Կանաչ ֆինանսավորման և դրամաշնորհների հասանելիություն</td><td>0.08</td><td>3</td><td>0.24</td></tr>
+            <tr><td>T1</td><td>Հումքի մատակարարման սեզոնայնություն</td><td>0.11</td><td>2</td><td>0.22</td></tr>
+            <tr><td>T2</td><td>Առաջնային պոլիմերների համաշխարհային գների տատանում</td><td>0.10</td><td>2</td><td>0.20</td></tr>
+            <tr><td>T3</td><td>Էլեկտրաէներգիայի սակագների աճ</td><td>0.08</td><td>2</td><td>0.16</td></tr>
+            <tr><td>T4</td><td>Աղտոտված հումքի մուտք արտադրական գիծ</td><td>0.06</td><td>2</td><td>0.12</td></tr>
+            <tr><td>T5</td><td>Օրենսդրական և կարգավորող փոփոխություններ</td><td>0.05</td><td>2</td><td>0.10</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="margin-top: 8px;" class="card highlight">
+        <b>Ընդհանուր EFE Գումար ($S_{\text{EFE}}$): 2.86</b> (Արդյունավետ արձագանք արտաքին միջավայրին)
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 5: IE Matrix System -->
+  <section class="slide">
+    <div>
+      <h2>Ռազմավարական Վեկտոր և IE Մատրիցա</h2>
+      <div class="grid2">
+        <div class="card">
+          <h3>Վեկտորի Հաշվարկ</h3>
+          <p>• $X = \sum WS_S - \sum WS_W = 2.23 - 0.74 = \mathbf{+1.49}$</p>
+          <p>• $Y = \sum WS_O - \sum WS_T = 2.06 - 0.80 = \mathbf{+1.26}$</p>
+          <p>• Մոդուլ $R = \sqrt{1.49^2 + 1.26^2} \approx \mathbf{1.95}$</p>
+          <p>• Անկյուն $\theta = \arctan(1.26 / 1.49) \approx \mathbf{40.22^\circ}$</p>
+          <br>
+          <span class="badge green">I ՔՎԱԴՐԱՆՏ: SO — ԱԳՐԵՍԻՎ ԱՃ</span>
+        </div>
+        <div class="card highlight" style="text-align: center;">
+          <svg viewBox="0 0 200 160" style="width: 100%; max-width: 240px;">
+            <line x1="20" y1="140" x2="180" y2="140" stroke="#1B3329" stroke-width="2"/>
+            <line x1="20" y1="140" x2="20" y2="20" stroke="#1B3329" stroke-width="2"/>
+            <line x1="20" y1="140" x2="130" y2="50" stroke="#36D66B" stroke-width="3"/>
+            <circle cx="130" cy="50" r="5" fill="#B7F36B"/>
+            <text x="105" y="40" fill="#36D66B" font-size="9" font-weight="bold">(+1.49, +1.26)</text>
+            <text x="100" y="155" fill="#A9B7B0" font-size="8">X (Ներքին Ուժ)</text>
+            <text x="5" y="80" fill="#A9B7B0" font-size="8" transform="rotate(-90 10 80)">Y (Արտաքին Հնարավ.)</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 6: TOWS Strategic Combinations -->
+  <section class="slide">
+    <div>
+      <h2>TOWS Ռազմավարական Կոմբինացիաներ</h2>
+      <div class="grid2">
+        <div class="card">
+          <span class="badge green">SO Ռազմավարություն (Ագրեսիվ)</span>
+          <p style="margin-top: 6px;"><b>SO-1:</b> rHDPE սալիկների, պալետների և rPP արկղերի զանգվածային արտադրություն շինարարական և լոգիստիկ ոլորտների համար:</p>
+          <p style="margin-top: 6px;"><b>SO-2:</b> Ագրոսեկտորից (Արմավիր, Արարատ) կաթիլային ժապավենների հավաքում և rLDPE թերթերի թողարկում:</p>
+        </div>
+        <div class="card">
+          <span class="badge amber">WO Ռազմավարություն (Վերափոխում)</span>
+          <p style="margin-top: 6px;"><b>WO-1:</b> Արտադրամասի 3,600 մ² ազատ տարածքում արևային (PV) կայանի տեղադրում՝ էներգիայի ծախսերը կրճատելու համար:</p>
+          <p style="margin-top: 6px;"><b>WO-2:</b> NIR օպտիկական տեսակավորման ավտոմատացում՝ PVC-ի մուտքը բացառելու համար:</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 7: QSPM Matrix -->
+  <section class="slide">
+    <div>
+      <h2>QSPM Մատրիցա (Քանակական Ռազմավարական Պլանավորում)</h2>
+      <p>Համեմատություն: <b>Strat A</b> (Պատրաստի արտադրանք) vs <b>Strat B</b> (Միայն вторичная гранула)</p>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Գործոն</th>
+              <th>Կշիռ</th>
+              <th>Strat A (AS)</th>
+              <th>Strat A (TAS)</th>
+              <th>Strat B (AS)</th>
+              <th>Strat B (TAS)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>S1: Փակ ցիկլ</td><td>0.12</td><td>4</td><td>0.48</td><td>2</td><td>0.24</td></tr>
+            <tr><td>S2: 14 տեխ. գոտի</td><td>0.10</td><td>4</td><td>0.40</td><td>3</td><td>0.30</td></tr>
+            <tr><td>O1: Շին. պահանջարկ</td><td>0.14</td><td>4</td><td>0.56</td><td>2</td><td>0.28</td></tr>
+            <tr><td>O2: Ներմուծման փոխարինում</td><td>0.12</td><td>4</td><td>0.48</td><td>2</td><td>0.24</td></tr>
+            <tr><td>T2: Հումքի գներ</td><td>0.10</td><td>4</td><td>0.40</td><td>1</td><td>0.10</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="grid2" style="margin-top: 10px;">
+        <div class="card highlight"><b>Strat A TAS: 3.20</b> (Ընտրված Ռազմավարություն)</div>
+        <div class="card"><b>Strat B TAS: 1.72</b></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 8: Factory Flow Diagram -->
+  <section class="slide">
+    <div>
+      <h2>Արտադրական Գծի 14 Գոտիները</h2>
+      <div class="card" style="font-family: monospace; font-size: 11px; line-height: 1.6; overflow-x: auto;">
+        [01. Ընդունում] ➔ [02. Հումքի Պահեստ] ➔ [03. NIR Տեսակավորում] ➔ [04. Մանրացում (20-40մմ)]<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<br>
+        [08. Էքստրուզիա]  [07. Չորացում (&lt;0.2%)]  [06. Ֆլոտացիա]  [05. Տաք Լվացում]<br>
+        |<br>
+        v<br>
+        [09. Ֆիլտրացիա (120բար)] ➔ [10. Գրանուլացում] ➔ [11. Կոմպաունդ] ➔ [12. Կաղապարում]<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<br>
+        [14. Լոգիստիկա/Առաքում]  [13. Պատրաստի Պահեստ] +
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 9: Roadmap -->
+  <section class="slide">
+    <div>
+      <h2>Ճանապարհային Քարտեզ (Roadmap Q1–Q4)</h2>
+      <div class="grid2">
+        <div class="card">
+          <span class="badge green">Q1 (Ամիս 1–3)</span>
+          <p>• 12,000 մ² հողամասի նախագծում</p>
+          <p>• 450 կՎտ էլեկտրաէներգիայի և ջրագծի միացում</p>
+          <br>
+          <span class="badge green">Q2 (Ամիս 4–6)</span>
+          <p>• 14 արտադրական հանգույցների մոնտաժ</p>
+          <p>• QC Լաբորատորիայի համալրում</p>
+        </div>
+        <div class="card highlight">
+          <span class="badge green">Q3 (Ամիս 7–9)</span>
+          <p>• 200 տ/ամիս հավաքման պայմանագրերի կնքում</p>
+          <p>• Գծի թեստային գործարկում</p>
+          <br>
+          <span class="badge green">Q4 (Ամիս 10–12)</span>
+          <p>• 161 տ/ամիս պատրաստի արտադրանքի թողարկում</p>
+          <p>• Արևային (PV) կայանի նախագծում</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 10: Porter 5 Forces Methodology -->
+  <section class="slide">
+    <div>
+      <h2>Մայքլ Պորտերի 5 Ուժերի Մոդելը</h2>
+      <p style="margin-bottom: 8px;">Գործնական հաշվարկային աշխատանք. REPLAST ARMENIA-ի մրցակցային միջավայրի գնահատում</p>
+      
+      <div class="grid2">
+        <div class="card highlight">
+          <h3>Հաշվարկման Մեթոդաբանություն</h3>
+          <p>1. Յուրաքանչյուր ուժ գնահատվում է 1–5 բալով (1 = շատ թույլ, 5 = շատ ուժեղ):</p>
+          <p>2. Սահմանվում են կշիռներ ($w_i$), որտեղ $\sum w_i = 1.0$:</p>
+          <p>3. Կշռված գնահատում. $S_i = w_i \times R_i$:</p>
+          <p>4. Մրցակցային ճնշման ինդեքս. $\text{PCI} = \sum (w_i \times R_i)$:</p>
+        </div>
+        <div class="card">
+          <h3>PCI Ինդեքսի Մեկնաբանման Սանդղակ</h3>
+          <p>• <span class="badge green">1.00 – 2.33</span> : Ցածր մրցակցային ճնշում</p>
+          <p>• <span class="badge amber">2.34 – 3.66</span> : Միջին մրցակցային ճնշում</p>
+          <p>• <span class="badge red">3.67 – 5.00</span> : Բարձր մրցակցային ճնշում</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 11: Porter 5 Forces Criteria Justification -->
+  <section class="slide">
+    <div>
+      <h2>5 Ուժերի Չափանիշները (REPLAST ARMENIA)</h2>
+      <div class="grid2">
+        <div class="card">
+          <p><b>1. Նոր մրցակիցների մուտք ($R_1 = 2$, Թույլ):</b> Բարձր CAPEX, 14 տեխնոլոգիական գոտի, $450\text{ կՎտ}$ էներգիա, NIR օպտիկական տեսակավորում և լաբորատոր QC:</p>
+          <p style="margin-top: 6px;"><b>2. Մատակարարների ուժ ($R_2 = 3$, Միջին):</b> Հումքի (PET, HDPE, PP) հավաքման սեզոնայնություն, բայց REPLAST-ը խոշոր գնորդ է 4 մարզերում:</p>
+          <p style="margin-top: 6px;"><b>3. Գնորդների ուժ ($R_3 = 3$, Միջին):</b> Շինարարական և լոգիստիկ ոլորտների գնային զգայունություն, սակայն պատրաստի արտադրանքը փոխարինում է թանկ ներմուծմանը:</p>
+        </div>
+        <div class="card highlight">
+          <p><b>4. Փոխարինողների սպառնալիք ($R_4 = 3$, Միջին):</b> Ավանդական բետոնե սալիկներ և փայտե պալետներ: rHDPE կոմպոզիտն ունի ավելի բարձր ամրություն (F300+) և երկարակեցություն (&gt;25 տարի):</p>
+          <p style="margin-top: 6px;"><b>5. Գործող մրցակցություն ($R_5 = 2$, Թույլ-Միջին):</b> Հայաստանում փոքր վերամշակողները վաճառում են էժան փաթիլ/գրանուլ: Պատրաստի արտադրանք թողարկող փակ ցիկլով մրցակիցները գրեթե բացակայում են:</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 12: Porter Calculation Table -->
+  <section class="slide">
+    <div>
+      <h2>Պորտերի 5 Ուժերի Հաշվարկային Աղյուսակ</h2>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Մրցակցային Ուժ</th>
+              <th>Կշիռ ($w$)</th>
+              <th>Բալ ($R$)</th>
+              <th>Կշռված Բալ ($w \times R$)</th>
+              <th>Մեկնաբանություն</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1. Նոր մրցակիցների մուտքի սպառնալիք</td>
+              <td>0.15</td>
+              <td>2</td>
+              <td>0.30</td>
+              <td>Բարձր մուտքային պատնեշներ (CAPEX/NIR)</td>
+            </tr>
+            <tr>
+              <td>2. Մատակարարների բանակցային ուժ</td>
+              <td>0.20</td>
+              <td>3</td>
+              <td>0.60</td>
+              <td>Սեզոնայնություն, բաշխված հավաքման ցանց</td>
+            </tr>
+            <tr>
+              <td>3. Գնորդների բանակցային ուժ</td>
+              <td>0.25</td>
+              <td>3</td>
+              <td>0.75</td>
+              <td>Ներմուծման փոխարինման բարձր պահանջարկ</td>
+            </tr>
+            <tr>
+              <td>4. Փոխարինող ապրանքների սպառնալիք</td>
+              <td>0.15</td>
+              <td>3</td>
+              <td>0.45</td>
+              <td>Բետոնե/փայտե ավանդական այլընտրանքներ</td>
+            </tr>
+            <tr>
+              <td>5. Գործող մրցակիցների մրցակցություն</td>
+              <td>0.25</td>
+              <td>2</td>
+              <td>0.50</td>
+              <td>Փակ ցիկլով պատրաստի ապրանքի ցածր մրցակցություն</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <div class="card highlight" style="margin-top: 10px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+        <div>
+          <b>ԸՆԴԱՄԵՆԸ (PCI Index):</b>
+          <span style="font-size: 16px; color: var(--green); margin-left: 8px;"><b>2.60</b> / 5.00</span>
+        </div>
+        <div>
+          <span class="badge amber" style="font-size: 12px; padding: 4px 8px;">ՄՐՑԱԿՑԱՅԻՆ ՃՆՇՈՒՄԸ՝ ՄԻՋԻՆ (MODERATE)</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 13: Porter Interpretation & Sensitivity -->
+  <section class="slide">
+    <div>
+      <h2>Արդյունքների Մեկնաբանություն և Զգայունություն</h2>
+      
+      <div class="grid2">
+        <div class="card">
+          <h3>Արդյունքների Մեկնաբանություն</h3>
+          <p>• <b>PCI = 2.60</b> ցույց է տալիս, որ REPLAST ARMENIA-ն գտնվում է <b>բարենպաստ միջին մրցակցային միջավայրում</b>:</p>
+          <p>• <b>Ամենաուժեղ գործոնները:</b> Գնորդների ուժ ($0.75$) և Մատակարարների ուժ ($0.60$):</p>
+          <p>• <b>Ամենաթույլ սպառնալիքը:</b> Նոր մրցակիցների մուտքը ($0.30$), ինչը պաշտպանված է տեխնոլոգիական բարդությամբ:</p>
+        </div>
+        
+        <div class="card highlight">
+          <h3>Զգայունության Վերլուծություն («Ինչ կլինի, եթե...»)</h3>
+          <p><b>Սցենար 1:</b> Եթե գնորդների ճնշումը աճի $3$-ից մինչև $4$, ապա.</p>
+          <p style="color: var(--green);">$\text{Նոր PCI} = 2.60 - (0.25 \times 3) + (0.25 \times 4) = \mathbf{2.85}$</p>
+          <p><b>Սցենար 2:</b> Եթե հումքի մրցակցությունը աճի $2$-ից մինչև $4$, ապա.</p>
+          <p style="color: var(--green);">$\text{Նոր PCI} = 2.60 - (0.25 \times 2) + (0.25 \times 4) = \mathbf{3.10}$</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 14: Strategic Steps & Conclusion -->
+  <section class="slide">
+    <div>
+      <h2>3 Ռազմավարական Քայլեր և Եզրակացություն</h2>
+      
+      <div class="grid3">
+        <div class="card highlight">
+          <span class="badge green">ՔԱՅԼ 1</span>
+          <h3 style="margin: 6px 0;">Երկարաժամկետ Հումքային Դաշինքներ</h3>
+          <p>Արմավիրի, Արարատի ֆերմերների և Երևանի ցանցերի հետ $100\text{--}500\text{ տ/ամ}$ հումքի երաշխավորված հոսքերի պայմանագրերի կնքում:</p>
+        </div>
+        
+        <div class="card highlight">
+          <span class="badge green">ՔԱՅԼ 2</span>
+          <h3 style="margin: 6px 0;">Ապրանքային Տարբերակում (F300+)</h3>
+          <p>Շեշտադրում բետոնից ավելի ամուր rHDPE սալիկների և $4000\text{ կգ}$ դիմացկունությամբ պալետների թողարկման վրա:</p>
+        </div>
+        
+        <div class="card highlight">
+          <span class="badge green">ՔԱՅԼ 3</span>
+          <h3 style="margin: 6px 0;">Ինքնարժեքի Կրճատում (PV Կայան)</h3>
+          <p>3,600 մ² ազատ տարածքում արևային ֆոտովոլտային կայանի տեղադրում՝ $450\text{ կՎտ}$ էներգիայի OPEX-ը նվազեցնելու համար:</p>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top: 10px; border-color: var(--deep-green); text-align: center;">
+        <p style="font-size: 13px; color: #fff;"><b>ԸՆԴՀԱՆՈՒՐ ԵԶՐԱԿԱՑՈՒԹՅՈՒՆ.</b> SWOT ($S_{\text{IFE}}=2.97$, $S_{\text{EFE}}=2.86$, $R=1.95$) և Պորտերի 5 Ուժերի ($\text{PCI}=2.60$) ինտեգրված մոդելները հաստատում են REPLAST ARMENIA-ի բարձր մրցունակությունը և <b>SO-1 Ագրեսիվ Ծավալման Ռազմավարության</b> արդյունավետությունը:</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <button class="nav-btn" onclick="prevSlide()">← ՀԵՏ</button>
+  <div class="dots-container" id="dots"></div>
+  <button class="nav-btn primary" onclick="nextSlide()">ԱՌԱՋ →</button>
+</footer>
+
+<script>
+  let currentSlide = 0;
+  const slides = document.querySelectorAll('.slide');
+  const slideTitle = document.getElementById('slide-title');
+  const dotsContainer = document.getElementById('dots');
+
+  // Generate Navigation Dots
+  slides.forEach((_, i) => {
+    const dot = document.createElement('div');
+    dot.classList.add('dot');
+    if (i === 0) dot.classList.add('active');
+    dot.onclick = () => goToSlide(i);
+    dotsContainer.appendChild(dot);
+  });
+
+  const dots = document.querySelectorAll('.dot');
+
+  function updateSlides() {
+    slides.forEach((slide, index) => {
+      slide.classList.toggle('active', index === currentSlide);
+    });
+    dots.forEach((dot, index) => {
+      dot.classList.toggle('active', index === currentSlide);
+    });
+    slideTitle.textContent = `${currentSlide + 1} / ${slides.length}`;
+  }
+
+  function goToSlide(index) {
+    currentSlide = index;
+    updateSlides();
+  }
+
+  function nextSlide() {
+    if (currentSlide < slides.length - 1) {
+      currentSlide++;
+      updateSlides();
+    }
+  }
+
+  function prevSlide() {
+    if (currentSlide > 0) {
+      currentSlide--;
+      updateSlides();
+    }
+  }
+
+  // TOUCH / SWIPE EVENT HANDLERS FOR MOBILE
+  let startX = 0;
+  let endX = 0;
+  const viewport = document.getElementById('viewport');
+
+  viewport.addEventListener('touchstart', e => {
+    startX = e.changedTouches[0].screenX;
+  }, { passive: true });
+
+  viewport.addEventListener('touchend', e => {
+    endX = e.changedTouches[0].screenX;
+    handleSwipe();
+  }, { passive: true });
+
+  function handleSwipe() {
+    const diffX = startX - endX;
+    if (Math.abs(diffX) > 40) {
+      if (diffX > 0) nextSlide(); // Swipe Left -> Next
+      else prevSlide(); // Swipe Right -> Prev
+    }
+  }
+
+  // KEYBOARD NAVIGATION
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
+    if (e.key === 'ArrowLeft') prevSlide();
+  });
+</script>
+</body>
+</html>

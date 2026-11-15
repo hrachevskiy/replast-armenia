@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="hy">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>REPLAST ARMENIA — Հարցաշար</title>
+<style>
+  :root {
+    --green: #36D66B;
+    --deep-green: #0A8F55;
+    --lime: #B7F36B;
+    --bg-dark: #07100C;
+    --card-bg: #11201A;
+    --border: #1B3329;
+    --text-light: #EAF2EE;
+    --text-dim: #A9B7B0;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; touch-action: manipulation; }
+  body {
+    font-family: system-ui, -apple-system, sans-serif;
+    background: var(--bg-dark);
+    color: var(--text-light);
+    height: 100vh;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  header {
+    height: 50px;
+    background: #0b1711;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
+    flex-shrink: 0;
+  }
+  .logo { font-weight: 800; font-size: 16px; color: #fff; }
+  .logo span { color: var(--green); }
+
+  #viewport {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .slide.active {
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 10;
+  }
+
+  footer {
+    height: 60px;
+    background: #0b1711;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
+    flex-shrink: 0;
+  }
+
+  .nav-btn {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    color: var(--text-light);
+    padding: 10px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 14px;
+  }
+  .nav-btn:active { background: var(--border); }
+  .nav-btn.primary { background: var(--green); color: #04120a; border: none; }
+
+  .dots-container {
+    display: flex;
+    gap: 6px;
+  }
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--border);
+    cursor: pointer;
+  }
+  .dot.active { background: var(--green); transform: scale(1.2); }
+
+  h1 { font-size: 24px; color: var(--green); margin-bottom: 6px; }
+  h2 { font-size: 18px; color: #fff; margin-bottom: 12px; border-bottom: 2px solid var(--deep-green); padding-bottom: 4px; }
+
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  @media (max-width: 768px) { 
+    .grid2, .grid3 { grid-template-columns: 1fr; }
+    .slide { padding: 12px; }
+  }
+
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px;
+    margin-bottom: 8px;
+  }
+  .card.highlight { border-color: var(--green); background: #13261f; }
+
+  .q-num {
+    display: inline-block;
+    background: rgba(54, 214, 107, 0.15);
+    color: var(--green);
+    font-weight: 800;
+    font-size: 11px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-bottom: 6px;
+  }
+
+  .q-title { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+  .q-text {
+    font-size: 13px;
+    color: var(--text-light);
+    background: rgba(0,0,0,0.25);
+    padding: 8px 10px;
+    border-left: 3px solid var(--green);
+    border-radius: 4px;
+    line-height: 1.4;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">REPLAST <span>ARMENIA</span></div>
+  <div id="slide-title" style="font-size: 11px; color: var(--text-dim)">1 / 7</div>
+</header>
+
+<main id="viewport">
+
+  <!-- Slide 1 -->
+  <section class="slide active">
+    <h1>REPLAST ARMENIA</h1>
+    <p style="font-size: 14px; color: #fff; margin-bottom: 10px;">Հարցաշար / Շուկայական Հետազոտություն</p>
+    <div class="card highlight">
+      <h2>Հետազոտության Նպատակը</h2>
+      <p style="font-size: 13px; color: var(--text-light);">
+        Պարզել հայաստանյան շուկայի իրական պահանջարկը, ծախսերը և խնդիրները՝ առանց բարդ տեխնիկական տերմինների:
+      </p>
+      <p style="font-size: 12px; color: var(--green); margin-top: 8px;"><b>💡 Խորհուրդ:</b> Թերթեք սլայդները մատով (սվայփ) կամ ներքևի կոճակներով:</p>
+    </div>
+  </section>
+
+  <!-- Slide 2 -->
+  <section class="slide">
+    <h2>1. Շինարարություն և Լոգիստիկա (B2B)</h2>
+    <div class="grid2">
+      <div class="card">
+        <div class="q-num">ՀԱՐՑ 01</div>
+        <div class="q-title">Դիմացկունություն և Սառնամանիք</div>
+        <div class="q-text">«Ձմռանը ցրտից ու սառույցից բետոնե սալիկների կոտրվելու խնդրին հաճա՞խ եք հանդիպում: Կցանկանայի՞ք օգտագործել սալիկ, որը ցրտից չի քանդվում:»</div>
+      </div>
+      <div class="card">
+        <div class="q-num">ՀԱՐՑ 02</div>
+        <div class="q-title">Տակդիրների (Պալետների) Ծախսեր</div>
+        <div class="q-text">«Որքա՞ն եք ծախսում փայտե կամ պլաստիկե տակդիրների վրա: Կգնե՞իք արդյոք տեղական արտադրանքը, եթե լիներ ավելի էժան ու ամուր:»</div>
+      </div>
+      <div class="card">
+        <div class="q-num">ՀԱՐՑ 03</div>
+        <div class="q-title">Փոխանակում (Trade-In)</div>
+        <div class="q-text">«Եթե ձեր կոտրված պլաստիկե արկղերն ու տարաները հետ ընդունենք և զեղչով նորը տանք, դա ձեզ կհետաքրքրի՞:»</div>
+      </div>
+      <div class="card">
+        <div class="q-num">ՀԱՐՑ 04</div>
+        <div class="q-title">Երաշխիք (20-25 տարի)</div>
+        <div class="q-text">«Որքանո՞վ է կարևոր 20-25 տարվա երաշխիք ունենալը, որպեսզի 2-3 տարին մեկ նորը չգնեք:»</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 3 -->
+  <section class="slide">
+    <h2>2. Գյուղատնտեսություն (Արմավիր, Արարատ)</h2>
+    <div class="grid3">
+      <div class="card">
+        <div class="q-num">ՀԱՐՑ 05</div>
+        <div class="q-title">Ագրոթաղանթի Թափոններ</div>
+        <div class="q-text">«Ի՞նչ եք անում օգտագործված ագրոթաղանթները (պլյոնկան) և խողովակները բերքահավաքից հետո:»</div>
+      </div>
+      <div class="card">
+        <div class="q-num">ՀԱՐՑ 06</div>
+        <div class="q-title">Աղբի Հանձնում Շահույթով</div>
+        <div class="q-text">«Եթե ինքներս գանք, հավաքենք պլաստիկ աղբը և վճարենք կամ զեղչ տանք, կհամագործակցե՞ք:»</div>
+      </div>
+      <div class="card">
+        <div class="q-num">ՀԱՐՑ 07</div>
+        <div class="q-title">Բերքի Արկղեր</div>
+        <div class="q-text">«Հաճա՞խ է պատահում, որ բերքի ծանրությունից արկղերը ջարդվում են, ու բերքը վնասվում է:»</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 4 -->
+  <section class="slide">
+    <h2>3. Հումք Տրամադրողներ (Խանութներ, Պահեստներ)</h2>
+    <div class="grid3">
+      <div class="card">
+        <div class="q-num">ՀԱՐՑ 08</div>
+        <div class="q-title">Աղբի Հեռացման Ծախսեր</div>
+        <div class="q-text">«Որքա՞ն եք վճարում պլաստիկ աղբը թափելու համար: Կուզենայի՞ք, որ մենք դա անեինք անվճար կամ շահավետ պայմաններով:»</div>
+      </div>
+      <div class="card">
+        <div class="q-num">ՀԱՐՑ 09</div>
+        <div class="q-title">Աղբամանների Տեղադրում</div>
+        <div class="q-text">«Բարդ կլինի՞ պլաստիկն առանձին հավաքելը, եթե տրամադրենք հատուկ աղբամաններ և դատարկենք:»</div>
+      </div>
+      <div class="card">
+        <div class="q-num">ՀԱՐՑ 10</div>
+        <div class="q-title">Էկո-Բրենդի Հեղինակություն</div>
+        <div class="q-text">«Կարևո՞ր է, որ հաճախորդն իմանա, որ դուք աղբը չեք նետում բնության մեջ, այլ հանձնում եք վերամշակման:»</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 5 -->
+  <section class="slide">
+    <h2>4. Համայնքներ և Քաղաքապետարաններ (ՏԻՄ)</h2>
+    <div class="grid3">
+      <div class="card">
+        <div class="q-num">ՀԱՐՑ 11</div>
+        <div class="q-title">Քաղաքային Բարեկարգում</div>
+        <div class="q-text">«Նստարաններ կամ աղբամաններ գնելիս ի՞նչ խնդիրների եք հանդիպում (արագ ջարդվել, վանդալիզմ, ներկի պոկվել):»</div>
+      </div>
+      <div class="card">
+        <div class="q-num">ՀԱՐՑ 12</div>
+        <div class="q-title">Առանց Խնամքի Գույք</div>
+        <div class="q-text">«Կցանկանայի՞ք տեղադրել նստարաններ, որոնք չեն կոտրվում, չեն ժանգոտվում և ներկելու կարիք չունեն:»</div>
+      </div>
+      <div class="card">
+        <div class="q-num">ՀԱՐՑ 13</div>
+        <div class="q-title">Համայնքային Աղբի Խնդիր</div>
+        <div class="q-text">«Պատրաստ է՞ քաղաքապետարանը աջակցել գործարանին, որը աղբը կվերածի քաղաքային գույքի:»</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 6 -->
+  <section class="slide">
+    <h2>5. Վերավաճառողներ (B2C Խանութներ)</h2>
+    <div class="grid2">
+      <div class="card">
+        <div class="q-num">ՀԱՐՑ 14</div>
+        <div class="q-title">Տեղական Արտադրանք</div>
+        <div class="q-text">«Գնորդները պատրաստակա՞մ են գնել Հայաստանում արտադրվածը, եթե որակը ավելի լավն է:»</div>
+      </div>
+      <div class="card">
+        <div class="q-num">ՀԱՐՑ 15</div>
+        <div class="q-title">Ցուցադրական Նմուշներ</div>
+        <div class="q-text">«Եթե տրամադրենք ցուցադրական stend-եր (թե ինչպես է աղբը դառնում սալիկ), դա կօգնի՞ վաճառքին:»</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 7 -->
+  <section class="slide">
+    <h2>Արդյունքների Կիրառումը</h2>
+    <div class="card highlight">
+      <h3 style="color: var(--green);">Գործողությունների Պլան</h3>
+      <p style="font-size: 13px; margin-top: 6px;">
+        1. <b>B2B Վաճառքներ.</b> Առաջարկել լուծումներ հաճախորդի конкреտ ծախսերի կրճատման հիման վրա:<br>
+        2. <b>Հումքի Ապահովում.</b> Սուպերմարկետների հետ կնքել աղբի անվճար/շահավետ տեղափոխման պայմանագրեր:<br>
+        3. <b>ՏԻՄ Համագործակցություն.</b> Առաջարկել «Անմահ» քաղաքային գույք (նստարաններ, աղբամաններ):
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <button class="nav-btn" onclick="prevSlide()">← ՀԵՏ</button>
+  <div class="dots-container" id="dots"></div>
+  <button class="nav-btn primary" onclick="nextSlide()">ԱՌԱՋ →</button>
+</footer>
+
+<script>
+  let currentSlide = 0;
+  const slides = document.querySelectorAll('.slide');
+  const slideTitle = document.getElementById('slide-title');
+  const dotsContainer = document.getElementById('dots');
+
+  // Generate dots
+  slides.forEach((_, i) => {
+    const dot = document.createElement('div');
+    dot.classList.add('dot');
+    if (i === 0) dot.classList.add('active');
+    dot.onclick = () => goToSlide(i);
+    dotsContainer.appendChild(dot);
+  });
+
+  const dots = document.querySelectorAll('.dot');
+
+  function updateSlides() {
+    slides.forEach((slide, index) => {
+      slide.classList.toggle('active', index === currentSlide);
+    });
+    dots.forEach((dot, index) => {
+      dot.classList.toggle('active', index === currentSlide);
+    });
+    slideTitle.textContent = `${currentSlide + 1} / ${slides.length}`;
+  }
+
+  function goToSlide(index) {
+    currentSlide = index;
+    updateSlides();
+  }
+
+  function nextSlide() {
+    if (currentSlide < slides.length - 1) {
+      currentSlide++;
+      updateSlides();
+    }
+  }
+
+  function prevSlide() {
+    if (currentSlide > 0) {
+      currentSlide--;
+      updateSlides();
+    }
+  }
+
+  // TOUCH / SWIPE SUPPORT
+  let startX = 0;
+  let endX = 0;
+  const viewport = document.getElementById('viewport');
+
+  viewport.addEventListener('touchstart', e => {
+    startX = e.changedTouches[0].screenX;
+  }, { passive: true });
+
+  viewport.addEventListener('touchend', e => {
+    endX = e.changedTouches[0].screenX;
+    handleSwipe();
+  }, { passive: true });
+
+  function handleSwipe() {
+    if (startX - endX > 40) nextSlide(); // Swipe Left
+    if (endX - startX > 40) prevSlide(); // Swipe Right
+  }
+
+  // KEYBOARD SUPPORT
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
+    if (e.key === 'ArrowLeft') prevSlide();
+  });
+</script>
+</body>
+</html>

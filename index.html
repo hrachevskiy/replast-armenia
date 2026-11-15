@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="hy">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>REPLAST ARMENIA — Թափոնից՝ արժեք</title>
+<meta name="description" content="REPLAST ARMENIA — պլաստիկ թափոնների փակ ցիկլով վերամշակման գործարան Հայաստանում. PET, HDPE, LDPE, PP → սալիկներ, պալետներ, արկղեր, պանելներ։">
+<meta property="og:title" content="REPLAST ARMENIA — Թափոնից՝ արժեք"><meta property="og:description" content="Պլաստիկի շրջանային տնտեսություն Հայաստանում"><meta property="og:image" content="assets/p/02-general.jpg">
+<meta name="theme-color" content="#050c08">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='28' fill='%2336D66B'/%3E%3Ccircle cx='32' cy='32' r='14' fill='%23050c08'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Armenian:wght@400;500;600;700;800;900&family=Unbounded:wght@500;700;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#040a07;--bg2:#08130e;--g:#36D66B;--dg:#0A8F55;--lime:#B7F36B;--mint:#7dffc0;--tx:#EAF2EE;--sub:#a3b5ac;--dim:#6b8076;--line:rgba(54,214,107,.14);--line2:rgba(54,214,107,.32);--glass:rgba(14,28,21,.55);--f:'Noto Sans Armenian',system-ui,sans-serif;--d:'Unbounded','Noto Sans Armenian',sans-serif;--m:'JetBrains Mono',ui-monospace,monospace;--e:cubic-bezier(.16,1,.3,1);--r:24px}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;overflow-x:clip}
+body{background:var(--bg);color:var(--tx);font-family:var(--f);line-height:1.6;overflow-x:clip;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}img{max-width:100%;display:block}
+::selection{background:rgba(54,214,107,.35)}
+.wrap{max-width:1240px;margin:0 auto;padding:0 28px}
+.noise{position:fixed;inset:0;pointer-events:none;z-index:100;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.cursor{position:fixed;width:420px;height:420px;border-radius:50%;pointer-events:none;z-index:1;background:radial-gradient(circle,rgba(54,214,107,.10),transparent 60%);transform:translate(-50%,-50%);left:-500px;top:-500px;transition:opacity .4s}
+/* loader */
+.ld{position:fixed;inset:0;z-index:200;background:var(--bg);display:grid;place-items:center;transition:opacity .8s var(--e),visibility 0s .8s}
+.ld.done{opacity:0;visibility:hidden}
+.ld .c{width:84px;height:84px;border-radius:50%;border:2px solid var(--line2);border-top-color:var(--g);animation:spin 1s linear infinite;box-shadow:0 0 40px rgba(54,214,107,.3)}
+.ld b{position:absolute;margin-top:140px;font:700 12px var(--m);letter-spacing:.3em;color:var(--g)}
+@keyframes spin{to{transform:rotate(360deg)}}
+/* nav */
+nav.top{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:50;width:min(1180px,calc(100% - 24px));display:flex;align-items:center;gap:18px;padding:10px 12px 10px 20px;border-radius:999px;background:rgba(6,14,10,.55);border:1px solid var(--line);backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);transition:.4s var(--e)}
+nav.top.sc{background:rgba(6,14,10,.82);border-color:var(--line2);box-shadow:0 10px 40px rgba(0,0,0,.45)}
+.logo{display:flex;align-items:center;gap:10px;font:900 15px var(--d);letter-spacing:.04em;white-space:nowrap}
+.logo i{width:26px;height:26px;border-radius:50%;background:conic-gradient(from 0deg,var(--g),var(--lime),var(--dg),var(--g));position:relative;animation:spin 6s linear infinite;box-shadow:0 0 18px rgba(54,214,107,.6)}
+.logo i::after{content:"";position:absolute;inset:7px;border-radius:50%;background:var(--bg)}
+.logo span{color:var(--g)}
+.nl{display:flex;gap:4px;margin-left:auto}
+.nl a{font-size:13.5px;font-weight:600;color:var(--sub);padding:8px 12px;border-radius:99px;transition:.25s}
+.nl a:hover,.nl a.on{color:var(--tx);background:rgba(54,214,107,.1)}
+.btn{display:inline-flex;align-items:center;gap:8px;font:700 14px var(--f);padding:13px 22px;border-radius:999px;border:1px solid var(--line2);background:var(--glass);color:var(--tx);cursor:pointer;transition:background .3s,border-color .3s,box-shadow .3s,color .3s;backdrop-filter:blur(10px);white-space:nowrap}
+.btn:hover{border-color:var(--g);box-shadow:0 0 30px rgba(54,214,107,.25)}
+.btn.pri{background:linear-gradient(135deg,var(--lime),var(--g) 45%,var(--dg));color:#03120a;border-color:transparent;box-shadow:0 10px 40px rgba(54,214,107,.35)}
+.btn.pri:hover{box-shadow:0 14px 60px rgba(54,214,107,.55)}
+.btn.sm{padding:9px 16px;font-size:13px}
+.burger{display:none;margin-left:auto;width:42px;height:42px;border-radius:50%;border:1px solid var(--line2);background:transparent;color:var(--tx);font-size:18px}
+/* hero */
+.hero{position:relative;min-height:100svh;display:flex;align-items:center;overflow:hidden;padding:120px 0 80px}
+#vortex{position:absolute;inset:0;width:100%;height:100%;z-index:0}
+.hero::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 70% 50%,transparent,var(--bg) 85%),linear-gradient(0deg,var(--bg),transparent 30%);pointer-events:none}
+.hero .wrap{position:relative;z-index:2;width:100%}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font:700 12px var(--m);letter-spacing:.22em;text-transform:uppercase;color:var(--g);padding:8px 14px;border-radius:99px;border:1px solid var(--line2);background:rgba(54,214,107,.06)}
+.eyebrow i{width:7px;height:7px;border-radius:50%;background:var(--g);box-shadow:0 0 10px var(--g);animation:blink 1.6s infinite}
+@keyframes blink{50%{opacity:.3}}
+.h1{font:900 clamp(44px,8.2vw,124px)/.92 var(--d);letter-spacing:-.03em;margin:26px 0 22px}
+.h1 .ln{display:block;overflow:hidden;padding-bottom:.06em}
+.h1 .ln>span{display:inline-block;transform:translateY(110%);transition:transform 1.2s var(--e)}
+.ready .h1 .ln>span{transform:none}
+.h1 .ln:nth-child(2)>span{transition-delay:.12s}.h1 .ln:nth-child(3)>span{transition-delay:.24s}
+.grad{background:linear-gradient(100deg,var(--lime),var(--g) 40%,var(--mint) 70%,var(--lime));background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:sh 6s linear infinite}
+@keyframes sh{to{background-position:200% center}}
+.lead{font-size:clamp(16px,1.5vw,20px);color:var(--sub);max-width:620px}
+.hero .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:34px}
+.hstats{display:flex;gap:12px;flex-wrap:wrap;margin-top:54px}
+.hstat{padding:14px 18px;border-radius:18px;background:var(--glass);border:1px solid var(--line);backdrop-filter:blur(14px);min-width:150px}
+.hstat b{display:block;font:800 26px var(--d);color:var(--g);letter-spacing:-.02em}
+.hstat span{font-size:12.5px;color:var(--sub)}
+.scrollhint{position:absolute;left:50%;bottom:26px;z-index:3;transform:translateX(-50%);font:700 10px var(--m);letter-spacing:.3em;color:var(--dim);display:flex;flex-direction:column;align-items:center;gap:8px}
+.scrollhint i{width:1px;height:44px;background:linear-gradient(var(--g),transparent);animation:drop 2s var(--e) infinite}
+@keyframes drop{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+/* marquee */
+.mq{border-block:1px solid var(--line);padding:22px 0;overflow:hidden;background:linear-gradient(90deg,var(--bg),rgba(54,214,107,.04),var(--bg))}
+.mq .tr{display:flex;gap:48px;width:max-content;animation:mq 40s linear infinite}
+.mq span{font:700 clamp(20px,2.4vw,32px) var(--d);color:transparent;-webkit-text-stroke:1px rgba(183,243,107,.45);white-space:nowrap;display:flex;align-items:center;gap:48px}
+.mq span::after{content:"✦";-webkit-text-stroke:0;color:var(--g);font-size:.6em}
+@keyframes mq{to{transform:translateX(-50%)}}
+/* sections */
+section{position:relative;padding:130px 0}
+.kick{font:700 12px var(--m);letter-spacing:.24em;text-transform:uppercase;color:var(--g);display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.kick::before{content:"";width:34px;height:1px;background:var(--g)}
+.h2{font:800 clamp(32px,4.6vw,64px)/1.04 var(--d);letter-spacing:-.025em;max-width:900px}
+.h2 em{font-style:normal;color:var(--g)}
+.sh{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;margin-bottom:54px;flex-wrap:wrap}
+.sh p{max-width:420px;color:var(--sub)}
+.rv{opacity:0;transform:translateY(40px);transition:opacity 1s var(--e),transform 1s var(--e);transition-delay:calc(var(--i,0)*80ms)}
+.rv.in{opacity:1;transform:none}
+.card{position:relative;border-radius:var(--r);background:linear-gradient(160deg,rgba(255,255,255,.035),rgba(255,255,255,.01));border:1px solid var(--line);padding:28px;overflow:hidden;backdrop-filter:blur(16px);transition:border-color .4s,transform .5s var(--e)}
+.card::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:radial-gradient(500px circle at var(--mx,-200px) var(--my,-200px),rgba(54,214,107,.13),transparent 40%)}
+.card:hover{border-color:var(--line2)}
+/* problem */
+.ps{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.ps .card h3{font:700 22px var(--d);margin:14px 0 10px}
+.ps .card p{color:var(--sub);font-size:15px}
+.ps .bad{background:linear-gradient(160deg,rgba(255,107,107,.07),rgba(255,255,255,.01));border-color:rgba(255,107,107,.18)}
+.ps .bad .tag{color:#ff8a8a;border-color:rgba(255,107,107,.35)}
+.tag{display:inline-block;font:700 11px var(--m);letter-spacing:.14em;text-transform:uppercase;padding:6px 12px;border-radius:99px;border:1px solid var(--line2);color:var(--g)}
+.ps ul{list-style:none;margin-top:16px;display:grid;gap:10px}
+.ps li{display:flex;gap:10px;font-size:14.5px;color:var(--sub)}.ps li::before{content:"→";color:var(--g)}
+.ps .bad li::before{content:"✕";color:#ff8a8a}
+/* process */
+.proc{display:grid;grid-template-columns:1.05fr 1fr;gap:60px;align-items:start}
+.pvis{position:sticky;top:110px;height:calc(100vh - 160px);max-height:640px;border-radius:32px;border:1px solid var(--line);background:radial-gradient(circle at 50% 40%,rgba(54,214,107,.10),transparent 60%),var(--bg2);overflow:hidden}
+.pvis svg{width:100%;height:100%}
+.pvis .lbl{position:absolute;left:24px;bottom:22px;right:24px;display:flex;justify-content:space-between;align-items:flex-end}
+.pvis .lbl b{font:900 64px var(--d);color:var(--g);line-height:1;letter-spacing:-.04em}
+.pvis .lbl span{font-size:14px;color:var(--sub);text-align:right;max-width:60%}
+.steps{display:flex;flex-direction:column;gap:14px;padding:6vh 0 30vh}
+.step{padding:22px 24px;border-radius:20px;border:1px solid var(--line);background:rgba(255,255,255,.015);transition:.5s var(--e);opacity:.38}
+.step.on{opacity:1;border-color:var(--line2);background:linear-gradient(120deg,rgba(54,214,107,.1),rgba(255,255,255,.015));transform:translateX(-8px)}
+.step .n{font:700 12px var(--m);color:var(--g);letter-spacing:.1em}
+.step h4{font:700 19px var(--d);margin:4px 0 6px}
+.step p{font-size:14.5px;color:var(--sub)}
+.phase{font:700 11px var(--m);letter-spacing:.2em;text-transform:uppercase;color:var(--lime);margin:26px 0 2px;opacity:.8}
+/* polymers */
+.poly{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.pc{padding:26px;min-height:230px;display:flex;flex-direction:column;transform-style:preserve-3d}
+.pc .code{font:900 46px var(--d);letter-spacing:-.03em;background:linear-gradient(135deg,var(--lime),var(--g));-webkit-background-clip:text;background-clip:text;color:transparent}
+.pc .ri{position:absolute;right:22px;top:22px;width:46px;height:46px;border-radius:50%;border:1px dashed var(--line2);display:grid;place-items:center;font:800 15px var(--m);color:var(--g);animation:spin 18s linear infinite}
+.pc .ri span{animation:spin 18s linear infinite reverse}
+.pc h4{font-size:17px;margin:6px 0 4px}
+.pc p{font-size:14px;color:var(--sub)}
+.pc .props{margin-top:auto;padding-top:14px;display:flex;gap:8px;flex-wrap:wrap}
+.pc .props span{font:600 11.5px var(--m);padding:5px 10px;border-radius:99px;background:rgba(54,214,107,.08);color:var(--mint)}
+.pc.no{border-color:rgba(255,107,107,.25);background:linear-gradient(160deg,rgba(255,107,107,.08),rgba(255,255,255,.01))}
+.pc.no .code{background:linear-gradient(135deg,#ffb3b3,#ff6b6b);-webkit-background-clip:text;background-clip:text}
+.pc.no .ri{border-color:rgba(255,107,107,.4);color:#ff8a8a}.pc.no .props span{background:rgba(255,107,107,.1);color:#ffb3b3}
+/* products */
+.filters{display:flex;gap:8px;flex-wrap:wrap}
+.fb{font:600 13.5px var(--f);padding:10px 18px;border-radius:99px;border:1px solid var(--line2);background:transparent;color:var(--sub);cursor:pointer;transition:.3s}
+.fb.on,.fb:hover{background:var(--g);color:#03120a;border-color:var(--g)}
+.gal{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:220px;gap:14px;margin-top:30px}
+.gi{position:relative;border-radius:20px;overflow:hidden;cursor:zoom-in;border:1px solid var(--line);background:var(--bg2);transition:transform .6s var(--e),opacity .5s,filter .5s}
+.gi.big{grid-column:span 2;grid-row:span 2}.gi.wide{grid-column:span 2}
+.gi img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--e)}
+.gi:hover img{transform:scale(1.07)}
+.gi::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(4,10,7,.9),transparent 55%)}
+.gi .t{position:absolute;left:16px;bottom:14px;right:16px;z-index:1}
+.gi .t b{display:block;font:700 15px var(--f)}.gi .t span{font:600 11px var(--m);letter-spacing:.12em;text-transform:uppercase;color:var(--g)}
+.gi.hide{opacity:.12;filter:grayscale(1) blur(2px);pointer-events:none;transform:scale(.97)}
+.lb{position:fixed;inset:0;z-index:150;background:rgba(2,6,4,.92);backdrop-filter:blur(14px);display:grid;place-items:center;opacity:0;visibility:hidden;transition:.4s}
+.lb.on{opacity:1;visibility:visible}
+.lb img{max-width:min(1200px,92vw);max-height:80vh;border-radius:18px;box-shadow:0 30px 120px rgba(0,0,0,.6);transform:scale(.94);transition:transform .5s var(--e)}
+.lb.on img{transform:none}
+.lb p{position:absolute;bottom:4vh;left:0;right:0;text-align:center;font-weight:700}
+.lb button{position:absolute;width:50px;height:50px;border-radius:50%;border:1px solid var(--line2);background:var(--glass);color:var(--tx);font-size:20px;cursor:pointer}
+.lb .x{top:24px;right:24px}.lb .pv{left:24px;top:50%}.lb .nx{right:24px;top:50%}
+/* calc */
+.calc{display:grid;grid-template-columns:1fr 1.2fr;gap:20px}
+.calc .card h3{font:700 20px var(--d);margin-bottom:6px}
+.big-n{font:900 clamp(56px,7vw,96px) var(--d);color:var(--g);letter-spacing:-.04em;line-height:1}
+.big-n small{font-size:.3em;color:var(--sub);letter-spacing:0;margin-left:6px}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:8px;border-radius:99px;background:linear-gradient(90deg,var(--g) var(--p,25%),rgba(255,255,255,.08) var(--p,25%));outline:none;margin:22px 0 8px}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;border-radius:50%;background:var(--lime);border:4px solid var(--bg);box-shadow:0 0 0 2px var(--g),0 0 20px var(--g);cursor:grab}
+input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--lime);border:4px solid var(--bg);box-shadow:0 0 0 2px var(--g)}
+.rl{display:flex;justify-content:space-between;font:600 11px var(--m);color:var(--dim)}
+.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.fl{padding:18px;border-radius:18px;background:rgba(255,255,255,.025);border:1px solid var(--line)}
+.fl b{display:block;font:800 26px var(--d);color:var(--tx);letter-spacing:-.02em}
+.fl span{font-size:12.5px;color:var(--sub)}
+.fl.hl{border-color:var(--line2);background:rgba(54,214,107,.08)}.fl.hl b{color:var(--g)}
+.bep{margin-top:18px;padding:14px 18px;border-radius:16px;font-size:14px;transition:.4s;border:1px solid}
+.bep.ok{border-color:var(--line2);background:rgba(54,214,107,.08);color:var(--mint)}.bep.no{border-color:rgba(255,184,77,.35);background:rgba(255,184,77,.07);color:#ffd28a}
+.yieldbar{display:flex;height:16px;border-radius:99px;overflow:hidden;margin-top:18px}
+.yieldbar i{display:block;height:100%;transition:width .6s var(--e)}
+/* bento */
+.bento{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:minmax(170px,auto);gap:16px}
+.bento .card{display:flex;flex-direction:column;justify-content:space-between}
+.b2{grid-column:span 2}.r2{grid-row:span 2}
+.bento .v{font:900 clamp(34px,3.6vw,52px) var(--d);color:var(--g);letter-spacing:-.03em;line-height:1}
+.bento .v small{font-size:.38em;color:var(--sub);margin-left:4px;letter-spacing:0}
+.bento .k{font-size:14px;color:var(--sub)}
+.bento h3{font:700 20px var(--d)}
+.bimg{padding:0!important;min-height:340px}
+.bimg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.75}
+.bimg .ov{position:relative;margin-top:auto;padding:26px;background:linear-gradient(0deg,rgba(4,10,7,.95),transparent)}
+.meter{height:10px;border-radius:99px;background:rgba(255,255,255,.06);overflow:hidden;margin-top:14px}.meter i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--dg),var(--g),var(--lime));transition:width 1.6s var(--e)}
+.in .meter i{width:var(--w)}
+/* strategy */
+.strat{display:grid;grid-template-columns:1.1fr 1fr;gap:20px}
+.vec svg{width:100%;height:auto}
+.vec .ln{stroke-dasharray:200;stroke-dashoffset:200;transition:stroke-dashoffset 2s var(--e) .3s}
+.in .vec .ln,.vec.in .ln{stroke-dashoffset:0}
+.kp{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.kp .card b{font:900 40px var(--d);color:var(--g);letter-spacing:-.03em;line-height:1;display:block}
+.kp .card span{font-size:13.5px;color:var(--sub)}
+.forces{display:grid;gap:10px;margin-top:4px}
+.force{display:grid;grid-template-columns:1fr 120px 36px;gap:12px;align-items:center;font-size:14px}
+.force .t{height:8px;border-radius:99px;background:rgba(255,255,255,.06);overflow:hidden}.force .t i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--g),#f5b83d);transition:width 1.4s var(--e)}
+.in .force .t i{width:var(--w)}
+.force b{font:700 13px var(--m);color:var(--lime);text-align:right}
+/* research */
+.res{display:grid;grid-template-columns:300px 1fr;gap:24px}
+.segs{display:flex;flex-direction:column;gap:8px;position:sticky;top:110px;align-self:start}
+.seg{text-align:left;padding:16px 18px;border-radius:16px;border:1px solid var(--line);background:transparent;color:var(--sub);font:600 14.5px var(--f);cursor:pointer;transition:.3s;display:flex;justify-content:space-between;gap:10px}
+.seg small{font:700 11px var(--m);color:var(--dim)}
+.seg.on{color:var(--tx);border-color:var(--g);background:rgba(54,214,107,.08)}.seg.on small{color:var(--g)}
+.qs{display:grid;gap:12px}
+.q{padding:22px 24px;border-radius:20px;border:1px solid var(--line);background:rgba(255,255,255,.02);animation:qin .6s var(--e) both}
+@keyframes qin{from{opacity:0;transform:translateY(16px)}}
+.q .n{font:700 11px var(--m);color:var(--g);letter-spacing:.14em}
+.q h4{font-size:16.5px;margin:4px 0 8px}
+.q p{font-size:15px;color:var(--sub);border-left:2px solid var(--g);padding-left:14px;font-style:italic}
+/* roadmap */
+.road{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;position:relative}
+.road::before{content:"";position:absolute;left:0;right:0;top:34px;height:2px;background:linear-gradient(90deg,var(--g),var(--lime),transparent)}
+.rq{padding-top:60px;position:relative}
+.rq::before{content:"";position:absolute;top:26px;left:0;width:18px;height:18px;border-radius:50%;background:var(--bg);border:3px solid var(--g);box-shadow:0 0 18px var(--g)}
+.rq b{font:900 30px var(--d);color:var(--g)}
+.rq span{display:block;font:600 12px var(--m);color:var(--dim);margin-bottom:10px}
+.rq li{list-style:none;font-size:14.5px;color:var(--sub);padding:6px 0;border-bottom:1px dashed var(--line)}
+/* docs */
+.docs{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.doc{display:flex;flex-direction:column;min-height:260px}
+.doc .ic{width:54px;height:54px;border-radius:16px;display:grid;place-items:center;font-size:24px;background:rgba(54,214,107,.1);border:1px solid var(--line2);margin-bottom:18px}
+.doc h4{font:700 18px var(--d);margin-bottom:8px}.doc p{font-size:14px;color:var(--sub)}
+.doc .go{margin-top:auto;padding-top:18px;font:700 13px var(--m);color:var(--g);display:flex;align-items:center;gap:8px}
+.doc:hover .go{gap:14px}.doc{transition:transform .5s var(--e),border-color .3s}.doc:hover{transform:translateY(-6px)}
+/* cta */
+.cta-big{text-align:center;padding:90px 30px;border-radius:40px;border:1px solid var(--line2);background:radial-gradient(ellipse at 50% 0%,rgba(54,214,107,.22),transparent 60%),var(--bg2);position:relative;overflow:hidden}
+.cta-big h2{font:900 clamp(36px,6vw,84px)/1 var(--d);letter-spacing:-.03em;margin:16px 0 18px}
+.cta-big p{color:var(--sub);max-width:560px;margin:0 auto 30px}
+.ring{position:absolute;border-radius:50%;border:1px solid var(--line);left:50%;top:50%;transform:translate(-50%,-50%);animation:pulse 6s ease-out infinite}
+@keyframes pulse{from{width:100px;height:100px;opacity:1}to{width:1400px;height:1400px;opacity:0}}
+footer{border-top:1px solid var(--line);padding:40px 0 50px;margin-top:80px}
+footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center;color:var(--dim);font-size:13.5px}
+footer a:hover{color:var(--g)}
+.tg{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:99px;background:linear-gradient(135deg,#2aabee,#229ed9);color:#fff;font-weight:700;font-size:14px}
+@media (max-width:1000px){.nl{display:none}.burger{display:block}.nl.open{display:flex;position:absolute;top:64px;left:0;right:0;flex-direction:column;padding:14px;border-radius:24px;background:rgba(6,14,10,.96);border:1px solid var(--line2)}
+.ps,.proc,.calc,.strat,.res{grid-template-columns:1fr}.pvis{position:relative;top:0;height:360px}.steps{padding:0}.poly{grid-template-columns:1fr 1fr}.gal{grid-template-columns:1fr 1fr;grid-auto-rows:170px}.bento{grid-template-columns:1fr 1fr}.docs{grid-template-columns:1fr 1fr}.road{grid-template-columns:1fr 1fr}.road::before{display:none}.segs{position:relative;top:0;flex-direction:row;overflow-x:auto}.seg{flex:none}.flow{grid-template-columns:1fr 1fr}nav.top .btn.sm{display:none}}
+@media (max-width:600px){.wrap{padding:0 18px}section{padding:90px 0}.poly,.docs,.road{grid-template-columns:1fr}.gal .gi.big,.gal .gi.wide{grid-column:span 2;grid-row:span 1}.bento .b2{grid-column:span 2}.hstat{min-width:calc(50% - 6px);flex:1}.force{grid-template-columns:1fr 80px 30px}.kp{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}.h1 .ln>span{transform:none}}
+</style>
+</head>
+<body>
+<div class="ld" id="ld"><div class="c"></div><b>REPLAST</b></div>
+<div class="noise"></div><div class="cursor" id="cur"></div>
+
+<nav class="top" id="nav"><a class="logo" href="#top"><i></i>REPLAST <span>ARMENIA</span></a>
+<div class="nl" id="nl"><a href="#about">Մասին</a><a href="#process">Գործընթաց</a><a href="#polymers">Պոլիմերներ</a><a href="#products">Արտադրանք</a><a href="#economics">Տնտեսագիտություն</a><a href="#strategy">Ռազմավարություն</a><a href="#research">Հետազոտություն</a><a href="#docs">Փաստաթղթեր</a></div>
+<a class="btn sm pri" href="presentation/">Ներկայացում ↗</a><button class="burger" id="bg" aria-label="Մենյու">☰</button></nav>
+
+<header class="hero" id="top"><canvas id="vortex"></canvas>
+<div class="wrap">
+<span class="eyebrow"><i></i>Հայաստան · Շրջանային տնտեսություն</span>
+<h1 class="h1"><span class="ln"><span>Թափոնից՝</span></span><span class="ln"><span class="grad">արժեք։</span></span></h1>
+<p class="lead">REPLAST ARMENIA-ն փակ ցիկլով վերամշակման գործարան է, որտեղ պլաստիկ թափոնը դառնում է մայթի սալիկ, պալետ, արկղ և շինարարական պանել՝ ամուր, տեղական և մատչելի։</p>
+<div class="cta"><a class="btn pri mag" href="#process">Ինչպես է աշխատում ↓</a><a class="btn mag" href="presentation/">Դիտել ներկայացումը ↗</a></div>
+<div class="hstats"><div class="hstat"><b data-c="500">0</b><span>տ/ամիս հզորություն</span></div><div class="hstat"><b data-c="14">0</b><span>տեխնոլոգիական գոտի</span></div><div class="hstat"><b data-c="16">0</b><span>արտադրանքի տեսակ</span></div><div class="hstat"><b data-c="85" data-s="%">0</b><span>ջրի փակ շրջանառություն</span></div></div>
+</div><div class="scrollhint">SCROLL<i></i></div></header>
+
+<div class="mq"><div class="tr" id="mq"></div></div>
+
+<section id="about"><div class="wrap">
+<div class="sh"><div><div class="kick rv">Խնդիր → Լուծում</div><h2 class="h2 rv">Պլաստիկը չպետք է <em>ավարտի</em> կյանքը աղբավայրում</h2></div><p class="rv">Ամեն տարի հազարավոր տոննա պլաստիկ թաղվում է Հայաստանի աղբավայրերում, իսկ նույն ժամանակ պալետները, արկղերը և պլաստիկ շինանյութերը ներմուծվում են։ REPLAST-ը միացնում է այս երկու ծայրերը։</p></div>
+<div class="ps">
+<div class="card bad rv"><span class="tag">Այսօր</span><h3>Գծային մոդել</h3><p>Վերցրու → օգտագործիր → նետիր։ Պլաստիկը քայքայվում է հարյուրավոր տարիներ, իսկ արժեքավոր հումքը կորչում է։</p><ul><li>Աղբավայրերի ծանրաբեռնվածություն</li><li>Ագրոթաղանթները այրվում կամ մնում են դաշտերում</li><li>Կախվածություն ներմուծվող պլաստիկ արտադրանքից</li><li>Բետոնե սալիկները ճաքում են սառնամանիքից</li></ul></div>
+<div class="card rv" style="--i:1"><span class="tag">REPLAST</span><h3>Փակ ցիկլ</h3><p>Հավաքում → տեսակավորում → լվացում → գրանուլ → պատրաստի արտադրանք։ Թափոնը դառնում է նոր, ավելի դիմացկուն ապրանք։</p><ul><li>Թափոնի տեղական վերամշակում 4 մարզից</li><li>Պատրաստի արտադրանք, ոչ միայն գրանուլ</li><li>Ներմուծման փոխարինում և նոր աշխատատեղեր</li><li>Սառնամանիքին դիմացկուն rHDPE սալիկներ</li></ul></div>
+</div></div></section>
+
+<section id="process" style="padding-top:40px"><div class="wrap">
+<div class="sh"><div><div class="kick rv">Տեխնոլոգիա</div><h2 class="h2 rv">14 գոտի՝ <em>թափոնից</em> մինչև պատրաստի ապրանք</h2></div><p class="rv">Թերթեք ներքև. ձախ կողմում տեսնում եք, թե որ փուլում է գտնվում նյութը։</p></div>
+<div class="proc"><div class="pvis" id="pvis"><svg viewBox="0 0 400 420" id="psvg"></svg><div class="lbl"><b id="pnum">01</b><span id="pname">Ընդունում</span></div></div>
+<div class="steps" id="steps"></div></div>
+</div></section>
+
+<section id="polymers"><div class="wrap">
+<div class="sh"><div><div class="kick rv">Հումք</div><h2 class="h2 rv">Ինչ պլաստիկ ենք <em>վերամշակում</em></h2></div><p class="rv">NIR օպտիկական տեսակավորիչը ճանաչում է պոլիմերի տեսակը և առանձնացնում վտանգավոր PVC-ն մինչև հալեցումը։</p></div>
+<div class="poly" id="poly"></div></div></section>
+
+<section id="products" style="padding-top:40px"><div class="wrap">
+<div class="sh"><div><div class="kick rv">Արտադրանք</div><h2 class="h2 rv">16 տեսակ <em>երկրորդ կյանք</em></h2></div><div class="filters rv" id="filters"></div></div>
+<div class="gal" id="gal"></div></div></section>
+<div class="lb" id="lb"><img alt=""><p></p><button class="x" aria-label="Փակել">✕</button><button class="pv" aria-label="Նախորդ">←</button><button class="nx" aria-label="Հաջորդ">→</button></div>
+
+<section id="economics"><div class="wrap">
+<div class="sh"><div><div class="kick rv">Ինտերակտիվ</div><h2 class="h2 rv">Քանի՞ տոննա՝ <em>քանի՞ ապրանք</em></h2></div><p class="rv">Շարժեք սահիչը. հաշվարկը ցույց է տալիս նյութական հոսքը և ամսական եկամուտը նախագծային պարամետրերով։</p></div>
+<div class="calc">
+<div class="card rv"><h3>Մուտքային թափոն</h3><p style="color:var(--sub);font-size:14px">ամսական, տոննա</p>
+<div class="big-n"><span id="tv">200</span><small>տ/ամիս</small></div>
+<input type="range" id="tr" min="100" max="500" step="10" value="200"><div class="rl"><span>100</span><span>300</span><span>500</span></div>
+<div class="yieldbar"><i id="yb1" style="background:var(--g)"></i><i id="yb2" style="background:#ff6b6b"></i></div><div class="rl" style="margin-top:6px"><span>ելք 82%</span><span>կորուստ 18%</span></div>
+<div class="bep" id="bep"></div></div>
+<div class="card rv" style="--i:1"><h3>Արդյունքը ամսական</h3><p style="color:var(--sub);font-size:14px;margin-bottom:18px">200 տ → 164 տ գրանուլ → 161 տ արտադրանք համամասնությամբ</p>
+<div class="flow"><div class="fl"><b id="o1">164</b><span>տ գրանուլ</span></div><div class="fl"><b id="o2">161</b><span>տ պատրաստի ապրանք</span></div><div class="fl"><b id="o3">36</b><span>տ տեխնոլոգիական կորուստ</span></div><div class="fl hl"><b id="o4">58</b><span>մլն ֏ եկամուտ</span></div></div>
+<div class="flow" style="margin-top:10px"><div class="fl"><b id="o5">40%</b><span>հզորության օգտագործում</span></div><div class="fl"><b id="o6">~3 200</b><span>պալետի համարժեք*</span></div><div class="fl"><b id="o7">2</b><span>հերթափոխ</span></div><div class="fl hl"><b id="o8">696</b><span>մլն ֏ տարեկան</span></div></div>
+<p style="color:var(--dim);font-size:12px;margin-top:14px">* եթե ամբողջ ծավալը ուղղվի ~50 կգ պալետների արտադրությանը։ Միջին իրացում՝ 290 հազ. ֏ 1 տ մշակված հումքի հաշվով (նախագծային ենթադրություն)։</p></div>
+</div></div></section>
+
+<section id="factory" style="padding-top:40px"><div class="wrap">
+<div class="sh"><div><div class="kick rv">Գործարան</div><h2 class="h2 rv">Ինժեներական <em>անձնագիր</em></h2></div><p class="rv">Մ2 մայրուղու երկայնքով, Երևանից 24–28 կմ հեռավորության վրա՝ բնակելի գոտուց ավելի քան 1.5 կմ։</p></div>
+<div class="bento">
+<div class="card bimg b2 r2 rv"><img src="assets/p/02-general.jpg" alt="REPLAST գործարան" loading="lazy"><div class="ov"><span class="tag">Արտադրական համալիր</span><h3 style="margin-top:12px">12 000 մ² հողամաս, ~8 400 մ² շինություն</h3><p class="k">Ընդունման, տեսակավորման, լվացման, էքստրուզիայի, կաղապարման և պահեստավորման գոտիներ մեկ տեխնոլոգիական գծում։</p></div></div>
+<div class="card rv" style="--i:1"><span class="k">Էլեկտրաէներգիա</span><div><div class="v" data-c="450">0<small>կՎտ</small></div><div class="meter"><i style="--w:52%"></i></div><div class="k" style="margin-top:6px">աշխատանքային՝ 180–260 կՎտ</div></div></div>
+<div class="card rv" style="--i:2"><span class="k">Ջուր</span><div><div class="v" data-c="15">0<small>մ³/ժ</small></div><div class="meter"><i style="--w:85%"></i></div><div class="k" style="margin-top:6px">85% փակ շրջանառություն</div></div></div>
+<div class="card rv" style="--i:3"><span class="k">Աշխատակազմ</span><div class="v" data-c="60">0<small>մարդ</small></div><div class="k">45–60 աշխատող, 2 հերթափոխ</div></div>
+<div class="card rv" style="--i:4"><span class="k">Խոնավություն չորացումից հետո</span><div class="v">&lt;0.2<small>%</small></div><div class="k">ցենտրիֆուգ + տաք օդ</div></div>
+<div class="card b2 rv" style="--i:2"><h3>Որակի վերահսկում</h3><p class="k" style="margin-top:8px">Սեփական լաբորատորիա՝ MFI (հալույթի հոսունություն), խտություն, խոնավություն և մեխանիկական փորձարկումներ յուրաքանչյուր խմբաքանակի համար։ 120 բար հալույթի ֆիլտրացիա։</p></div>
+<div class="card b2 rv" style="--i:3"><h3>Գոլորշի և սեղմված օդ</h3><p class="k" style="margin-top:8px">~1.2 տ/ժ գոլորշի տաք լվացման համար և 6 բար սեղմված օդ օպտիկական տեսակավորիչների ու պնևմատիկայի համար։</p></div>
+</div></div></section>
+
+<section id="strategy"><div class="wrap">
+<div class="sh"><div><div class="kick rv">Ռազմավարություն</div><h2 class="h2 rv">SWOT և Պորտերի <em>5 ուժերը</em></h2></div><p class="rv">IFE/EFE մատրիցները, ռազմավարական վեկտորը և QSPM-ը ցույց են տալիս՝ ագրեսիվ աճի (SO) ռազմավարություն։ <a href="strategy/" style="color:var(--g);font-weight:700">Ամբողջական վերլուծությունը ↗</a></p></div>
+<div class="strat">
+<div class="card vec rv"><span class="tag">Ռազմավարական վեկտոր</span>
+<svg viewBox="0 0 320 240" style="margin-top:14px"><defs><linearGradient id="vg" x1="0" x2="1"><stop offset="0" stop-color="#0A8F55"/><stop offset="1" stop-color="#B7F36B"/></linearGradient></defs>
+<rect x="160" y="20" width="140" height="100" fill="rgba(54,214,107,.08)"/><text x="292" y="38" text-anchor="end" font-size="11" fill="#36D66B" font-family="JetBrains Mono" font-weight="700">SO · ԱԳՐԵՍԻՎ</text>
+<text x="28" y="38" font-size="10" fill="#6b8076" font-family="JetBrains Mono">WO</text><text x="28" y="212" font-size="10" fill="#6b8076" font-family="JetBrains Mono">WT</text><text x="292" y="212" text-anchor="end" font-size="10" fill="#6b8076" font-family="JetBrains Mono">ST</text>
+<line x1="20" y1="120" x2="300" y2="120" stroke="rgba(255,255,255,.15)"/><line x1="160" y1="20" x2="160" y2="220" stroke="rgba(255,255,255,.15)"/>
+<line class="ln" x1="160" y1="120" x2="249" y2="44" stroke="url(#vg)" stroke-width="4" stroke-linecap="round"/><circle cx="249" cy="44" r="7" fill="#B7F36B"><animate attributeName="r" values="6;10;6" dur="2s" repeatCount="indefinite"/></circle>
+<text x="240" y="70" font-size="11" fill="#EAF2EE" font-family="JetBrains Mono">(+1.49; +1.26)</text><text x="186" y="112" font-size="11" fill="#a3b5ac" font-family="JetBrains Mono">θ = 40.2°</text></svg>
+<div class="kp" style="margin-top:14px"><div class="card"><b data-c="2.97" data-dec="2">0</b><span>IFE (ներքին գործոններ) &gt; 2.50</span></div><div class="card"><b data-c="2.86" data-dec="2">0</b><span>EFE (արտաքին գործոններ)</span></div></div></div>
+<div style="display:grid;gap:20px">
+<div class="card rv" style="--i:1"><span class="tag">Պորտերի 5 ուժ · 1–5 բալ</span><div class="forces" style="margin-top:18px">
+<div class="force"><span>Նոր մրցակիցների մուտք</span><div class="t"><i style="--w:40%"></i></div><b>2</b></div>
+<div class="force"><span>Մատակարարների ուժ</span><div class="t"><i style="--w:60%"></i></div><b>3</b></div>
+<div class="force"><span>Գնորդների ուժ</span><div class="t"><i style="--w:60%"></i></div><b>3</b></div>
+<div class="force"><span>Փոխարինողների սպառնալիք</span><div class="t"><i style="--w:60%"></i></div><b>3</b></div>
+<div class="force"><span>Ներճյուղային մրցակցություն</span><div class="t"><i style="--w:40%"></i></div><b>2</b></div></div>
+<p style="margin-top:16px;font-size:14px;color:var(--sub)">Մրցակցային ճնշման ինդեքս՝ <b style="color:var(--lime)">PCI = 2.60 / 5</b> · միջին ճնշում</p></div>
+<div class="card rv" style="--i:2"><span class="tag">QSPM</span><div class="kp" style="margin-top:14px"><div><b style="font:900 40px var(--d);color:var(--g)">3.20</b><span style="font-size:13.5px;color:var(--sub)">Պատրաստի արտադրանք ✓</span></div><div><b style="font:900 40px var(--d);color:var(--dim)">1.72</b><span style="font-size:13.5px;color:var(--sub)">Միայն գրանուլ</span></div></div></div>
+</div></div></div></section>
+
+<section id="research" style="padding-top:40px"><div class="wrap">
+<div class="sh"><div><div class="kick rv">Շուկայի հետազոտություն</div><h2 class="h2 rv">15 հարց, որ տալիս ենք <em>շուկային</em></h2></div><p class="rv">Հարցաշարը կազմված է հինգ թիրախային խմբի համար՝ առանց բարդ տեխնիկական տերմինների։ <a href="research/" style="color:var(--g);font-weight:700">Բացել հարցաշարը ↗</a></p></div>
+<div class="res"><div class="segs" id="segs"></div><div class="qs" id="qs"></div></div></div></section>
+
+<section id="roadmap" style="padding-top:40px"><div class="wrap">
+<div class="sh"><div><div class="kick rv">Ճանապարհային քարտեզ</div><h2 class="h2 rv">Առաջին տարին՝ <em>քայլ առ քայլ</em></h2></div></div>
+<div class="road">
+<div class="rq rv"><b>Q1</b><span>ամիս 1–3</span><ul><li>12 000 մ² հողամասի նախագծում</li><li>450 կՎտ և ջրագծի միացում</li></ul></div>
+<div class="rq rv" style="--i:1"><b>Q2</b><span>ամիս 4–6</span><ul><li>14 հանգույցի մոնտաժ</li><li>QC լաբորատորիայի համալրում</li></ul></div>
+<div class="rq rv" style="--i:2"><b>Q3</b><span>ամիս 7–9</span><ul><li>200 տ/ամիս հավաքման պայմանագրեր</li><li>Գծի թեստային գործարկում</li></ul></div>
+<div class="rq rv" style="--i:3"><b>Q4</b><span>ամիս 10–12</span><ul><li>161 տ/ամիս պատրաստի արտադրանք</li><li>Արևային (PV) կայանի նախագծում</li></ul></div>
+</div></div></section>
+
+<section id="docs"><div class="wrap">
+<div class="sh"><div><div class="kick rv">Նյութեր</div><h2 class="h2 rv">Ամբողջական <em>փաստաթղթեր</em></h2></div></div>
+<div class="docs">
+<a class="card doc rv" href="presentation/"><div class="ic">🎬</div><h4>Ընկերության ներկայացում</h4><p>25 սլայդ՝ տեխնոլոգիա, 14 գոտի, արտադրանք, պոլիմերներ, վիդեոներ։</p><span class="go">Բացել →</span></a>
+<a class="card doc rv" style="--i:1" href="strategy/"><div class="ic">📊</div><h4>SWOT և Porter</h4><p>IFE/EFE, TOWS, QSPM, 5 ուժերի հաշվարկ և զգայունության վերլուծություն։</p><span class="go">Բացել →</span></a>
+<a class="card doc rv" style="--i:2" href="research/"><div class="ic">📝</div><h4>Հարցաշար</h4><p>15 հարց 5 թիրախային խմբի համար և արդյունքների կիրառման պլան։</p><span class="go">Բացել →</span></a>
+<a class="card doc rv" style="--i:3" href="docs/REPLAST_ARMENIA_Porter_5_Forces.pdf" target="_blank" rel="noopener"><div class="ic">📄</div><h4>Ռազմավարական վերլուծություն (PDF)</h4><p>Պորտերի 5 ուժերի մոդելի հաշվարկային աշխատանք։</p><span class="go">Ներբեռնել →</span></a>
+</div></div></section>
+
+<section style="padding-top:20px"><div class="wrap"><div class="cta-big rv"><div class="ring"></div><div class="ring" style="animation-delay:2s"></div><div class="ring" style="animation-delay:4s"></div>
+<div style="position:relative"><span class="eyebrow"><i></i>Համագործակցություն</span><h2>Ունե՞ք պլաստիկ թափոն։<br><span class="grad">Մենք ունենք պլան։</span></h2><p>Խանութներ, պահեստներ, ֆերմերներ, համայնքներ և շինարարական ընկերություններ. գրեք նախագծի հեղինակին։</p>
+<a class="tg mag" href="https://t.me/hrachevskiy" target="_blank" rel="noopener">✈ Telegram՝ @hrachevskiy</a></div></div></div></section>
+
+<footer><div class="wrap"><a class="logo" href="#top"><i></i>REPLAST <span>ARMENIA</span></a><span>Ակադեմիական նախագիծ · Հեղինակ՝ Հրաչյա Ասլանյան, ՀԱՊՀ · © 2026</span><span><a href="presentation/">Ներկայացում</a> · <a href="strategy/">Վերլուծություն</a> · <a href="https://t.me/hrachevskiy" target="_blank" rel="noopener">Telegram</a></span></div></footer>
+
+<script>
+const $=(q,r=document)=>r.querySelector(q),$$=(q,r=document)=>[...r.querySelectorAll(q)];const RM=matchMedia('(prefers-reduced-motion: reduce)').matches,FINE=matchMedia('(pointer:fine)').matches;
+/* data */
+const P=[['01-paving','Մայթի սալիկներ','Քաղաքային','big'],['11-pallets','Պալետներ','Լոգիստիկա','wide'],['13-crates','Լոգիստիկ արկղեր','Լոգիստիկա',''],['05-benches','Նստարաններ և սեղաններ','Քաղաքային',''],['14-construction-panels','Շինարարական պանելներ','Շինարարություն','wide'],['04-curbs','Եզրաքարեր','Քաղաքային',''],['06-bins','Աղբամաններ','Քաղաքային',''],['12-containers','Կոնտեյներներ','Լոգիստիկա',''],['07-road','Ճանապարհային տարրեր','Քաղաքային','wide'],['15-sheets','Պլաստիկ թերթեր','Շինարարություն',''],['16-decorative-panels','Դեկորատիվ պանելներ','Շինարարություն',''],['08-barrels','Տարաներ և տակառներ','Լոգիստիկա',''],['03-enclosures','Կորպուսներ և պատյաններ','Տեխնիկական',''],['10-technical','Տեխնիկական մասեր','Տեխնիկական',''],['09-custom','Անհատական պատվերներ','Տեխնիկական','wide'],['02-general','Ընդհանուր տեսականի','Շինարարություն','wide']];
+const STEPS=[['Ընդունում և պահեստավորում',[['Ընդունում','Թափոնի կշռում, մուտքային հսկողություն և գրանցում ըստ մատակարարի։'],['Հումքի պահեստ','Կապոցների պահպանում ըստ պոլիմերի տեսակի՝ ծածկված հարթակներում։']]],['Տեսակավորում և մանրացում',[['NIR տեսակավորում','Ինֆրակարմիր օպտիկան ճանաչում է PET, HDPE, PP, LDPE և դուրս է բերում PVC-ն։'],['Մանրացում','Պլաստիկը մանրացվում է 20–40 մմ փաթիլների։']]],['Լվացում և չորացում',[['Տաք լվացում','Պիտակների, սոսինձի և յուղերի հեռացում տաք լվացող լուծույթով։'],['Ֆլոտացիա','Խտությամբ տարանջատում. PP/PE-ն լողում է, PET-ը սուզվում։'],['Չորացում','Ցենտրիֆուգ և տաք օդ՝ մինչև 0.2%-ից ցածր խոնավություն։']]],['Հալեցում և գրանուլներ',[['Էքստրուզիա','Փաթիլները հալեցվում են էքստրուդերում՝ դեգազացիայով։'],['Ֆիլտրացիա','120 բար ճնշմամբ հալույթի մաքրում մեխանիկական խառնուրդներից։'],['Գրանուլացում','Հալույթը կտրվում է միատարր գրանուլների՝ երկրորդային հումք։']]],['Արտադրանք և առաքում',[['Կոմպաունդավորում','Ներկանյութերի, UV կայունացուցիչների և հավելումների ավելացում։'],['Կաղապարում','Ներարկային և սեղմման կաղապարում՝ սալիկներ, պալետներ, արկղեր։'],['Որակի վերահսկում','MFI, խտություն, ամրություն. յուրաքանչյուր խմբաքանակ ստուգվում է։'],['Առաքում','Պատրաստի արտադրանքի պահեստավորում և բաշխում հաճախորդներին։']]]];
+const POLY=[['PET','1','Պոլիէթիլենտերեֆտալատ','Շշեր և տարաներ. թափանցիկ, ամուր, լավ վերամշակվող։',['ρ 1.38','Tհալ ~250°C']],['HDPE','2','Բարձր խտության պոլիէթիլեն','Կանիստրներ, խողովակներ, արկղեր. սալիկների և պալետների հիմք։',['ρ 0.95','Tհալ ~130°C']],['LDPE','4','Ցածր խտության պոլիէթիլեն','Թաղանթներ, պարկեր, ագրոթաղանթ. ճկուն և առաձգական։',['ρ 0.92','Tհալ ~110°C']],['PP','5','Պոլիպրոպիլեն','Կափարիչներ, արկղեր, տեխնիկական մասեր. ջերմակայուն։',['ρ 0.90','Tհալ ~165°C']],['PS','6','Պոլիստիրոլ','Փաթեթավորում և սպասք. օգտագործվում է խառնուրդներում։',['ρ 1.05','Tփափկ ~100°C']],['PVC','3','Պոլիվինիլքլորիդ','Չի ընդունվում. 160°C-ից բարձր անջատում է HCl և վնասում սարքավորումները։',['Բացառվում է NIR-ով'],1]];
+const SEG=[['Շինարարություն և լոգիստիկա','B2B',[['Դիմացկունություն և սառնամանիք','«Ձմռանը ցրտից ու սառույցից բետոնե սալիկների կոտրվելու խնդրին հաճա՞խ եք հանդիպում: Կցանկանայի՞ք օգտագործել սալիկ, որը ցրտից չի քանդվում:»'],['Տակդիրների (պալետների) ծախսեր','«Որքա՞ն եք ծախսում փայտե կամ պլաստիկե տակդիրների վրա: Կգնե՞իք արդյոք տեղական արտադրանքը, եթե լիներ ավելի էժան ու ամուր:»'],['Փոխանակում (Trade-In)','«Եթե ձեր կոտրված պլաստիկե արկղերն ու տարաները հետ ընդունենք և զեղչով նորը տանք, դա ձեզ կհետաքրքրի՞:»'],['Երաշխիք (20–25 տարի)','«Որքանո՞վ է կարևոր 20–25 տարվա երաշխիք ունենալը, որպեսզի 2–3 տարին մեկ նորը չգնեք:»']]],
+['Գյուղատնտեսություն','Արմավիր, Արարատ',[['Ագրոթաղանթի թափոններ','«Ի՞նչ եք անում օգտագործված ագրոթաղանթները (պլյոնկան) և խողովակները բերքահավաքից հետո:»'],['Աղբի հանձնում շահույթով','«Եթե ինքներս գանք, հավաքենք պլաստիկ աղբը և վճարենք կամ զեղչ տանք, կհամագործակցե՞ք:»'],['Բերքի արկղեր','«Հաճա՞խ է պատահում, որ բերքի ծանրությունից արկղերը ջարդվում են, ու բերքը վնասվում է:»']]],
+['Հումք տրամադրողներ','Խանութներ, պահեստներ',[['Աղբի հեռացման ծախսեր','«Որքա՞ն եք վճարում պլաստիկ աղբը թափելու համար: Կուզենայի՞ք, որ մենք դա անեինք անվճար կամ շահավետ պայմաններով:»'],['Աղբամանների տեղադրում','«Բարդ կլինի՞ պլաստիկն առանձին հավաքելը, եթե տրամադրենք հատուկ աղբամաններ և դատարկենք:»'],['Էկո-բրենդի հեղինակություն','«Կարևո՞ր է, որ հաճախորդն իմանա, որ դուք աղբը չեք նետում բնության մեջ, այլ հանձնում եք վերամշակման:»']]],
+['Համայնքներ (ՏԻՄ)','Քաղաքապետարաններ',[['Քաղաքային բարեկարգում','«Նստարաններ կամ աղբամաններ գնելիս ի՞նչ խնդիրների եք հանդիպում (արագ ջարդվել, վանդալիզմ, ներկի պոկվել):»'],['Առանց խնամքի գույք','«Կցանկանայի՞ք տեղադրել նստարաններ, որոնք չեն կոտրվում, չեն ժանգոտվում և ներկելու կարիք չունեն:»'],['Համայնքային աղբի խնդիր','«Պատրաստ է՞ քաղաքապետարանը աջակցել գործարանին, որը աղբը կվերածի քաղաքային գույքի:»']]],
+['Վերավաճառողներ','B2C խանութներ',[['Տեղական արտադրանք','«Գնորդները պատրաստակա՞մ են գնել Հայաստանում արտադրվածը, եթե որակը ավելի լավն է:»'],['Ցուցադրական նմուշներ','«Եթե տրամադրենք ցուցադրական ստենդեր (թե ինչպես է աղբը դառնում սալիկ), դա կօգնի՞ վաճառքին:»']]]];
+/* loader + ready */
+addEventListener('load',()=>{setTimeout(()=>{$('#ld').classList.add('done');document.body.classList.add('ready')},350)});setTimeout(()=>{$('#ld').classList.add('done');document.body.classList.add('ready')},3500);
+/* nav */
+const nav=$('#nav');addEventListener('scroll',()=>nav.classList.toggle('sc',scrollY>30),{passive:true});
+$('#bg').onclick=()=>$('#nl').classList.toggle('open');$$('#nl a').forEach(a=>a.onclick=()=>$('#nl').classList.remove('open'));
+const secs=$$('section[id]');const so=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)$$('#nl a').forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id))}),{rootMargin:'-45% 0px -50% 0px'});secs.forEach(s=>so.observe(s));
+/* cursor glow + card spotlight + magnetic */
+if(FINE){const c=$('#cur');addEventListener('pointermove',e=>{c.style.left=e.clientX+'px';c.style.top=e.clientY+'px';const k=e.target.closest&&e.target.closest('.card');if(k){const r=k.getBoundingClientRect();k.style.setProperty('--mx',e.clientX-r.left+'px');k.style.setProperty('--my',e.clientY-r.top+'px')}},{passive:true});
+ if(!RM)$$('.mag').forEach(b=>{b.addEventListener('pointermove',e=>{const r=b.getBoundingClientRect();b.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.2}px,${(e.clientY-r.top-r.height/2)*.3}px)`});b.addEventListener('pointerleave',()=>b.style.transform='')})}
+/* marquee */
+const words=['PET','HDPE','LDPE','PP','Սալիկներ','Պալետներ','Արկղեր','Պանելներ','Նստարաններ','Փակ ցիկլ','0 թափոն','Made in Armenia'];$('#mq').innerHTML=[...words,...words].map(w=>`<span>${w}</span>`).join('');
+/* vortex canvas */
+(function(){const cv=$('#vortex'),x=cv.getContext('2d');let W,H,cx,cy,pts=[],mx=0,my=0;const N=innerWidth<700?260:620;
+function rs(){const d=Math.min(devicePixelRatio,2);W=cv.width=cv.offsetWidth*d;H=cv.height=cv.offsetHeight*d;cx=W*(innerWidth<900?.5:.72);cy=H*.5;pts=Array.from({length:N},()=>mk(true))}
+function mk(init){const a=Math.random()*Math.PI*2,r=(init?Math.random():1)*Math.max(W,H)*.75+60;return{a,r,s:.0015+Math.random()*.004,z:Math.random(),c:Math.random()<.18?'#B7F36B':(Math.random()<.5?'#36D66B':'#7dffc0'),sz:Math.random()*2.4+.6}}
+rs();addEventListener('resize',rs);addEventListener('pointermove',e=>{mx=(e.clientX/innerWidth-.5);my=(e.clientY/innerHeight-.5)},{passive:true});
+let t=0;(function f(){t++;x.fillStyle='rgba(4,10,7,.22)';x.fillRect(0,0,W,H);const ox=cx+mx*60,oy=cy+my*40;
+const g=x.createRadialGradient(ox,oy,0,ox,oy,Math.min(W,H)*.22);g.addColorStop(0,'rgba(183,243,107,.55)');g.addColorStop(.25,'rgba(54,214,107,.25)');g.addColorStop(1,'rgba(54,214,107,0)');x.fillStyle=g;x.beginPath();x.arc(ox,oy,Math.min(W,H)*.22,0,7);x.fill();
+for(const p of pts){p.a+=p.s*(1+300/(p.r+50));p.r-=.35+p.r*.0016;if(p.r<18){Object.assign(p,mk(false))}const px=ox+Math.cos(p.a)*p.r,py=oy+Math.sin(p.a)*p.r*.55;const al=Math.min(1,p.r/80)*(.35+p.z*.65);x.globalAlpha=al;x.fillStyle=p.c;x.fillRect(px,py,p.sz*(1+p.z),p.sz*(1+p.z))}
+x.globalAlpha=1;x.strokeStyle='rgba(54,214,107,.18)';x.lineWidth=1.2;for(let i=0;i<3;i++){x.beginPath();x.ellipse(ox,oy,Math.min(W,H)*(.12+i*.07),Math.min(W,H)*(.12+i*.07)*.55,t*.002*(i%2?1:-1),0,Math.PI*2);x.stroke()}
+if(!RM)requestAnimationFrame(f)})()})();
+/* reveal + counters */
+function cnt(el){if(el.dataset.done)return;el.dataset.done=1;const to=+el.dataset.c,dec=+(el.dataset.dec||0),suf=el.dataset.s||'',sm=el.querySelector('small'),t0=performance.now();const st=n=>{const p=Math.min(1,(n-t0)/1600),e=1-Math.pow(1-p,4);const v=(to*e).toFixed(dec);const txt=dec?v:Number(v).toLocaleString('en-US').replace(/,/g,' ');if(el.firstChild&&el.firstChild.nodeType===3)el.firstChild.nodeValue=txt+suf;else el.textContent=txt+suf;if(p<1)requestAnimationFrame(st)};requestAnimationFrame(st)}
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');$$('[data-c]',e.target).forEach(cnt);if(e.target.dataset.c)cnt(e.target);io.unobserve(e.target)}}),{threshold:.15});
+/* process */
+let si=0,html='',flat=[];STEPS.forEach(([ph,list])=>{html+=`<div class="phase">${ph}</div>`;list.forEach(s=>{si++;flat.push(s[0]);html+=`<div class="step" data-i="${si}"><span class="n">ԳՈՏԻ ${String(si).padStart(2,'0')}</span><h4>${s[0]}</h4><p>${s[1]}</p></div>`})});$('#steps').innerHTML=html;
+(function(){const sv=$('#psvg');const pts=[];const cols=[[60,70],[200,70],[340,70],[340,170],[200,170],[60,170],[60,270],[200,270],[340,270],[340,360],[200,360],[60,360]];
+// build serpentine path through 14 nodes
+const nodes=[];for(let r=0;r<4;r++){for(let c=0;c<4;c++){if(nodes.length>=14)break;const col=r%2?3-c:c;nodes.push([60+col*93.3,60+r*100])}}
+let d='M'+nodes.map(n=>n.join(' ')).join(' L');let g=`<defs><linearGradient id="pg" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#B7F36B"/><stop offset="1" stop-color="#0A8F55"/></linearGradient><filter id="gl"><feGaussianBlur stdDeviation="4"/></filter></defs>`;
+g+=`<path d="${d}" fill="none" stroke="rgba(54,214,107,.12)" stroke-width="18" stroke-linejoin="round" stroke-linecap="round"/><path id="pp" d="${d}" fill="none" stroke="url(#pg)" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>`;
+nodes.forEach((n,i)=>{g+=`<g class="nd" data-i="${i+1}"><circle cx="${n[0]}" cy="${n[1]}" r="17" fill="#08130e" stroke="rgba(54,214,107,.35)" stroke-width="1.5"/><text x="${n[0]}" y="${n[1]+4}" text-anchor="middle" font-size="11" font-weight="700" fill="#6b8076" font-family="JetBrains Mono">${String(i+1).padStart(2,'0')}</text></g>`});
+g+=`<circle id="dot" r="9" fill="#B7F36B" filter="url(#gl)"/><circle id="dot2" r="6" fill="#eaffd0"/>`;sv.innerHTML=g;
+const path=$('#pp'),L=path.getTotalLength();path.style.strokeDasharray=L;path.style.strokeDashoffset=L;
+const segL=[];for(let i=0;i<14;i++){let best=0,bd=1e9;for(let l=0;l<=L;l+=2){const p=path.getPointAtLength(l),dd=Math.hypot(p.x-nodes[i][0],p.y-nodes[i][1]);if(dd<bd){bd=dd;best=l}}segL.push(best)}
+let cur=0,tgt=0;function set(k){tgt=segL[k-1];$('#pnum').textContent=String(k).padStart(2,'0');$('#pname').textContent=flat[k-1];$$('.nd').forEach(n=>{const on=+n.dataset.i<=k;n.querySelector('circle').setAttribute('stroke',on?'#36D66B':'rgba(54,214,107,.35)');n.querySelector('circle').setAttribute('fill',+n.dataset.i===k?'#36D66B':'#08130e');n.querySelector('text').setAttribute('fill',+n.dataset.i===k?'#03120a':on?'#B7F36B':'#6b8076')})}
+(function an(){cur+=(tgt-cur)*.08;path.style.strokeDashoffset=L-cur;const p=path.getPointAtLength(Math.max(0,cur));['#dot','#dot2'].forEach(s=>{$(s).setAttribute('cx',p.x);$(s).setAttribute('cy',p.y)});requestAnimationFrame(an)})();
+const ob=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){$$('.step').forEach(s=>s.classList.toggle('on',s===e.target));set(+e.target.dataset.i)}}),{rootMargin:'-45% 0px -45% 0px'});$$('.step').forEach(s=>ob.observe(s));set(1)})();
+/* polymers */
+$('#poly').innerHTML=POLY.map((p,i)=>`<div class="card pc rv${p[5]?' no':''}" style="--i:${i%3}"><div class="ri"><span>${p[1]}</span></div><div class="code">${p[0]}</div><h4>${p[2]}</h4><p>${p[3]}</p><div class="props">${p[4].map(x=>`<span>${x}</span>`).join('')}</div></div>`).join('');
+if(FINE&&!RM)document.addEventListener('pointermove',e=>{const c=e.target.closest&&e.target.closest('.pc');$$('.pc').forEach(k=>{if(k!==c)k.style.transform=''});if(!c)return;const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transform=`perspective(800px) rotateY(${x*10}deg) rotateX(${-y*10}deg) translateY(-4px)`},{passive:true});
+/* products */
+const cats=['Բոլորը',...new Set(P.map(p=>p[2]))];$('#filters').innerHTML=cats.map((c,i)=>`<button class="fb${i?'':' on'}" data-k="${c}">${c}</button>`).join('');
+$('#gal').innerHTML=P.map((p,i)=>`<div class="gi rv ${p[3]}" data-i="${i}" data-cat="${p[2]}" style="--i:${i%4}"><img src="assets/p/${p[0]}${p[3]==='big'||p[3]==='wide'?'':'_s'}.jpg" alt="${p[1]}" loading="lazy"><div class="t"><span>${p[2]}</span><b>${p[1]}</b></div></div>`).join('');
+$$('.fb').forEach(b=>b.onclick=()=>{$$('.fb').forEach(x=>x.classList.toggle('on',x===b));$$('.gi').forEach(g=>g.classList.toggle('hide',b.dataset.k!=='Բոլորը'&&g.dataset.cat!==b.dataset.k))});
+const lb=$('#lb');let li=0;const show=i=>{li=(i+P.length)%P.length;$('img',lb).src='assets/p/'+P[li][0]+'.jpg';$('p',lb).textContent=P[li][1]+' · '+P[li][2]};
+$$('.gi').forEach(g=>g.onclick=()=>{show(+g.dataset.i);lb.classList.add('on')});$('.x',lb).onclick=()=>lb.classList.remove('on');$('.pv',lb).onclick=()=>show(li-1);$('.nx',lb).onclick=()=>show(li+1);lb.onclick=e=>{if(e.target===lb)lb.classList.remove('on')};
+addEventListener('keydown',e=>{if(!lb.classList.contains('on'))return;if(e.key==='Escape')lb.classList.remove('on');if(e.key==='ArrowRight')show(li+1);if(e.key==='ArrowLeft')show(li-1)});
+/* calculator */
+const tr=$('#tr');function calc(){const t=+tr.value;tr.style.setProperty('--p',((t-100)/400*100)+'%');$('#tv').textContent=t;const gr=t*.82,pr=t*.805,loss=t*.18,rev=t*.29;
+$('#o1').textContent=Math.round(gr);$('#o2').textContent=Math.round(pr);$('#o3').textContent=Math.round(loss);$('#o4').textContent=Math.round(rev);$('#o5').textContent=Math.round(t/500*100)+'%';$('#o6').textContent='~'+(Math.round(pr*1000/50/100)*100).toLocaleString('en-US').replace(/,/g,' ');$('#o7').textContent=t>300?'2–3':'2';$('#o8').textContent=Math.round(rev*12).toLocaleString('en-US').replace(/,/g,' ');
+$('#yb1').style.width='82%';$('#yb2').style.width='18%';const b=$('#bep');if(t>=120){b.className='bep ok';b.innerHTML=`✓ Անվնասաբերության կետից (≈120 տ/ամիս) <b>${t-120} տ</b>-ով բարձր`}else{b.className='bep no';b.innerHTML='⚠ Անվնասաբերության կետից (≈120 տ/ամիս) ցածր'}}
+tr.oninput=calc;calc();
+/* research */
+$('#segs').innerHTML=SEG.map((s,i)=>`<button class="seg${i?'':' on'}" data-i="${i}">${s[0]}<small>${s[2].length} հարց</small></button>`).join('');
+function seg(i){let n=SEG.slice(0,i).reduce((a,s)=>a+s[2].length,0);$('#qs').innerHTML=SEG[i][2].map((q,k)=>`<div class="q" style="animation-delay:${k*70}ms"><span class="n">ՀԱՐՑ ${String(n+k+1).padStart(2,'0')} · ${SEG[i][1]}</span><h4>${q[0]}</h4><p>${q[1]}</p></div>`).join('')}
+$$('.seg').forEach(b=>b.onclick=()=>{$$('.seg').forEach(x=>x.classList.toggle('on',x===b));seg(+b.dataset.i)});seg(0);
+/* observe reveals last (after dynamic content) */
+$$('.rv,.hstat,.bento .card,.strat .card,.vec').forEach(el=>io.observe(el));$$('.hstat [data-c]').forEach(el=>setTimeout(()=>cnt(el),900));
+</script>
+</body>
+</html>
