@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="hy">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>REPLAST MARKET — Խանութ և պլաստիկի գնում</title>
+<meta name="description" content="REPLAST MARKET — վերամշակված պլաստիկից արտադրանքի խանութ և պլաստիկ թափոնի գնում։ Ակադեմիական նախագիծ։">
+<meta name="theme-color" content="#040a07">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='28' fill='%2336D66B'/%3E%3Ccircle cx='32' cy='32' r='14' fill='%23050c08'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Armenian:wght@400;500;600;700;800;900&family=Unbounded:wght@500;700;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#040a07;--bg2:#08130e;--card:#0b1812;--g:#36D66B;--dg:#0A8F55;--lime:#B7F36B;--amber:#F2B53A;--red:#FF5E5E;--blue:#5CB8DE;--tx:#EAF2EE;--sub:#a3b5ac;--dim:#6b8076;--line:rgba(54,214,107,.14);--line2:rgba(54,214,107,.32);--glass:rgba(14,28,21,.62);--f:'Noto Sans Armenian',system-ui,sans-serif;--d:'Unbounded','Noto Sans Armenian',sans-serif;--m:'JetBrains Mono',ui-monospace,monospace;--e:cubic-bezier(.16,1,.3,1)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;overflow-x:clip}
+body{background:var(--bg);color:var(--tx);font-family:var(--f);line-height:1.55;overflow-x:clip;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}img{max-width:100%;display:block}
+button,input,select{font:inherit;color:inherit}
+::selection{background:rgba(54,214,107,.35)}
+.wrap{max-width:1280px;margin:0 auto;padding:0 24px}
+.bgfx{position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(900px 500px at 85% -10%,rgba(54,214,107,.16),transparent 60%),radial-gradient(700px 500px at -10% 30%,rgba(10,143,85,.14),transparent 60%)}
+.grid-bg{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.5;background-image:linear-gradient(rgba(54,214,107,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(54,214,107,.04) 1px,transparent 1px);background-size:44px 44px;mask-image:radial-gradient(ellipse at 50% 0%,#000 30%,transparent 75%)}
+main,nav,footer{position:relative;z-index:2}
+.mono{font-family:var(--m)}
+/* nav */
+nav.top{position:sticky;top:12px;z-index:60;margin:12px auto 0;width:min(1240px,calc(100% - 24px));display:flex;align-items:center;gap:14px;padding:9px 10px 9px 18px;border-radius:999px;background:rgba(6,14,10,.78);border:1px solid var(--line);backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4)}
+.logo{display:flex;align-items:center;gap:10px;font:900 14px var(--d);letter-spacing:.04em;white-space:nowrap}
+.logo i{width:26px;height:26px;border-radius:50%;background:conic-gradient(var(--g),var(--lime),var(--dg),var(--g));position:relative;animation:spin 6s linear infinite;box-shadow:0 0 18px rgba(54,214,107,.6)}
+.logo i::after{content:"";position:absolute;inset:7px;border-radius:50%;background:var(--bg)}
+.logo span{color:var(--g)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.nl{display:flex;gap:2px;margin-left:auto}
+.nl a{font-size:13px;font-weight:600;color:var(--sub);padding:8px 12px;border-radius:99px;transition:.25s;white-space:nowrap}
+.nl a:hover{color:var(--tx);background:rgba(54,214,107,.1)}
+.cartbtn{position:relative;display:flex;align-items:center;gap:8px;padding:10px 16px;border-radius:99px;background:var(--g);color:#04120a;font-weight:800;font-size:14px;border:0;cursor:pointer;transition:transform .2s,box-shadow .3s;white-space:nowrap}
+.cartbtn:hover{box-shadow:0 0 30px rgba(54,214,107,.5)}
+.cartbtn .cnt{min-width:22px;height:22px;border-radius:99px;background:#04120a;color:var(--lime);font:700 12px var(--m);display:inline-flex;align-items:center;justify-content:center;padding:0 6px}
+.cartbtn.bump{animation:bump .45s var(--e)}
+@keyframes bump{40%{transform:scale(1.14)}}
+/* promo strip */
+.strip{margin:14px auto 0;width:min(1240px,calc(100% - 24px));border-radius:16px;overflow:hidden;border:1px solid var(--line);background:linear-gradient(90deg,rgba(54,214,107,.12),rgba(183,243,107,.06));white-space:nowrap}
+.strip .tr{display:inline-flex;gap:46px;padding:10px 0;animation:mq 38s linear infinite;font:700 12.5px var(--m);letter-spacing:.06em;color:var(--sub)}
+.strip .tr b{color:var(--lime)}
+@keyframes mq{to{transform:translateX(-50%)}}
+/* hero */
+.hero{padding:58px 0 30px;display:grid;grid-template-columns:1.15fr .85fr;gap:36px;align-items:center}
+.kick{display:inline-flex;align-items:center;gap:8px;font:700 11px var(--m);letter-spacing:.2em;color:var(--g);padding:7px 12px;border:1px solid var(--line2);border-radius:99px;background:rgba(54,214,107,.06)}
+.kick i{width:7px;height:7px;border-radius:50%;background:var(--g);box-shadow:0 0 10px var(--g);animation:pl 1.6s infinite}
+@keyframes pl{50%{opacity:.3}}
+h1{font:900 clamp(38px,6vw,76px)/1 var(--d);letter-spacing:-.02em;margin:18px 0 16px}
+h1 em{font-style:normal;background:linear-gradient(90deg,var(--g),var(--lime));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p.l{font-size:17px;color:var(--sub);max-width:560px}
+.cta{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:9px;font-weight:800;font-size:15px;padding:15px 24px;border-radius:99px;border:1px solid var(--line2);background:var(--glass);cursor:pointer;transition:.3s var(--e);white-space:nowrap}
+.btn:hover{border-color:var(--g);box-shadow:0 0 30px rgba(54,214,107,.25);transform:translateY(-2px)}
+.btn.p{background:var(--g);color:#04120a;border-color:var(--g)}
+.hstats{display:flex;gap:26px;margin-top:30px;flex-wrap:wrap}
+.hstats div b{display:block;font:800 26px var(--d);color:var(--tx)}
+.hstats div span{font-size:12.5px;color:var(--dim)}
+.hcards{position:relative;height:440px}
+.hc{position:absolute;border-radius:24px;overflow:hidden;border:1px solid var(--line2);box-shadow:0 30px 70px rgba(0,0,0,.55);background:var(--card)}
+.hc img{width:100%;height:100%;object-fit:cover}
+.hc .pt{position:absolute;left:12px;bottom:12px;padding:8px 12px;border-radius:12px;background:rgba(4,10,7,.82);backdrop-filter:blur(8px);font-size:13px;font-weight:700}
+.hc .pt b{color:var(--lime);font-family:var(--m)}
+.hc1{left:0;top:20px;width:62%;height:300px;animation:fl 7s ease-in-out infinite}
+.hc2{right:0;top:0;width:44%;height:230px;animation:fl 8s ease-in-out infinite reverse}
+.hc3{right:6%;bottom:0;width:52%;height:200px;animation:fl 9s ease-in-out infinite}
+@keyframes fl{50%{transform:translateY(-12px)}}
+.sale{position:absolute;left:50%;top:46%;transform:translate(-50%,-50%) rotate(-8deg);z-index:3;width:132px;height:132px;border-radius:50%;background:var(--lime);color:#04120a;display:flex;flex-direction:column;align-items:center;justify-content:center;font:900 30px var(--d);box-shadow:0 0 0 8px rgba(183,243,107,.18),0 20px 50px rgba(0,0,0,.5);animation:wob 3s ease-in-out infinite}
+.sale small{font:800 11px var(--f);letter-spacing:.04em}
+@keyframes wob{50%{transform:translate(-50%,-50%) rotate(-2deg) scale(1.05)}}
+/* switch */
+.modes{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:10px 0 40px}
+.mode{position:relative;display:flex;gap:18px;align-items:center;padding:22px;border-radius:22px;border:1px solid var(--line);background:var(--glass);overflow:hidden;transition:.35s var(--e)}
+.mode:hover{border-color:var(--g);transform:translateY(-3px)}
+.mode .ic{width:58px;height:58px;border-radius:16px;display:grid;place-items:center;font-size:28px;background:rgba(54,214,107,.12);flex:0 0 auto}
+.mode h3{font:800 19px var(--d)}
+.mode p{font-size:14px;color:var(--sub)}
+.mode .ar{margin-left:auto;font-size:24px;color:var(--g)}
+/* deals */
+.sech{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin:40px 0 18px;flex-wrap:wrap}
+.sech h2{font:900 clamp(26px,3.4vw,40px)/1.05 var(--d);letter-spacing:-.01em}
+.sech h2 em{font-style:normal;color:var(--g)}
+.sech p{color:var(--sub);font-size:14.5px;max-width:520px}
+.deals{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:16px}
+.deal{border-radius:22px;padding:22px;border:1px solid var(--line);background:var(--glass);position:relative;overflow:hidden}
+.deal .t{font:700 11px var(--m);letter-spacing:.16em;color:var(--lime)}
+.deal h4{font:800 20px var(--d);margin:8px 0 6px;line-height:1.2}
+.deal p{font-size:13.5px;color:var(--sub)}
+.deal.big{background:linear-gradient(135deg,rgba(54,214,107,.22),rgba(10,143,85,.08));border-color:var(--line2)}
+.timer{display:flex;gap:8px;margin-top:14px}
+.timer div{min-width:64px;padding:10px 8px;border-radius:14px;background:rgba(4,10,7,.6);text-align:center;border:1px solid var(--line)}
+.timer b{display:block;font:800 26px var(--m);color:var(--tx)}
+.timer span{font-size:11px;color:var(--dim)}
+.code{display:inline-flex;align-items:center;gap:10px;margin-top:12px;padding:8px 8px 8px 14px;border:1px dashed var(--line2);border-radius:12px;font:700 15px var(--m);color:var(--lime)}
+.code button{border:0;border-radius:8px;padding:6px 10px;background:rgba(54,214,107,.15);color:var(--tx);cursor:pointer;font:700 11px var(--m)}
+.tiers{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.tiers div{display:flex;justify-content:space-between;padding:8px 12px;border-radius:10px;background:rgba(4,10,7,.5);font-size:13.5px}
+.tiers b{font-family:var(--m);color:var(--g)}
+/* toolbar */
+.bar{position:sticky;top:76px;z-index:40;display:flex;gap:10px;align-items:center;padding:10px;border-radius:18px;background:rgba(6,14,10,.86);border:1px solid var(--line);backdrop-filter:blur(14px);margin-bottom:18px;flex-wrap:wrap}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{padding:9px 14px;border-radius:99px;border:1px solid var(--line);background:transparent;cursor:pointer;font-size:13.5px;font-weight:600;color:var(--sub);transition:.2s}
+.chip:hover{color:var(--tx);border-color:var(--line2)}
+.chip.on{background:var(--g);color:#04120a;border-color:var(--g)}
+.search{margin-left:auto;display:flex;align-items:center;gap:8px;padding:0 14px;border-radius:99px;border:1px solid var(--line);background:rgba(4,10,7,.6);height:40px;min-width:220px}
+.search input{border:0;background:transparent;outline:0;width:100%;font-size:14px}
+select.sort{height:40px;border-radius:99px;border:1px solid var(--line);background:rgba(4,10,7,.6);padding:0 14px;font-size:13.5px;outline:0}
+select.sort option{background:#08130e}
+/* products */
+.prods{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.pc{display:flex;flex-direction:column;border-radius:22px;border:1px solid var(--line);background:var(--card);overflow:hidden;transition:transform .45s var(--e),box-shadow .45s var(--e),border-color .3s;opacity:0;transform:translateY(18px)}
+.pc.in{opacity:1;transform:none}
+.pc:hover{transform:translateY(-6px);border-color:var(--line2);box-shadow:0 24px 50px rgba(0,0,0,.5),0 0 30px rgba(54,214,107,.12)}
+.pc .im{position:relative;height:190px;overflow:hidden;cursor:zoom-in;background:#07110c}
+.pc .im img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--e)}
+.pc:hover .im img{transform:scale(1.1)}
+.bd{position:absolute;top:12px;left:12px;display:flex;gap:6px}
+.bd span{font:800 10.5px var(--m);letter-spacing:.08em;padding:5px 9px;border-radius:8px}
+.bd .s{background:var(--red);color:#fff}.bd .h{background:var(--amber);color:#1a1000}.bd .n{background:var(--blue);color:#02121a}.bd .k{background:var(--lime);color:#04120a}
+.eco{position:absolute;right:10px;bottom:10px;font:700 11px var(--m);padding:5px 9px;border-radius:8px;background:rgba(4,10,7,.82);color:var(--lime);backdrop-filter:blur(6px)}
+.pc .bo{padding:16px;display:flex;flex-direction:column;gap:6px;flex:1}
+.pc .cat{font:700 10.5px var(--m);letter-spacing:.14em;color:var(--dim);text-transform:uppercase}
+.pc h3{font-size:16px;font-weight:800;line-height:1.25}
+.pc .ds{font-size:12.5px;color:var(--sub);line-height:1.45}
+.pr{display:flex;align-items:baseline;gap:8px;margin-top:auto;padding-top:8px;flex-wrap:wrap}
+.pr b{font:800 22px var(--m);color:var(--tx);letter-spacing:-.02em}
+.pr s{font:600 13px var(--m);color:var(--dim)}
+.pr span{font-size:12px;color:var(--dim)}
+.add{display:flex;gap:8px;margin-top:10px}
+.qty{display:flex;align-items:center;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.qty button{width:32px;height:40px;border:0;background:transparent;cursor:pointer;font-size:17px;color:var(--sub)}
+.qty button:hover{background:rgba(54,214,107,.1);color:var(--tx)}
+.qty input{width:46px;height:40px;border:0;background:transparent;text-align:center;font:700 14px var(--m);outline:0}
+.ab{flex:1;height:40px;border-radius:12px;border:0;background:var(--g);color:#04120a;font-weight:800;font-size:14px;cursor:pointer;transition:.25s}
+.ab:hover{box-shadow:0 0 24px rgba(54,214,107,.45)}
+.ab.ok{background:var(--lime)}
+.ab.ask{background:transparent;border:1px solid var(--line2);color:var(--tx)}
+/* buyback */
+.bb{display:grid;grid-template-columns:1.05fr .95fr;gap:18px}
+.panel{border-radius:22px;border:1px solid var(--line);background:var(--glass);padding:22px}
+.ptab{width:100%;border-collapse:collapse}
+.ptab th{text-align:left;font:700 10.5px var(--m);letter-spacing:.14em;color:var(--g);padding:0 10px 10px;border-bottom:1px solid var(--line2)}
+.ptab td{padding:12px 10px;border-bottom:1px solid var(--line);font-size:14px;vertical-align:middle}
+.ptab td.num{text-align:right;font:800 17px var(--m);white-space:nowrap}
+.ptab .pk{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:10px;font:800 12px var(--m);margin-right:10px;vertical-align:middle}
+.ptab .x td{opacity:.55}
+.up{color:var(--g);font:700 11px var(--m);margin-left:6px}
+.calc label{display:block;font:700 10.5px var(--m);letter-spacing:.14em;color:var(--dim);margin:14px 0 8px}
+.poly{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.poly button{padding:10px 6px;border-radius:12px;border:1px solid var(--line);background:rgba(4,10,7,.5);cursor:pointer;font:700 13px var(--m);transition:.2s}
+.poly button.on{background:var(--g);color:#04120a;border-color:var(--g)}
+.kg{display:flex;align-items:center;gap:14px}
+.kg input[type=range]{flex:1;accent-color:#36D66B}
+.kg output{font:800 22px var(--m);min-width:110px;text-align:right}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;border:1px solid var(--line);cursor:pointer;font-size:14px;transition:.2s}
+.opt:hover{border-color:var(--line2)}
+.opt input{accent-color:#36D66B;width:17px;height:17px}
+.opt b{margin-left:auto;font:700 12px var(--m);color:var(--g)}
+.pay{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.pay button{padding:12px;border-radius:12px;border:1px solid var(--line);background:rgba(4,10,7,.5);cursor:pointer;text-align:left;font-size:13px;transition:.2s}
+.pay button b{display:block;font-size:14.5px}
+.pay button.on{border-color:var(--g);background:rgba(54,214,107,.12)}
+.res{margin-top:16px;padding:18px;border-radius:18px;background:linear-gradient(135deg,rgba(54,214,107,.2),rgba(10,143,85,.06));border:1px solid var(--line2)}
+.res .big{font:900 38px var(--m);color:var(--lime);letter-spacing:-.02em}
+.res .sm{font-size:13px;color:var(--sub)}
+.points{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:16px}
+.pt2{border-radius:18px;border:1px solid var(--line);padding:16px;background:var(--glass)}
+.pt2 .t{font:700 10.5px var(--m);letter-spacing:.14em;color:var(--g)}
+.pt2 h4{font-size:15px;margin:6px 0 4px}
+.pt2 p{font-size:13px;color:var(--sub)}
+/* loyalty / faq */
+.loy{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.lv{border-radius:20px;padding:18px;border:1px solid var(--line);background:var(--glass)}
+.lv .n{font:900 15px var(--d)}
+.lv .r{font:800 28px var(--m);color:var(--g);margin:6px 0}
+.lv p{font-size:13px;color:var(--sub)}
+.faq{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+details{border-radius:16px;border:1px solid var(--line);background:var(--glass);padding:14px 18px}
+summary{cursor:pointer;font-weight:700;font-size:15px;list-style:none;display:flex;justify-content:space-between;gap:10px}
+summary::after{content:"+";color:var(--g);font:700 20px var(--m);transition:.3s}
+details[open] summary::after{transform:rotate(45deg)}
+details p{margin-top:8px;font-size:14px;color:var(--sub)}
+/* cart drawer */
+.ov{position:fixed;inset:0;background:rgba(2,6,4,.6);backdrop-filter:blur(4px);z-index:90;opacity:0;pointer-events:none;transition:.35s}
+.ov.on{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(460px,100%);z-index:95;background:#07110c;border-left:1px solid var(--line2);transform:translateX(102%);transition:transform .5s var(--e);display:flex;flex-direction:column}
+.drawer.on{transform:none}
+.dh{display:flex;align-items:center;justify-content:space-between;padding:20px 22px;border-bottom:1px solid var(--line)}
+.dh h3{font:800 19px var(--d)}
+.x{width:38px;height:38px;border-radius:12px;border:1px solid var(--line);background:transparent;cursor:pointer;font-size:18px}
+.items{flex:1;overflow-y:auto;padding:12px 22px;display:flex;flex-direction:column;gap:12px}
+.it{display:grid;grid-template-columns:64px 1fr auto;gap:12px;align-items:center;padding:10px;border-radius:14px;border:1px solid var(--line);background:rgba(11,24,18,.7)}
+.it img{width:64px;height:64px;border-radius:10px;object-fit:cover}
+.it h5{font-size:13.5px;line-height:1.3}
+.it .u{font:600 12px var(--m);color:var(--dim)}
+.it .sum{text-align:right;font:800 14px var(--m)}
+.it .qty button{width:26px;height:30px}.it .qty input{width:36px;height:30px;font-size:12.5px}
+.rm{border:0;background:none;color:var(--dim);cursor:pointer;font-size:12px;margin-top:4px}
+.rm:hover{color:var(--red)}
+.empty{text-align:center;padding:60px 10px;color:var(--dim)}
+.df{padding:18px 22px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:9px;background:#06100b}
+.row{display:flex;justify-content:space-between;font-size:14px;color:var(--sub)}
+.row b{font-family:var(--m);color:var(--tx)}
+.row.d b{color:var(--g)}
+.row.t{font-size:17px;color:var(--tx);font-weight:800;padding-top:8px;border-top:1px dashed var(--line2)}
+.row.t b{font-size:22px;color:var(--lime)}
+.pc-in{display:flex;gap:8px}
+.pc-in input{flex:1;height:40px;border-radius:12px;border:1px solid var(--line);background:rgba(4,10,7,.6);padding:0 12px;font:700 13px var(--m);outline:0;text-transform:uppercase}
+.pc-in button{height:40px;padding:0 14px;border-radius:12px;border:1px solid var(--line2);background:transparent;cursor:pointer;font-weight:700;font-size:13px}
+.msg{font-size:12.5px;min-height:16px}
+.dv{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.dv button{padding:8px 6px;border-radius:10px;border:1px solid var(--line);background:transparent;cursor:pointer;font-size:12px;line-height:1.25}
+.dv button.on{border-color:var(--g);background:rgba(54,214,107,.12)}
+.ecobar{font-size:12.5px;color:var(--lime);background:rgba(183,243,107,.08);border-radius:10px;padding:8px 10px}
+/* modal */
+.mod{position:fixed;inset:0;z-index:110;display:grid;place-items:center;padding:20px;background:rgba(2,6,4,.72);backdrop-filter:blur(6px);opacity:0;pointer-events:none;transition:.3s}
+.mod.on{opacity:1;pointer-events:auto}
+.mc{width:min(520px,100%);max-height:90vh;overflow-y:auto;border-radius:24px;border:1px solid var(--line2);background:#07110c;padding:24px;transform:translateY(16px) scale(.98);transition:.4s var(--e)}
+.mod.on .mc{transform:none}
+.mc h3{font:800 21px var(--d);margin-bottom:6px}
+.mc p{color:var(--sub);font-size:14px}
+.fi{display:flex;flex-direction:column;gap:6px;margin-top:12px}
+.fi label{font:700 10.5px var(--m);letter-spacing:.14em;color:var(--dim)}
+.fi input,.fi textarea{border-radius:12px;border:1px solid var(--line);background:rgba(4,10,7,.6);padding:11px 12px;font-size:14px;outline:0}
+.fi input:focus,.fi textarea:focus{border-color:var(--g)}
+pre.ord{white-space:pre-wrap;font:600 12.5px/1.55 var(--m);background:rgba(4,10,7,.7);border:1px solid var(--line);border-radius:12px;padding:12px;margin-top:12px;color:var(--sub)}
+.lb{position:fixed;inset:0;z-index:120;display:grid;place-items:center;background:rgba(2,6,4,.9);opacity:0;pointer-events:none;transition:.3s;cursor:zoom-out;padding:20px}
+.lb.on{opacity:1;pointer-events:auto}
+.lb img{max-width:92vw;max-height:84vh;border-radius:16px;border:1px solid var(--line2)}
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,40px);opacity:0;z-index:130;padding:12px 18px;border-radius:14px;background:var(--lime);color:#04120a;font-weight:800;font-size:14px;transition:.4s var(--e);box-shadow:0 14px 40px rgba(0,0,0,.5)}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+footer{border-top:1px solid var(--line);margin-top:70px;padding:30px 0 40px;color:var(--dim);font-size:13px}
+footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.disc{font-size:12px;color:var(--dim);margin-top:10px}
+@media (max-width:1100px){.prods{grid-template-columns:repeat(3,1fr)}.points,.loy{grid-template-columns:1fr 1fr}}
+@media (max-width:900px){.hero,.bb,.deals,.modes,.faq{grid-template-columns:1fr}.hcards{height:340px}.prods{grid-template-columns:1fr 1fr}.nl{display:none}.bar{top:70px}}
+@media (max-width:560px){.wrap{padding:0 16px}.prods,.points,.loy{grid-template-columns:1fr}.search{min-width:0;width:100%;margin-left:0}.hcards{display:none}.timer div{min-width:54px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="bgfx"></div><div class="grid-bg"></div>
+
+<nav class="top">
+  <a class="logo" href="../"><i></i>REPLAST <span>MARKET</span></a>
+  <div class="nl"><a href="#shop">Խանութ</a><a href="#deals">Ակցիաներ</a><a href="#buy">Պլաստիկի գնում</a><a href="#club">EcoClub</a><a href="#faq">Հարցեր</a><a href="../">Գլխավոր ↗</a></div>
+  <button class="cartbtn" id="cartBtn" aria-label="Զամբյուղ">🛒 Զամբյուղ <span class="cnt" id="cnt">0</span></button>
+</nav>
+
+<div class="strip"><div class="tr" id="ticker"></div></div>
+
+<main class="wrap">
+  <section class="hero">
+    <div>
+      <span class="kick"><i></i>ԱՌՑԱՆՑ ԽԱՆՈՒԹ · ԳՈՐԾԱՐԱՆԱՅԻՆ ԳՆԵՐ</span>
+      <h1>Գնիր <em>վերամշակված</em>։<br>Վաճառիր <em>պլաստիկդ</em>։</h1>
+      <p class="l">Սալիկներ, պալետներ, նստարաններ և պանելներ՝ ուղիղ գործարանից։ Իսկ քո մաքուր պլաստիկ թափոնը մենք կգնենք կամ կփոխանակենք ապրանքով <b style="color:var(--lime)">+25% բոնուսով</b>։</p>
+      <div class="cta"><a class="btn p" href="#shop">Անցնել խանութ →</a><a class="btn" href="#buy">♻ Վաճառել պլաստիկ</a></div>
+      <div class="hstats">
+        <div><b data-n="16">0</b><span>ապրանքատեսակ</span></div>
+        <div><b data-n="6">0</b><span>ընդունվող պոլիմեր</span></div>
+        <div><b data-n="24" data-s=" ժ">0</b><span>առաքում Երևանում</span></div>
+        <div><b data-n="10" data-s=" տ.">0</b><span>երաշխիք սալիկին</span></div>
+      </div>
+    </div>
+    <div class="hcards">
+      <div class="hc hc1"><img src="../assets/p/01-paving.jpg" alt="REPLAST PAVE սալիկ"><div class="pt">REPLAST PAVE · <b>4 580 ֏/մ²</b></div></div>
+      <div class="hc hc2"><img src="../assets/p/05-benches_s.jpg" alt="Նստարան"><div class="pt">Նստարան · <b>159 000 ֏</b></div></div>
+      <div class="hc hc3"><img src="../assets/p/11-pallets_s.jpg" alt="Պալետ"><div class="pt">Պալետ · <b>14 900 ֏</b></div></div>
+      <div class="sale">−12%<small>ՍԱԼԻԿ</small></div>
+    </div>
+  </section>
+
+  <div class="modes">
+    <a class="mode" href="#shop"><div class="ic">🛒</div><div><h3>Գնել</h3><p>16 ապրանք, զեղչեր մինչև 17%, առաքում 24 ժամում</p></div><span class="ar">→</span></a>
+    <a class="mode" href="#buy"><div class="ic">♻️</div><div><h3>Վաճառել պլաստիկ</h3><p>PET, HDPE, LDPE, PP՝ մինչև 167 ֏/կգ, անվճար տեղափոխում</p></div><span class="ar">→</span></a>
+  </div>
+
+  <!-- DEALS -->
+  <div class="sech" id="deals"><h2>Ակցիաներ և <em>զեղչեր</em></h2><p>Զեղչերը կիրառվում են ավտոմատ՝ զամբյուղում։ Պրոմոկոդը մուտքագրեք պատվերի ժամանակ։</p></div>
+  <div class="deals">
+    <div class="deal big">
+      <span class="t">ՍԵԶՈՆԻ ՆԱԽԱՎԱՃԱՌՔ</span>
+      <h4>−12% REPLAST PAVE սալիկի վրա</h4>
+      <p>Պատվիրեք հիմա գարնան սեզոնի համար. առաքումը մինչև մարտի 15-ը։ Գինը ֆիքսվում է։</p>
+      <div class="timer" id="timer"><div><b>00</b><span>օր</span></div><div><b>00</b><span>ժամ</span></div><div><b>00</b><span>րոպե</span></div><div><b>00</b><span>վրկ</span></div></div>
+    </div>
+    <div class="deal">
+      <span class="t">ԾԱՎԱԼԱՅԻՆ ԶԵՂՉ</span>
+      <h4>Որքան շատ, այնքան էժան</h4>
+      <div class="tiers"><div><span>150 000 ֏-ից</span><b>−3%</b></div><div><span>500 000 ֏-ից</span><b>−7%</b></div><div><span>1 500 000 ֏-ից</span><b>−12%</b></div></div>
+    </div>
+    <div class="deal">
+      <span class="t">ՊՐՈՄՈԿՈԴԵՐ</span>
+      <h4>Առաջին պատվեր և բիզնես</h4>
+      <p>Առաջին պատվերի համար՝ −10%</p>
+      <div class="code">ECO10 <button onclick="copyCode('ECO10')">ՊԱՏՃԵՆԵԼ</button></div>
+      <p style="margin-top:10px">Պալետների վրա՝ լրացուցիչ −8%</p>
+      <div class="code">PALET8 <button onclick="copyCode('PALET8')">ՊԱՏՃԵՆԵԼ</button></div>
+    </div>
+  </div>
+
+  <!-- SHOP -->
+  <div class="sech" id="shop"><h2>Մեր <em>արտադրանքը</em></h2><p>Բոլոր գներն ընդգրկում են ԱԱՀ։ Կանաչ պիտակը ցույց է տալիս, թե քանի կգ պլաստիկ է վերամշակվել մեկ միավորի համար։</p></div>
+  <div class="bar">
+    <div class="chips" id="chips"></div>
+    <select class="sort" id="sort" aria-label="Դասավորել"><option value="pop">Հանրաճանաչ</option><option value="asc">Գինը՝ աճման կարգով</option><option value="desc">Գինը՝ նվազման կարգով</option><option value="eco">Ամենաէկոլոգիական</option></select>
+    <label class="search">⌕<input id="q" placeholder="Որոնել ապրանք…"></label>
+  </div>
+  <div class="prods" id="prods"></div>
+
+  <!-- BUYBACK -->
+  <div class="sech" id="buy"><h2>Պլաստիկի <em>գնում</em></h2><p>Բերեք կամ կանչեք մեքենա։ Կշռում ենք ձեր ներկայությամբ, վճարում ենք նույն օրը՝ կանխիկ, քարտին կամ EcoClub բոնուսներով։</p></div>
+  <div class="bb">
+    <div class="panel">
+      <table class="ptab">
+        <tr><th>Պոլիմեր</th><th>Ինչ է դա</th><th style="text-align:right">֏ / կգ</th></tr>
+        <tbody id="ptab"></tbody>
+      </table>
+      <p class="disc">Գինը մաքուր, տեսակավորված պլաստիկի համար է. խառը կամ յուղոտ թափոնի դեպքում գինը իջնում է մինչև 50%։ PVC-ն չենք ընդունում, քանի որ հալվելիս անջատում է HCl։</p>
+    </div>
+    <div class="panel calc">
+      <div style="font:800 19px var(--d)">Հաշվիչ՝ որքա՞ն կստանաք</div>
+      <label>ՊՈԼԻՄԵՐԻ ՏԵՍԱԿ</label>
+      <div class="poly" id="poly"></div>
+      <label>ՔԱՇ</label>
+      <div class="kg"><input type="range" id="kg" min="10" max="3000" step="10" value="250"><output id="kgo">250 կգ</output></div>
+      <label>ՎԻՃԱԿ</label>
+      <div class="opts">
+        <label class="opt"><input type="checkbox" id="o1" checked>Մաքուր և չոր (առանց պիտակների, մնացորդների)<b>+20%</b></label>
+        <label class="opt"><input type="checkbox" id="o2">Սեղմված բալաներով<b>+15%</b></label>
+      </div>
+      <label>ՎՃԱՐՄԱՆ ՁԵՎ</label>
+      <div class="pay"><button class="on" data-p="cash"><b>💵 Փող</b>կանխիկ կամ քարտին</button><button data-p="credit"><b>🎁 Բոնուս +25%</b>գնումների համար խանութում</button></div>
+      <div class="res">
+        <div class="sm" id="resl">Դուք կստանաք</div>
+        <div class="big" id="res">0 ֏</div>
+        <div class="sm" id="res2"></div>
+      </div>
+      <button class="btn p" style="width:100%;justify-content:center;margin-top:12px" onclick="sellReq()">Կանչել մեքենա / հայտ ուղարկել →</button>
+    </div>
+  </div>
+  <div class="points">
+    <div class="pt2"><span class="t">ԳՈՐԾԱՐԱՆ</span><h4>Մ2 մայրուղի · Կոտայք</h4><p>Երկ–Շբթ · 09:00–18:00<br>Ցանկացած ծավալ, բեռնատարի կշեռք</p></div>
+    <div class="pt2"><span class="t">ԵՐԵՎԱՆ</span><h4>Ընդունման կետ</h4><p>Երկ–Կիր · 10:00–19:00<br>Մինչև 500 կգ</p></div>
+    <div class="pt2"><span class="t">ԱՐՄԱՎԻՐ</span><h4>Ընդունման կետ</h4><p>Երկ–Շբթ · 09:00–17:00<br>Ագրոթաղանթ, արկղեր</p></div>
+    <div class="pt2"><span class="t">ԱՆՎՃԱՐ ՏԵՂԱՓՈԽՈՒՄ</span><h4>Մեքենա ձեր դռան մոտ</h4><p>Երևանում՝ 300 կգ-ից<br>Մարզերում՝ 1 տ-ից</p></div>
+  </div>
+
+  <!-- CLUB -->
+  <div class="sech" id="club"><h2>EcoClub՝ <em>կուտակիր և խնայիր</em></h2><p>1 բոնուս = 1 ֏։ Բոնուսները ստանում եք գնումներից և հանձնված պլաստիկից։ Մակարդակը որոշվում է տարեկան ծավալով։</p></div>
+  <div class="loy">
+    <div class="lv"><div class="n">🌱 ՍԵՐՄ</div><div class="r">2%</div><p>Բոնուս յուրաքանչյուր գնումից։ Գրանցվելուն պես։</p></div>
+    <div class="lv"><div class="n">🌿 ԾԻԼ</div><div class="r">4%</div><p>Տարեկան 300 հզ. ֏ կամ 500 կգ պլաստիկից հետո։ + անվճար նմուշներ։</p></div>
+    <div class="lv"><div class="n">🌳 ԾԱՌ</div><div class="r">6%</div><p>Տարեկան 1 մլն ֏-ից։ + անձնական մենեջեր և առաջնահերթ առաքում։</p></div>
+    <div class="lv" style="border-color:var(--line2);background:linear-gradient(135deg,rgba(54,214,107,.18),rgba(10,143,85,.05))"><div class="n">🏙 ՀԱՄԱՅՆՔ</div><div class="r">B2G</div><p>Պայմանագրային գներ համայնքների և դպրոցների համար, ցուցանակ «Այս մայթը եղել է … տ պլաստիկ»։</p></div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="sech" id="faq"><h2>Հաճախ տրվող <em>հարցեր</em></h2></div>
+  <div class="faq">
+    <details open><summary>Ինչքա՞ն է առաքումը</summary><p>Երևանում՝ 5 000 ֏, իսկ 200 000 ֏-ից պատվերների համար՝ անվճար։ Մարզերում՝ 15 000 ֏, անվճար՝ 500 000 ֏-ից։ Գործարանից կարող եք վերցնել անվճար։</p></details>
+    <details><summary>Ինչպե՞ս եմ վճարում</summary><p>Պատվերից հետո մենեջերը կապ է հաստատում և ուղարկում է հաշիվ-ապրանքագիր։ Վճարում՝ փոխանցումով կամ ստանալիս։ Կայքում քարտի տվյալներ չենք հավաքում։</p></details>
+    <details><summary>Ի՞նչ երաշխիք կա</summary><p>Սալիկ և եզրաքար՝ 10 տարի ճաքելու դեմ, պալետներ և արկղեր՝ 3 տարի։ Յուրաքանչյուր խմբաքանակ ունի լաբորատոր անձնագիր։</p></details>
+    <details><summary>Կարո՞ղ եմ պլաստիկը փոխանակել ապրանքով</summary><p>Այո. ընտրեք «Բոնուս +25%» տարբերակը։ Օրինակ՝ 500 կգ մաքուր HDPE-ն տալիս է ≈ 86 600 ֏ բոնուս, որը բավական է ≈ 18 մ² սալիկի համար։</p></details>
+  </div>
+</main>
+
+<footer><div class="wrap"><div><b style="color:var(--tx)">REPLAST MARKET</b> · REPLAST ARMENIA<br><span class="disc">Ակադեմիական նախագիծ · Հեղինակ՝ Հրաչյա Ասլանյան, ՀԱՊՀ։ Գները, ակցիաները և էկրանի տվյալները պայմանական են (ցուցադրական)։</span></div><div><a href="../">Գլխավոր</a> · <a href="../presentation/">Ներկայացում</a> · <a href="https://t.me/hrachevskiy" target="_blank" rel="noopener">Telegram</a></div></div></footer>
+
+<!-- cart -->
+<div class="ov" id="ov"></div>
+<aside class="drawer" id="drawer" aria-label="Զամբյուղ">
+  <div class="dh"><h3>Զամբյուղ</h3><button class="x" onclick="cart(false)">✕</button></div>
+  <div class="items" id="items"></div>
+  <div class="df" id="df">
+    <div class="dv" id="dv"><button class="on" data-d="evn">Երևան<br><small>24 ժ</small></button><button data-d="reg">Մարզեր<br><small>48 ժ</small></button><button data-d="pick">Գործարանից<br><small>անվճար</small></button></div>
+    <div class="pc-in"><input id="promo" placeholder="ՊՐՈՄՈԿՈԴ"><button onclick="applyPromo()">Կիրառել</button></div>
+    <div class="msg" id="pmsg"></div>
+    <div class="row"><span>Ապրանքներ</span><b id="sSub">0 ֏</b></div>
+    <div class="row d" id="rTier"><span id="tierL">Ծավալային զեղչ</span><b id="sTier">0 ֏</b></div>
+    <div class="row d" id="rPromo"><span id="promoL">Պրոմոկոդ</span><b id="sPromo">0 ֏</b></div>
+    <div class="row"><span>Առաքում</span><b id="sDel">0 ֏</b></div>
+    <div class="row t"><span>Ընդամենը</span><b id="sTot">0 ֏</b></div>
+    <div class="ecobar" id="ecoT"></div>
+    <button class="btn p" style="justify-content:center" onclick="checkout()">Ձևակերպել պատվերը →</button>
+  </div>
+</aside>
+
+<div class="mod" id="mod"><div class="mc" id="mc"></div></div>
+<div class="lb" id="lb" onclick="this.classList.remove('on')"><img alt=""></div>
+<div class="toast" id="toast"></div>
+
+<script>
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const F=n=>Math.round(n).toLocaleString('ru-RU').replace(/ |,/g,' ')+' ֏';
+const IMG='../assets/p/';
+const P=[
+ {id:'pave',n:'Մայթի սալիկ REPLAST PAVE 300',c:'Քաղաքային',i:'01-paving',u:'մ²',p:5200,s:4580,b:['s','h'],e:8.7,d:'300×300×30 մմ · 6 գույն · ցրտադիմացկուն F300'},
+ {id:'kit',n:'«Բակի փաթեթ»՝ 50 մ² սալիկ + 2 նստարան + 2 աղբաման',c:'Քաղաքային',i:'02-general',u:'փաթեթ',p:694000,s:579000,b:['k'],e:703,d:'Պատրաստի լուծում դպրոցի կամ շենքի բակի համար'},
+ {id:'bench',n:'Նստարան սեղանով «ԱՅԳԻ»',c:'Քաղաքային',i:'05-benches',u:'հատ',p:185000,s:159000,b:['s'],e:120,d:'6 տեղ · չի փտում, չի պահանջում ներկում'},
+ {id:'curb',n:'Եզրաքար 1000×200×80',c:'Քաղաքային',i:'04-curbs',u:'հատ',p:2900,e:4.5,d:'Մայթերի և այգիների եզրերի համար'},
+ {id:'bin',n:'Աղբաման 240 լ անիվներով',c:'Քաղաքային',i:'06-bins',u:'հատ',p:32000,e:14,d:'UV կայունացված · կափարիչով · 3 գույն'},
+ {id:'road',n:'Արագության թմբիկ 500 մմ',c:'Ճանապարհային',i:'07-road',u:'հատ',p:14500,b:['n'],e:9,d:'Լուսանդրադարձիչներով · ամրացումը ներառված'},
+ {id:'pallet',n:'Պալետ 1200×800 (մինչև 1.5 տ)',c:'Լոգիստիկա',i:'11-pallets',u:'հատ',p:14900,b:['h'],e:18,d:'Չի ներծծում խոնավություն · հեշտ լվացվում է'},
+ {id:'box',n:'Կոնտեյներ-բոքս 1200×1000',c:'Լոգիստիկա',i:'12-containers',u:'հատ',p:89000,e:45,d:'Ծալովի · 600 լ · պահեստների և ֆերմաների համար'},
+ {id:'crate',n:'Լոգիստիկ արկղ 600×400×300',c:'Լոգիստիկա',i:'13-crates',u:'հատ',p:4900,s:4400,b:['s'],e:2.2,d:'Բերքի և պահեստի համար · շարվում է իրար վրա'},
+ {id:'barrel',n:'Տակառ 220 լ կափարիչով',c:'Լոգիստիկա',i:'08-barrels',u:'հատ',p:18000,e:9,d:'Ջրի և տեխնիկական հեղուկների համար'},
+ {id:'panel',n:'Շինարարական պանել 2000×1000×20',c:'Շինանյութ',i:'14-construction-panels',u:'հատ',p:24500,e:28,d:'Կաղապարամած, ցանկապատ, խոնավ տարածքներ'},
+ {id:'sheet',n:'Պլաստիկ թերթ 2000×1000×10',c:'Շինանյութ',i:'15-sheets',u:'հատ',p:13800,e:15,d:'Կտրվում է սովորական գործիքով'},
+ {id:'deco',n:'Դեկորատիվ պանել',c:'Շինանյութ',i:'16-decorative-panels',u:'մ²',p:8900,b:['n'],e:7,d:'Ֆասադների և ցանկապատների համար · 4 հյուսվածք'},
+ {id:'case',n:'Տեխնիկական կորպուս IP54',c:'Տեխնիկական',i:'03-enclosures',u:'հատ',p:7800,e:1.6,d:'Էլեկտրական վահանակների և սենսորների համար'},
+ {id:'tech',n:'Տեխնիկական մասեր ըստ գծագրի',c:'Տեխնիկական',i:'10-technical',u:'կգ',p:2400,e:1,d:'Կաղապարում ձեր գծագրով · 100 կգ-ից'},
+ {id:'custom',n:'Անհատական պատվեր',c:'Տեխնիկական',i:'09-custom',u:'',p:0,e:0,d:'Ձեր գաղափարը՝ վերամշակված պլաստիկից։ Գինը՝ հարցմամբ'}
+];
+const BUY=[['PET','#5CB8DE','Թափանցիկ շշեր',90],['PET-C','#3d86a8','Գունավոր շշեր',60],['HDPE','#36D66B','Կանիստրներ, կաթի և քիմիայի շշեր',110],['LDPE','#B7F36B','Թաղանթ, ագրոթաղանթ',70],['PP','#F2B53A','Կափարիչներ, դույլեր, արկղեր',100],['PS','#9B7BFF','Բաժակներ, փաթեթավորում',30]];
+let cartS={}, deliv='evn', promo='', cat='Բոլորը';
+try{cartS=JSON.parse(localStorage.getItem('rp_cart')||'{}')}catch(e){}
+const save=()=>{try{localStorage.setItem('rp_cart',JSON.stringify(cartS))}catch(e){}};
+const price=p=>p.s||p.p;
+/* ticker */
+const tk=['♻ PET <b>90 ֏/կգ</b>','HDPE <b>110 ֏/կգ</b>','PP <b>100 ֏/կգ</b>','LDPE <b>70 ֏/կգ</b>','REPLAST PAVE <b>4 580 ֏/մ² · −12%</b>','Պրոմոկոդ <b>ECO10</b> · −10%','Բոնուսով փոխանակում <b>+25%</b>','Առաքում Երևանում <b>24 ժ</b>','Պալետ <b>14 900 ֏</b>','EcoClub <b>մինչև 6%</b> բոնուս'];
+$('#ticker').innerHTML=[...tk,...tk].map(x=>'<span>'+x+'</span>').join('');
+/* chips */
+const cats=['Բոլորը',...new Set(P.map(p=>p.c))];
+$('#chips').innerHTML=cats.map(c=>`<button class="chip${c===cat?' on':''}" data-c="${c}">${c}</button>`).join('');
+$('#chips').onclick=e=>{const b=e.target.closest('.chip');if(!b)return;cat=b.dataset.c;$$('.chip').forEach(x=>x.classList.toggle('on',x===b));render()};
+$('#sort').onchange=render;$('#q').oninput=render;
+function render(){
+  const q=$('#q').value.trim().toLowerCase(), so=$('#sort').value;
+  let L=P.filter(p=>(cat==='Բոլորը'||p.c===cat)&&(!q||(p.n+p.d+p.c).toLowerCase().includes(q)));
+  if(so==='asc')L.sort((a,b)=>(price(a)||1e12)-(price(b)||1e12)); if(so==='desc')L.sort((a,b)=>price(b)-price(a)); if(so==='eco')L.sort((a,b)=>b.e-a.e);
+  const BN={s:'ԶԵՂՉ',h:'ՀԻԹ',n:'ՆՈՐ',k:'ՓԱԹԵԹ'};
+  $('#prods').innerHTML=L.map(p=>{
+    const pct=p.s?Math.round((1-p.s/p.p)*100):0;
+    return `<article class="pc"><div class="im" onclick="zoom('${p.i}')"><img src="${IMG}${p.i}_s.jpg" alt="${p.n}" loading="lazy"><div class="bd">${(p.b||[]).map(b=>`<span class="${b}">${b==='s'?'−'+pct+'%':BN[b]}</span>`).join('')}</div>${p.e?`<span class="eco">♻ ${p.e} կգ / ${p.u}</span>`:''}</div>
+    <div class="bo"><span class="cat">${p.c}</span><h3>${p.n}</h3><p class="ds">${p.d}</p>
+    <div class="pr">${p.p?`<b>${F(price(p))}</b>${p.s?`<s>${F(p.p)}</s>`:''}<span>/ ${p.u}</span>`:`<b style="font-size:17px">Գինը՝ հարցմամբ</b>`}</div>
+    <div class="add">${p.p?`<div class="qty"><button onclick="st('${p.id}',-1)">−</button><input id="q_${p.id}" value="${p.u==='մ²'?20:p.u==='կգ'?100:1}" inputmode="numeric"><button onclick="st('${p.id}',1)">+</button></div><button class="ab" onclick="add('${p.id}',this)">Ավելացնել</button>`:`<button class="ab ask" onclick="ask('${p.id}')">Ուղարկել հարցում →</button>`}</div></div></article>`}).join('')||'<p class="empty">Ոչինչ չի գտնվել</p>';
+  requestAnimationFrame(()=>$$('.pc').forEach((el,i)=>setTimeout(()=>el.classList.add('in'),i*45)));
+}
+function st(id,d){const i=$('#q_'+id);const p=P.find(x=>x.id===id);const step=p.u==='մ²'?5:p.u==='կգ'?50:1;i.value=Math.max(step===1?1:step,(+i.value||0)+d*step)}
+function add(id,btn){const q=Math.max(1,+$('#q_'+id).value||1);cartS[id]=(cartS[id]||0)+q;save();upd();btn.classList.add('ok');btn.textContent='✓ Ավելացված';setTimeout(()=>{btn.classList.remove('ok');btn.textContent='Ավելացնել'},1200);const c=$('#cartBtn');c.classList.remove('bump');void c.offsetWidth;c.classList.add('bump');toast('Ավելացվեց զամբյուղ')}
+function zoom(i){$('#lb img').src=IMG+i+'.jpg';$('#lb').classList.add('on')}
+function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('on');clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove('on'),1800)}
+function copyCode(c){navigator.clipboard&&navigator.clipboard.writeText(c).catch(()=>{});$('#promo').value=c;toast('Կոդը պատճենված է՝ '+c)}
+/* cart */
+function cart(o){$('#drawer').classList.toggle('on',o);$('#ov').classList.toggle('on',o);if(o)upd()}
+$('#cartBtn').onclick=()=>cart(true);$('#ov').onclick=()=>{cart(false);mod(false)};
+$('#dv').onclick=e=>{const b=e.target.closest('button');if(!b)return;deliv=b.dataset.d;$$('#dv button').forEach(x=>x.classList.toggle('on',x===b));upd()};
+function applyPromo(){const v=$('#promo').value.trim().toUpperCase();const m=$('#pmsg');if(['ECO10','PALET8'].includes(v)){promo=v;m.style.color='var(--g)';m.textContent='✓ Կոդը կիրառված է';}else{promo='';m.style.color='var(--red)';m.textContent='Կոդը չի գտնվել';}upd()}
+function calc(){
+  let sub=0,eco=0,pal=0;const L=[];
+  for(const id in cartS){const p=P.find(x=>x.id===id);if(!p)continue;const q=cartS[id],s=price(p)*q;sub+=s;eco+=p.e*q;if(id==='pallet')pal+=s;L.push([p,q,s])}
+  const tr=sub>=1.5e6?.12:sub>=5e5?.07:sub>=1.5e5?.03:0, tier=sub*tr;
+  let pr=0;if(promo==='ECO10')pr=(sub-tier)*.10;if(promo==='PALET8')pr=pal*(1-tr)*.08;
+  const after=sub-tier-pr;
+  const del=!L.length?0:deliv==='pick'?0:deliv==='evn'?(after>=2e5?0:5000):(after>=5e5?0:15000);
+  return {L,sub,tr,tier,pr,del,tot:after+del,eco};
+}
+function upd(){
+  const c=calc();$('#cnt').textContent=Object.keys(cartS).length;
+  $('#items').innerHTML=c.L.length?c.L.map(([p,q,s])=>`<div class="it"><img src="${IMG}${p.i}_s.jpg" alt=""><div><h5>${p.n}</h5><div class="u">${F(price(p))} / ${p.u}</div><div class="qty" style="margin-top:6px;width:max-content"><button onclick="cq('${p.id}',-1)">−</button><input value="${q}" onchange="sq('${p.id}',this.value)"><button onclick="cq('${p.id}',1)">+</button></div></div><div><div class="sum">${F(s)}</div><button class="rm" onclick="rm('${p.id}')">Հեռացնել</button></div></div>`).join(''):'<div class="empty">🛒<br><br>Զամբյուղը դատարկ է<br><small>Ընտրեք ապրանք խանութից</small></div>';
+  $('#df').style.display=c.L.length?'flex':'none';
+  $('#sSub').textContent=F(c.sub);
+  $('#rTier').style.display=c.tier?'flex':'none';$('#tierL').textContent='Ծավալային զեղչ −'+Math.round(c.tr*100)+'%';$('#sTier').textContent='−'+F(c.tier);
+  $('#rPromo').style.display=c.pr?'flex':'none';$('#promoL').textContent='Պրոմոկոդ '+promo;$('#sPromo').textContent='−'+F(c.pr);
+  $('#sDel').textContent=c.del?F(c.del):'անվճար';$('#sTot').textContent=F(c.tot);
+  $('#ecoT').textContent=`♻ Ձեր պատվերը վերամշակում է ${Math.round(c.eco).toLocaleString('ru-RU')} կգ պլաստիկ · EcoClub բոնուս՝ +${F(c.tot*.02)}`;
+  return c;
+}
+function cq(id,d){const p=P.find(x=>x.id===id);const step=p.u==='մ²'?5:p.u==='կգ'?50:1;cartS[id]=Math.max(0,cartS[id]+d*step);if(!cartS[id])delete cartS[id];save();upd()}
+function sq(id,v){v=Math.max(0,+v||0);if(v)cartS[id]=v;else delete cartS[id];save();upd()}
+function rm(id){delete cartS[id];save();upd()}
+/* modal / order */
+function mod(o,html){if(html)$('#mc').innerHTML=html;$('#mod').classList.toggle('on',o)}
+$('#mod').onclick=e=>{if(e.target.id==='mod')mod(false)};
+function form(title,sub,summary,kind){
+  mod(true,`<h3>${title}</h3><p>${sub}</p>
+  <div class="fi"><label>ԱՆՈՒՆ / ԿԱԶՄԱԿԵՐՊՈՒԹՅՈՒՆ</label><input id="fN" autocomplete="name"></div>
+  <div class="fi"><label>ՀԵՌԱԽՈՍ</label><input id="fP" inputmode="tel" placeholder="+374 …" autocomplete="tel"></div>
+  <div class="fi"><label>ՀԱՍՑԵ / ՄԵԿՆԱԲԱՆՈՒԹՅՈՒՆ</label><textarea id="fC" rows="2"></textarea></div>
+  <pre class="ord" id="ord">${summary}</pre>
+  <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap"><button class="btn p" onclick="send('${kind}')">Ուղարկել Telegram-ով →</button><button class="btn" onclick="mod(false)">Չեղարկել</button></div>
+  <p class="disc">Հայտի տեքստը կպատճենվի, և կբացվի Telegram-ը. տեղադրեք այն նամակում։ Վճարման տվյալներ չենք պահանջում։</p>`);
+}
+function checkout(){const c=upd();if(!c.L.length)return;const no='RP-'+Date.now().toString().slice(-6);
+  const s=`Պատվեր ${no}\n`+c.L.map(([p,q,s])=>`• ${p.n} — ${q} ${p.u} = ${F(s)}`).join('\n')+`\nԶեղչեր՝ −${F(c.tier+c.pr)}\nԱռաքում (${{evn:'Երևան',reg:'Մարզեր',pick:'Գործարանից'}[deliv]})՝ ${c.del?F(c.del):'անվճար'}\nԸՆԴԱՄԵՆԸ՝ ${F(c.tot)}`;
+  form('Պատվերի ձևակերպում','Մենեջերը կապ կհաստատի 1 ժամվա ընթացքում (աշխատանքային ժամերին)։',s,'order')}
+function ask(id){const p=P.find(x=>x.id===id);form('Հարցում՝ '+p.n,'Նկարագրեք պատվերը. կուղարկենք գնային առաջարկ 24 ժամում։',`Հարցում՝ ${p.n}`,'ask')}
+function send(k){const n=$('#fN').value.trim(),ph=$('#fP').value.trim();if(!n||!ph){toast('Լրացրեք անունը և հեռախոսը');return}
+  const t=`${$('#ord').textContent}\nԱնուն՝ ${n}\nՀեռ.՝ ${ph}\n${$('#fC').value}`;navigator.clipboard&&navigator.clipboard.writeText(t).catch(()=>{});
+  window.open('https://t.me/hrachevskiy','_blank','noopener');mod(false);if(k==='order'){cartS={};save();upd();cart(false)}toast('Հայտը պատճենված է՝ տեղադրեք Telegram-ում')}
+/* buyback */
+let poly='HDPE',payM='cash';
+$('#ptab').innerHTML=BUY.map(([k,c,d,p])=>`<tr><td><span class="pk" style="background:${c}22;color:${c}">${k.replace('-C','')}</span>${k==='PET-C'?'PET':k}</td><td>${d}</td><td class="num">${p}<span class="up">մինչև ${Math.round(p*1.2*1.15*1.1)}</span></td></tr>`).join('')+`<tr class="x"><td><span class="pk" style="background:#FF5E5E22;color:#FF5E5E">PVC</span>PVC</td><td>Խողովակներ, պատուհանի պրոֆիլ</td><td class="num" style="color:var(--red)">✕</td></tr>`;
+$('#poly').innerHTML=BUY.map(([k])=>`<button data-k="${k}" class="${k===poly?'on':''}">${k}</button>`).join('');
+$('#poly').onclick=e=>{const b=e.target.closest('button');if(!b)return;poly=b.dataset.k;$$('#poly button').forEach(x=>x.classList.toggle('on',x===b));bcalc()};
+$$('.pay button').forEach(b=>b.onclick=()=>{payM=b.dataset.p;$$('.pay button').forEach(x=>x.classList.toggle('on',x===b));bcalc()});
+['kg','o1','o2'].forEach(id=>$('#'+id).oninput=bcalc);
+function bcalc(){const kg=+$('#kg').value;$('#kgo').textContent=kg.toLocaleString('ru-RU')+' կգ';
+  let r=BUY.find(b=>b[0]===poly)[3];if($('#o1').checked)r*=1.2;if($('#o2').checked)r*=1.15;const vb=kg>=2000?.10:kg>=500?.05:0;r*=1+vb;
+  let v=kg*r;if(payM==='credit')v*=1.25;
+  $('#resl').textContent=payM==='credit'?'Դուք կստանաք բոնուս':'Դուք կստանաք';$('#res').textContent=F(v);
+  $('#res2').innerHTML=`${r.toFixed(0)} ֏/կգ${vb?` · ծավալային բոնուս +${vb*100}%`:''} · ${kg>=300?'🚚 անվճար տեղափոխում Երևանում':'բերեք ընդունման կետ'}<br>♻ ${kg.toLocaleString('ru-RU')} կգ-ից կստացվի ≈ ${(kg/8.7).toFixed(0)} մ² սալիկ`}
+function sellReq(){const kg=$('#kg').value;form('Պլաստիկի հանձնում','Կհամաձայնեցնենք ժամը և կուղարկենք մեքենա։',`Պլաստիկի հանձնում՝ ${poly}, ${kg} կգ\n${$('#res2').textContent.split('♻')[0]}\nՎճարում՝ ${payM==='credit'?'բոնուս +25%':'փող'}\nԳնահատում՝ ${$('#res').textContent}`,'sell')}
+/* timer: pre-sale until 31 Dec 2026, Yerevan time */
+const END=new Date('2026-12-31T23:59:59+04:00').getTime();
+function tick(){let d=Math.max(0,END-Date.now())/1000;const v=[Math.floor(d/86400),Math.floor(d%86400/3600),Math.floor(d%3600/60),Math.floor(d%60)];$$('#timer b').forEach((b,i)=>b.textContent=String(v[i]).padStart(2,'0'))}
+tick();setInterval(tick,1000);
+/* hero counters */
+$$("[data-n]").forEach(el=>{const t=+el.dataset.n,s=el.dataset.s||'';let k=0;const f=()=>{k+=1/40;el.textContent=Math.round(t*Math.min(1,k))+s;if(k<1)requestAnimationFrame(f)};f()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){cart(false);mod(false);$('#lb').classList.remove('on')}});
+render();upd();bcalc();
+</script>
+</body>
+</html>

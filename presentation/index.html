@@ -249,6 +249,73 @@ svg.diagram text{font-family:var(--mono)}
 .kv .v{color:var(--white);font-weight:600;text-align:right}
 @media (max-width:900px){.grid2,.grid3,.grid4,.split,.split-55{grid-template-columns:1fr}.grid3{grid-template-columns:1fr 1fr}}
 @media (max-width:620px){.grid3,.grid4{grid-template-columns:1fr}.slide{padding:14px 14px 22px}#topbar{padding:0 12px}#footer{padding:0 10px}.hide-sm{display:none}#dots{max-width:44%}}
+
+/* ============================================================
+   v2 — Product dossier · Quality · SMM
+   ============================================================ */
+.tbl{width:100%;border-collapse:collapse;font-size:12.5px}
+.tbl th{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--green);text-align:left;padding:7px 8px;border-bottom:1px solid rgba(54,214,107,.35);font-weight:700}
+.tbl td{padding:7px 8px;border-bottom:1px solid rgba(27,51,41,.6);color:var(--steel-3);vertical-align:top;line-height:1.4}
+.tbl td.num,.tbl th.num{text-align:right;font-family:var(--mono);white-space:nowrap}
+.tbl tr.hl td{background:rgba(54,214,107,.08);color:var(--white);font-weight:700}
+.tbl td b{color:var(--white)}
+.formula{font-family:var(--mono);font-size:13px;color:var(--white);background:rgba(54,214,107,.07);border:1px solid rgba(54,214,107,.25);border-radius:10px;padding:10px 12px;line-height:1.55}
+.formula .res{color:var(--lime);font-weight:700}
+.formula .lbl{display:block;font-size:9.5px;letter-spacing:.14em;color:var(--steel-2);text-transform:uppercase;margin-bottom:3px}
+.stat{display:flex;flex-direction:column;gap:2px}
+.stat .n{font-family:var(--mono);font-size:26px;font-weight:800;color:var(--green);letter-spacing:-.02em;line-height:1.05}
+.stat .n.lime{color:var(--lime)}.stat .n.amber{color:var(--amber)}.stat .n.blue{color:var(--blue)}
+.stat .l{font-size:11.5px;color:var(--steel);line-height:1.35}
+.sec-h{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--lime);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.sec-h .no{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:6px;background:var(--green);color:#04120a;font-weight:800;letter-spacing:0}
+.blist{list-style:none;display:flex;flex-direction:column;gap:7px}
+.blist li{position:relative;padding-left:16px;font-size:13px;color:var(--steel-3);line-height:1.45}
+.blist li::before{content:"";position:absolute;left:2px;top:7px;width:6px;height:6px;border-radius:2px;background:var(--green);transform:rotate(45deg)}
+.blist li b{color:var(--white)}
+.hbar{display:flex;flex-direction:column;gap:9px}
+.hbar .r{display:grid;grid-template-columns:170px 1fr 92px;gap:10px;align-items:center;font-size:12px;color:var(--steel-3)}
+.hbar .t{height:12px;background:var(--graphite-3);border-radius:6px;overflow:hidden}
+.hbar .f{height:100%;border-radius:6px;background:var(--green);width:0;transition:width 1.2s var(--ease)}
+.slide.active .hbar .f{width:var(--w)}
+.hbar .v{font-family:var(--mono);text-align:right;color:var(--white);font-weight:700}
+.swot{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.swot>div{border:1px solid var(--graphite-4);border-radius:12px;padding:12px 14px;background:rgba(13,23,18,.7)}
+.swot .S{box-shadow:inset 0 0 0 1px rgba(54,214,107,.35)}.swot .W{box-shadow:inset 0 0 0 1px rgba(255,90,90,.35)}
+.swot .O{box-shadow:inset 0 0 0 1px rgba(77,166,201,.4)}.swot .T{box-shadow:inset 0 0 0 1px rgba(230,161,0,.4)}
+.swot h4{font-size:14px;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.swot h4 .k{font-family:var(--mono);font-size:18px;font-weight:900}
+.rings{position:relative;width:100%;max-width:300px;aspect-ratio:1;margin:0 auto}
+.rings div{position:absolute;left:50%;bottom:0;transform:translateX(-50%);border-radius:50%;display:flex;align-items:flex-start;justify-content:center;font-family:var(--mono);font-size:11px;font-weight:700;padding-top:10px;text-align:center;line-height:1.2}
+.phone{border-radius:26px;overflow:hidden;border:1px solid var(--graphite-4);box-shadow:0 18px 40px rgba(0,0,0,.5);background:#000;cursor:zoom-in;transition:transform .4s var(--ease),box-shadow .4s var(--ease)}
+.phone img{width:100%;display:block}
+.phone:hover{transform:translateY(-6px) scale(1.03);box-shadow:0 26px 60px rgba(0,0,0,.6),0 0 26px rgba(54,214,107,.2)}
+.phone-cap{margin-top:8px;font-size:12px;color:var(--steel-3);line-height:1.4}
+.phone-cap b{color:var(--white)}
+.org{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.org .u{border:1px solid var(--graphite-4);border-radius:12px;padding:11px 12px;background:rgba(13,23,18,.7)}
+.org .u .h{font-weight:700;font-size:13px;color:var(--white);margin:4px 0 5px;line-height:1.25}
+.org .u p{font-size:11.5px;color:var(--steel);line-height:1.45}
+.org .u .c{font-family:var(--mono);font-size:10px;color:var(--green);letter-spacing:.1em}
+.gauge{display:flex;flex-direction:column;align-items:center;gap:2px}
+.gauge svg{width:92px;height:56px}
+.gauge .gv{font-family:var(--mono);font-weight:800;font-size:16px;color:var(--white)}
+.gauge .gl{font-size:10.5px;color:var(--steel-2);text-align:center;line-height:1.25}
+.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.steps .s{border:1px solid var(--graphite-4);border-radius:12px;padding:11px;background:rgba(13,23,18,.7);position:relative}
+.steps .s .m{font-family:var(--mono);font-size:10px;color:var(--lime);letter-spacing:.1em}
+.steps .s .h{font-weight:700;font-size:12.5px;margin:5px 0 4px;color:var(--white);line-height:1.3}
+.steps .s p{font-size:11.5px;color:var(--steel);line-height:1.4}
+.iso{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.iso .c{border:1px solid var(--graphite-4);border-radius:12px;padding:12px;background:rgba(13,23,18,.7);display:flex;flex-direction:column;gap:6px}
+.iso .c .code{font-family:var(--mono);font-weight:800;font-size:17px;color:var(--green)}
+.iso .c .n{font-weight:700;font-size:12.5px;color:var(--white);line-height:1.3}
+.iso .c p{font-size:11.5px;color:var(--steel);line-height:1.45}
+.prio{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;padding:2px 7px;border-radius:99px;align-self:flex-start}
+.prio.p1{background:rgba(54,214,107,.18);color:var(--green)}.prio.p2{background:rgba(77,166,201,.18);color:var(--blue)}.prio.p3{background:rgba(110,128,119,.2);color:var(--steel)}
+input.rng{width:100%;accent-color:#36D66B}
+@media (max-width:980px){.org,.iso,.steps{grid-template-columns:1fr 1fr}.hbar .r{grid-template-columns:120px 1fr 80px}}
+@media (max-width:620px){.org,.iso,.steps,.swot{grid-template-columns:1fr}}
+.slide-inner{justify-content:center}
 </style>
 </head>
 <body>
@@ -432,7 +499,7 @@ svg.diagram text{font-family:var(--mono)}
         <div id="header-title" class="tiny" style="color:var(--steel);font-weight:600;max-width:340px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"></div>
         <div class="mono" style="font-size:9px;color:var(--green);letter-spacing:.16em">ԱԿԱԴԵՄԻԱԿԱՆ ԲԻԶՆԵՍ ՆԱԽԱԳԻԾ · NPUA</div>
       </div>
-      <div class="mono tag green" style="font-size:11px;padding:5px 11px"><span id="cur-num">01</span><span class="dim">/</span><span>20</span></div>
+      <div class="mono tag green" style="font-size:11px;padding:5px 11px"><span id="cur-num">01</span><span class="dim">/</span><span id="tot-num">44</span></div>
     </div>
   </header>
 
@@ -658,7 +725,7 @@ svg.diagram text{font-family:var(--mono)}
               <g>
                 <circle cx="176" cy="112" r="14" fill="rgba(54,214,107,.2)" stroke="#36D66B" stroke-width="2"/>
                 <circle cx="176" cy="112" r="5" fill="#36D66B"/>
-                <text x="176" y="98" text-anchor="middle" class="eq-title" fill="#fff" font-size="11">Երևան</text>
+                <text x="154" y="116" text-anchor="end" class="eq-title" fill="#fff" font-size="11">Երևան</text>
               </g>
               <g>
                 <circle class="region-node" data-r="kotayk" cx="196" cy="82" r="11" fill="rgba(183,243,107,.15)" stroke="#B7F36B" stroke-width="1.6" style="cursor:pointer" onclick="selectRegion('kotayk')"/>
@@ -668,17 +735,17 @@ svg.diagram text{font-family:var(--mono)}
               <g>
                 <circle class="region-node" data-r="armavir" cx="136" cy="150" r="11" fill="rgba(54,214,107,.15)" stroke="#36D66B" stroke-width="1.6" style="cursor:pointer" onclick="selectRegion('armavir')"/>
                 <circle cx="136" cy="150" r="3.5" fill="#36D66B"/>
-                <text x="100" y="146" class="eq-label" fill="#36D66B" font-size="9">Արմավիր</text>
+                <text x="120" y="154" text-anchor="end" class="eq-label" fill="#36D66B" font-size="9">Արմավիր</text>
               </g>
               <g>
                 <circle class="region-node" data-r="ararat" cx="150" cy="200" r="11" fill="rgba(77,166,201,.15)" stroke="#4DA6C9" stroke-width="1.6" style="cursor:pointer" onclick="selectRegion('ararat')"/>
                 <circle cx="150" cy="200" r="3.5" fill="#4DA6C9"/>
-                <text x="118" y="222" class="eq-label" fill="#4DA6C9" font-size="9">Արարատ</text>
+                <text x="166" y="204" class="eq-label" fill="#4DA6C9" font-size="9">Արարատ</text>
               </g>
               <g>
                 <circle class="region-node" data-r="yerevan" cx="176" cy="112" r="16" fill="rgba(54,214,107,.15)" stroke="#36D66B" stroke-width="1.6" style="cursor:pointer" onclick="selectRegion('yerevan')"/>
               </g>
-              <text x="180" y="316" text-anchor="middle" class="eq-label" fill="#6E8077" font-size="8.5">ԿՈՆՑԵՊՏՈՒԱԼ ՀԱՎԱՔՄԱՆ ՑԱՆՑ — ՆԱԽԱԳԾԱՅԻՆ ԵՆԹԱԴՐՈՒԹՅՈՒՆ</text>
+              <text x="180" y="316" text-anchor="middle" class="eq-label" fill="#6E8077" font-size="8.5">ՆԱԽԱԳԾԱՅԻՆ ՀԱՎԱՔՄԱՆ ՑԱՆՑ</text>
             </svg>
           </div>
 
@@ -2004,39 +2071,8 @@ svg.diagram text{font-family:var(--mono)}
       </div>
     </section>
 
-    <!-- ===================== SLIDE 20 · FINAL ===================== -->
-    <section class="slide" id="slide-21">
-      <div class="slide-inner" style="justify-content:center;text-align:center;align-items:center">
-        <div class="core-wrap zoom" style="--d:.1s;margin-bottom:6px">
-          <div class="core-glow" style="width:300px;height:300px"></div>
-          <svg class="core-idle" style="width:min(260px,56vw)"><use href="#core-loop"/></svg>
-        </div>
-
-        <div class="col rise" style="--d:.3s;align-items:center;gap:10px">
-          <div class="eyebrow">ԵԶՐԱՓԱԿԻՉ ԱՆԻՄԱՑԻԱ · ԳՐԱՆՈՒԼՆԵՐ → ՑԻԿԼ → ՆՅՈՒԹ → ԱՐՏԱԴՐԱՆՔ → ՆՈՐ ՑԻԿԼ</div>
-          <h2 style="font-size:clamp(30px,5vw,54px)">ԹԱՓՈՆԻՑ<br>ԴԵՊԻ <span class="grad-text">ԱՐԺԵՔ</span></h2>
-          <p class="lead" style="font-size:17px;color:var(--steel-3)">Այսօրվա թափոնը՝ վաղվա հումք։</p>
-        </div>
-
-        <div class="panel panel-pad hud-corner rise" style="--d:.5s;max-width:620px;width:100%">
-          <div class="flow" style="justify-content:center;gap:6px;margin-bottom:14px">
-            <span class="node hot">ԹԱՓՈՆ</span><span class="arrow">→</span>
-            <span class="node hot">ՆՅՈՒԹ</span><span class="arrow">→</span>
-            <span class="node hot">ԱՐՏԱԴՐԱՆՔ</span><span class="arrow">→</span>
-            <span class="node hot">ՆՈՐ ԿՅԱՆՔ</span>
-          </div>
-          <div style="font-weight:900;font-size:22px;letter-spacing:.02em">REPLAST <span style="color:var(--green)">ARMENIA</span></div>
-          <div class="small dim" style="margin-top:4px">Արդյունաբերական վերամշակում և շրջանային արտադրություն · Ակադեմիական բիզնես նախագիծ — Հայաստան</div>
-          <div class="mono tiny" style="margin-top:12px;color:var(--steel-3)">Հայաստանի ազգային պոլիտեխնիկական համալսարան (NPUA)</div>
-          <div class="mono tiny green" style="margin-top:4px">Հրաչյա Ասլանյան (Hrachya Aslanyan) · 3-րդ կուրս</div>
-        </div>
-
-        <button class="btn primary rise" style="--d:.7s" onclick="goToSlide(1)">↺ ՎԵՐԱՄԵԿՆԱՐԿԵԼ ԳՈՐԾԱՐԱՆԻ ՑԻԿԼԸ</button>
-      </div>
-    </section>
-
     <!-- ===================== SLIDE 21 · ԴՐՈՒՅՔ 01 · URBAN ===================== -->
-    <section class="slide" id="slide-22">
+    <section class="slide" id="slide-21">
       <div class="slide-inner">
         <div class="rise" style="--d:.05s">
           <div class="eyebrow">ԴՐՈՒՅՔ 01 <span class="sep">//</span> ՔԱՂԱՔԱՅԻՆ ԲԱՐԵԿԱՐԳՈՒՄ</div>
@@ -2069,7 +2105,7 @@ svg.diagram text{font-family:var(--mono)}
     </section>
 
     <!-- ===================== SLIDE 22 · ԴՐՈՒՅՔ 02 · CONSTRUCTION ===================== -->
-    <section class="slide" id="slide-23">
+    <section class="slide" id="slide-22">
       <div class="slide-inner">
         <div class="rise" style="--d:.05s">
           <div class="eyebrow">ԴՐՈՒՅՔ 02 <span class="sep">//</span> ՇԻՆԱՐԱՐԱԿԱՆ ՆՅՈՒԹԵՐ</div>
@@ -2102,7 +2138,7 @@ svg.diagram text{font-family:var(--mono)}
     </section>
 
     <!-- ===================== SLIDE 23 · ԴՐՈՒՅՔ 03 · LOGISTICS ===================== -->
-    <section class="slide" id="slide-24">
+    <section class="slide" id="slide-23">
       <div class="slide-inner">
         <div class="rise" style="--d:.05s">
           <div class="eyebrow">ԴՐՈՒՅՔ 03 <span class="sep">//</span> ԼՈԳԻՍՏԻԿԱ ԵՎ ՏԱՐԱՆԵՐ</div>
@@ -2135,7 +2171,7 @@ svg.diagram text{font-family:var(--mono)}
     </section>
 
     <!-- ===================== SLIDE 24 · ԴՐՈՒՅՔ 04 · TECHNICAL ===================== -->
-    <section class="slide" id="slide-25">
+    <section class="slide" id="slide-24">
       <div class="slide-inner">
         <div class="rise" style="--d:.05s">
           <div class="eyebrow">ԴՐՈՒՅՔ 04 <span class="sep">//</span> ՏԵԽՆԻԿԱԿԱՆ ԼՈՒԾՈՒՄՆԵՐ</div>
@@ -2164,6 +2200,741 @@ svg.diagram text{font-family:var(--mono)}
             <div class="zoomhint">⤢</div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- ===================== ՇՈՒԿԱՅԱԿԱՆ ԴՈՍՅԵ · 1–2 ===================== -->
+    <section class="slide" id="slide-25" data-t="Շուկայական դոսյե — նկարագիր, ծավալ, կառուցվածք">
+      <div class="slide-inner">
+        <div class="rise" style="--d:.05s">
+          <div class="eyebrow">ՍԼԱՅԴ 25 <span class="sep">//</span> ՇՈՒԿԱՅԱԿԱՆ ԴՈՍՅԵ (MARKET DOSSIER) · 1–2</div>
+          <h2 style="margin-top:6px">Պլաստիկի վերամշակման <span class="grad-text">շուկան Հայաստանում</span></h2>
+          <p class="lead" style="margin-top:6px">Շուկայական դոսյեն կազմված է 9 բաժնից։ Շուկան՝ <b>պլաստիկ թափոնի վերամշակում և դրանից ստացված արտադրանք</b> (գրանուլ, շինանյութ, տարաներ)։</p>
+        </div>
+        <div class="split-55">
+          <div class="panel panel-pad hud-corner rise" style="--d:.15s">
+            <div class="sec-h"><span class="no">1</span>Ընդհանուր նկարագիր</div>
+            <ul class="blist" style="margin-bottom:12px">
+              <li><b>Պատմություն.</b> 2018-ին Կապանում ԵՄ աջակցությամբ (€750 հզ.) բացվեց պլաստիկից շինանյութ արտադրող առաջին նախագիծը</li>
+              <li><b>Այսօր.</b> գործում է պլաստիկ վերամշակող <b>5 ընկերություն</b>, սակայն խոշոր գործարան երկրում չկա</li>
+              <li><b>Միտումներ.</b> 2022-ից արգելված են մինչև 50 մկմ պոլիէթիլենային տոպրակները, իսկ 2027-ից՝ բոլոր միանգամյա տոպրակները</li>
+              <li><b>Տարածաշրջանային համատեքստ.</b> ԵՄ-ՀՀ CEPA համաձայնագրով Հայաստանը պետք է ներդնի արտադրողի ընդլայնված պատասխանատվություն (EPR)</li>
+            </ul>
+            <div class="grid3">
+              <div class="stat"><span class="n" data-count="720" data-suffix=" հզ. տ">0</span><span class="l">կենցաղային թափոն տարեկան</span></div>
+              <div class="stat"><span class="n lime" data-count="13" data-suffix="%">0</span><span class="l">պլաստիկի բաժինը թափոնում</span></div>
+              <div class="stat"><span class="n amber" data-count="6.4" data-dec="1" data-suffix="%">0</span><span class="l">վերամշակվում է այսօր</span></div>
+            </div>
+          </div>
+          <div class="panel panel-pad hud-corner rise" style="--d:.25s">
+            <div class="sec-h"><span class="no">2</span>Շուկայի ծավալը (հումքի կողմից)</div>
+            <div class="hbar" style="margin-bottom:12px">
+              <div class="r" style="grid-template-columns:1fr 110px 74px"><span><b>TAM</b> · պլաստիկ թափոն (720 հզ. × 13%)</span><div class="t"><div class="f" style="--w:100%"></div></div><span class="v">≈ 94 հզ. տ</span></div>
+              <div class="r" style="grid-template-columns:1fr 110px 74px"><span><b>SAM</b> · Երևանի պլաստիկ (290 հզ. × 13%)</span><div class="t"><div class="f" style="--w:40%;background:var(--lime)"></div></div><span class="v">≈ 38 հզ. տ</span></div>
+              <div class="r" style="grid-template-columns:1fr 110px 74px"><span>Այսօր վերամշակվում է</span><div class="t"><div class="f" style="--w:6.4%;background:var(--amber)"></div></div><span class="v">6 հզ. տ</span></div>
+              <div class="r" style="grid-template-columns:1fr 110px 74px"><span><b>SOM</b> · REPLAST (200 տ × 12)</span><div class="t"><div class="f" style="--w:2.6%;background:var(--blue)"></div></div><span class="v">2.4 հզ. տ</span></div>
+            </div>
+            <div class="formula"><span class="lbl">Ինչ կփոխի REPLAST-ը</span>6 000 + 2 400 = 8 400 տ → երկրում վերամշակումը կաճի <span class="res">+40%-ով</span></div>
+            <div class="formula" style="margin-top:8px"><span class="lbl">Աճի տեմպ</span>Կենցաղային թափոնը կանխատեսվում է 720 → 820 հզ. տ, այսինքն <span class="res">+14%</span> մոտ ապագայում</div>
+          </div>
+        </div>
+        <p class="tiny dim mono rise" style="--d:.35s">ԱՂԲՅՈՒՐՆԵՐ՝ AUA Acopian Center (2019, թափոնի կազմ) · World Bank 2024 (EcoLur-ի հղմամբ) · ampop.am (Երևան, 2023) · UNDP (UNICEF Armenia) · EcoLur · EU Neighbours East (2018) · ARKA (2026)։ TAM/SOM-ը՝ հաշվարկային։</p>
+      </div>
+    </section>
+
+    <!-- ===================== ՇՈՒԿԱՅԱԿԱՆ ԴՈՍՅԵ · 3–4 ===================== -->
+    <section class="slide" id="slide-26" data-t="Շուկայական դոսյե — պահանջարկ և առաջարկ">
+      <div class="slide-inner">
+        <div class="rise" style="--d:.05s">
+          <div class="eyebrow">ՍԼԱՅԴ 26 <span class="sep">//</span> ՇՈՒԿԱՅԱԿԱՆ ԴՈՍՅԵ · 3–4</div>
+          <h2 style="margin-top:6px">Պահանջարկ և <span class="grad-text">առաջարկ</span></h2>
+        </div>
+        <div class="grid2">
+          <div class="panel panel-pad hud-corner rise" style="--d:.15s">
+            <div class="sec-h"><span class="no">3</span>Պահանջարկի վերլուծություն</div>
+            <table class="tbl" style="margin-bottom:12px">
+              <tr><th>Սեգմենտ</th><th>Ինչ է գնում</th><th>Հաճախականություն</th></tr>
+              <tr><td><b>Համայնքներ (B2G)</b></td><td>Սալիկ, նստարան, աղբամաններ</td><td>Տարեկան տենդերներ, գարուն–աշուն</td></tr>
+              <tr><td><b>Շինարարներ (B2B)</b></td><td>Սալիկ, պանելներ, եզրաքարեր</td><td>Ըստ նախագծի</td></tr>
+              <tr><td><b>Գյուղատնտեսություն, լոգիստիկա</b></td><td>Արկղեր, պալետներ, տակառներ</td><td>Անընդհատ, բերքահավաքին՝ գագաթնակետ</td></tr>
+              <tr><td><b>Տնային տնտեսություններ</b></td><td>Սալիկ, ցանկապատ, տարաներ</td><td>Սեզոնային</td></tr>
+            </table>
+            <ul class="blist">
+              <li><b>Գնային զգայունություն.</b> բարձր. տենդերներում հաղթում է ամենացածր գինը</li>
+              <li><b>Նախասիրություններ.</b> երկարակեցություն և սառնամանիքին դիմացկունություն</li>
+              <li><b>Տարածք.</b> Երևանի բնակիչը տարեկան 300 կգ թափոն է արտադրում, մարզերում՝ 220 կգ. հումքի և պահանջարկի կենտրոնը Երևանն է</li>
+            </ul>
+          </div>
+          <div class="panel panel-pad hud-corner rise" style="--d:.25s">
+            <div class="sec-h"><span class="no">4</span>Առաջարկի վերլուծություն</div>
+            <div class="mono tiny dim" style="letter-spacing:.1em;margin-bottom:8px">«ԱՅԼ ՊԼԱՍՏԻԿ ԱՐՏԱԴՐԱՆՔ»-Ի ՆԵՐՄՈՒԾՈՒՄ, 2022 · ԸՆԴԱՄԵՆԸ $32.2 ՄԼՆ</div>
+            <div class="hbar" style="margin-bottom:12px">
+              <div class="r" style="grid-template-columns:90px 1fr 64px"><span>Չինաստան</span><div class="t"><div class="f" style="--w:100%;background:var(--red)"></div></div><span class="v">$6.62M</span></div>
+              <div class="r" style="grid-template-columns:90px 1fr 64px"><span>Ռուսաստան</span><div class="t"><div class="f" style="--w:69%;background:var(--blue)"></div></div><span class="v">$4.56M</span></div>
+              <div class="r" style="grid-template-columns:90px 1fr 64px"><span>Գերմանիա</span><div class="t"><div class="f" style="--w:66%;background:var(--amber)"></div></div><span class="v">$4.36M</span></div>
+              <div class="r" style="grid-template-columns:90px 1fr 64px"><span>Իտալիա</span><div class="t"><div class="f" style="--w:41%;background:var(--lime)"></div></div><span class="v">$2.72M</span></div>
+              <div class="r" style="grid-template-columns:90px 1fr 64px"><span>ԱՄՆ</span><div class="t"><div class="f" style="--w:33%;background:var(--violet)"></div></div><span class="v">$2.17M</span></div>
+            </div>
+            <ul class="blist">
+              <li><b>Հիմնական խաղացողներ.</b> ներմուծողներ, 5 տեղական վերամշակող (հիմնականում գրանուլ և փաթիլ), աղբավայրերի ոչ ֆորմալ հավաքողներ</li>
+              <li><b>Գներ.</b> մայթի սալիկ՝ 4 500–7 800 ֏/մ² (տես ապրանքային դոսյեն)</li>
+              <li><b>Մուտք / ելք.</b> նոր խաղացողները փոքր են և հաճախ աշխատում են դրամաշնորհներով</li>
+            </ul>
+          </div>
+        </div>
+        <p class="tiny dim mono rise" style="--d:.35s">ԱՂԲՅՈՒՐՆԵՐ՝ OEC (oec.world, 2022) · AUA Acopian Center · Recyclers Union (EcoLur) · ampop.am։ Սեգմենտներն ու հաճախականությունը՝ նախագծային գնահատական։</p>
+      </div>
+    </section>
+
+    <!-- ===================== ՇՈՒԿԱՅԱԿԱՆ ԴՈՍՅԵ · 5–6 ===================== -->
+    <section class="slide" id="slide-27" data-t="Շուկայական դոսյե — մրցակցություն և օրենսդրություն">
+      <div class="slide-inner">
+        <div class="rise" style="--d:.05s">
+          <div class="eyebrow">ՍԼԱՅԴ 27 <span class="sep">//</span> ՇՈՒԿԱՅԱԿԱՆ ԴՈՍՅԵ · 5–6</div>
+          <h2 style="margin-top:6px">Մրցակցություն և <span class="grad-text">խաղի կանոններ</span></h2>
+        </div>
+        <div class="grid2">
+          <div class="panel panel-pad hud-corner rise" style="--d:.15s">
+            <div class="sec-h"><span class="no">5</span>Մրցակցային միջավայր</div>
+            <table class="tbl" style="margin-bottom:12px">
+              <tr><th>Մրցակից</th><th>Ուժեղ կողմ</th><th>Թույլ կողմ</th></tr>
+              <tr><td><b>Ներմուծողներ</b></td><td>Հայտնի բրենդներ, մեծ տեսականի</td><td>Լոգիստիկա, դոլարային գին</td></tr>
+              <tr><td><b>Տեղական վերամշակողներ</b></td><td>Ցածր ծախսեր, հումքի կապեր</td><td>Փոքր ծավալ, քիչ պատրաստի ապրանք</td></tr>
+              <tr><td><b>Բետոնե արտադրողներ</b> (փոխարինող)</td><td>Ցածր գին, ավանդույթ</td><td>Ճաքում է սառնամանիքից, ծանր է</td></tr>
+            </table>
+            <div class="mono tiny green" style="letter-spacing:.12em;margin-bottom:6px">ՓՈԽԱՐԻՆՈՂՆԵՐ</div>
+            <div class="row" style="gap:6px;margin-bottom:12px"><span class="chip">Բետոն</span><span class="chip">Փայտե պալետներ</span><span class="chip">Մետաղական տարաներ</span><span class="chip">Առաջնային պլաստիկ</span></div>
+            <div class="mono tiny amber" style="letter-spacing:.12em;margin-bottom:6px">ՄՈՒՏՔԻ ԽՈՉԸՆԴՈՏՆԵՐ</div>
+            <ul class="blist"><li>Մեծ ներդրում գծի և լաբորատորիայի համար</li><li>Թափոնը տեսակավորված չի հավաքվում. խառը թափոնը աղտոտվում է</li><li>Տեխնոլոգիական գիտելիք և որակի հավաստագրում</li></ul>
+          </div>
+          <div class="panel panel-pad hud-corner rise" style="--d:.25s">
+            <div class="sec-h"><span class="no">6</span>Օրենսդրական և տնտեսական գործոններ</div>
+            <div class="steps" style="grid-template-columns:1fr 1fr;margin-bottom:12px">
+              <div class="s"><span class="m">2022</span><div class="h">≤ 50 մկմ տոպրակների արգելք</div><p>Մանրածախ առևտրում</p></div>
+              <div class="s"><span class="m">2024 · CEPA</span><div class="h">EPR-ի ներդրման պարտավորություն</div><p>Արտադրողը վճարում է իր թափոնի վերամշակման համար</p></div>
+              <div class="s"><span class="m">2026</span><div class="h">Նոր օրենք (ընդունվել է 25.03.2026)</div><p>Փոփոխություններ «Առևտրի և ծառայությունների մասին» օրենքում</p></div>
+              <div class="s" style="background:rgba(54,214,107,.1);border-color:rgba(54,214,107,.45)"><span class="m">2027</span><div class="h">Միանգամյա տոպրակների լրիվ արգելք</div><p>Առևտրում և հանրային սննդում</p></div>
+            </div>
+            <ul class="blist">
+              <li><b>Աջակցություն.</b> ԵՄ, Շվեդիա (Waste Policy Armenia ծրագիր), միջազգային բանկեր</li>
+              <li><b>Արտաքին գործոններ.</b> «այլ պլաստիկ արտադրանքի» ներմուծումը ($32.2M) 4 անգամ գերազանցում է արտահանմանը ($8.03M)</li>
+            </ul>
+          </div>
+        </div>
+        <p class="tiny dim mono rise" style="--d:.35s">ԱՂԲՅՈՒՐՆԵՐ՝ ARKA (25.03.2026) · JAMnews · AUA Acopian Center (EPR) · OEC 2022։</p>
+      </div>
+    </section>
+
+    <!-- ===================== ՇՈՒԿԱՅԱԿԱՆ ԴՈՍՅԵ · 7–9 ===================== -->
+    <section class="slide" id="slide-28" data-t="Շուկայական դոսյե — ֆինանսներ, հեռանկարներ, եզրակացություն">
+      <div class="slide-inner">
+        <div class="rise" style="--d:.05s">
+          <div class="eyebrow">ՍԼԱՅԴ 28 <span class="sep">//</span> ՇՈՒԿԱՅԱԿԱՆ ԴՈՍՅԵ · 7–9</div>
+          <h2 style="margin-top:6px">Ֆինանսներ, հեռանկարներ, <span class="grad-text">եզրակացություն</span></h2>
+        </div>
+        <div class="grid3">
+          <div class="panel panel-pad hud-corner rise" style="--d:.15s">
+            <div class="sec-h"><span class="no">7</span>Ֆինանսատնտեսական ցուցանիշներ</div>
+            <div class="col" style="gap:12px">
+              <div class="stat"><span class="n">$5–6 մլն</span><span class="l">եկամուտ, որ կարող է տալ 6 հզ. տ վերամշակված պլաստիկը (UNDP)</span></div>
+              <div class="stat"><span class="n lime">10–15</span><span class="l">աշխատատեղ յուրաքանչյուր 1 000 տ թափոնի համար (UNDP)</span></div>
+              <div class="stat"><span class="n blue">$32.2M / $8.03M</span><span class="l">ներմուծում / արտահանում, «այլ պլաստիկ արտադրանք», 2022</span></div>
+              <div class="stat"><span class="n amber">≈ 30%</span><span class="l">շահութաբերություն պատրաստի ապրանքի դեպքում (նախագծային մոդել). միայն գրանուլը ավելի քիչ է բերում</span></div>
+            </div>
+          </div>
+          <div class="panel panel-pad hud-corner rise" style="--d:.25s">
+            <div class="sec-h"><span class="no">8</span>Զարգացման հեռանկարներ</div>
+            <ul class="blist" style="margin-bottom:12px">
+              <li><b>Կարճաժամկետ.</b> 2027-ի արգելք և EPR. ավելի շատ հավաքված պլաստիկ</li>
+              <li><b>Երկարաժամկետ.</b> թափոնի աճ մինչև 820 հզ. տ և առանձին հավաքում Երևանում</li>
+              <li><b>Տեխնոլոգիաներ.</b> NIR տեսակավորում, food-grade rPET, քիմիական վերամշակում</li>
+              <li><b>Սպառողներ.</b> աճում է «կանաչ» ապրանքի պահանջարկը, հատկապես երիտասարդների շրջանում</li>
+            </ul>
+            <div class="mono tiny amber" style="letter-spacing:.12em;margin-bottom:6px">ՌԻՍԿԵՐ</div>
+            <div class="row" style="gap:6px"><span class="chip">Օրենքի թույլ կիրարկում</span><span class="chip">Խառը թափոն</span><span class="chip">Ներմուծման մրցակցություն</span><span class="chip">Նավթի գներ</span></div>
+          </div>
+          <div class="panel panel-pad hud-corner glow rise" style="--d:.35s">
+            <div class="sec-h"><span class="no">9</span>Եզրակացություն</div>
+            <p class="lead" style="font-size:14px;margin-bottom:10px">Շուկան <b>վաղ փուլում է</b>. վերամշակվում է պլաստիկ թափոնի միայն ~6%-ը, իսկ պատրաստի ապրանքը ներմուծվում է։ Օրենքները (2027, EPR) ստեղծում են կայուն հումքի հոսք։</p>
+            <div class="mono tiny green" style="letter-spacing:.12em;margin-bottom:6px">ՄՐՑԱԿՑԱՅԻՆ ԱՌԱՎԵԼՈՒԹՅՈՒՆՆԵՐ</div>
+            <ul class="blist" style="margin-bottom:10px"><li>Մեծ, չօգտագործված հումքի բազա</li><li>Ներմուծման փոխարինման հնարավորություն</li></ul>
+            <div class="mono tiny lime" style="letter-spacing:.12em;margin-bottom:6px">ԶԱՐԳԱՑՄԱՆ ՈՒՂԻՆԵՐ</div>
+            <ul class="blist"><li>Պատրաստի ապրանք, ոչ միայն գրանուլ</li><li>Պայմանագրեր համայնքների հետ</li><li>Արտահանում ԵԱՏՄ և Վրաստան</li></ul>
+          </div>
+        </div>
+        <p class="tiny dim mono rise" style="--d:.4s">ԱՂԲՅՈՒՐՆԵՐ՝ UNDP (UNICEF Armenia) · OEC 2022 · World Bank 2024 · ARKA 2026։ Շահութաբերությունը՝ REPLAST-ի նախագծային մոդելից։</p>
+      </div>
+    </section>
+
+    <!-- ===================== ԱՊՐԱՆՔԱՅԻՆ ԴՈՍՅԵ · 1–2 ===================== -->
+    <section class="slide" id="slide-29" data-t="Ապրանքային դոսյե — ընդհանուր և տեխնիկական">
+      <div class="slide-inner">
+        <div class="rise" style="--d:.05s">
+          <div class="eyebrow">ՍԼԱՅԴ 29 <span class="sep">//</span> ԱՊՐԱՆՔԱՅԻՆ ԴՈՍՅԵ (PRODUCT DOSSIER) · 1–2</div>
+          <h2 style="margin-top:6px">Ապրանքային դոսյե՝ <span class="grad-text">REPLAST PAVE</span></h2>
+          <p class="lead" style="margin-top:6px">Դոսյեն կազմված է 9 բաժնից։ Որպես օրինակ վերցված է մեր գլխավոր ապրանքը՝ <b>պոլիմերավազային մայթի սալիկը</b>, որի հումքը գործարանի սեփական rHDPE/LDPE գրանուլն է։</p>
+        </div>
+        <div class="split-55">
+          <div class="col">
+            <div class="gcard rise" style="--d:.15s" onclick="openLightbox('assets/products/01-paving.jpg','REPLAST PAVE 300 — պոլիմերավազային սալիկ')">
+              <div class="gimg" style="height:250px"><img src="assets/products/01-paving.jpg" alt="REPLAST PAVE սալիկ"></div>
+              <div class="gcap"><span class="tag green">ԱՊՐԱՆՔ</span> REPLAST PAVE 300</div>
+            </div>
+            <div class="grid3 rise" style="--d:.25s">
+              <div class="panel panel-pad stat"><span class="n" data-count="8.7" data-dec="1" data-suffix=" կգ">0</span><span class="l">վերամշակված պլաստիկ 1 մ²-ում</span></div>
+              <div class="panel panel-pad stat"><span class="n lime" data-count="25" data-suffix=" տ.">0</span><span class="l">ծառայության ժամկետ</span></div>
+              <div class="panel panel-pad stat"><span class="n blue">F300</span><span class="l">ցրտադիմացկունություն</span></div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="panel panel-pad hud-corner rise" style="--d:.2s">
+              <div class="sec-h"><span class="no">1</span>Ապրանքի ընդհանուր բնութագրեր</div>
+              <div class="kv"><span class="k">Անվանում</span><span class="v">REPLAST PAVE 300 պոլիմերավազային սալիկ</span></div>
+              <div class="kv"><span class="k">Արտադրող / բրենդ</span><span class="v">REPLAST ARMENIA</span></div>
+              <div class="kv"><span class="k">Ապրանքի տեսակ</span><span class="v">Արդյունաբերական (շինանյութ)՝ B2G · B2B · B2C</span></div>
+              <div class="kv"><span class="k">Կյանքի ցիկլի փուլ</span><span class="v green">Մուտք (շուկա դուրս գալը)</span></div>
+            </div>
+            <div class="panel panel-pad hud-corner rise" style="--d:.3s">
+              <div class="sec-h"><span class="no">2</span>Տեխնիկական և ֆունկցիոնալ հատկանիշներ</div>
+              <div class="kv"><span class="k">Չափս</span><span class="v">300 × 300 × 30 մմ · 11 հատ = 1 մ²</span></div>
+              <div class="kv"><span class="k">Քաշ</span><span class="v">2.6 կգ/հատ · ≈ 29 կգ/մ²</span></div>
+              <div class="kv"><span class="k">Բաղադրություն</span><span class="v">30% rHDPE/LDPE · 68% քվարցային ավազ · 2% գունանյութ</span></div>
+              <div class="kv"><span class="k">Տեխնոլոգիա</span><span class="v">հալում-խառնում → տաք մամլում կաղապարում</span></div>
+              <div class="kv"><span class="k">Ֆունկցիա</span><span class="v">մայթեր, բակեր, այգիներ, խաղահրապարակներ</span></div>
+              <div class="kv"><span class="k">Որակ</span><span class="v">ջրակլանում &lt; 0.1% · սեղմման ամրություն ≥ 25 ՄՊա · 6 գույն</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== ԴՈՍՅԵ · 3 ՄԱՐՔԵԹԻՆԳ ===================== -->
+    <section class="slide" id="slide-30" data-t="Ապրանքային դոսյե — մարքեթինգային բնութագրեր">
+      <div class="slide-inner">
+        <div class="rise" style="--d:.05s">
+          <div class="eyebrow">ՍԼԱՅԴ 30 <span class="sep">//</span> ԱՊՐԱՆՔԱՅԻՆ ԴՈՍՅԵ · 3</div>
+          <h2 style="margin-top:6px">Ո՞ւմ ենք վաճառում՝ <span class="grad-text">շուկա և դիրքավորում</span></h2>
+        </div>
+        <div class="grid3">
+          <div class="panel panel-pad hud-corner rise" style="--d:.15s">
+            <div class="sec-h"><span class="no">3</span>Թիրախային շուկա</div>
+            <div class="rings">
+              <div style="width:100%;height:100%;background:rgba(54,214,107,.08);border:1px solid rgba(54,214,107,.35);color:var(--steel-3)">TAM · Հայաստան<br><span style="color:var(--white)">1.2 մլն մ² · 6.2 մլրդ ֏</span></div>
+              <div style="width:68%;height:68%;background:rgba(54,214,107,.14);border:1px solid rgba(54,214,107,.55);color:var(--steel-3)">SAM · 4 մարզ<br><span style="color:var(--white)">600 հզ. մ² · 3.1 մլրդ ֏</span></div>
+              <div style="width:36%;height:36%;background:var(--green);color:#04120a;padding-top:14px">SOM<br>60 հզ. մ²<br>312 մլն ֏</div>
+            </div>
+            <p class="small dim" style="margin-top:10px">SAM՝ Երևան, Կոտայք, Արարատ, Արմավիր։ SOM՝ SAM-ի 10%-ը առաջին 2 տարում։ Գնահատականները նախագծային են։</p>
+          </div>
+          <div class="panel panel-pad hud-corner rise" style="--d:.25s">
+            <div class="sec-h">Սպառողների սեգմենտներ</div>
+            <div class="hbar" style="margin-bottom:14px">
+              <div class="r" style="grid-template-columns:1fr 70px 40px"><span>Համայնքներ, քաղաքապետարաններ (B2G)</span><div class="t"><div class="f" style="--w:90%"></div></div><span class="v">45%</span></div>
+              <div class="r" style="grid-template-columns:1fr 70px 40px"><span>Կառուցապատողներ, շինարարներ (B2B)</span><div class="t"><div class="f" style="--w:70%;background:var(--lime)"></div></div><span class="v">35%</span></div>
+              <div class="r" style="grid-template-columns:1fr 70px 40px"><span>Մասնավոր տներ, ամառանոցներ (B2C)</span><div class="t"><div class="f" style="--w:40%;background:var(--blue)"></div></div><span class="v">20%</span></div>
+            </div>
+            <div class="sec-h">Մրցակցային առավելություններ</div>
+            <ul class="blist">
+              <li><b>Չի ճաքում սառնամանիքից</b>՝ ի տարբերություն բետոնի</li>
+              <li><b>30%-ով թեթև</b> է բետոնե սալիկից՝ ավելի էժան տեղափոխում</li>
+              <li><b>Տեղական հումք</b>՝ սեփական գրանուլ, կախվածություն չկա ներմուծումից</li>
+              <li><b>Էկոլոգիական պատմություն</b>՝ յուրաքանչյուր մ²-ը 8.7 կգ թափոն է</li>
+            </ul>
+          </div>
+          <div class="panel panel-pad hud-corner rise" style="--d:.35s">
+            <div class="sec-h">Դիրքավորում (Positioning)</div>
+            <svg viewBox="0 0 300 230" class="diagram" role="img" aria-label="Դիրքավորման քարտեզ">
+              <line x1="34" y1="200" x2="290" y2="200" stroke="#6E8077"/><line x1="34" y1="200" x2="34" y2="10" stroke="#6E8077"/>
+              <text x="162" y="222" text-anchor="middle" font-size="10" fill="#A9B7B0">ԳԻՆ →</text>
+              <text x="14" y="105" text-anchor="middle" font-size="10" fill="#A9B7B0" transform="rotate(-90 14 105)">ԴԻՄԱՑԿՈՒՆՈՒԹՅՈՒՆ →</text>
+              <circle cx="80" cy="160" r="9" fill="#6E8077"/><text x="94" y="164" font-size="10" fill="#D6E0DB">Բետոնե վիբրոսալիկ</text>
+              <circle cx="170" cy="120" r="9" fill="#A9B7B0"/><text x="184" y="124" font-size="10" fill="#D6E0DB">Բետոն պրեմիում</text>
+              <circle cx="250" cy="48" r="9" fill="#4DA6C9"/><text x="244" y="30" text-anchor="end" font-size="10" fill="#D6E0DB">Ներմուծված պոլիմերային</text>
+              <circle cx="150" cy="52" r="13" fill="#36D66B" class="led"/><text x="150" y="80" text-anchor="middle" font-size="11" font-weight="700" fill="#B7F36B">REPLAST PAVE</text>
+            </svg>
+            <div class="formula" style="margin-top:8px"><span class="lbl">Դիրքավորման բանաձև</span>Ավելի դիմացկուն, քան բետոնը, ավելի մատչելի, քան ներմուծվածը։</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== ԴՈՍՅԵ · 4 ԳՆԱՅԻՆ ՔԱՂԱՔԱԿԱՆՈՒԹՅՈՒՆ ===================== -->
+    <section class="slide" id="slide-31" data-t="Ապրանքային դոսյե — գնային քաղաքականություն">
+      <div class="slide-inner">
+        <div class="rise" style="--d:.05s">
+          <div class="eyebrow">ՍԼԱՅԴ 31 <span class="sep">//</span> ԱՊՐԱՆՔԱՅԻՆ ԴՈՍՅԵ · 4</div>
+          <h2 style="margin-top:6px">Գնային քաղաքականություն՝ <span class="grad-text">competitive pricing</span></h2>
+        </div>
+        <div class="grid3">
+          <div class="panel panel-pad hud-corner rise" style="--d:.15s">
+            <div class="sec-h"><span class="no">4</span>Արտադրական ինքնարժեք, ֏ / մ²</div>
+            <table class="tbl">
+              <tr><td>Պոլիմեր (8.7 կգ × 160 ֏)</td><td class="num">1 390</td></tr>
+              <tr><td>Քվարցային ավազ (20 կգ × 10 ֏)</td><td class="num">200</td></tr>
+              <tr><td>Գունանյութ, կայունացուցիչ</td><td class="num">300</td></tr>
+              <tr><td>Էլեկտրաէներգիա</td><td class="num">650</td></tr>
+              <tr><td>Աշխատավարձ</td><td class="num">600</td></tr>
+              <tr><td>Ամորտիզացիա և այլ</td><td class="num">460</td></tr>
+              <tr class="hl"><td>Ինքնարժեք</td><td class="num">3 600</td></tr>
+            </table>
+          </div>
+          <div class="panel panel-pad hud-corner rise" style="--d:.25s">
+            <div class="sec-h">Վաճառքի գին և մրցակիցներ, ֏ / մ²</div>
+            <div class="hbar">
+              <div class="r" style="grid-template-columns:1fr 90px 56px"><span>Բետոնե վիբրոսալիկ</span><div class="t"><div class="f" style="--w:58%;background:var(--steel-2)"></div></div><span class="v">4 500</span></div>
+              <div class="r" style="grid-template-columns:1fr 90px 56px"><span><b style="color:var(--green)">REPLAST PAVE</b></span><div class="t"><div class="f" style="--w:67%"></div></div><span class="v green">5 200</span></div>
+              <div class="r" style="grid-template-columns:1fr 90px 56px"><span>Բետոն պրեմիում</span><div class="t"><div class="f" style="--w:83%;background:var(--steel)"></div></div><span class="v">6 500</span></div>
+              <div class="r" style="grid-template-columns:1fr 90px 56px"><span>Ներմուծված պոլիմերային</span><div class="t"><div class="f" style="--w:100%;background:var(--blue)"></div></div><span class="v">7 800</span></div>
+            </div>
+            <div class="grid2" style="margin-top:14px">
+              <div class="stat"><span class="n" data-count="1600" data-suffix=" ֏">0</span><span class="l">շահույթ 1 մ²-ից</span></div>
+              <div class="stat"><span class="n lime" data-count="30.8" data-dec="1" data-suffix="%">0</span><span class="l">վաճառքի շահութաբերություն</span></div>
+            </div>
+          </div>
+          <div class="panel panel-pad hud-corner rise" style="--d:.35s">
+            <div class="sec-h">Գնային ռազմավարություն</div>
+            <p class="lead" style="margin-bottom:10px"><b>Competitive pricing</b>՝ գինը 33%-ով ցածր է ներմուծված պոլիմերային սալիկից և մոտ է սովորական բետոնին։ Իսկ տարեկան արժեքը (կյանքի ցիկլի գինը) երեք անգամ ցածր է։</p>
+            <div class="formula"><span class="lbl">Տարեկան արժեք = գին ÷ ծառայության ժամկետ</span>Բետոն՝ 4 500 ÷ 8 տ. = <b>563 ֏/մ²</b><br>REPLAST՝ 5 200 ÷ 25 տ. = <span class="res">208 ֏/մ²</span></div>
+            <p class="small dim" style="margin-top:10px">Գները նախագծային ենթադրություններ են՝ ԱԱՀ-ն ներառված չէ։</p><a class="btn primary" style="margin-top:10px" href="../shop/" target="_blank" rel="noopener">REPLAST MARKET խանութ ↗</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== ԴՈՍՅԵ · 5–6 ===================== -->
+    <section class="slide" id="slide-32" data-t="Ապրանքային դոսյե — տարածում և հաղորդակցում">
+      <div class="slide-inner">
+        <div class="rise" style="--d:.05s">
+          <div class="eyebrow">ՍԼԱՅԴ 32 <span class="sep">//</span> ԱՊՐԱՆՔԱՅԻՆ ԴՈՍՅԵ · 5–6</div>
+          <h2 style="margin-top:6px">Ինչպե՞ս է սալիկը հասնում <span class="grad-text">գնորդին</span></h2>
+        </div>
+        <div class="grid2">
+          <div class="panel panel-pad hud-corner rise" style="--d:.15s">
+            <div class="sec-h"><span class="no">5</span>Տարածման (Distribution) ուղիներ</div>
+            <div class="flow" style="margin-bottom:12px"><span class="node">Գործարան</span><span class="arrow">→</span><span class="node">Պահեստ · պալետ 12 մ²</span><span class="arrow">→</span><span class="node hot">Գնորդ</span></div>
+            <div class="hbar" style="margin-bottom:12px">
+              <div class="r" style="grid-template-columns:1fr 110px 44px"><span>Ուղղակի վաճառք՝ տենդերներ, կառուցապատողներ</span><div class="t"><div class="f" style="--w:100%"></div></div><span class="v">55%</span></div>
+              <div class="r" style="grid-template-columns:1fr 110px 44px"><span>Դիլերներ՝ շինանյութի խանութներ (մեծածախ)</span><div class="t"><div class="f" style="--w:55%;background:var(--lime)"></div></div><span class="v">30%</span></div>
+              <div class="r" style="grid-template-columns:1fr 110px 44px"><span>Առցանց պատվեր՝ կայք և սոցցանցեր</span><div class="t"><div class="f" style="--w:27%;background:var(--blue)"></div></div><span class="v">15%</span></div>
+            </div>
+            <ul class="blist">
+              <li><b>Լոգիստիկա.</b> սեփական 10 տ բեռնատար և գործընկեր փոխադրողներ։ Երևան՝ 24 ժամում, մարզեր՝ 48 ժամում</li>
+              <li><b>Մատակարարման շղթա.</b> թափոնի հավաքում 4 մարզից → գրանուլ → սալիկ → պալետ ≈ 350 կգ</li>
+              <li><b>Գործընկերներ.</b> համայնքներ, աղբահանող ընկերություններ, էկո ՀԿ-ներ, ճարտարապետական բյուրոներ</li>
+            </ul>
+          </div>
+          <div class="panel panel-pad hud-corner rise" style="--d:.25s">
+            <div class="sec-h"><span class="no">6</span>Հաղորդակցման (Promotion) ռազմավարություն</div>
+            <div class="grid2" style="gap:10px">
+              <div class="panel panel-pad" style="padding:11px"><div class="mono tiny green" style="letter-spacing:.12em;margin-bottom:5px">ԳՈՎԱԶԴ</div><p class="small" style="color:var(--steel-3);line-height:1.45">SMM՝ Instagram, Facebook, TikTok, YouTube (տես հաջորդ բաժինը), թիրախային գովազդ</p></div>
+              <div class="panel panel-pad" style="padding:11px"><div class="mono tiny green" style="letter-spacing:.12em;margin-bottom:5px">ՎԱՃԱՌՔԻ ԽԹԱՆՈՒՄ</div><p class="small" style="color:var(--steel-3);line-height:1.45">7% զեղչ 1 000 մ²-ից, կուտակային զեղչ շինարարներին մինչև 10%, անվճար նմուշներ</p></div>
+              <div class="panel panel-pad" style="padding:11px"><div class="mono tiny green" style="letter-spacing:.12em;margin-bottom:5px">ԲՐԵՆԴԻՆԳ</div><p class="small" style="color:var(--steel-3);line-height:1.45">Կանաչ գույն, QR կոդ յուրաքանչյուր պալետին՝ «ինչ թափոնից է պատրաստված»</p></div>
+              <div class="panel panel-pad" style="padding:11px"><div class="mono tiny green" style="letter-spacing:.12em;margin-bottom:5px">PR ԵՎ ԲՈՎԱՆԴԱԿՈՒԹՅՈՒՆ</div><p class="small" style="color:var(--steel-3);line-height:1.45">«Թափոնից՝ մայթ» արշավ, ցուցահանդեսներ, սառեցման փորձերի և գործարանի տեսանյութեր</p></div>
+            </div>
+            <div class="formula" style="margin-top:12px"><span class="lbl">Գլխավոր ուղերձ</span>«Այս մայթը եղել է 3.6 տոննա պլաստիկ» · ցուցանակ յուրաքանչյուր ավարտված նախագծի մոտ</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== ԴՈՍՅԵ · 7 ՖԻՆԱՆՍՆԵՐ ===================== -->
+    <section class="slide" id="slide-33" data-t="Ապրանքային դոսյե — ֆինանսատնտեսական գնահատում">
+      <div class="slide-inner">
+        <div class="rise" style="--d:.05s">
+          <div class="eyebrow">ՍԼԱՅԴ 33 <span class="sep">//</span> ԱՊՐԱՆՔԱՅԻՆ ԴՈՍՅԵ · 7</div>
+          <h2 style="margin-top:6px">Ֆինանսատնտեսական <span class="grad-text">գնահատում</span></h2>
+          <p class="lead" style="margin-top:6px">Շարժեք սահիչը՝ տեսնելու, թե ինչպես է տարեկան վաճառքի ծավալը փոխում շահույթը և ներդրման վերադարձը։</p>
+        </div>
+        <div class="split-55">
+          <div class="panel panel-pad hud-corner rise" style="--d:.15s">
+            <div class="sec-h"><span class="no">7</span>Տվյալներ</div>
+            <div class="spread small" style="margin-bottom:6px"><span>Տարեկան վաճառք</span><span class="mono green" id="ds-vol" style="font-size:20px;font-weight:800">60 000 մ²</span></div>
+            <input class="rng" type="range" min="30000" max="90000" step="5000" value="60000" oninput="calcDossier(+this.value)">
+            <div class="spread tiny dim mono"><span>30 000</span><span>60 000 · հիմնական</span><span>90 000</span></div>
+            <div class="kv" style="margin-top:10px"><span class="k">Վաճառքի գին</span><span class="v">5 200 ֏ / մ²</span></div>
+            <div class="kv"><span class="k">Ինքնարժեք</span><span class="v">3 600 ֏ / մ²</span></div>
+            <div class="kv"><span class="k">Ներդրում սալիկի գծում</span><span class="v">140 մլն ֏ (խառնիչ-էքստրուդեր, 2 մամլիչ, կաղապարներ)</span></div>
+            <div class="kv"><span class="k">Շուկայական բաժին</span><span class="v" id="ds-share">5% TAM · 10% SAM</span></div>
+            <div class="kv"><span class="k">Վերամշակված պլաստիկ</span><span class="v green" id="ds-plastic">522 տ / տարի</span></div>
+          </div>
+          <div class="col">
+            <div class="formula rise" style="--d:.2s"><span class="lbl">Տարեկան շրջանառություն</span><span id="ds-f1">60 000 × 5 200 = </span><span class="res" id="ds-rev">312 մլն ֏</span></div>
+            <div class="formula rise" style="--d:.25s"><span class="lbl">Ընդհանուր ծախսեր</span><span id="ds-f2">60 000 × 3 600 = </span><span class="res" id="ds-cost">216 մլն ֏</span></div>
+            <div class="formula rise" style="--d:.3s"><span class="lbl">Տարեկան շահույթ (մինչև հարկումը)</span><span id="ds-f3">312 − 216 = </span><span class="res" id="ds-profit">96 մլն ֏</span> · շահութաբերություն <span class="res">30.8%</span></div>
+            <div class="grid2 rise" style="--d:.35s">
+              <div class="formula"><span class="lbl">ROI = շահույթ ÷ ներդրում</span><span id="ds-f4">96 ÷ 140 = </span><span class="res" id="ds-roi">68.6%</span></div>
+              <div class="formula"><span class="lbl">Payback Period</span><span id="ds-f5">140 ÷ 96 = </span><span class="res" id="ds-pb">1.46 տարի</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== ԴՈՍՅԵ · 8–9 SWOT + ԵԶՐԱԿԱՑՈՒԹՅՈՒՆ ===================== -->
+    <section class="slide" id="slide-34" data-t="Ապրանքային դոսյե — SWOT և եզրակացություն">
+      <div class="slide-inner">
+        <div class="rise" style="--d:.05s">
+          <div class="eyebrow">ՍԼԱՅԴ 34 <span class="sep">//</span> ԱՊՐԱՆՔԱՅԻՆ ԴՈՍՅԵ · 8–9</div>
+          <h2 style="margin-top:6px">SWOT և <span class="grad-text">եզրակացություն</span></h2>
+        </div>
+        <div class="split-55">
+          <div class="rise" style="--d:.15s">
+            <div class="sec-h"><span class="no">8</span>SWOT վերլուծություն</div>
+            <div class="swot">
+              <div class="S"><h4><span class="k green">S</span>Ուժեղ կողմեր</h4><ul class="blist"><li>Ցրտադիմացկուն, չի ճաքում</li><li>Սեփական գրանուլ՝ ցածր ինքնարժեք</li><li>Տեղական արտադրություն</li></ul></div>
+              <div class="W"><h4><span class="k" style="color:var(--red)">W</span>Թույլ կողմեր</h4><ul class="blist"><li>Նոր բրենդ, ճանաչելիության պակաս</li><li>UV-ից գույնի խամրում՝ պետք է կայունացուցիչ</li><li>Թանկ է էժան բետոնից</li></ul></div>
+              <div class="O"><h4><span class="k blue">O</span>Հնարավորություններ</h4><ul class="blist"><li>Համայնքների բարեկարգման ծրագրեր</li><li>«Կանաչ» պետական գնումներ, ESG</li><li>Արտահանում Վրաստան</li></ul></div>
+              <div class="T"><h4><span class="k amber">T</span>Սպառնալիքներ</h4><ul class="blist"><li>Էժան բետոնե սալիկի արտադրողներ</li><li>Թափոնի հավաքման անկայունություն</li><li>Անվստահություն «պլաստիկ» սալիկի նկատմամբ</li></ul></div>
+            </div>
+          </div>
+          <div class="panel panel-pad hud-corner glow rise" style="--d:.28s">
+            <div class="sec-h"><span class="no">9</span>Եզրակացություն</div>
+            <p class="lead" style="font-size:14.5px;margin-bottom:12px"><b>REPLAST PAVE</b>-ը ունի մրցունակ գին, լուծում է բետոնե սալիկի ճաքելու խնդիրը և տարեկան վերամշակում է 522 տոննա պլաստիկ։ Ճիշտ կազմակերպման դեպքում ապրանքը կապահովի <b>≈ 31% շահութաբերություն</b> և ներդրումը կվերադարձնի <b>1.5 տարում</b>։</p>
+            <div class="mono tiny green" style="letter-spacing:.12em;margin-bottom:6px">ՀԱՋՈՂՈՒԹՅԱՆ ԳՈՐԾՈՆՆԵՐ</div>
+            <ul class="blist" style="margin-bottom:12px"><li>Կայուն հումք՝ հավաքման պայմանագրեր 4 մարզում</li><li>Որակի հավաստագրում (ISO 9001, լաբորատոր անձնագիր)</li><li>Առաջին պիլոտային նախագծերը համայնքներում</li></ul>
+            <div class="mono tiny lime" style="letter-spacing:.12em;margin-bottom:6px">ԶԱՐԳԱՑՄԱՆ ՀԵՌԱՆԿԱՐՆԵՐ</div>
+            <div class="row" style="gap:6px"><span class="chip">Նոր ձևեր և գույներ</span><span class="chip">Շոշափելի սալիկ տեսողության խնդիր ունեցողների համար</span><span class="chip">Եզրաքարեր</span><span class="chip lime">Արտահանում</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== ՎԵՐԱՀՍԿՈՂՈՒԹՅՈՒՆ · ԷՈՒԹՅՈՒՆ ԵՎ ՏԵՍԱԿՆԵՐ ===================== -->
+    <section class="slide" id="slide-35" data-t="Վերահսկողություն — էություն, տեսակներ, մեթոդներ">
+      <div class="slide-inner">
+        <div class="rise" style="--d:.05s">
+          <div class="eyebrow">ՍԼԱՅԴ 35 <span class="sep">//</span> ՎԵՐԱՀՍԿՈՂՈՒԹՅՈՒՆ ԵՎ ՈՐԱԿ</div>
+          <h2 style="margin-top:6px">Վերահսկողությունը՝ <span class="grad-text">կառավարման գործառույթ</span></h2>
+          <p class="lead" style="margin-top:6px">Վերահսկողությունը ստուգում է, թե արդյոք REPLAST-ի աշխատանքը համապատասխանում է պլաններին, նորմերին և ստանդարտներին։ Այն <b>բացահայտում է շեղումները</b> և սկսում ուղղիչ գործողություններ։</p>
+        </div>
+        <div class="grid3 rise" style="--d:.12s">
+          <div class="panel panel-pad"><div class="mono tiny green" style="letter-spacing:.12em;margin-bottom:5px">ՆՊԱՏԱԿ 1</div><p class="small" style="color:var(--steel-3);line-height:1.5">Ստուգել՝ արդյոք հումքը, էներգիան և ջուրը օգտագործվում են <b style="color:#fff">արդյունավետ</b></p></div>
+          <div class="panel panel-pad"><div class="mono tiny green" style="letter-spacing:.12em;margin-bottom:5px">ՆՊԱՏԱԿ 2</div><p class="small" style="color:var(--steel-3);line-height:1.5">Բացահայտել սխալներն ու ռիսկերը <b style="color:#fff">վաղ փուլում</b>՝ մինչև խոտանը հասնի գնորդին</p></div>
+          <div class="panel panel-pad"><div class="mono tiny green" style="letter-spacing:.12em;margin-bottom:5px">ՆՊԱՏԱԿ 3</div><p class="small" style="color:var(--steel-3);line-height:1.5">Ապահովել <b style="color:#fff">շարունակական բարելավում</b> և հիմնավորված որոշումներ</p></div>
+        </div>
+        <div class="grid3">
+          <div class="panel panel-pad hud-corner rise" style="--d:.2s">
+            <div class="spread" style="margin-bottom:8px"><span class="tag blue">ՆԱԽՆԱԿԱՆ</span><span class="mono tiny dim">ԳՈՏԻ 1–3</span></div>
+            <div style="font-weight:700;font-size:14px;margin-bottom:8px">Մինչև արտադրությունը՝ ընդունում</div>
+            <ul class="blist"><li>Բեռնատարի կշռում և վիզուալ ստուգում</li><li>NIR տեսակավորիչ՝ <b>PVC &lt; 0.01%</b></li><li>Աղտոտվածություն <b>≤ 5%</b>, այլապես խմբաքանակը մերժվում է</li></ul>
+          </div>
+          <div class="panel panel-pad hud-corner rise" style="--d:.28s">
+            <div class="spread" style="margin-bottom:8px"><span class="tag green">ԸՆԹԱՑԻԿ</span><span class="mono tiny dim">ԳՈՏԻ 4–13</span></div>
+            <div style="font-weight:700;font-size:14px;margin-bottom:8px">Գործընթացի ընթացքում՝ գծում</div>
+            <ul class="blist"><li>Տաք լվացում <b>80–85 °C</b></li><li>Խոնավություն չորացումից հետո <b>&lt; 0.2%</b></li><li>Էքստրուդերի գոտիներ <b>180–230 °C</b>, հալույթի ճնշում <b>≤ 120 բար</b></li></ul>
+          </div>
+          <div class="panel panel-pad hud-corner rise" style="--d:.36s">
+            <div class="spread" style="margin-bottom:8px"><span class="tag amber">ՀԵՏՎԵՐԱՀՍԿՈՂՈՒԹՅՈՒՆ</span><span class="mono tiny dim">ԳՈՏԻ 12–14</span></div>
+            <div style="font-weight:700;font-size:14px;margin-bottom:8px">Արդյունքից հետո՝ լաբորատորիա</div>
+            <ul class="blist"><li>MFI, խտություն, ամրություն, գույն</li><li>Յուրաքանչյուր խմբաքանակի <b>անձնագիր</b></li><li>Ամսական <b>պլան / փաստ</b> հաշվետվություն</li></ul>
+          </div>
+        </div>
+        <div class="row rise" style="--d:.44s;gap:6px"><span class="mono tiny dim" style="letter-spacing:.12em">ՄԵԹՈԴՆԵՐ՝</span><span class="chip lime">Պլան–փաստ համեմատություն</span><span class="chip">Ֆինանսական ցուցանիշներ</span><span class="chip">Ներքին հաշվետվություններ</span><span class="chip">Ստուգումներ և աուդիտ</span><span class="chip">Հարցազրույցներ</span></div>
+      </div>
+    </section>
+
+    <!-- ===================== ՊԼԱՆ / ՓԱՍՏ ===================== -->
+    <section class="slide" id="slide-36" data-t="Վերահսկողություն — պլան / փաստ և ցուցանիշներ">
+      <div class="slide-inner">
+        <div class="rise" style="--d:.05s">
+          <div class="eyebrow">ՍԼԱՅԴ 36 <span class="sep">//</span> ՏՆՏԵՍԱԿԱՆ ՎԵՐԼՈՒԾՈՒԹՅՈՒՆ</div>
+          <h2 style="margin-top:6px">Պլան ընդդեմ փաստի՝ <span class="grad-text">որքա՞ն ենք կորցնում</span></h2>
+          <p class="lead" style="margin-top:6px">Ամսական պլան՝ <b>161 տ</b> պատրաստի արտադրանք։ Շարժեք սահիչը՝ փաստացի արտադրանքը փոխելու համար։</p>
+        </div>
+        <div class="split-55">
+          <div class="panel panel-pad hud-corner rise" style="--d:.15s">
+            <div class="spread small" style="margin-bottom:6px"><span>Փաստացի արտադրանք / ամիս</span><span class="mono green" id="pf-act" style="font-size:22px;font-weight:800">148 տ</span></div>
+            <input class="rng" type="range" min="120" max="180" step="1" value="148" oninput="calcPF(+this.value)">
+            <div class="spread tiny dim mono" style="margin-bottom:12px"><span>120 տ</span><span>պլան 161 տ</span><span>180 տ</span></div>
+            <div class="col" style="gap:10px">
+              <div class="formula"><span class="lbl">Համեմատական վերլուծություն · Շեղում = Փաստացի − Պլանային</span><span id="pf-f1">148 − 161 = </span><span class="res" id="pf-dev">−13 տ</span></div>
+              <div class="formula"><span class="lbl">Հարաբերական վերլուծություն · Կատարման % = Փաստացի ÷ Պլանային × 100%</span><span id="pf-f2">148 ÷ 161 × 100% = </span><span class="res" id="pf-pct">91.9%</span></div>
+              <div class="formula"><span class="lbl">Գործոնային վերլուծություն · ΔP = ΔQ × (Գին − Ինքնարժեք)</span><span id="pf-f3">−13 × (290 000 − 205 000) = </span><span class="res" id="pf-dp">−1 105 000 ֏</span></div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="panel panel-pad hud-corner rise" style="--d:.25s">
+              <div class="sec-h">Արտադրողականության վերահսկողություն</div>
+              <div class="formula"><span class="lbl">Արտադրողականություն = Արտադրանք ÷ Ռեսուրս</span>161 000 կգ ÷ (52 աշխ. × 176 ժ) = <span class="res">17.6 կգ / մարդ-ժամ</span></div>
+              <p class="small dim" style="margin-top:8px">Ցուցանիշը հետևում ենք հերթափոխերի կտրվածքով․ անկումը ազդանշան է սարքավորման պարապուրդի կամ հումքի որակի խնդրի մասին։</p>
+            </div>
+            <div class="panel panel-pad hud-corner rise" style="--d:.35s">
+              <div class="sec-h">Ֆինանսական վերահսկողություն</div>
+              <div class="formula"><span class="lbl">Պահուստների շրջանառություն = Վաճառք ÷ Միջին պահուստ</span>58 մլն ֏ ÷ 19 մլն ֏ = <span class="res">3.05 անգամ / ամիս</span> (≈ 10 օր պահեստում)</div>
+              <p class="small dim" style="margin-top:8px">Գինը (290 հզ. ֏/տ) և ինքնարժեքը (205 հզ. ֏/տ) նախագծային մոդելից են։</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== BCR ===================== -->
+    <section class="slide" id="slide-37" data-t="Վերահսկողություն — օգուտ / ծախս (BCR)">
+      <div class="slide-inner">
+        <div class="rise" style="--d:.05s">
+          <div class="eyebrow">ՍԼԱՅԴ 37 <span class="sep">//</span> ՕԳՈՒՏ / ԾԱԽՍ ՀԱՐԱԲԵՐԱԿՑՈՒԹՅՈՒՆ (BCR)</div>
+          <h2 style="margin-top:6px">Արժե՞ արդյոք ներդնել <span class="grad-text">QC լաբորատորիա</span></h2>
+          <p class="lead" style="margin-top:6px">BCR-ը (Benefit-Cost Ratio) ցույց է տալիս՝ քանի դրամ օգուտ է բերում ծախսված յուրաքանչյուր դրամը։ <b>BCR = Ընդհանուր օգուտ ÷ Ընդհանուր ծախսեր</b></p>
+        </div>
+        <div class="grid3">
+          <div class="panel panel-pad hud-corner rise" style="--d:.15s">
+            <div class="sec-h">Ծախսեր (1-ին տարի), մլն ֏</div>
+            <table class="tbl">
+              <tr><td>Լաբ սարքավորումներ (MFI, խտաչափ, ճեղքման մեքենա, խոնավաչափ)</td><td class="num">24.0</td></tr>
+              <tr><td>2 լաբորանտ (աշխատավարձ)</td><td class="num">7.2</td></tr>
+              <tr><td>Ռեակտիվներ, տրամաչափում</td><td class="num">2.8</td></tr>
+              <tr class="hl"><td>Ընդամենը</td><td class="num">34.0</td></tr>
+            </table>
+          </div>
+          <div class="panel panel-pad hud-corner rise" style="--d:.25s">
+            <div class="sec-h">Օգտակար ազդեցություն / տարի, մլն ֏</div>
+            <table class="tbl">
+              <tr><td>Խոտանի կրճատում 5% → 2% (58 տ × 290 հզ. ֏)</td><td class="num">16.8</td></tr>
+              <tr><td>Վերադարձների և բողոքների նվազում</td><td class="num">9.5</td></tr>
+              <tr><td>Հավաստագրված գրանուլի +5% գին</td><td class="num">10.4</td></tr>
+              <tr class="hl"><td>Ընդամենը</td><td class="num">36.7</td></tr>
+            </table>
+            <p class="small dim" style="margin-top:8px">Ոչ ֆինանսական օգուտ՝ գնորդի վստահություն, ISO 9001-ի նախապայման։</p>
+          </div>
+          <div class="panel panel-pad hud-corner glow rise" style="--d:.35s">
+            <div class="sec-h">Արդյունք</div>
+            <div class="grid2" style="margin-bottom:12px">
+              <div class="stat"><span class="n" data-count="1.08" data-dec="2">0</span><span class="l">BCR 1-ին տարի<br>36.7 ÷ 34.0</span></div>
+              <div class="stat"><span class="n lime" data-count="3.67" data-dec="2">0</span><span class="l">BCR 2-րդ տարուց<br>36.7 ÷ 10.0</span></div>
+            </div>
+            <table class="tbl">
+              <tr><th>BCR</th><th>Մեկնաբանություն</th></tr>
+              <tr class="hl"><td class="num">&gt; 1</td><td>Ծրագիրն արդյունավետ է՝ օգուտը գերազանցում է ծախսերը</td></tr>
+              <tr><td class="num">= 1</td><td>Օգուտը հավասար է ծախսերին</td></tr>
+              <tr><td class="num">&lt; 1</td><td>Ծախսերը գերազանցում են օգուտը</td></tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== ՍՏՈՐԱԲԱԺԱՆՈՒՄՆԵՐ ===================== -->
+    <section class="slide" id="slide-38" data-t="Վերահսկողություն — վերահսկող ստորաբաժանումներ">
+      <div class="slide-inner">
+        <div class="rise" style="--d:.05s">
+          <div class="eyebrow">ՍԼԱՅԴ 38 <span class="sep">//</span> ԿԱԶՄԱԿԵՐՊԱԿԱՆ ԿԱՌՈՒՑՎԱԾՔ</div>
+          <h2 style="margin-top:6px">Ո՞վ է վերահսկում <span class="grad-text">REPLAST-ում</span></h2>
+          <p class="lead" style="margin-top:6px">Վերահսկողությունը բաշխված է 7 ստորաբաժանման միջև։ Բոլորը հաշվետու են տնօրենին և ամեն ամիս ներկայացնում են իրենց ցուցանիշները։</p>
+        </div>
+        <div class="org">
+          <div class="u rise" style="--d:.1s"><span class="c">01 · 1 ՄԱՍՆԱԳԵՏ</span><div class="h">Ներքին աուդիտ</div><p>Անկախ ստուգումներ, ռիսկերի վերլուծություն, օրենքներին և ներքին կանոններին համապատասխանություն</p></div>
+          <div class="u rise" style="--d:.15s"><span class="c">02 · 2 ՄԱՍՆԱԳԵՏ</span><div class="h">Ֆինանսական բաժին / հաշվապահություն</div><p>Հաշվետվությունների ճշգրտություն, բյուջեի կատարում, ծախսերի վերահսկում 1C-ում</p></div>
+          <div class="u rise" style="--d:.2s"><span class="c">03 · 1 ՄԱՍՆԱԳԵՏ</span><div class="h">Տնտեսական պլանավորում</div><p>Պլան / փաստ, ինքնարժեքի հաշվարկ, տնտեսական հիմնավորում որոշումների համար</p></div>
+          <div class="u rise" style="--d:.25s"><span class="c">04 · 4 ՀԵՐԹԱՓՈԽԻ ՂԵԿԱՎԱՐ</span><div class="h">Արտադրամաս</div><p>Տեխնոլոգիական կարգապահություն, արտադրողականություն, պարապուրդների պատճառներ</p></div>
+          <div class="u rise" style="--d:.3s"><span class="c">05 · 3 ՄԱՍՆԱԳԵՏ</span><div class="h">Որակի վերահսկում (QC / QA)</div><p>Լաբորատոր փորձարկումներ, խմբաքանակի անձնագիր, ստանդարտներին համապատասխանություն</p></div>
+          <div class="u rise" style="--d:.35s"><span class="c">06 · 2 ՄԱՍՆԱԳԵՏ</span><div class="h">Անվտանգություն և աշխատանքի պաշտպանություն</div><p>Մանրացուցիչների և տաք գոտիների կանոններ, ուսուցում, դժբախտ պատահարների կանխում</p></div>
+          <div class="u rise" style="--d:.4s"><span class="c">07 · 1 ՄԱՍՆԱԳԵՏ</span><div class="h">ՏՏ վերահսկողություն</div><p>SCADA և սերվերների անվտանգություն, տվյալների պահուստային պատճեններ, մուտքի իրավունքներ</p></div>
+          <div class="u rise" style="--d:.45s;background:rgba(54,214,107,.08);border-color:rgba(54,214,107,.4)"><span class="c">ԸՆԴԱՄԵՆԸ</span><div class="h">14 մարդ վերահսկողության համակարգում</div><p>45–60 աշխատողներից։ Ամեն ամիս՝ ցուցանիշների համատեղ նիստ տնօրենի հետ։</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== ՄՇՏԱԴԻՏԱՐԿՈՒՄ ===================== -->
+    <section class="slide" id="slide-39" data-t="Վերահսկողություն — մշտադիտարկում (մոնիթորինգ)">
+      <div class="slide-inner">
+        <div class="rise" style="--d:.05s">
+          <div class="eyebrow">ՍԼԱՅԴ 39 <span class="sep">//</span> ՄՇՏԱԴԻՏԱՐԿՈՒՄ (MONITORING)</div>
+          <h2 style="margin-top:6px">Գործարանը՝ <span class="grad-text">իրական ժամանակում</span></h2>
+          <p class="lead" style="margin-top:6px">Մշտադիտարկումը տվյալների անընդհատ հավաքումն ու վերլուծությունն է։ Այն թույլ է տալիս արագ նկատել շեղումները և արձագանքել դրանց։</p>
+        </div>
+        <div class="panel panel-pad hud-corner rise" style="--d:.12s">
+          <div class="spread" style="margin-bottom:8px"><span class="mono tiny green" style="letter-spacing:.14em"><span class="dot led"></span>&nbsp; ԿԱՌԱՎԱՐՄԱՆ ՎԱՀԱՆԱԿ · ՕՐԻՆԱԿ</span><span class="mono tiny dim">SCADA + Power BI</span></div>
+          <div class="grid4" style="grid-template-columns:repeat(6,1fr)" id="mon-gauges"></div>
+        </div>
+        <div class="split-55">
+          <div class="panel panel-pad hud-corner rise" style="--d:.2s">
+            <table class="tbl">
+              <tr><th>Ոլորտ</th><th>Ինչ է վերահսկվում</th><th>Գործիք</th><th>Հաճախականություն</th></tr>
+              <tr><td><b>Ընդունում</b></td><td>Տոննաժ, PVC բաժին</td><td>Կշեռք, NIR</td><td>Յուրաքանչյուր բեռնատար</td></tr>
+              <tr><td><b>Արտադրություն</b></td><td>Ջերմաստիճան, ճնշում, կգ/ժ</td><td>Սենսորներ, SCADA</td><td>Իրական ժամանակում</td></tr>
+              <tr><td><b>Որակ</b></td><td>MFI, խտություն, խոնավություն</td><td>Լաբորատորիա</td><td>Յուրաքանչյուր խմբաքանակ</td></tr>
+              <tr><td><b>Ֆինանսներ</b></td><td>Ինքնարժեք, եկամուտ, բյուջե</td><td>1C ERP, Power BI</td><td>Շաբաթական</td></tr>
+              <tr><td><b>Անվտանգություն</b></td><td>Պաշտպանիչ միջոցներ, միջադեպեր</td><td>Տեսախցիկներ, չեկ-լիստ</td><td>Յուրաքանչյուր հերթափոխ</td></tr>
+              <tr><td><b>ՏՏ</b></td><td>Համակարգերի աշխատանք, պատճեններ</td><td>Սերվերի մոնիթորինգ, լոգեր</td><td>24/7</td></tr>
+            </table>
+          </div>
+          <div class="panel panel-pad hud-corner rise" style="--d:.3s">
+            <div class="sec-h">Ինչպես ենք կազմակերպում</div>
+            <ol class="blist" style="counter-reset:n">
+              <li><b>1.</b> Պատասխանատու՝ QC/QA և ՏՏ բաժիններ</li>
+              <li><b>2.</b> Ոլորտների և KPI-ների ընտրություն</li>
+              <li><b>3.</b> Տվյալների հավաքում՝ սենսորներ, սկաներ, ձեռքով մուտք</li>
+              <li><b>4.</b> Վերլուծություն՝ Excel, Power BI, 1C</li>
+              <li><b>5.</b> Հաշվետվություն՝ օրական, շաբաթական, ամսական</li>
+              <li><b>6.</b> Տեղեկատվության հոսք դեպի ղեկավարություն և բաժիններ</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== ՈՐԱԿԻ ԿԱՌԱՎԱՐՈՒՄ ===================== -->
+    <section class="slide" id="slide-40" data-t="Որակի կառավարում և հաճախորդ">
+      <div class="slide-inner">
+        <div class="rise" style="--d:.05s">
+          <div class="eyebrow">ՍԼԱՅԴ 40 <span class="sep">//</span> ՈՐԱԿԻ ԿԱՌԱՎԱՐՈՒՄ</div>
+          <h2 style="margin-top:6px">Որակը՝ <span class="grad-text">հաճախորդի աչքերով</span></h2>
+          <p class="lead" style="margin-top:6px">Որակը ցույց է տալիս, թե որքանով է արտադրանքը համապատասխանում հաճախորդի սպասումներին։ Մրցակցային շուկայում գնորդը հեշտությամբ փոխում է մատակարարին, իսկ գոհ գնորդը վերադառնում է և խորհուրդ տալիս մեզ ուրիշներին։</p>
+        </div>
+        <div class="grid3">
+          <div class="panel panel-pad hud-corner rise" style="--d:.15s">
+            <div class="sec-h">5 սկզբունք REPLAST-ում</div>
+            <ul class="blist">
+              <li><b>Հաճախորդի կողմնորոշում.</b> սալիկի գույնն ու չափսը՝ ըստ պատվերի</li>
+              <li><b>Աշխատակիցների մասնակցություն.</b> ամեն հերթափոխ կարող է կանգնեցնել գիծը խոտանի դեպքում</li>
+              <li><b>Գործընթացային մոտեցում.</b> մեկ գոտու ելքը հաջորդի մուտքն է</li>
+              <li><b>Մշտական կատարելագործում.</b> PDCA ցիկլ ամեն ամիս</li>
+              <li><b>Փաստերի վրա հիմնված որոշումներ.</b> լաբորատոր և SCADA տվյալներ</li>
+            </ul>
+          </div>
+          <div class="panel panel-pad hud-corner rise" style="--d:.25s">
+            <div class="sec-h">Հաճախորդի ձայնը</div>
+            <ul class="blist" style="margin-bottom:12px">
+              <li><b>QR կոդ պալետին.</b> հետադարձ կապի ձև 30 վայրկյանում</li>
+              <li><b>Բողոքների վերլուծություն.</b> պատասխան 48 ժամում</li>
+              <li><b>Սոցցանցերի մոնիթորինգ.</b> մեկնաբանություններ և կարծիքներ</li>
+            </ul>
+            <div class="mono tiny green" style="letter-spacing:.12em;margin-bottom:6px">ԳՈՐԾԸՆԹԱՑՆԵՐԻ ՇՂԹԱ</div>
+            <div class="flow"><span class="node">Գնում</span><span class="arrow">→</span><span class="node">Արտադրություն</span><span class="arrow">→</span><span class="node">Վաճառք</span><span class="arrow">→</span><span class="node">Լոգիստիկա</span><span class="arrow">→</span><span class="node hot">Սպասարկում</span></div>
+          </div>
+          <div class="panel panel-pad hud-corner glow rise" style="--d:.35s">
+            <div class="sec-h">Բավարարվածության թիրախներ</div>
+            <div class="grid2" style="gap:14px">
+              <div class="stat"><span class="n" data-count="50" data-suffix="+">0</span><span class="l">NPS՝ «Կառաջարկե՞ք մեզ ընկերներին»</span></div>
+              <div class="stat"><span class="n lime" data-count="60" data-suffix="%">0</span><span class="l">մշտական հաճախորդներ</span></div>
+              <div class="stat"><span class="n amber">≤ 1%</span><span class="l">բողոքներ առաքումներից</span></div>
+              <div class="stat"><span class="n blue">&lt; 0.5%</span><span class="l">վերադարձներ</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== ISO ===================== -->
+    <section class="slide" id="slide-41" data-t="ISO ստանդարտներ և սերտիֆիկացում">
+      <div class="slide-inner">
+        <div class="rise" style="--d:.05s">
+          <div class="eyebrow">ՍԼԱՅԴ 41 <span class="sep">//</span> ISO ՍՏԱՆԴԱՐՏՆԵՐ</div>
+          <h2 style="margin-top:6px">ISO՝ <span class="grad-text">վստահության լեզու</span></h2>
+          <p class="lead" style="margin-top:6px">ISO-ն (International Organization for Standardization) ստեղծվել է 1947-ին և միավորում է 160-ից ավելի երկրի։ Մեզ համար ստանդարտները <b>պետական տենդերների և արտահանման բանալին</b> են։</p>
+        </div>
+        <div class="iso">
+          <div class="c rise" style="--d:.12s"><span class="code">ISO 9001</span><span class="n">Որակի կառավարման համակարգ</span><span class="prio p1">ԱՌԱՋՆԱՀԵՐԹ · 1-ԻՆ ՏԱՐԻ</span><p>Գործընթացների վերահսկում, փաստաթղթավորում, խոտանի պատճառների վերլուծություն</p></div>
+          <div class="c rise" style="--d:.18s"><span class="code">ISO 14001</span><span class="n">Շրջակա միջավայրի կառավարում</span><span class="prio p1">ԱՌԱՋՆԱՀԵՐԹ · 1-ԻՆ ՏԱՐԻ</span><p>Ջրի 85% փակ շրջանառություն, թափոնների և արտանետումների վերահսկում</p></div>
+          <div class="c rise" style="--d:.24s"><span class="code">ISO 45001</span><span class="n">Աշխատանքի անվտանգություն և առողջություն</span><span class="prio p2">2-ՐԴ ՏԱՐԻ</span><p>Մանրացուցիչներ, 230 °C տաք գոտիներ, աղմուկ՝ ռիսկերի գնահատում և ուսուցում</p></div>
+          <div class="c rise" style="--d:.3s"><span class="code">ISO/IEC 27001</span><span class="n">Տեղեկատվության անվտանգություն</span><span class="prio p3">ԵՐԿԱՐԱԺԱՄԿԵՏ</span><p>SCADA և հաճախորդների տվյալների պաշտպանություն, մուտքի սահմանափակում</p></div>
+          <div class="c rise" style="--d:.36s;opacity:.75"><span class="code" style="color:var(--steel)">ISO 22000</span><span class="n">Սննդի անվտանգություն</span><span class="prio p3">ՉԻ ԿԻՐԱՌՎՈՒՄ</span><p>Սննդի հետ շփվող արտադրանք չենք թողարկում։ Կարևոր կդառնա ապագայում՝ food-grade rPET-ի դեպքում</p></div>
+        </div>
+        <div class="rise" style="--d:.42s">
+          <div class="sec-h">Սերտիֆիկացման գործընթացը (ISO 9001 + 14001)</div>
+          <div class="steps">
+            <div class="s"><span class="m">ԱՄԻՍ 1–2</span><div class="h">Նախնական աուդիտ / GAP վերլուծություն</div><p>Ինչ ունենք և ինչ է պակասում</p></div>
+            <div class="s"><span class="m">ԱՄԻՍ 3–8</span><div class="h">Համակարգի մշակում և ներդրում</div><p>Ընթացակարգեր, հրահանգներ, ուսուցում</p></div>
+            <div class="s"><span class="m">ԱՄԻՍ 9</span><div class="h">Ներքին աուդիտ</div><p>Փաստաթղթերի և գործընթացների ստուգում</p></div>
+            <div class="s"><span class="m">ԱՄԻՍ 10–11</span><div class="h">Արտաքին աուդիտ</div><p>Սերտիֆիկացման մարմնի կողմից</p></div>
+            <div class="s" style="background:rgba(54,214,107,.1);border-color:rgba(54,214,107,.45)"><span class="m">ԱՄԻՍ 12</span><div class="h">Սերտիֆիկատ՝ 3 տարով</div><p>Տարեկան վերահսկիչ աուդիտներով</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== ՍՈՑՑԱՆՑԵՐ · ԷՋԵՐ ===================== -->
+    <section class="slide" id="slide-42" data-t="Սոցիալական ցանցեր — մեր էջերը">
+      <div class="slide-inner">
+        <div class="rise" style="--d:.05s">
+          <div class="eyebrow">ՍԼԱՅԴ 42 <span class="sep">//</span> ՍՈՑԻԱԼԱԿԱՆ ՑԱՆՑԵՐ (SMM)</div>
+          <h2 style="margin-top:6px">REPLAST-ը <span class="grad-text">սոցիալական ցանցերում</span></h2>
+          <p class="lead" style="margin-top:6px">Չորս հարթակ՝ չորս տարբեր դեր։ Ներքևում մեր էջերի էկրանի նկարներն են <span class="tag green" style="vertical-align:1px">ՄԱԿԵՏ · ԿՈՆՑԵՊՏ</span>։ Սեղմեք նկարի վրա՝ մեծացնելու համար։</p>
+        </div>
+        <div class="grid4">
+          <div class="rise" style="--d:.12s"><div class="phone" onclick="openLightbox('assets/social/ig.jpg','Instagram · @replast.armenia')"><img src="assets/social/ig.jpg" alt="Instagram էջի մակետ"></div>
+            <div class="phone-cap"><b>Instagram</b> · @replast.armenia<br>Պատրաստի արտադրանք, Reels, պատվերներ · <span class="green">4 գրառում / շաբ.</span></div></div>
+          <div class="rise" style="--d:.2s"><div class="phone" onclick="openLightbox('assets/social/tt.jpg','TikTok · @replast.armenia')"><img src="assets/social/tt.jpg" alt="TikTok էջի մակետ"></div>
+            <div class="phone-cap"><b>TikTok</b> · @replast.armenia<br>«Ինչպես է պատրաստվում», 15–60 վ · <span class="green">5 տեսանյութ / շաբ.</span></div></div>
+          <div class="rise" style="--d:.28s"><div class="phone" onclick="openLightbox('assets/social/fb.jpg','Facebook · REPLAST ARMENIA')"><img src="assets/social/fb.jpg" alt="Facebook էջի մակետ"></div>
+            <div class="phone-cap"><b>Facebook</b> · REPLAST ARMENIA<br>Համայնքներ, B2G, նախագծերի հաշվետվություն · <span class="green">3 / շաբ.</span></div></div>
+          <div class="rise" style="--d:.36s"><div class="phone" onclick="openLightbox('assets/social/yt.jpg','YouTube · @replastarmenia')"><img src="assets/social/yt.jpg" alt="YouTube ալիքի մակետ"></div>
+            <div class="phone-cap"><b>YouTube</b> · @replastarmenia<br>Էքսկուրսիաներ, փորձարկումներ · <span class="green">2 տեսանյութ / ամիս</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== ՍՈՑՑԱՆՑԵՐ · ՌԱԶՄԱՎԱՐՈՒԹՅՈՒՆ ===================== -->
+    <section class="slide" id="slide-43" data-t="Սոցիալական ցանցեր — SMM ռազմավարություն">
+      <div class="slide-inner">
+        <div class="rise" style="--d:.05s">
+          <div class="eyebrow">ՍԼԱՅԴ 43 <span class="sep">//</span> SMM ՌԱԶՄԱՎԱՐՈՒԹՅՈՒՆ</div>
+          <h2 style="margin-top:6px">Ինչ ենք հրապարակում և <span class="grad-text">ինչ ենք չափում</span></h2>
+        </div>
+        <div class="grid3">
+          <div class="panel panel-pad hud-corner rise" style="--d:.15s">
+            <div class="sec-h">Բովանդակության ուղղություններ</div>
+            <div class="hbar">
+              <div class="r" style="grid-template-columns:1fr 70px 40px"><span>«Թափոնից՝ արժեք»՝ ինչպես է պատրաստվում</span><div class="t"><div class="f" style="--w:100%"></div></div><span class="v">30%</span></div>
+              <div class="r" style="grid-template-columns:1fr 70px 40px"><span>Ավարտված նախագծեր, առաջ / հետո</span><div class="t"><div class="f" style="--w:83%;background:var(--lime)"></div></div><span class="v">25%</span></div>
+              <div class="r" style="grid-template-columns:1fr 70px 40px"><span>Փորձարկումներ՝ սառեցում, ամրություն</span><div class="t"><div class="f" style="--w:50%;background:var(--blue)"></div></div><span class="v">15%</span></div>
+              <div class="r" style="grid-template-columns:1fr 70px 40px"><span>Էկո խորհուրդներ, հավաքման կետեր</span><div class="t"><div class="f" style="--w:50%;background:var(--violet)"></div></div><span class="v">15%</span></div>
+              <div class="r" style="grid-template-columns:1fr 70px 40px"><span>Թիմը և գործարանը ներսից</span><div class="t"><div class="f" style="--w:50%;background:var(--amber)"></div></div><span class="v">15%</span></div>
+            </div>
+          </div>
+          <div class="panel panel-pad hud-corner rise" style="--d:.25s">
+            <div class="sec-h">Վաճառքի ձագար (1-ին տարի)</div>
+            <div class="col" style="gap:7px">
+              <div class="flow" style="flex-wrap:nowrap"><span class="node" style="flex:1;text-align:center">Հասանելիություն · 300 000</span></div>
+              <div class="flow" style="flex-wrap:nowrap;padding:0 12%"><span class="node" style="flex:1;text-align:center">Ներգրավվածություն · 15 000</span></div>
+              <div class="flow" style="flex-wrap:nowrap;padding:0 24%"><span class="node" style="flex:1;text-align:center">Հայտեր · 480</span></div>
+              <div class="flow" style="flex-wrap:nowrap;padding:0 34%"><span class="node hot" style="flex:1;text-align:center">Պատվերներ · 120</span></div>
+            </div>
+            <div class="formula" style="margin-top:12px"><span class="lbl">Բյուջե</span>400 000 ֏ / ամիս՝ 250 հզ. գովազդ + 150 հզ. բովանդակություն</div>
+          </div>
+          <div class="panel panel-pad hud-corner glow rise" style="--d:.35s">
+            <div class="sec-h">KPI՝ 12 ամսում</div>
+            <table class="tbl">
+              <tr><th>Հարթակ</th><th class="num">Հետևորդներ</th><th class="num">ER</th></tr>
+              <tr><td>TikTok</td><td class="num">15 000</td><td class="num">≥ 6%</td></tr>
+              <tr><td>Instagram</td><td class="num">5 000</td><td class="num">≥ 4%</td></tr>
+              <tr><td>Facebook</td><td class="num">3 000</td><td class="num">≥ 3%</td></tr>
+              <tr><td>YouTube</td><td class="num">1 000</td><td class="num">—</td></tr>
+              <tr class="hl"><td>Հայտեր</td><td class="num" colspan="2">40 / ամիս</td></tr>
+            </table>
+            <p class="small dim" style="margin-top:8px">ER (engagement rate)՝ արձագանքներ ÷ դիտումներ։</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== SLIDE 20 · FINAL ===================== -->
+    <section class="slide" id="slide-44">
+      <div class="slide-inner" style="justify-content:center;text-align:center;align-items:center">
+        <div class="core-wrap zoom" style="--d:.1s;margin-bottom:6px">
+          <div class="core-glow" style="width:300px;height:300px"></div>
+          <svg class="core-idle" style="width:min(260px,56vw)"><use href="#core-loop"/></svg>
+        </div>
+
+        <div class="col rise" style="--d:.3s;align-items:center;gap:10px">
+          <div class="eyebrow">ԵԶՐԱՓԱԿԻՉ ԱՆԻՄԱՑԻԱ · ԳՐԱՆՈՒԼՆԵՐ → ՑԻԿԼ → ՆՅՈՒԹ → ԱՐՏԱԴՐԱՆՔ → ՆՈՐ ՑԻԿԼ</div>
+          <h2 style="font-size:clamp(30px,5vw,54px)">ԹԱՓՈՆԻՑ<br>ԴԵՊԻ <span class="grad-text">ԱՐԺԵՔ</span></h2>
+          <p class="lead" style="font-size:17px;color:var(--steel-3)">Այսօրվա թափոնը՝ վաղվա հումք։</p>
+        </div>
+
+        <div class="panel panel-pad hud-corner rise" style="--d:.5s;max-width:620px;width:100%">
+          <div class="flow" style="justify-content:center;gap:6px;margin-bottom:14px">
+            <span class="node hot">ԹԱՓՈՆ</span><span class="arrow">→</span>
+            <span class="node hot">ՆՅՈՒԹ</span><span class="arrow">→</span>
+            <span class="node hot">ԱՐՏԱԴՐԱՆՔ</span><span class="arrow">→</span>
+            <span class="node hot">ՆՈՐ ԿՅԱՆՔ</span>
+          </div>
+          <div style="font-weight:900;font-size:22px;letter-spacing:.02em">REPLAST <span style="color:var(--green)">ARMENIA</span></div>
+          <div class="small dim" style="margin-top:4px">Արդյունաբերական վերամշակում և շրջանային արտադրություն · Ակադեմիական բիզնես նախագիծ — Հայաստան</div>
+          <div class="mono tiny" style="margin-top:12px;color:var(--steel-3)">Հայաստանի ազգային պոլիտեխնիկական համալսարան (NPUA)</div>
+          <div class="mono tiny green" style="margin-top:4px">Հրաչյա Ասլանյան (Hrachya Aslanyan) · 3-րդ կուրս</div>
+        </div>
+
+        <button class="btn primary rise" style="--d:.7s" onclick="goToSlide(1)">↺ ՎԵՐԱՄԵԿՆԱՐԿԵԼ ԳՈՐԾԱՐԱՆԻ ՑԻԿԼԸ</button>
       </div>
     </section>
 
@@ -2207,11 +2978,10 @@ svg.diagram text{font-family:var(--mono)}
 /* ============================================================
    REPLAST ARMENIA — Slide Engine & Interactions (Vanilla JS)
    ============================================================ */
-const TOTAL = 25;
+const TOTAL = 44;
 let current = 1;
 
 const slideTitles = [
-
   "01 · Վերնագիր — վիրտուալ գործարան",
   "02 · Խնդիրը՝ թափոն, թե՞ հումք",
   "03 · Բիզնես հայեցակարգ և արժեք",
@@ -2232,13 +3002,94 @@ const slideTitles = [
   "18 · Ամբողջական գործարան",
   "19 · Տնտեսական մոդել",
   "20 · Շրջանային տնտեսություն",
-  "21 · Եզրափակում — թափոնից դեպի արժեք",
-  "22 · Պատրաստի արտադրանք — քաղաքային միջավայր",
-  "23 · Պատրաստի արտադրանք — շինարարական նյութեր",
-  "24 · Պատրաստի արտադրանք — լոգիստիկա և տարաներ",
-  "25 · Պատրաստի արտադրանք — տեխնիկական լուծումներ"
-
+  "21 · Պատրաստի արտադրանք — քաղաքային միջավայր",
+  "22 · Պատրաստի արտադրանք — շինարարական նյութեր",
+  "23 · Պատրաստի արտադրանք — լոգիստիկա և տարաներ",
+  "24 · Պատրաստի արտադրանք — տեխնիկական լուծումներ",
+  "25 · Շուկայական դոսյե — նկարագիր, ծավալ, կառուցվածք",
+  "26 · Շուկայական դոսյե — պահանջարկ և առաջարկ",
+  "27 · Շուկայական դոսյե — մրցակցություն և օրենսդրություն",
+  "28 · Շուկայական դոսյե — ֆինանսներ, հեռանկարներ, եզրակացություն",
+  "29 · Ապրանքային դոսյե — ընդհանուր և տեխնիկական",
+  "30 · Ապրանքային դոսյե — մարքեթինգային բնութագրեր",
+  "31 · Ապրանքային դոսյե — գնային քաղաքականություն",
+  "32 · Ապրանքային դոսյե — տարածում և հաղորդակցում",
+  "33 · Ապրանքային դոսյե — ֆինանսատնտեսական գնահատում",
+  "34 · Ապրանքային դոսյե — SWOT և եզրակացություն",
+  "35 · Վերահսկողություն — էություն, տեսակներ, մեթոդներ",
+  "36 · Վերահսկողություն — պլան / փաստ և ցուցանիշներ",
+  "37 · Վերահսկողություն — օգուտ / ծախս (BCR)",
+  "38 · Վերահսկողություն — վերահսկող ստորաբաժանումներ",
+  "39 · Վերահսկողություն — մշտադիտարկում (մոնիթորինգ)",
+  "40 · Որակի կառավարում և հաճախորդ",
+  "41 · ISO ստանդարտներ և սերտիֆիկացում",
+  "42 · Սոցիալական ցանցեր — մեր էջերը",
+  "43 · Սոցիալական ցանցեր — SMM ռազմավարություն",
+  "44 · Եզրափակում — թափոնից դեպի արժեք"
 ];
+
+
+/* ============================================================
+   v2 — auto-fit, dossier & plan/fact calculators, monitoring gauges
+   ============================================================ */
+function fmtN(v){ return Math.round(v).toLocaleString('ru-RU').replace(/,/g,' '); }
+function fitSlide(sl){
+  if(!sl) return;
+  const inner = sl.querySelector('.slide-inner'); if(!inner) return;
+  const cs = getComputedStyle(sl);
+  const availH = sl.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
+  const availW = sl.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+  const maxZ = Math.min(1.32, Math.max(1, availW / 1260));
+  let z = maxZ;
+  for(let k=0;k<4;k++){
+    inner.style.zoom = z; inner.style.minHeight = '0';
+    const h = inner.scrollHeight * z;
+    inner.style.minHeight = '';
+    if(h <= availH + 1) break;
+    z = Math.max(.6, z * (availH / h) * .995);
+  }
+  inner.style.zoom = z;
+}
+window.addEventListener('resize', ()=> fitSlide(document.querySelector('.slide.active')));
+
+function calcDossier(v){
+  const price=5200, cost=3600, inv=140e6;
+  const rev=v*price, c=v*cost, p=rev-c, roi=p/inv*100, pb=inv/p;
+  const m = x=> (x/1e6).toFixed(0)+' մլն ֏';
+  document.getElementById('ds-vol').textContent = fmtN(v)+' մ²';
+  document.getElementById('ds-f1').textContent = fmtN(v)+' × 5 200 = ';
+  document.getElementById('ds-rev').textContent = m(rev);
+  document.getElementById('ds-f2').textContent = fmtN(v)+' × 3 600 = ';
+  document.getElementById('ds-cost').textContent = m(c);
+  document.getElementById('ds-f3').textContent = (rev/1e6).toFixed(0)+' − '+(c/1e6).toFixed(0)+' = ';
+  document.getElementById('ds-profit').textContent = m(p);
+  document.getElementById('ds-f4').textContent = (p/1e6).toFixed(0)+' ÷ 140 = ';
+  document.getElementById('ds-roi').textContent = roi.toFixed(1)+'%';
+  document.getElementById('ds-f5').textContent = '140 ÷ '+(p/1e6).toFixed(0)+' = ';
+  document.getElementById('ds-pb').textContent = pb.toFixed(2)+' տարի';
+  document.getElementById('ds-share').textContent = (v/1.2e6*100).toFixed(1).replace('.0','')+'% TAM · '+(v/6e5*100).toFixed(0)+'% SAM';
+  document.getElementById('ds-plastic').textContent = fmtN(v*8.7/1000)+' տ / տարի';
+}
+function calcPF(a){
+  const plan=161, d=a-plan, pct=a/plan*100, dp=d*(290000-205000);
+  const sg = x=> (x>0?'+':x<0?'−':'')+fmtN(Math.abs(x));
+  document.getElementById('pf-act').textContent = a+' տ';
+  document.getElementById('pf-f1').textContent = a+' − 161 = ';
+  document.getElementById('pf-dev').textContent = sg(d)+' տ';
+  document.getElementById('pf-f2').textContent = a+' ÷ 161 × 100% = ';
+  document.getElementById('pf-pct').textContent = pct.toFixed(1)+'%';
+  document.getElementById('pf-f3').textContent = (d<0?'−':'')+Math.abs(d)+' × (290 000 − 205 000) = ';
+  document.getElementById('pf-dp').textContent = sg(dp)+' ֏';
+  ['pf-dev','pf-pct','pf-dp'].forEach(id=> document.getElementById(id).style.color = d<0 ? 'var(--red)' : 'var(--lime)');
+}
+(function buildGauges(){
+  const box = document.getElementById('mon-gauges'); if(!box) return;
+  const G = [['Ընդունում','9.1','տ/օր',.76,'#36D66B'],['Ջրի շրջանառություն','85','%',.85,'#4DA6C9'],['Խոնավություն','0.15','% (≤0.2)',.75,'#B7F36B'],['Հալույթի ճնշում','104','բար (≤120)',.87,'#E6A100'],['MFI','8.4','գ/10ր',.6,'#36D66B'],['OEE','78','%',.78,'#9B7BFF']];
+  box.innerHTML = G.map(([l,v,u,k,c])=>{
+    const a = Math.PI*(1-k), x = 46+38*Math.cos(a), y = 50-38*Math.sin(a);
+    return `<div class="gauge"><svg viewBox="0 0 92 56"><path d="M8 50 A38 38 0 0 1 84 50" fill="none" stroke="#1B3329" stroke-width="7" stroke-linecap="round"/><path class="draw" style="--len:120" d="M8 50 A38 38 0 0 1 ${x.toFixed(1)} ${y.toFixed(1)}" fill="none" stroke="${c}" stroke-width="7" stroke-linecap="round"/></svg><span class="gv">${v}</span><span class="gl">${l}<br>${u}</span></div>`;
+  }).join('');
+})();
 
 function initDots(){
   const c = document.getElementById('dots');
@@ -2274,6 +3125,7 @@ function updateUI(){
   document.getElementById('btn-prev').disabled = current===1;
   document.getElementById('btn-next').disabled = current===TOTAL;
   runCounters(act);
+  fitSlide(act); requestAnimationFrame(()=>fitSlide(act)); setTimeout(()=>fitSlide(act),700);
 }
 
 function goToSlide(n){ if(n>=1 && n<=TOTAL){ current=n; updateUI(); } }
@@ -2532,6 +3384,7 @@ window.addEventListener('load', ()=>{
   setMoisture(0.12);
   highlightMachine(1);
   calcModel(200);
+  { const h=+((location.hash.match(/\d+/)||[])[0]||0); if(h>=1&&h<=TOTAL) current=h; }
   updateUI();
   if(location.protocol === 'file:'){
     document.body.classList.add('file-mode');

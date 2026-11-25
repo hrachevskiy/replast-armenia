@@ -223,10 +223,42 @@ footer{border-top:1px solid var(--line);padding:40px 0 50px;margin-top:80px}
 footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center;color:var(--dim);font-size:13.5px}
 footer a:hover{color:var(--g)}
 .tg{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:99px;background:linear-gradient(135deg,#2aabee,#229ed9);color:#fff;font-weight:700;font-size:14px}
-@media (max-width:1440px){.nl a.x2{display:none}}@media (max-width:1180px){.nl a.x1{display:none}}@media (max-width:1000px){.nl{display:none}.nl.open a{display:block!important}.burger{display:block}.nl.open{display:flex;position:absolute;top:64px;left:0;right:0;flex-direction:column;padding:14px;border-radius:24px;background:rgba(6,14,10,.96);border:1px solid var(--line2)}
+@media (max-width:1440px){.nl a.x2{display:none}}@media (max-width:1360px){.nl a.x3{display:none}}@media (max-width:1180px){.nl a.x1{display:none}}@media (max-width:1000px){.nl{display:none}.nl.open a{display:block!important}.burger{display:block}.nl.open{display:flex;position:absolute;top:64px;left:0;right:0;flex-direction:column;padding:14px;border-radius:24px;background:rgba(6,14,10,.96);border:1px solid var(--line2)}
 .ps,.proc,.calc,.strat,.res{grid-template-columns:1fr}.pvis{position:relative;top:0;height:360px}.steps{padding:0}.poly{grid-template-columns:1fr 1fr}.gal{grid-template-columns:1fr 1fr;grid-auto-rows:170px}.bento{grid-template-columns:1fr 1fr}.docs{grid-template-columns:1fr 1fr}.road{grid-template-columns:1fr 1fr}.road::before{display:none}.segs{position:relative;top:0;flex-direction:row;overflow-x:auto}.seg{flex:none}.flow{grid-template-columns:1fr 1fr}nav.top .btn.sm{display:none}}
 @media (max-width:600px){.wrap{padding:0 18px}section{padding:90px 0}.poly,.docs,.road{grid-template-columns:1fr}.gal .gi.big,.gal .gi.wide{grid-column:span 2;grid-row:span 1}.bento .b2{grid-column:span 2}.hstat{min-width:calc(50% - 6px);flex:1}.force{grid-template-columns:1fr 80px 30px}.kp{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}.h1 .ln>span{transform:none}}
+
+/* v2: market / quality / smm / shop */
+.mk{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.mk .card h3{font:800 22px var(--d);margin:12px 0 8px}
+.mk .card p{color:var(--sub);font-size:15px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0}
+.kpis div{border-radius:16px;border:1px solid var(--line);padding:12px;background:rgba(4,10,7,.4)}
+.kpis b{display:block;font:800 22px var(--m);color:var(--g);letter-spacing:-.02em}
+.kpis span{font-size:12px;color:var(--sub);line-height:1.35;display:block}
+.lnk{display:inline-flex;gap:8px;font-weight:700;color:var(--g);font-size:14px}
+.qa{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.qa .card h4{font:800 18px var(--d);margin:10px 0 6px}
+.qa .card p{color:var(--sub);font-size:14px}
+.isos{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.isos span{font:700 12px var(--m);padding:6px 10px;border-radius:10px;border:1px solid var(--line2);color:var(--tx)}
+.isos span.off{opacity:.45;text-decoration:line-through}
+.phones{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.phones figure{border-radius:28px;overflow:hidden;border:1px solid var(--line2);box-shadow:0 30px 60px rgba(0,0,0,.5);transition:transform .6s var(--e)}
+.phones figure:hover{transform:translateY(-10px) rotate(-1deg)}
+.phones figcaption{margin-top:10px;font-size:13.5px;color:var(--sub)}
+.phones figcaption b{color:var(--tx)}
+.shopcta{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:center;padding:40px;border-radius:32px;border:1px solid var(--line2);background:linear-gradient(135deg,rgba(54,214,107,.2),rgba(10,143,85,.05) 60%);position:relative;overflow:hidden}
+.shopcta h2{font:900 clamp(30px,4vw,52px)/1.02 var(--d)}
+.shopcta h2 em{font-style:normal;color:var(--lime)}
+.shopcta p{color:var(--sub);margin:14px 0 22px;font-size:16px}
+.prc{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.prc div{border-radius:18px;padding:14px;background:rgba(4,10,7,.55);border:1px solid var(--line)}
+.prc b{display:block;font:800 20px var(--m);color:var(--tx)}
+.prc span{font-size:12.5px;color:var(--sub)}
+.prc i{font-style:normal;font:800 11px var(--m);color:#04120a;background:var(--lime);padding:2px 7px;border-radius:6px;margin-left:6px}
+@media (max-width:1000px){.mk,.qa,.shopcta{grid-template-columns:1fr}.phones{grid-template-columns:1fr 1fr}.kpis{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.phones{grid-template-columns:1fr 1fr;gap:10px}.shopcta{padding:24px}}
 </style>
 </head>
 <body>
@@ -234,7 +266,7 @@ footer a:hover{color:var(--g)}
 <div class="noise"></div><div class="cursor" id="cur"></div>
 
 <nav class="top" id="nav"><a class="logo" href="#top"><i></i>REPLAST <span>ARMENIA</span></a>
-<div class="nl" id="nl"><a href="#about">Մասին</a><a href="#process">Գործընթաց</a><a class="x2" href="#polymers">Պոլիմերներ</a><a href="#products">Արտադրանք</a><a class="x1" href="#economics">Տնտեսագիտություն</a><a href="#strategy">Ռազմավարություն</a><a class="x2" href="#research">Հետազոտություն</a><a href="#docs">Փաստաթղթեր</a></div>
+<div class="nl" id="nl"><a href="#about">Մասին</a><a href="#process">Գործընթաց</a><a class="x2" href="#polymers">Պոլիմերներ</a><a href="#products">Արտադրանք</a><a class="x1" href="#economics">Տնտեսագիտություն</a><a href="#strategy">Ռազմավարություն</a><a class="x2" href="#research">Հետազոտություն</a><a class="x3" href="#market">Դոսյե</a><a class="x2" href="#quality">Որակ</a><a href="#shop">Խանութ</a><a href="#docs">Փաստաթղթեր</a></div>
 <a class="btn sm pri" href="presentation/">Ներկայացում ↗</a><button class="burger" id="bg" aria-label="Մենյու">☰</button></nav>
 
 <header class="hero" id="top"><canvas id="vortex"></canvas>
@@ -331,10 +363,45 @@ footer a:hover{color:var(--g)}
 <div class="rq rv" style="--i:3"><b>Q4</b><span>ամիս 10–12</span><ul><li>161 տ/ամիս պատրաստի արտադրանք</li><li>Արևային (PV) կայանի նախագծում</li></ul></div>
 </div></div></section>
 
+<section id="market"><div class="wrap">
+<div class="sh"><div><div class="kick rv">Շուկայական և ապրանքային դոսյե</div><h2 class="h2 rv">Շուկան և մեր <em>ապրանքը</em></h2></div><p class="rv">Երկու դոսյեն կազմված են 9 բաժնից յուրաքանչյուրը՝ ծավալ, պահանջարկ, մրցակիցներ, օրենսդրություն, գներ, տարածում, ֆինանսներ, SWOT։</p></div>
+<div class="mk">
+<div class="card rv"><span class="tag">Market Dossier</span><h3>Պլաստիկի վերամշակման շուկան Հայաստանում</h3><p>Վերամշակվում է պլաստիկ թափոնի միայն ~6%-ը, իսկ պատրաստի ապրանքը ներմուծվում է։ 2027-ի արգելքը և EPR-ը կստեղծեն կայուն հումքի հոսք։</p>
+<div class="kpis"><div><b>720 հզ. տ</b><span>կենցաղային թափոն տարեկան</span></div><div><b>13%</b><span>պլաստիկի բաժինը</span></div><div><b>6.4%</b><span>վերամշակվում է այսօր</span></div><div><b>+40%</b><span>աճ REPLAST-ի գործարկումով</span></div></div>
+<a class="lnk" href="presentation/#25">Բացել շուկայական դոսյեն →</a></div>
+<div class="card rv" style="--i:1"><span class="tag">Product Dossier</span><h3>REPLAST PAVE՝ պոլիմերավազային սալիկ</h3><p>300×300×30 մմ, ցրտադիմացկուն F300, 1 մ²-ում՝ 8.7 կգ վերամշակված պլաստիկ։ Գինը 33%-ով ցածր է ներմուծվածից։</p>
+<div class="kpis"><div><b>5 200 ֏</b><span>գին 1 մ²-ի համար</span></div><div><b>30.8%</b><span>շահութաբերություն</span></div><div><b>68.6%</b><span>ROI</span></div><div><b>1.5 տ.</b><span>ներդրման վերադարձ</span></div></div>
+<a class="lnk" href="presentation/#29">Բացել ապրանքային դոսյեն →</a></div>
+</div></div></section>
+
+<section id="quality" style="padding-top:40px"><div class="wrap">
+<div class="sh"><div><div class="kick rv">Վերահսկողություն և որակ</div><h2 class="h2 rv">Որակը՝ <em>չափելի</em></h2></div><p class="rv">Վերահսկողության 3 տեսակ, պլան/փաստ վերլուծություն, BCR, 7 վերահսկող ստորաբաժանում, մշտադիտարկում և ISO սերտիֆիկացում։</p></div>
+<div class="qa">
+<div class="card rv"><span class="tag">Նախնական · ընթացիկ · հետ</span><h4>3 կետ ամբողջ գծում</h4><p>Ընդունում (NIR, PVC &lt; 0.01%) → գիծ (խոնավություն &lt; 0.2%, ճնշում ≤ 120 բար) → լաբորատորիա (MFI, խտություն, անձնագիր)։</p></div>
+<div class="card rv" style="--i:1"><span class="tag">BCR</span><h4>QC լաբորատորիան արդարացված է</h4><p>Ծախս՝ 34 մլն ֏, օգուտ՝ 36.7 մլն ֏/տարի։ BCR = 1.08 առաջին տարում և 3.67 հաջորդ տարիներին։</p></div>
+<div class="card rv" style="--i:2"><span class="tag">ISO</span><h4>12 ամիս մինչև սերտիֆիկատ</h4><p>GAP → ներդրում → ներքին աուդիտ → արտաքին աուդիտ → սերտիֆիկատ 3 տարով։</p><div class="isos"><span>ISO 9001</span><span>ISO 14001</span><span>ISO 45001</span><span>ISO/IEC 27001</span><span class="off">ISO 22000</span></div></div>
+</div>
+<p class="rv" style="margin-top:18px"><a class="lnk" href="presentation/#35">Մանրամասն՝ ներկայացման 35–41 սլայդներում →</a></p>
+</div></section>
+
+<section id="smm" style="padding-top:40px"><div class="wrap">
+<div class="sh"><div><div class="kick rv">Սոցիալական ցանցեր</div><h2 class="h2 rv">REPLAST-ը <em>ձեր հեռախոսում</em></h2></div><p class="rv">Մեր էջերի մակետները (կոնցեպտ). TikTok՝ «ինչպես է պատրաստվում», Instagram՝ արտադրանք, Facebook՝ համայնքներ, YouTube՝ էքսկուրսիաներ։</p></div>
+<div class="phones">
+<div class="rv"><figure><img src="presentation/assets/social/ig.jpg" alt="Instagram էջի մակետ" loading="lazy"></figure><figcaption><b>Instagram</b> · 5 000 հետևորդ՝ թիրախ</figcaption></div>
+<div class="rv" style="--i:1"><figure><img src="presentation/assets/social/tt.jpg" alt="TikTok էջի մակետ" loading="lazy"></figure><figcaption><b>TikTok</b> · 15 000 հետևորդ՝ թիրախ</figcaption></div>
+<div class="rv" style="--i:2"><figure><img src="presentation/assets/social/fb.jpg" alt="Facebook էջի մակետ" loading="lazy"></figure><figcaption><b>Facebook</b> · 3 000 հետևորդ՝ թիրախ</figcaption></div>
+<div class="rv" style="--i:3"><figure><img src="presentation/assets/social/yt.jpg" alt="YouTube ալիքի մակետ" loading="lazy"></figure><figcaption><b>YouTube</b> · 1 000 բաժանորդ՝ թիրախ</figcaption></div>
+</div></div></section>
+
+<section id="shop" style="padding-top:40px"><div class="wrap">
+<div class="shopcta rv"><div><div class="kick">REPLAST MARKET</div><h2>Գնիր <em>վերամշակված</em>։<br>Վաճառիր պլաստիկդ։</h2><p>16 ապրանք գործարանային գներով, զեղչեր մինչև 17%, պլաստիկի գնում մինչև 167 ֏/կգ և փոխանակում ապրանքով +25% բոնուսով։</p><a class="btn pri" href="shop/">Բացել խանութը →</a></div>
+<div class="prc"><div><b>4 580 ֏<i>−12%</i></b><span>սալիկ / մ²</span></div><div><b>14 900 ֏</b><span>պալետ 1200×800</span></div><div><b>110 ֏/կգ</b><span>HDPE-ի գնում</span></div><div><b>90 ֏/կգ</b><span>PET շշերի գնում</span></div></div></div>
+</div></section>
+
 <section id="docs"><div class="wrap">
 <div class="sh"><div><div class="kick rv">Նյութեր</div><h2 class="h2 rv">Ամբողջական <em>փաստաթղթեր</em></h2></div></div>
 <div class="docs">
-<a class="card doc rv" href="presentation/"><div class="ic">🎬</div><h4>Ընկերության ներկայացում</h4><p>25 սլայդ՝ տեխնոլոգիա, 14 գոտի, արտադրանք, պոլիմերներ, վիդեոներ։</p><span class="go">Բացել →</span></a>
+<a class="card doc rv" href="presentation/"><div class="ic">🎬</div><h4>Ընկերության ներկայացում</h4><p>44 սլայդ՝ տեխնոլոգիա, 14 գոտի, շուկայական և ապրանքային դոսյե, որակ և ISO, սոցցանցեր։</p><span class="go">Բացել →</span></a>
 <a class="card doc rv" style="--i:1" href="strategy/"><div class="ic">📊</div><h4>SWOT և Porter</h4><p>IFE/EFE, TOWS, QSPM, 5 ուժերի հաշվարկ և զգայունության վերլուծություն։</p><span class="go">Բացել →</span></a>
 <a class="card doc rv" style="--i:2" href="research/"><div class="ic">📝</div><h4>Հարցաշար</h4><p>15 հարց 5 թիրախային խմբի համար և արդյունքների կիրառման պլան։</p><span class="go">Բացել →</span></a>
 <a class="card doc rv" style="--i:3" href="docs/REPLAST_ARMENIA_Porter_5_Forces.pdf" target="_blank" rel="noopener"><div class="ic">📄</div><h4>Ռազմավարական վերլուծություն (PDF)</h4><p>Պորտերի 5 ուժերի մոդելի հաշվարկային աշխատանք։</p><span class="go">Ներբեռնել →</span></a>
