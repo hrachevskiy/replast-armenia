@@ -237,6 +237,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 @media (max-width:1100px){.prods{grid-template-columns:repeat(3,1fr)}.points,.loy{grid-template-columns:1fr 1fr}}
 @media (max-width:900px){.hero,.bb,.deals,.modes,.faq{grid-template-columns:1fr}.hcards{height:340px}.prods{grid-template-columns:1fr 1fr}.nl{display:none}.bar{top:70px}}
 @media (max-width:560px){.wrap{padding:0 16px}.prods,.points,.loy{grid-template-columns:1fr}.search{min-width:0;width:100%;margin-left:0}.hcards{display:none}.timer div{min-width:54px}}
+@media (max-width:420px){nav.top{gap:8px;padding:8px 8px 8px 12px}.logo{font-size:12.5px;gap:7px}.logo i{width:22px;height:22px}.logo i::after{inset:6px}.cartbtn{padding:9px 12px;font-size:12.5px}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style><style>
 .ph4{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:10px}
@@ -268,7 +269,23 @@ table.k th{text-align:left;font:700 10.5px var(--m);letter-spacing:.14em;color:v
 table.k td{padding:9px 8px;border-bottom:1px solid var(--line)}table.k td.n{text-align:right;font:800 14px var(--m)}
 .note{display:inline-flex;gap:8px;align-items:center;font:700 11px var(--m);letter-spacing:.12em;padding:6px 12px;border-radius:99px;background:var(--lime);color:#04120a}
 @media (max-width:1100px){.ph4{grid-template-columns:1fr 1fr}.three{grid-template-columns:1fr}.cal{grid-template-columns:repeat(4,1fr)}}
-@media (max-width:560px){.ph4{gap:12px}.cal{grid-template-columns:1fr 1fr}.hb .r{grid-template-columns:1fr 70px 40px}}
+.phc,.ph4>*{min-width:0}
+.swipe{display:none;font:700 11px var(--m);letter-spacing:.12em;color:var(--g);margin-top:6px}
+.kw{overflow-x:auto}
+@media (max-width:640px){
+ .ph4{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;margin:10px -16px 0;padding:6px 16px 18px;scrollbar-width:none}
+ .ph4::-webkit-scrollbar{display:none}
+ .phc{flex:0 0 80%;scroll-snap-align:center}
+ .phone{border-radius:28px}
+ .swipe{display:block}
+ .kv{font-size:13px}
+ .cal{grid-template-columns:1fr 1fr}
+ .hb .r{grid-template-columns:1fr 64px 38px;font-size:13px}
+ .fun div{width:100%!important}
+ table.k{font-size:13px}table.k th,table.k td{padding:8px 5px}table.k th{font-size:9.5px;letter-spacing:.08em}table.k td.n{font-size:13px}
+ .panel{padding:18px}
+ .sech{margin-top:34px}
+}
 </style>
 </head>
 <body>
@@ -289,6 +306,7 @@ table.k td{padding:9px 8px;border-bottom:1px solid var(--line)}table.k td.n{text
   </section>
 
   <div class="sech" id="pages"><h2>Մեր <em>էջերը</em></h2><p>Յուրաքանչյուր հարթակ աշխատում է իր լսարանի համար՝ TikTok-ը բերում է ուշադրություն, Facebook-ը՝ համայնքներ և տենդերներ։</p></div>
+  <div class="swipe">← ՍԱՀԵՑՐԵՔ ԷՋԵՐԻ ՄԻՋԵՎ →</div>
   <div class="ph4">
     <div class="phc"><button class="phone" onclick="zoom('ig')"><img src="../presentation/assets/social/ig.jpg" alt="Instagram էջի մակետ"></button>
       <div class="pl"><i style="background:linear-gradient(135deg,#f9ce34,#ee2a7b,#6228d7)">IG</i><div><b>Instagram</b><span>@replast.armenia</span></div></div>
@@ -334,8 +352,8 @@ table.k td{padding:9px 8px;border-bottom:1px solid var(--line)}table.k td.n{text
   </div>
 
   <div class="sech" id="kpi"><h2>KPI՝ <em>12 ամսում</em></h2><p>ER (engagement rate)՝ արձագանքներ ÷ դիտումներ։</p></div>
-  <div class="panel" style="max-width:760px">
-    <table class="k"><tr><th>Հարթակ</th><th style="text-align:right">Հետևորդներ</th><th style="text-align:right">ER</th><th style="text-align:right">Հրապարակումներ / ամիս</th></tr>
+  <div class="panel kw" style="max-width:760px">
+    <table class="k"><tr><th>Հարթակ</th><th style="text-align:right">Հետևորդներ</th><th style="text-align:right">ER</th><th style="text-align:right">Գրառում / ամիս</th></tr>
     <tr><td>TikTok</td><td class="n">15 000</td><td class="n">≥ 6%</td><td class="n">20</td></tr>
     <tr><td>Instagram</td><td class="n">5 000</td><td class="n">≥ 4%</td><td class="n">16</td></tr>
     <tr><td>Facebook</td><td class="n">3 000</td><td class="n">≥ 3%</td><td class="n">12</td></tr>
