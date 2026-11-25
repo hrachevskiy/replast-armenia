@@ -1,0 +1,2545 @@
+<!DOCTYPE html>
+<html lang="hy">
+<head><base href="../presentation/">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>REPLAST ARMENIA — Ինտերակտիվ վիրտուալ պլաստիկի վերամշակման գործարան</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+Armenian:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   REPLAST ARMENIA — Industrial Circular Design System
+   ============================================================ */
+:root{
+  --green:#36D66B;        /* REPLAST GREEN */
+  --deep:#0A8F55;         /* DEEP GREEN */
+  --lime:#B7F36B;         /* NEON LIME */
+  --graphite:#07100C;     /* GRAPHITE */
+  --graphite-2:#0B1711;   /* surface */
+  --graphite-3:#11201A;   /* card */
+  --graphite-4:#1B3329;   /* border */
+  --steel:#A9B7B0;        /* STEEL */
+  --steel-2:#6E8077;      /* steel dark */
+  --steel-3:#D6E0DB;      /* steel light */
+  --white:#EAF2EE;
+  --amber:#E6A100;        /* technical accent */
+  --red:#FF5A5A;
+  --blue:#4DA6C9;
+  --violet:#9B7BFF;
+  --mono:'JetBrains Mono','Noto Sans Armenian',ui-monospace,'Fira Code',monospace;
+  --sans:'Inter','Noto Sans Armenian',system-ui,-apple-system,Segoe UI,sans-serif;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --hdr:56px;
+  --ftr:52px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{
+  font-family:var(--sans);
+  background:var(--graphite);
+  color:var(--white);
+  overflow:hidden;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-track{background:var(--graphite-2)}
+::-webkit-scrollbar-thumb{background:var(--graphite-4);border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:var(--deep)}
+.mono{font-family:var(--mono)}
+/* ---------- Layout shell ---------- */
+#app{position:fixed;inset:0;display:flex;flex-direction:column}
+#topbar{height:var(--hdr);flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 20px;background:linear-gradient(180deg,rgba(11,23,17,.98),rgba(7,16,12,.96));border-bottom:1px solid var(--graphite-4);z-index:60;position:relative}
+#progress-track{height:3px;flex:0 0 auto;background:var(--graphite-2);position:relative;z-index:60}
+#progress-bar{height:100%;width:5%;background:linear-gradient(90deg,var(--deep),var(--green),var(--lime));transition:width .45s var(--ease);box-shadow:0 0 12px rgba(54,214,107,.5)}
+#viewport{flex:1 1 auto;position:relative;overflow:hidden}
+#footer{height:var(--ftr);flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 20px;background:linear-gradient(0deg,rgba(11,23,17,.98),rgba(7,16,12,.96));border-top:1px solid var(--graphite-4);z-index:60;position:relative;gap:12px}
+/* ---------- Background grid ---------- */
+.bg-grid{
+  background-image:
+    linear-gradient(to right,rgba(54,214,107,.045) 1px,transparent 1px),
+    linear-gradient(to bottom,rgba(54,214,107,.045) 1px,transparent 1px);
+  background-size:34px 34px;
+}
+.radial-fade{position:absolute;inset:0;pointer-events:none;background:radial-gradient(1200px 600px at 50% -10%,rgba(10,143,85,.14),transparent 60%)}
+/* ---------- Slide ---------- */
+.slide{
+  position:absolute;inset:0;opacity:0;pointer-events:none;
+  transform:translateY(14px) scale(.995);
+  transition:opacity .55s var(--ease),transform .55s var(--ease);
+  overflow-y:auto;overflow-x:hidden;padding:18px 26px 26px;
+  scrollbar-gutter:stable;
+}
+.slide.active{opacity:1;pointer-events:auto;transform:none;z-index:10}
+.slide-inner{max-width:1240px;margin:0 auto;min-height:100%;display:flex;flex-direction:column;gap:16px}
+/* ---------- Typography ---------- */
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--lime)}
+.eyebrow .sep{color:var(--steel-2);margin:0 6px}
+h1,h2,h3{font-weight:800;line-height:1.04;letter-spacing:-.01em}
+h2{font-size:clamp(22px,3.2vw,34px);color:var(--white)}
+.grad-text{background:linear-gradient(90deg,var(--green),var(--lime) 60%,var(--white));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{color:var(--steel);font-size:14px;line-height:1.55}
+.lead b{color:var(--steel-3);font-weight:600}
+.small{font-size:12px}
+.tiny{font-size:10.5px}
+.dim{color:var(--steel-2)}
+.accent{color:var(--lime)}
+.green{color:var(--green)}
+/* ---------- Panels / cards ---------- */
+.panel{background:rgba(13,23,18,.86);border:1px solid var(--graphite-4);border-radius:14px;backdrop-filter:blur(8px)}
+.panel-pad{padding:16px}
+.panel.glow{box-shadow:0 0 0 1px rgba(54,214,107,.14),0 0 30px rgba(54,214,107,.10)}
+.hud-corner{position:relative}
+.hud-corner::before,.hud-corner::after{content:"";position:absolute;width:12px;height:12px;border:1px solid var(--green);opacity:.55}
+.hud-corner::before{top:-1px;left:-1px;border-right:none;border-bottom:none}
+.hud-corner::after{bottom:-1px;right:-1px;border-left:none;border-top:none}
+.tag{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;border-radius:999px;border:1px solid var(--graphite-4);color:var(--steel);background:rgba(11,23,17,.7)}
+.tag.green{color:var(--green);border-color:rgba(54,214,107,.4)}
+.tag.lime{color:var(--lime);border-color:rgba(183,243,107,.35)}
+.tag.amber{color:var(--amber);border-color:rgba(230,161,0,.4)}
+.tag.blue{color:var(--blue);border-color:rgba(77,166,201,.4)}
+.tag.red{color:var(--red);border-color:rgba(255,90,90,.4)}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--green);display:inline-block;box-shadow:0 0 8px rgba(54,214,107,.8)}
+.dot.amber{background:var(--amber);box-shadow:0 0 8px rgba(230,161,0,.8)}
+.dot.blue{background:var(--blue);box-shadow:0 0 8px rgba(77,166,201,.8)}
+.dot.red{background:var(--red);box-shadow:0 0 8px rgba(255,90,90,.8)}
+/* ---------- Buttons ---------- */
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.04em;padding:10px 16px;border-radius:10px;border:1px solid var(--graphite-4);background:var(--graphite-3);color:var(--steel);cursor:pointer;transition:all .25s var(--ease);user-select:none}
+.btn:hover{color:var(--white);border-color:var(--steel-2);transform:translateY(-1px)}
+.btn.primary{background:var(--green);color:#04120a;border-color:var(--green)}
+.btn.primary:hover{background:#2ebd5e;box-shadow:0 8px 22px rgba(54,214,107,.28)}
+.btn.ghost{background:transparent}
+.btn:disabled{opacity:.4;pointer-events:none}
+/* ---------- Chip / metric ---------- */
+.chip{display:inline-block;font-family:var(--mono);font-size:11px;padding:4px 10px;border-radius:8px;background:var(--graphite-2);border:1px solid var(--graphite-4);color:var(--steel-3)}
+.chip.lime{color:var(--lime);border-color:rgba(183,243,107,.3)}
+.metric{font-family:var(--mono)}
+.metric .val{font-size:24px;font-weight:700;color:var(--white);letter-spacing:-.02em}
+.metric .val.green{color:var(--green)}
+.metric .lbl{font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--steel-2)}
+/* ---------- Flow arrows ---------- */
+.flow{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.flow .node{padding:8px 13px;border-radius:9px;background:var(--graphite-2);border:1px solid var(--graphite-4);font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;color:var(--steel-3);white-space:nowrap}
+.flow .node.hot{color:var(--graphite);background:var(--green);border-color:var(--green);font-weight:700}
+.flow .arrow{color:var(--green);font-family:var(--mono);font-size:14px}
+/* ---------- Tabs ---------- */
+.tabs{display:flex;gap:6px;flex-wrap:wrap}
+.tab{padding:9px 14px;border-radius:10px 10px 0 0;border:1px solid var(--graphite-4);border-bottom:none;background:var(--graphite-2);color:var(--steel);font-family:var(--mono);font-size:11.5px;font-weight:700;letter-spacing:.05em;cursor:pointer;transition:all .2s var(--ease)}
+.tab:hover{color:var(--white);background:var(--graphite-3)}
+.tab.active{background:var(--green);color:#04120a;border-color:var(--green)}
+.tab-body{border:1px solid var(--graphite-4);border-radius:0 12px 12px 12px;background:rgba(13,23,18,.7);padding:16px;min-height:120px}
+/* ---------- Accordion ---------- */
+.acc-item{border:1px solid var(--graphite-4);border-radius:11px;overflow:hidden;background:rgba(13,23,18,.6);transition:border-color .25s}
+.acc-item:hover{border-color:var(--steel-2)}
+.acc-item.open{border-color:rgba(54,214,107,.5)}
+.acc-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 15px;cursor:pointer;user-select:none}
+.acc-head .t{font-weight:700;font-size:13.5px;color:var(--white)}
+.acc-head .caret{color:var(--green);transition:transform .3s var(--ease);font-family:var(--mono)}
+.acc-item.open .caret{transform:rotate(180deg)}
+.acc-body{max-height:0;overflow:hidden;transition:max-height .4s var(--ease)}
+.acc-body-in{padding:0 15px 14px;color:var(--steel);font-size:12.5px;line-height:1.6}
+/* ---------- Hover cards ---------- */
+.hcard{position:relative;border:1px solid var(--graphite-4);border-radius:12px;background:rgba(13,23,18,.6);padding:14px;cursor:pointer;transition:transform .3s var(--ease),box-shadow .3s var(--ease),border-color .3s var(--ease)}
+.hcard:hover{transform:translateY(-4px) scale(1.01);border-color:rgba(54,214,107,.55);box-shadow:0 14px 34px rgba(0,0,0,.45),0 0 22px rgba(54,214,107,.16)}
+/* ---------- Tooltip ---------- */
+[data-tip]{position:relative;cursor:help;border-bottom:1px dotted var(--steel-2)}
+[data-tip]:hover::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);width:max-content;max-width:280px;background:#0c1813;border:1px solid var(--graphite-4);color:var(--steel-3);font-family:var(--mono);font-size:10.5px;line-height:1.5;padding:8px 11px;border-radius:8px;z-index:70;box-shadow:0 10px 30px rgba(0,0,0,.5);white-space:normal}
+/* ---------- Modal ---------- */
+#modal{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(4,10,7,.72);backdrop-filter:blur(6px)}
+#modal.hidden{display:none}
+#modal-card{width:min(560px,100%);max-height:82vh;overflow-y:auto;background:var(--graphite-2);border:1px solid var(--graphite-4);border-radius:16px;padding:22px;box-shadow:0 30px 80px rgba(0,0,0,.6)}
+/* ---------- Product gallery ---------- */
+.gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.gcard{position:relative;border:1px solid var(--graphite-4);border-radius:14px;overflow:hidden;background:#08130E;cursor:zoom-in;transform-origin:center;transition:transform .45s var(--ease),box-shadow .45s var(--ease),border-color .45s var(--ease)}
+.gcard .gimg{height:214px;overflow:hidden;position:relative}
+.gcard img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;transition:transform .7s var(--ease),filter .45s var(--ease)}
+.gcard:hover{transform:translateY(-6px) scale(1.045);border-color:rgba(54,214,107,.6);box-shadow:0 22px 52px rgba(0,0,0,.55),0 0 30px rgba(54,214,107,.2);z-index:25}
+.gcard:hover img{transform:scale(1.16);filter:saturate(1.08)}
+.gcard .gcap{position:absolute;left:0;right:0;bottom:0;padding:11px 13px;display:flex;align-items:center;gap:8px;background:linear-gradient(0deg,rgba(7,16,12,.97),rgba(7,16,12,.6) 55%,transparent);font-size:12.5px;color:#fff;font-weight:600;transition:padding .4s var(--ease)}
+.gcard:hover .gcap{padding-bottom:14px}
+.gcard .zoomhint{position:absolute;top:10px;right:10px;width:27px;height:27px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(7,16,12,.72);border:1px solid var(--graphite-4);color:var(--lime);font-size:13px;opacity:0;transform:scale(.85);transition:opacity .3s var(--ease),transform .3s var(--ease)}
+.gcard:hover .zoomhint{opacity:1;transform:scale(1)}
+@media (max-width:620px){.gallery{grid-template-columns:1fr}.gcard .gimg{height:196px}}
+/* ---------- Lightbox ---------- */
+#lightbox{position:fixed;inset:0;z-index:120;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:26px;background:rgba(4,10,7,.93);backdrop-filter:blur(8px);cursor:zoom-out}
+#lightbox.hidden{display:none}
+#lightbox img{max-width:94vw;max-height:79vh;border-radius:12px;border:1px solid var(--graphite-4);box-shadow:0 34px 90px rgba(0,0,0,.75);background:#07100C}
+#lightbox-cap{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--lime)}
+#lightbox-hint{font-family:var(--mono);font-size:10px;color:var(--steel-2)}
+/* ---------- Video cards (machine demos) ---------- */
+.vidrow{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.vcard{position:relative;height:190px;border:1px solid var(--graphite-4);border-radius:14px;overflow:hidden;background:#08130E;cursor:pointer;transition:transform .35s var(--ease),border-color .35s var(--ease),box-shadow .35s var(--ease)}
+.vcard:hover{transform:translateY(-4px);border-color:rgba(255,90,90,.5);box-shadow:0 16px 40px rgba(0,0,0,.5)}
+.vcard .vthumb{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.82;transition:transform .6s var(--ease),opacity .35s var(--ease)}
+.vcard:hover .vthumb{transform:scale(1.06);opacity:1}
+.vplay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none}
+.vplay::before{content:"\25B6";width:54px;height:54px;border-radius:50%;background:rgba(54,214,107,.94);color:#04120a;display:flex;align-items:center;justify-content:center;font-size:19px;padding-left:4px;box-shadow:0 8px 24px rgba(0,0,0,.55);transition:transform .3s var(--ease)}
+.vcard:hover .vplay::before{transform:scale(1.12)}
+.vcap{position:absolute;left:0;right:0;bottom:0;padding:10px 12px;display:flex;align-items:center;gap:8px;background:linear-gradient(0deg,rgba(7,16,12,.97),rgba(7,16,12,.6) 55%,transparent);font-size:12px;color:#fff;font-weight:600}
+.vcard.playing{cursor:default}
+.vcard.playing iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+@media (max-width:620px){.vidrow{grid-template-columns:1fr}}
+.file-mode .vplay::before{content:"\2197";font-size:24px;padding-left:0}
+/* ---------- Diagrams ---------- */
+svg.diagram{width:100%;height:auto;display:block}
+svg.diagram text{font-family:var(--mono)}
+.grid-lines line{stroke:rgba(54,214,107,.08)}
+.eq{stroke:var(--steel-2);fill:rgba(13,23,18,.6)}
+.eq-label{font-size:9px;fill:var(--steel-3);letter-spacing:.06em}
+.eq-title{font-size:10.5px;fill:var(--white);font-weight:700}
+.eq-accent{stroke:var(--green);fill:rgba(54,214,107,.08)}
+.flowline{fill:none;stroke:var(--green);stroke-width:2}
+.flowline.amber{stroke:var(--amber)}
+.flowline.blue{stroke:var(--blue)}
+.dash-anim{stroke-dasharray:6 6;animation:dashmove 1.2s linear infinite}
+@keyframes dashmove{to{stroke-dashoffset:-12}}
+/* ============================================================
+   REPLAST CORE — brand character states
+   ============================================================ */
+.core-wrap{position:relative;display:flex;align-items:center;justify-content:center}
+.core-glow{position:absolute;border-radius:50%;filter:blur(30px);opacity:.5;background:radial-gradient(circle,rgba(54,214,107,.6),transparent 70%)}
+@keyframes corePulse{0%,100%{transform:scale(1);filter:drop-shadow(0 0 8px rgba(54,214,107,.55))}50%{transform:scale(1.045);filter:drop-shadow(0 0 20px rgba(183,243,107,.85))}}
+@keyframes ringRotate{to{transform:rotate(360deg)}}
+@keyframes coreFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+@keyframes coreGlow{0%,100%{filter:drop-shadow(0 0 6px rgba(54,214,107,.45))}50%{filter:drop-shadow(0 0 18px rgba(183,243,107,.7))}}
+.core-idle{animation:coreFloat 6s ease-in-out infinite, coreGlow 3.6s ease-in-out infinite}
+.core-ring-arc{stroke-dasharray:90 260;stroke-linecap:round}
+/* ============================================================
+   Entry animations (re-trigger on .active)
+   ============================================================ */
+@keyframes riseIn{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes zoomIn{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}
+@keyframes slideL{from{opacity:0;transform:translateX(-26px)}to{opacity:1;transform:none}}
+@keyframes slideR{from{opacity:0;transform:translateX(26px)}to{opacity:1;transform:none}}
+@keyframes drawLine{from{stroke-dashoffset:var(--len,600)}to{stroke-dashoffset:0}}
+.slide.active .rise{opacity:0;animation:riseIn .75s var(--ease) forwards;animation-delay:var(--d,0s)}
+.slide.active .fade{opacity:0;animation:fadeIn .8s var(--ease) forwards;animation-delay:var(--d,0s)}
+.slide.active .zoom{opacity:0;animation:zoomIn .8s var(--ease) forwards;animation-delay:var(--d,0s)}
+.slide.active .sl{opacity:0;animation:slideL .75s var(--ease) forwards;animation-delay:var(--d,0s)}
+.slide.active .sr{opacity:0;animation:slideR .75s var(--ease) forwards;animation-delay:var(--d,0s)}
+.slide.active .draw{stroke-dasharray:var(--len,600);animation:drawLine 1.4s var(--ease) forwards;animation-delay:var(--d,.2s)}
+/* moving conveyors / streams */
+@keyframes beltMove{to{background-position:44px 0}}
+.belt{background-image:repeating-linear-gradient(90deg,rgba(54,214,107,.16) 0 14px,transparent 14px 22px);animation:beltMove 1.6s linear infinite}
+@keyframes flowDash{to{stroke-dashoffset:-40}}
+.stream{fill:none;stroke-width:2.4;stroke-dasharray:3 7;animation:flowDash 1.1s linear infinite}
+@keyframes spinSlow{to{transform:rotate(360deg)}}
+.spin{transform-origin:center;animation:spinSlow 4s linear infinite}
+@keyframes bobUp{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.bob{animation:bobUp 2.4s ease-in-out infinite}
+@keyframes blinkLed{0%,100%{opacity:1}50%{opacity:.35}}
+.led{animation:blinkLed 1.6s ease-in-out infinite}
+/* ============================================================
+   Responsive
+   ============================================================ */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.split{display:grid;grid-template-columns:1.2fr .8fr;gap:18px;align-items:start}
+.split-55{display:grid;grid-template-columns:1.05fr .95fr;gap:18px;align-items:start}
+.row{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.col{display:flex;flex-direction:column;gap:14px}
+.grow{flex:1 1 0;min-width:0}
+.spread{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.scroll-x{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px}
+.kv{display:flex;justify-content:space-between;gap:12px;padding:6px 0;border-bottom:1px solid rgba(27,51,41,.5);font-size:12px}
+.kv .k{color:var(--steel-2);font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;text-transform:uppercase}
+.kv .v{color:var(--white);font-weight:600;text-align:right}
+@media (max-width:900px){.grid2,.grid3,.grid4,.split,.split-55{grid-template-columns:1fr}.grid3{grid-template-columns:1fr 1fr}}
+@media (max-width:620px){.grid3,.grid4{grid-template-columns:1fr}.slide{padding:14px 14px 22px}#topbar{padding:0 12px}#footer{padding:0 10px}.hide-sm{display:none}#dots{max-width:44%}}
+</style>
+</head>
+<body>
+<div id="app">
+
+  <!-- ===================== REPLAST CORE SVG SYMBOLS ===================== -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <radialGradient id="coreGrad" cx="45%" cy="40%" r="65%">
+        <stop offset="0%" stop-color="#B7F36B"/>
+        <stop offset="55%" stop-color="#36D66B"/>
+        <stop offset="100%" stop-color="#0A8F55"/>
+      </radialGradient>
+      <radialGradient id="coreInner" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#ffffff"/>
+        <stop offset="60%" stop-color="#B7F36B"/>
+        <stop offset="100%" stop-color="#36D66B"/>
+      </radialGradient>
+      <linearGradient id="shellGrad" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#12221B"/>
+        <stop offset="55%" stop-color="#0D1914"/>
+        <stop offset="100%" stop-color="#07100C"/>
+      </linearGradient>
+
+      <!-- Canonical REPLAST CORE (idle brand mark) -->
+      <symbol id="core-idle" viewBox="0 0 200 200">
+        <g class="core-ring">
+          <animateTransform attributeName="transform" type="rotate" from="0 100 100" to="360 100 100" dur="14s" repeatCount="indefinite"/>
+          <circle cx="100" cy="100" r="86" fill="none" stroke="#0A8F55" stroke-width="2" stroke-dasharray="3 7" opacity=".7"/>
+          <path class="core-ring-arc" d="M 186 100 A 86 86 0 0 1 100 186" fill="none" stroke="#36D66B" stroke-width="4"/>
+          <path class="core-ring-arc" d="M 14 100 A 86 86 0 0 1 100 14" fill="none" stroke="#B7F36B" stroke-width="4"/>
+          <polygon points="186,94 194,101 182,101" fill="#36D66B"/>
+          <polygon points="14,106 6,99 18,99" fill="#B7F36B"/>
+        </g>
+        <g class="core-pulse">
+          <polygon points="100,38 147,64 156,116 118,158 64,146 44,94" fill="url(#shellGrad)" stroke="#36D66B" stroke-width="2.5"/>
+          <polygon points="100,38 118,116 147,64" fill="#12221B" stroke="#1B3329" stroke-width="1.4"/>
+          <polygon points="100,38 64,146 44,94" fill="#0A8F55" fill-opacity=".25" stroke="#1B3329" stroke-width="1.4"/>
+          <polygon points="118,116 156,116 118,158" fill="#12221B" stroke="#1B3329" stroke-width="1.4"/>
+          <polygon points="64,146 118,116 118,158" fill="#07100C" stroke="#1B3329" stroke-width="1.4"/>
+          <circle cx="100" cy="100" r="19" fill="url(#coreInner)" opacity=".92">
+            <animate attributeName="r" values="17;21;17" dur="3.6s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values=".85;1;.85" dur="3.6s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="100" cy="100" r="11" fill="#ffffff"/>
+          <circle cx="89" cy="86" r="2.4" fill="#36D66B"/>
+          <circle cx="111" cy="86" r="2.4" fill="#36D66B"/>
+        </g>
+      </symbol>
+
+      <!-- STATE: WASTE (irregular, embedded among debris, dim) -->
+      <symbol id="core-waste" viewBox="0 0 200 200">
+        <circle cx="100" cy="100" r="86" fill="none" stroke="#1B3329" stroke-width="2" stroke-dasharray="3 7"/>
+        <g class="core-pulse">
+          <polygon points="60,60 100,40 148,72 142,120 104,156 64,132" fill="url(#shellGrad)" stroke="#3a4a42" stroke-width="2.5"/>
+          <polygon points="100,40 142,120 148,72" fill="#0d1914" stroke="#1B3329" stroke-width="1.4"/>
+          <polygon points="104,156 142,120 148,72" fill="#07100c" stroke="#1B3329" stroke-width="1.4"/>
+          <polygon points="64,132 104,156 60,60" fill="#0a1510" stroke="#1B3329" stroke-width="1.4"/>
+          <circle cx="100" cy="98" r="15" fill="#36D66B" opacity=".35"><animate attributeName="opacity" values=".2;.5;.2" dur="3s" repeatCount="indefinite"/></circle>
+          <circle cx="100" cy="98" r="7" fill="#36D66B" opacity=".55"/>
+        </g>
+        <!-- debris -->
+        <g fill="#22342c" opacity=".8">
+          <rect x="38" y="52" width="9" height="9" rx="1.5" transform="rotate(18 42 56)"/>
+          <rect x="150" y="150" width="11" height="11" rx="2" transform="rotate(-14 155 155)"/>
+          <rect x="160" y="40" width="8" height="8" rx="1.5" transform="rotate(32 164 44)"/>
+          <rect x="34" y="140" width="7" height="7" rx="1" transform="rotate(-22 37 143)"/>
+        </g>
+      </symbol>
+
+      <!-- STATE: SORTED (separated colour streams) -->
+      <symbol id="core-sorted" viewBox="0 0 200 200">
+        <circle cx="100" cy="100" r="86" fill="none" stroke="#0A8F55" stroke-width="2" stroke-dasharray="3 7" opacity=".7"/>
+        <g class="core-pulse">
+          <polygon points="100,42 142,66 150,114 116,150 62,140 46,98" fill="url(#shellGrad)" stroke="#36D66B" stroke-width="2.5"/>
+          <circle cx="100" cy="100" r="15" fill="url(#coreInner)" opacity=".9"><animate attributeName="opacity" values=".7;1;.7" dur="3s" repeatCount="indefinite"/></circle>
+          <circle cx="100" cy="100" r="8" fill="#fff"/>
+          <circle cx="91" cy="89" r="2.2" fill="#36D66B"/><circle cx="109" cy="89" r="2.2" fill="#36D66B"/>
+        </g>
+        <g class="stream" stroke-width="2">
+          <path d="M100 100 L170 60" stroke="#36D66B"/>
+          <path d="M100 100 L168 140" stroke="#B7F36B"/>
+          <path d="M100 100 L30 60" stroke="#4DA6C9"/>
+          <path d="M100 100 L32 140" stroke="#E6A100"/>
+        </g>
+        <g fill="#36D66B"><circle cx="170" cy="60" r="5"/></g>
+        <g fill="#B7F36B"><circle cx="168" cy="140" r="5"/></g>
+        <g fill="#4DA6C9"><circle cx="30" cy="60" r="5"/></g>
+        <g fill="#E6A100"><circle cx="32" cy="140" r="5"/></g>
+      </symbol>
+
+      <!-- STATE: FLAKES (shredded) -->
+      <symbol id="core-flakes" viewBox="0 0 200 200">
+        <circle cx="100" cy="100" r="86" fill="none" stroke="#0A8F55" stroke-width="2" stroke-dasharray="3 7" opacity=".6"/>
+        <g fill="#12221B" stroke="#36D66B" stroke-width="1.6">
+          <polygon points="78,66 98,58 110,74 96,86"><animateTransform attributeName="transform" type="translate" values="0 0;0 -5;0 0" dur="2.4s" repeatCount="indefinite" additive="sum"/></polygon>
+          <polygon points="112,96 128,90 136,106 120,114"><animateTransform attributeName="transform" type="translate" values="0 0;0 -5;0 0" dur="2.4s" begin=".3s" repeatCount="indefinite" additive="sum"/></polygon>
+          <polygon points="76,102 90,96 96,112 80,118"><animateTransform attributeName="transform" type="translate" values="0 0;0 -5;0 0" dur="2.4s" begin=".6s" repeatCount="indefinite" additive="sum"/></polygon>
+          <polygon points="102,122 118,116 124,132 108,138"><animateTransform attributeName="transform" type="translate" values="0 0;0 -5;0 0" dur="2.4s" begin=".9s" repeatCount="indefinite" additive="sum"/></polygon>
+          <polygon points="88,130 98,126 104,140 90,144"><animateTransform attributeName="transform" type="translate" values="0 0;0 -5;0 0" dur="2.4s" begin="1.2s" repeatCount="indefinite" additive="sum"/></polygon>
+          <polygon points="118,74 132,70 138,84 124,88"><animateTransform attributeName="transform" type="translate" values="0 0;0 -5;0 0" dur="2.4s" begin=".45s" repeatCount="indefinite" additive="sum"/></polygon>
+        </g>
+        <circle cx="100" cy="100" r="8" fill="#B7F36B" opacity=".7"><animate attributeName="opacity" values=".4;.8;.4" dur="2s" repeatCount="indefinite"/></circle>
+      </symbol>
+
+      <!-- STATE: MELT (molten polymer) -->
+      <symbol id="core-melt" viewBox="0 0 200 200">
+        <circle cx="100" cy="100" r="86" fill="none" stroke="#0A8F55" stroke-width="2" stroke-dasharray="3 7" opacity=".6"/>
+        <g class="core-pulse">
+          <path d="M62 106 C62 78 76 58 100 58 C126 58 140 80 138 108 C136 138 118 152 100 152 C78 152 64 134 62 106 Z" fill="url(#coreGrad)" opacity=".9"><animate attributeName="opacity" values=".82;1;.82" dur="2.6s" repeatCount="indefinite"/></path>
+          <path d="M74 96 C74 84 84 74 100 74 C114 74 122 84 122 96 C122 110 112 118 100 118 C86 118 78 108 74 96 Z" fill="#ffffff" opacity=".65"/>
+          <circle cx="100" cy="96" r="6" fill="#fff" opacity=".9"/>
+        </g>
+      </symbol>
+
+      <!-- STATE: PELLETS -->
+      <symbol id="core-pellets" viewBox="0 0 200 200">
+        <circle cx="100" cy="100" r="86" fill="none" stroke="#0A8F55" stroke-width="2" stroke-dasharray="3 7" opacity=".6"/>
+        <g>
+          <ellipse cx="86" cy="82" rx="17" ry="12" fill="url(#coreGrad)" opacity=".95"/>
+          <ellipse cx="120" cy="92" rx="16" ry="11" fill="url(#coreGrad)" opacity=".9"/>
+          <ellipse cx="96" cy="124" rx="18" ry="12" fill="url(#coreGrad)" opacity=".92"/>
+          <ellipse cx="74" cy="118" rx="12" ry="9" fill="#0A8F55" opacity=".85"/>
+          <ellipse cx="128" cy="126" rx="12" ry="9" fill="#0A8F55" opacity=".8"/>
+          <ellipse cx="82" cy="82" rx="7" ry="4" fill="#fff" opacity=".5"/>
+          <ellipse cx="118" cy="92" rx="6" ry="3.5" fill="#fff" opacity=".5"/>
+          <ellipse cx="96" cy="124" rx="7" ry="4" fill="#fff" opacity=".5"/>
+        </g>
+      </symbol>
+
+      <!-- STATE: PRODUCT (formed tile) -->
+      <symbol id="core-product" viewBox="0 0 200 200">
+        <circle cx="100" cy="100" r="86" fill="none" stroke="#0A8F55" stroke-width="2" stroke-dasharray="3 7" opacity=".6"/>
+        <g class="core-pulse">
+          <rect x="62" y="62" width="76" height="76" rx="12" fill="url(#shellGrad)" stroke="#36D66B" stroke-width="2.4"/>
+          <rect x="70" y="70" width="60" height="60" rx="7" fill="none" stroke="#1B3329" stroke-width="1.4"/>
+          <circle cx="100" cy="100" r="14" fill="url(#coreInner)" opacity=".95"><animate attributeName="opacity" values=".8;1;.8" dur="3.2s" repeatCount="indefinite"/></circle>
+          <circle cx="100" cy="100" r="7" fill="#fff"/>
+          <circle cx="92" cy="94" r="2" fill="#36D66B"/><circle cx="108" cy="94" r="2" fill="#36D66B"/>
+        </g>
+      </symbol>
+
+      <!-- STATE: NEW LIFE (circular loop, bright core) -->
+      <symbol id="core-loop" viewBox="0 0 200 200">
+        <g class="core-ring">
+          <animateTransform attributeName="transform" type="rotate" from="0 100 100" to="360 100 100" dur="12s" repeatCount="indefinite"/>
+          <circle cx="100" cy="100" r="86" fill="none" stroke="#0A8F55" stroke-width="2.4"/>
+          <path class="core-ring-arc" d="M 186 100 A 86 86 0 0 1 100 186" fill="none" stroke="#36D66B" stroke-width="5"/>
+          <path class="core-ring-arc" d="M 14 100 A 86 86 0 0 1 100 14" fill="none" stroke="#B7F36B" stroke-width="5"/>
+          <polygon points="186,93 195,100 181,101" fill="#36D66B"/>
+          <polygon points="14,107 5,100 19,99" fill="#B7F36B"/>
+        </g>
+        <g class="core-pulse">
+          <polygon points="100,56 128,72 128,128 100,144 72,128 72,72" fill="url(#shellGrad)" stroke="#36D66B" stroke-width="2.4"/>
+          <circle cx="100" cy="100" r="20" fill="url(#coreInner)"/>
+          <circle cx="100" cy="100" r="10" fill="#fff"/>
+        </g>
+        <g fill="#B7F36B" opacity=".8">
+          <circle cx="186" cy="100" r="3"><animate attributeName="opacity" values="1;.2;1" dur="2s" repeatCount="indefinite"/></circle>
+          <circle cx="100" cy="186" r="3"><animate attributeName="opacity" values=".2;1;.2" dur="2s" repeatCount="indefinite"/></circle>
+          <circle cx="14" cy="100" r="3"><animate attributeName="opacity" values="1;.2;1" dur="2s" repeatCount="indefinite"/></circle>
+          <circle cx="100" cy="14" r="3"><animate attributeName="opacity" values=".2;1;.2" dur="2s" repeatCount="indefinite"/></circle>
+        </g>
+      </symbol>
+    </defs>
+  </svg>
+
+  <!-- ===================== TOP BAR ===================== -->
+  <header id="topbar">
+    <div class="row" style="gap:10px">
+      <div class="core-wrap" style="width:38px;height:38px">
+        <svg class="core-idle" style="width:100%;height:100%"><use href="#core-idle" width="200" height="200"/></svg>
+      </div>
+      <div>
+        <div style="font-weight:800;font-size:15px;letter-spacing:.02em;color:#fff">REPLAST <span style="color:var(--green)">ARMENIA</span></div>
+        <div class="mono tiny dim" style="letter-spacing:.14em">ՇՐՋԱՆԱՅԻՆ ԿԱՆԱՉ ՏԵԽՆՈԼՈԳԻԱ</div>
+      </div>
+    </div>
+    <div class="row" style="gap:14px">
+      <div style="text-align:right">
+        <div id="header-title" class="tiny" style="color:var(--steel);font-weight:600;max-width:340px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"></div>
+        <div class="mono" style="font-size:9px;color:var(--green);letter-spacing:.16em">ԱԿԱԴԵՄԻԱԿԱՆ ԲԻԶՆԵՍ ՆԱԽԱԳԻԾ · NPUA</div>
+      </div>
+      <div class="mono tag green" style="font-size:11px;padding:5px 11px"><span id="cur-num">01</span><span class="dim">/</span><span>20</span></div>
+    </div>
+  </header>
+
+  <!-- ===================== PROGRESS ===================== -->
+  <div id="progress-track"><div id="progress-bar"></div></div>
+
+  <!-- ===================== SLIDES VIEWPORT ===================== -->
+  <main id="viewport" class="bg-grid">
+    <div class="radial-fade"></div>
+
+    <!-- ===================== ՍԼԱՅԴ 01 · TITLE ===================== -->
+    <section class="slide active" id="slide-1">
+      <div class="slide-inner" style="justify-content:space-between;padding:8px 0">
+        <div class="spread fade" style="--d:.1s">
+          <span class="tag green"><span class="dot"></span> ՎԻՐՏՈՒԱԼ ԳՈՐԾԱՐԱՆԸ ԱԿՏԻՎ Է</span>
+          <div class="mono tiny dim" style="text-align:right">
+            <div>ՀԵՂԻՆԱԿ<b style="color:#fff"></b></div>
+            <div>3-րդ կուրս · Հայաստանի ազգային պոլիտեխնիկական համալսարան (NPUA)</div>
+          </div>
+        </div>
+
+        <div class="split" style="align-items:center;margin:auto 0">
+          <div class="col" style="gap:18px">
+            <div class="col rise" style="--d:.25s;gap:8px">
+              <div class="eyebrow">Ակադեմիական կանաչ արտադրական հայեցակարգ</div>
+              <h1 style="font-size:clamp(40px,6.4vw,76px)">REPLAST<br><span class="grad-text">ARMENIA</span></h1>
+              <p class="lead" style="font-size:clamp(16px,2vw,21px);font-weight:300;color:var(--steel-3)">
+                Արդյունաբերական վերամշակում և շրջանային արտադրություն
+              </p>
+            </div>
+            <div class="panel panel-pad hud-corner rise" style="--d:.45s;border-left:3px solid var(--green)">
+              <div class="mono tiny green" style="letter-spacing:.16em;margin-bottom:8px">ԳՈՐԾԸՆԹԱՑԻ ՀԻՄՆԱԿԱՆ ԲԱՆԱՁԵՎԸ</div>
+              <div class="flow" style="gap:6px">
+                <span class="node">ՊԼԱՍՏԻԿ ԹԱՓՈՆ</span><span class="arrow">→</span>
+                <span class="node">ՆՅՈՒԹ</span><span class="arrow">→</span>
+                <span class="node">ԱՐՏԱԴՐԱՆՔ</span><span class="arrow">→</span>
+                <span class="node hot">ՆՈՐ ԿՅԱՆՔ</span>
+              </div>
+            </div>
+            <div class="row rise" style="--d:.65s">
+              <button class="btn primary" onclick="nextSlide()">ՄՏՆԵԼ ՎԻՐՏՈՒԱԼ ԳՈՐԾԱՐԱՆ
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </button>
+              <button class="btn" onclick="openModal('REPLAST CORE — ֆիրմային ուղեցույց','<p><b style=&quot;color:#fff&quot;>REPLAST CORE</b>-ը վերամշակված պլաստիկի կենդանի մասնիկ է, ընկերության միասնական տեսողական խորհրդանիշը։</p><p style=&quot;margin-top:8px&quot;>Այն ֆիզիկապես անցնում է ամբողջ ցիկլը <b>ԹԱՓՈՆ → ՆՅՈՒԹ → ԱՐՏԱԴՐԱՆՔ → ՆՈՐ ԿՅԱՆՔ</b> և յուրաքանչյուր սլայդում բացատրում է տեխնոլոգիական փուլը։</p>')">ԾԱՆՈԹԱՑԻՐ REPLAST CORE-ԻՆ</button>
+            </div>
+          </div>
+
+          <div class="core-wrap zoom" style="--d:.55s;min-height:300px">
+            <div class="core-glow" style="width:340px;height:340px"></div>
+            <svg class="core-idle" style="width:min(340px,72vw);height:auto" viewBox="0 0 200 200"><use href="#core-idle"/></svg>
+            <div class="mono tiny green" style="position:absolute;bottom:8px;letter-spacing:.18em">REPLAST CORE · ՖԻՐՄԱՅԻՆ ՆՇԱՆ</div>
+          </div>
+        </div>
+
+        <div class="grid4 fade" style="--d:.8s">
+          <div class="panel panel-pad hud-corner"><div class="metric"><div class="lbl">ՏԵՂԱԴՐՈՒԹՅՈՒՆ</div><div class="val" style="font-size:16px">Երևան / մարզեր</div></div></div>
+          <div class="panel panel-pad hud-corner"><div class="metric"><div class="lbl">ԹԻՐԱԽ ՊՈԼԻՄԵՐՆԵՐ</div><div class="val" style="font-size:16px">PET · HDPE · PP · LDPE</div></div></div>
+          <div class="panel panel-pad hud-corner"><div class="metric"><div class="lbl">ՀԶՈՐՈՒԹՅՈՒՆԸ</div><div class="val green">100–500 տ/ամիս</div></div></div>
+          <div class="panel panel-pad hud-corner"><div class="metric"><div class="lbl">ՏԵԽՆՈԼՈԳԻԱՆ</div><div class="val" style="font-size:16px;color:var(--lime)">Փակ ցիկլ</div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== ՍԼԱՅԴ 02 · PROBLEM ===================== -->
+    <section class="slide" id="slide-2">
+      <div class="slide-inner">
+        <div class="rise" style="--d:.05s">
+          <div class="eyebrow">ՍԼԱՅԴ 02 <span class="sep">//</span> ՌԵՍՈՒՐՍԱՅԻՆ ՏՐԱՄԱԲԱՆՈՒԹՅՈՒՆ</div>
+          <h2 style="margin-top:6px">Պլաստիկը՝ <span class="grad-text">թափո՞ն, թե՞ հումք</span></h2>
+          <p class="lead" style="margin-top:6px;max-width:820px">Օգտագործումից հետո պլաստիկը կարող է դառնալ աղտոտիչ, սակայն ճիշտ <b>հավաքված</b> և <b>պատրաստված</b> նյութը կրկին վերածվում է արտադրական ռեսուրսի։ Տարբերությունը ինժեներիայի մեջ է, ոչ թե հենց նյութի։</p>
+        </div>
+
+        <div class="split rise" style="--d:.2s">
+          <div class="panel panel-pad hud-corner">
+            <div class="mono tiny green" style="letter-spacing:.14em;margin-bottom:14px">ՆՅՈՒԹԻ ԿՅԱՆՔԻ ՑԻԿԼԸ</div>
+            <div class="core-wrap" style="margin-bottom:14px">
+              <svg class="core-idle" style="width:min(230px,60vw)"><use href="#core-waste"/></svg>
+            </div>
+            <div class="flow">
+              <span class="node">ԱՐՏԱԴՐԱՆՔ</span><span class="arrow">→</span>
+              <span class="node">ՕԳՏԱԳՈՐԾՈՒՄ</span><span class="arrow">→</span>
+              <span class="node hot">ԹԱՓՈՆ</span><span class="arrow">→</span>
+              <span class="node">ՀԱՎԱՔՈՒՄ</span><span class="arrow">→</span>
+              <span class="node">ՎԵՐԱՄՇԱԿՈՒՄ</span><span class="arrow">→</span>
+              <span class="node hot">ՆՈՐ ԱՐՏԱԴՐԱՆՔ</span>
+            </div>
+            <p class="small dim mono" style="margin-top:12px">CORE-Ի ԿԱՐԳԱՎԻՃԱԿԸ. <span class="green">ԱՐՏԱԴՐԱՆՔ → ՕԳՏԱԳՈՐԾՈՒՄ → ԹԱՓՈՆ → ՎԵՐԱՄՇԱԿՈՒՄ → ՆՈՐ ԱՐՏԱԴՐԱՆՔ</span></p>
+          </div>
+
+          <div class="col">
+            <div class="mono tiny lime" style="letter-spacing:.14em">ՀԻՄՆԱԿԱՆ ԽՆԴԻՐՆԵՐԸ — ՍԵՂՄԵՔ ՄԱՆՐԱՄԱՍՆՈՒԹՅՈՒՆՆԵՐԻ ՀԱՄԱՐ</div>
+            <div class="acc-item rise" style="--d:.25s">
+              <div class="acc-head" onclick="toggleAcc(this)"><span class="t">Հումքի աղտոտվածություն</span><span class="caret">▾</span></div>
+              <div class="acc-body"><div class="acc-body-in">Սննդի մնացորդները, յուղերը, պիտակները և սոսինձները վատացնում են հալույթի որակը և պահանջում ծախսատար լվացում։ Աղտոտվածությունը նյութի արժեքի կորստի գլխավոր գործոնն է։</div></div>
+            </div>
+            <div class="acc-item rise" style="--d:.3s">
+              <div class="acc-head" onclick="toggleAcc(this)"><span class="t">Տարբեր պոլիմերների խառնում</span><span class="caret">▾</span></div>
+              <div class="acc-body"><div class="acc-body-in">PET + HDPE + PP + PVC թերմոդինամիկորեն անհամատեղելի են։ Նրանց խառնուրդը տալիս է փխրուն, շերտավորվող նյութ — առանց տեսակավորման վերամշակումն անհնար է։</div></div>
+            </div>
+            <div class="acc-item rise" style="--d:.35s">
+              <div class="acc-head" onclick="toggleAcc(this)"><span class="t">Տեսակավորման բացակայություն</span><span class="caret">▾</span></div>
+              <div class="acc-body"><div class="acc-body-in">Առանց տեսակի, գույնի և աղտոտվածության բաժանման նյութը կորցնում է տեխնոլոգիական կանխատեսելիությունը և կիրառելիությունը։</div></div>
+            </div>
+            <div class="acc-item rise" style="--d:.4s">
+              <div class="acc-head" onclick="toggleAcc(this)"><span class="t">Հավաքման լոգիստիկա</span><span class="caret">▾</span></div>
+              <div class="acc-body"><div class="acc-body-in">Թափոնների ցածր խտությունը և աղբյուրների ցրվածությունը թանկացնում են տեղափոխումը։ Անհրաժեշտ է հավաքման ցանցային մոդել։</div></div>
+            </div>
+            <div class="acc-item rise" style="--d:.45s">
+              <div class="acc-head" onclick="toggleAcc(this)"><span class="t">Որակի և արժեքի կորուստ</span><span class="caret">▾</span></div>
+              <div class="acc-body"><div class="acc-body-in">Յուրաքանչյուր տաքացման ցիկլ բերում է շղթայի ջերմաօքսիդատիվ դեգրադացիայի։ Առանց կայունացման և վերահսկողության նյութը յուրաքանչյուր ցիկլում էժանանում է։</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== ՍԼԱՅԴ 03 · BUSINESS CONCEPT ===================== -->
+    <section class="slide" id="slide-3">
+      <div class="slide-inner">
+        <div class="rise" style="--d:.05s">
+          <div class="eyebrow">ՍԼԱՅԴ 03 <span class="sep">//</span> ԱՐԺԵՔԻ ՍՏԵՂԾՄԱՆ ՇՂԹԱ</div>
+          <h2 style="margin-top:6px">Ոչ միայն վերամշակում՝ <span class="grad-text">արժեքի ստեղծման նոր շղթա</span></h2>
+        </div>
+
+        <div class="split" style="align-items:center">
+          <div class="col rise" style="--d:.2s">
+            <button class="pillar-btn panel panel-pad hcard" data-p="1" onclick="selectPillar(1)" style="text-align:left;width:100%">
+              <div class="spread"><span class="mono tag amber">01</span><span class="mono tiny dim">ՄՈՒՏՔ · ՀՈՒՄՔ</span></div>
+              <div style="font-weight:800;font-size:17px;color:#fff;margin-top:8px">ԹԱՓՈՆՆԵՐԻ ԿԱՌԱՎԱՐՈՒՄ</div>
+              <p class="small dim">Հումքի հավաքում և նախնական պատրաստում</p>
+            </button>
+            <button class="pillar-btn panel panel-pad hcard" data-p="2" onclick="selectPillar(2)" style="text-align:left;width:100%">
+              <div class="spread"><span class="mono tag green">02</span><span class="mono tiny dim">ԳՈՐԾԸՆԹԱՑ · ՎԵՐԱԿԱՆԳՆՈՒՄ</span></div>
+              <div style="font-weight:800;font-size:17px;color:#fff;margin-top:8px">ՆՅՈՒԹԻ ՎԵՐԱԿԱՆԳՆՈՒՄ</div>
+              <p class="small dim">Մաքրում, տարանջատում, էքստրուզիա, գրանուլացում</p>
+            </button>
+            <button class="pillar-btn panel panel-pad hcard" data-p="3" onclick="selectPillar(3)" style="text-align:left;width:100%">
+              <div class="spread"><span class="mono tag blue">03</span><span class="mono tiny dim">ԵԼՔ · ԱՐՏԱԴՐԱՆՔ</span></div>
+              <div style="font-weight:800;font-size:17px;color:#fff;margin-top:8px">ԱՐՏԱԴՐՈՒԹՅՈՒՆ</div>
+              <p class="small dim">Պատրաստի արտադրանքի կաղապարում</p>
+            </button>
+          </div>
+
+          <div class="panel panel-pad hud-corner rise" style="--d:.35s">
+            <div class="core-wrap" style="margin-bottom:10px">
+              <svg class="core-idle" style="width:min(220px,50vw)"><use href="#core-sorted"/></svg>
+            </div>
+            <div class="mono tiny green" style="text-align:center;letter-spacing:.16em" id="core-state-label">CORE → WASTE</div>
+            <div class="flow" style="justify-content:center;margin:14px 0">
+              <span class="node hot">ԹԱՓՈՆ</span><span class="arrow">→</span>
+              <span class="node hot">ՆՅՈՒԹ</span><span class="arrow">→</span>
+              <span class="node hot">ԱՐՏԱԴՐԱՆՔ</span>
+            </div>
+            <div class="panel" style="background:rgba(11,23,17,.7);padding:14px;border-radius:10px">
+              <div class="spread" style="margin-bottom:6px">
+                <span class="mono tiny dim">ՈՒՂՂՈՒԹՅՈՒՆ</span>
+                <span class="mono tag green" id="pillar-status">ՀՈՒՄՔԻ ՀԱՎԱՔՈՒՄ</span>
+              </div>
+              <div style="font-weight:800;font-size:16px;color:#fff"><span id="pillar-num">01</span><span id="pillar-title">Թափոնների կառավարում</span></div>
+              <p class="small lead" style="margin-top:8px" id="pillar-desc"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== ՍԼԱՅԴ 04 · TYPES OF PLASTIC ===================== -->
+    <section class="slide" id="slide-4">
+      <div class="slide-inner">
+        <div class="rise" style="--d:.05s">
+          <div class="eyebrow">ՍԼԱՅԴ 04 <span class="sep">//</span> ՊՈԼԻՄԵՐԱՅԻՆ ՀԱՄԱՏԵՂԵԼԻՈՒԹՅՈՒՆ</div>
+          <h2 style="margin-top:6px">Պլաստիկի վեց տեսակ՝ <span class="grad-text">վեց սցենար</span></h2>
+          <p class="lead" style="margin-top:6px">Յուրաքանչյուր պոլիմեր ունի իր խտությունը, հալման ջերմաստիճանը և քիմիան։ Դրանք <b>չի կարելի պարզապես խառնել</b> — սա տեխնոլոգիապես անհամատեղելի հոսքեր են։</p>
+        </div>
+
+        <div class="split">
+          <div class="col rise" style="--d:.18s">
+            <div class="tabs scroll-x">
+              <button class="tab poly-tab active" data-p="pet" onclick="switchPolymer('pet')">PET</button>
+              <button class="tab poly-tab" data-p="hdpe" onclick="switchPolymer('hdpe')">HDPE</button>
+              <button class="tab poly-tab" data-p="ldpe" onclick="switchPolymer('ldpe')">LDPE</button>
+              <button class="tab poly-tab" data-p="pp" onclick="switchPolymer('pp')">PP</button>
+              <button class="tab poly-tab" data-p="ps" onclick="switchPolymer('ps')">PS</button>
+              <button class="tab poly-tab" data-p="pvc" onclick="switchPolymer('pvc')">PVC</button>
+            </div>
+            <div class="tab-body" id="poly-content"></div>
+          </div>
+
+          <div class="panel panel-pad hud-corner rise" style="--d:.32s">
+            <div class="mono tiny amber" style="letter-spacing:.14em;margin-bottom:10px">ԱՆՀԱՄԱՏԵՂԵԼԻ ՀՈՍՔԵՐ</div>
+            <div class="core-wrap" style="margin-bottom:10px">
+              <svg class="core-idle" style="width:min(210px,46vw)"><use href="#core-sorted"/></svg>
+            </div>
+            <p class="small lead" style="margin-bottom:10px">PET+HDPE+PP+PVC խառնուրդը մեկ հալույթում բերում է <b style="color:#fff">ֆազերի շերտավորման</b>, փխրունության և դեստրուկցիայի։ ~260 °C-ում (PET-ի հալումը) PVC-ն անջատում է <span data-tip="Քլորաջրածին՝ ագրեսիվ և թունավոր գազ, ՊՎՔ-ի ջերմային քայքայման արգասիք">HCl</span>։</p>
+            <button class="btn amber" style="border-color:rgba(230,161,0,.5);color:var(--amber)" onclick="openModal('Ինչու՞ չի կարելի խառնել պոլիմերները','<p><b style=&quot;color:#fff&quot;>1. Թերմոդինամիկ անհամատեղելիություն։</b> Տարբեր շղթաները մոլեկուլային մակարդակում չեն խառնվում — հալույթը շերտավորվում է դոմենների՝ առաջացնելով թույլ միջֆազային սահմաններ։</p><p style=&quot;margin-top:8px&quot;><b style=&quot;color:#fff&quot;>2. Տարբեր հալման ջերմաստիճաններ։</b> Մինչ PET-ը հալվում է (260 °C), PVC-ն արդեն քայքայվում է՝ անջատելով HCl, իսկ HDPE-ն վաղուց հոսուն է։</p><p style=&quot;margin-top:8px&quot;><b style=&quot;color:#fff&quot;>3. Տարբեր խտություն։</b> Դա թույլ է տալիս բաժանել հոսքերը ֆլոտացիայով — տեսակավորման առանցքային մեթոդ։</p>')">ԻՆՉՈՒ ՉԻ ԿԱՐԵԼԻ ԽԱՌՆԵԼ</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== ՍԼԱՅԴ 05 · COLLECTION ===================== -->
+    <section class="slide" id="slide-5">
+      <div class="slide-inner">
+        <div class="rise" style="--d:.05s">
+          <div class="eyebrow">ՍԼԱՅԴ 05 <span class="sep">//</span> ՀԱՎԱՔՄԱՆ ՑԱՆՑ</div>
+          <h2 style="margin-top:6px">Որտեղի՞ց է գալիս <span class="grad-text">հումքը</span></h2>
+        </div>
+
+        <div class="split">
+          <div class="panel panel-pad hud-corner rise" style="--d:.18s">
+            <div class="mono tiny green" style="letter-spacing:.14em;margin-bottom:10px">ՀԱՅԱՍՏԱՆԻ ԿՈՆՑԵՊՏՈՒԱԼ ՔԱՐՏԵԶ</div>
+            <svg viewBox="0 0 360 340" class="diagram">
+              <g class="grid-lines">
+                <line x1="20" y1="60" x2="340" y2="60"/><line x1="20" y1="120" x2="340" y2="120"/>
+                <line x1="20" y1="180" x2="340" y2="180"/><line x1="20" y1="240" x2="340" y2="240"/>
+                <line x1="20" y1="300" x2="340" y2="300"/>
+                <line x1="60" y1="20" x2="60" y2="320"/><line x1="120" y1="20" x2="120" y2="320"/>
+                <line x1="180" y1="20" x2="180" y2="320"/><line x1="240" y1="20" x2="240" y2="320"/>
+                <line x1="300" y1="20" x2="300" y2="320"/>
+              </g>
+              <!-- stylized Armenia outline -->
+              <path d="M150 40 C180 34 210 40 224 58 C238 76 236 96 218 108 C226 124 218 142 200 150 C210 168 204 190 186 200 C170 210 150 206 138 192 C126 176 128 158 118 146 C104 132 108 108 124 92 C136 78 132 58 150 40 Z" fill="rgba(54,214,107,.06)" stroke="#36D66B" stroke-width="1.6" stroke-dasharray="4 4"/>
+              <g>
+                <circle cx="176" cy="112" r="14" fill="rgba(54,214,107,.2)" stroke="#36D66B" stroke-width="2"/>
+                <circle cx="176" cy="112" r="5" fill="#36D66B"/>
+                <text x="176" y="98" text-anchor="middle" class="eq-title" fill="#fff" font-size="11">Երևան</text>
+              </g>
+              <g>
+                <circle class="region-node" data-r="kotayk" cx="196" cy="82" r="11" fill="rgba(183,243,107,.15)" stroke="#B7F36B" stroke-width="1.6" style="cursor:pointer" onclick="selectRegion('kotayk')"/>
+                <circle cx="196" cy="82" r="3.5" fill="#B7F36B"/>
+                <text x="210" y="78" class="eq-label" fill="#B7F36B" font-size="9">Կոտայք</text>
+              </g>
+              <g>
+                <circle class="region-node" data-r="armavir" cx="136" cy="150" r="11" fill="rgba(54,214,107,.15)" stroke="#36D66B" stroke-width="1.6" style="cursor:pointer" onclick="selectRegion('armavir')"/>
+                <circle cx="136" cy="150" r="3.5" fill="#36D66B"/>
+                <text x="100" y="146" class="eq-label" fill="#36D66B" font-size="9">Արմավիր</text>
+              </g>
+              <g>
+                <circle class="region-node" data-r="ararat" cx="150" cy="200" r="11" fill="rgba(77,166,201,.15)" stroke="#4DA6C9" stroke-width="1.6" style="cursor:pointer" onclick="selectRegion('ararat')"/>
+                <circle cx="150" cy="200" r="3.5" fill="#4DA6C9"/>
+                <text x="118" y="222" class="eq-label" fill="#4DA6C9" font-size="9">Արարատ</text>
+              </g>
+              <g>
+                <circle class="region-node" data-r="yerevan" cx="176" cy="112" r="16" fill="rgba(54,214,107,.15)" stroke="#36D66B" stroke-width="1.6" style="cursor:pointer" onclick="selectRegion('yerevan')"/>
+              </g>
+              <text x="180" y="316" text-anchor="middle" class="eq-label" fill="#6E8077" font-size="8.5">ԿՈՆՑԵՊՏՈՒԱԼ ՀԱՎԱՔՄԱՆ ՑԱՆՑ — ՆԱԽԱԳԾԱՅԻՆ ԵՆԹԱԴՐՈՒԹՅՈՒՆ</text>
+            </svg>
+          </div>
+
+          <div class="col rise" style="--d:.3s">
+            <div class="panel panel-pad hud-corner">
+              <div class="mono tiny green" style="letter-spacing:.14em;margin-bottom:8px">ՀՈՒՄՔԻ ԱՂԲՅՈՒՐՆԵՐԸ</div>
+              <div class="flow" style="gap:6px">
+                <span class="node">Բնակչություն</span><span class="node">Մանրածախ</span><span class="node">Ձեռնարկություններ</span>
+                <span class="node">Պահեստներ</span><span class="node">Լոգիստիկա</span><span class="node">Արտադրական կտրվածքներ</span><span class="node">Փաթեթավորում</span>
+              </div>
+            </div>
+            <div class="panel panel-pad hud-corner">
+              <div class="spread" style="margin-bottom:6px">
+                <span class="mono tiny dim">ՄԱՐԶ</span><span class="mono tag green" id="region-type">—</span>
+              </div>
+              <div style="font-weight:800;font-size:16px;color:#fff" id="region-name"></div>
+              <div class="kv" style="margin-top:8px"><span class="k">Հոսք</span><span class="v" id="region-waste"></span></div>
+              <div class="kv"><span class="k">Ծավալ</span><span class="v green" id="region-vol"></span></div>
+              <div class="kv"><span class="k">Աղբյուրներ</span><span class="v" id="region-desc"></span></div>
+            </div>
+            <p class="small dim mono">ՆՇՈՒՄ. քարտեզը նախագծային ենթադրություն է, իրական հավաքման ցանց չի հաստատվում։</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== ՍԼԱՅԴ 06 · FACTORY LOCATION & PLAN ===================== -->
+    <section class="slide" id="slide-6">
+      <div class="slide-inner">
+        <div class="rise" style="--d:.05s">
+          <div class="eyebrow">ՍԼԱՅԴ 06 <span class="sep">//</span> ՏԵՂԱԴՐՈՒԹՅՈՒՆ ԵՎ ՀԱՏԱԿԱԳԻԾ</div>
+          <h2 style="margin-top:6px">Որտե՞ղ է գտնվելու <span class="grad-text">մեր գործարանը</span></h2>
+          <p class="lead" style="margin-top:6px;max-width:940px">Տեղանքն ընտրված է <b>Երևանին մոտ</b>՝ հումքի, աշխատուժի և լոգիստիկայի համար, սակայն <b>բնակելի գոտիներից բավական հեռու</b>՝ աղմուկի, փոշու և սանիտարական պահանջների պատճառով։</p>
+        </div>
+
+        <div class="split" style="grid-template-columns:.86fr 1.14fr">
+          <div class="panel panel-pad hud-corner rise" style="--d:.18s">
+            <div class="mono tiny green" style="letter-spacing:.14em;margin-bottom:8px">ՏԵՂԱԴՐՈՒԹՅԱՆ ՍԽԵՄԱ</div>
+            <svg viewBox="0 0 420 300" class="diagram">
+              <g class="grid-lines">
+                <line x1="20" y1="60" x2="400" y2="60"/><line x1="20" y1="120" x2="400" y2="120"/>
+                <line x1="20" y1="180" x2="400" y2="180"/><line x1="20" y1="240" x2="400" y2="240"/>
+                <line x1="60" y1="20" x2="60" y2="290"/><line x1="140" y1="20" x2="140" y2="290"/>
+                <line x1="220" y1="20" x2="220" y2="290"/><line x1="300" y1="20" x2="300" y2="290"/>
+                <line x1="380" y1="20" x2="380" y2="290"/>
+              </g>
+              <path d="M250 46 L288 8 L308 30 L332 4 L372 46 Z" fill="rgba(169,183,176,.10)" stroke="#6E8077" stroke-width="1"/>
+              <text x="311" y="60" text-anchor="middle" class="eq-label" fill="#6E8077" font-size="8">ԱՐԱՐԱՏ</text>
+              <circle cx="322" cy="112" r="70" fill="rgba(230,161,0,.05)" stroke="#E6A100" stroke-width="1.4" stroke-dasharray="5 4"/>
+              <text x="322" y="198" text-anchor="middle" class="eq-label" fill="#E6A100" font-size="8">ՍԱՆԻՏԱՐԱԿԱՆ ԳՈՏԻ 1.5 կմ</text>
+              <rect x="288" y="88" width="68" height="48" rx="6" fill="rgba(54,214,107,.2)" stroke="#36D66B" stroke-width="2"/>
+              <text x="322" y="108" text-anchor="middle" class="eq-title" font-size="9">ԳՈՐԾԱՐԱՆ</text>
+              <text x="322" y="122" text-anchor="middle" class="eq-label" font-size="8">12 000 մ²</text>
+              <path d="M78 228 C150 212 235 168 292 130" fill="none" stroke="#6E8077" stroke-width="3.4" stroke-dasharray="11 7"/>
+              <text x="150" y="232" class="eq-label" fill="#A9B7B0" font-size="8.5">Մ2 ՄԱՅՐՈՒՂԻ</text>
+              <path class="flowline" d="M120 216 C180 190 240 158 288 132"/>
+              <text x="196" y="164" text-anchor="middle" class="eq-label" fill="#36D66B" font-size="9">24–28 կմ</text>
+              <circle cx="140" cy="96" r="7" fill="rgba(169,183,176,.14)" stroke="#A9B7B0" stroke-width="1.2"/>
+              <text x="140" y="84" text-anchor="middle" class="eq-label" font-size="8">ԳՅՈՒՂ 2.1 կմ</text>
+              <circle cx="78" cy="228" r="42" fill="rgba(54,214,107,.10)" stroke="#36D66B" stroke-width="2"/>
+              <circle cx="78" cy="228" r="6" fill="#36D66B"/>
+              <text x="78" y="288" text-anchor="middle" class="eq-title">ԵՐԵՎԱՆ</text>
+            </svg>
+            <div class="col" style="gap:0;margin-top:10px">
+              <div class="kv"><span class="k">Երևանից հեռավորությունը</span><span class="v green">24–28 կմ</span></div>
+              <div class="kv"><span class="k">Մոտակա բնակավայրից</span><span class="v green">&gt; 1.5 կմ</span></div>
+              <div class="kv"><span class="k">Հողամասը</span><span class="v">12 000 մ² (150 × 80 մ)</span></div>
+              <div class="kv"><span class="k">Շինության մակերեսը</span><span class="v">~8 400 մ²</span></div>
+              <div class="kv"><span class="k">Մուտք</span><span class="v">Մ2 մայրուղի</span></div>
+            </div>
+            <p class="small dim mono" style="margin-top:8px">ՆԱԽԱԳԾԱՅԻՆ ԵՆԹԱԴՐՈՒԹՅՈՒՆ — իրական հողամաս չի հաստատվում</p>
+          </div>
+
+          <div class="panel panel-pad hud-corner rise" style="--d:.28s">
+            <div class="mono tiny lime" style="letter-spacing:.14em;margin-bottom:8px">ԳՈՐԾԱՐԱՆԻ ՀԱՏԱԿԱԳԻԾԸ — 14 ԳՈՏԻ</div>
+            <svg viewBox="0 0 580 400" class="diagram">
+              <text x="14" y="14" class="eq-label" fill="#6E8077" font-size="8">ՀՈՂԱՄԱՍ 150 մ × 80 մ · ՇԻՆՈՒԹՅՈՒՆ ~8 400 մ²</text>
+              <rect x="12" y="24" width="556" height="362" rx="10" fill="none" stroke="#1B3329" stroke-width="1.4" stroke-dasharray="7 5"/>
+              <rect x="40" y="50" width="500" height="330" rx="8" fill="rgba(11,23,17,.55)" stroke="#6E8077" stroke-width="1.6"/>
+
+              <rect x="42" y="52" width="206" height="64" fill="rgba(54,214,107,.10)" stroke="#36D66B" stroke-width="1.2"/>
+              <text x="145" y="80" text-anchor="middle" class="eq-title" font-size="9.5">1 · ԸՆԴՈՒՆՈՒՄ ԵՎ ԿՇԵՌՔ</text>
+              <text x="145" y="96" text-anchor="middle" class="eq-label" font-size="8">600 մ²</text>
+
+              <rect x="250" y="52" width="288" height="64" fill="rgba(54,214,107,.07)" stroke="#36D66B" stroke-width="1.2"/>
+              <text x="394" y="80" text-anchor="middle" class="eq-title" font-size="9.5">2 · ՀՈՒՄՔԻ ՊԱՀԵՍՏ</text>
+              <text x="394" y="96" text-anchor="middle" class="eq-label" font-size="8">900 մ²</text>
+
+              <rect x="42" y="118" width="168" height="64" fill="rgba(54,214,107,.10)" stroke="#36D66B" stroke-width="1.2"/>
+              <text x="126" y="146" text-anchor="middle" class="eq-title" font-size="9.5">3 · ՏԵՍԱԿԱՎՈՐՈՒՄ</text>
+              <text x="126" y="162" text-anchor="middle" class="eq-label" font-size="8">700 մ²</text>
+
+              <rect x="212" y="118" width="166" height="64" fill="rgba(54,214,107,.07)" stroke="#36D66B" stroke-width="1.2"/>
+              <text x="295" y="146" text-anchor="middle" class="eq-title" font-size="9.5">4 · ԼՎԱՑՈՒՄ</text>
+              <text x="295" y="162" text-anchor="middle" class="eq-label" font-size="8">800 մ²</text>
+
+              <rect x="380" y="118" width="158" height="64" fill="rgba(54,214,107,.10)" stroke="#36D66B" stroke-width="1.2"/>
+              <text x="459" y="146" text-anchor="middle" class="eq-title" font-size="9.5">5 · ՏԱՐԱՆՋ. ԵՒ ՉՈՐ.</text>
+              <text x="459" y="162" text-anchor="middle" class="eq-label" font-size="8">650 մ²</text>
+
+              <rect x="42" y="184" width="298" height="64" fill="rgba(54,214,107,.07)" stroke="#36D66B" stroke-width="1.2"/>
+              <text x="191" y="212" text-anchor="middle" class="eq-title" font-size="9.5">6 · ԷՔՍՏՐՈՒԶԻԱ ԵՒ ԳՐԱՆՈՒԼԱՑՈՒՄ</text>
+              <text x="191" y="228" text-anchor="middle" class="eq-label" font-size="8">750 մ²</text>
+
+              <rect x="342" y="184" width="196" height="64" fill="rgba(54,214,107,.10)" stroke="#36D66B" stroke-width="1.2"/>
+              <text x="440" y="212" text-anchor="middle" class="eq-title" font-size="9.5">7 · ԿՈՄՊԱՈՒՆԴԱՎՈՐՈՒՄ</text>
+              <text x="440" y="228" text-anchor="middle" class="eq-label" font-size="8">400 մ²</text>
+
+              <rect x="42" y="250" width="188" height="64" fill="rgba(54,214,107,.10)" stroke="#36D66B" stroke-width="1.2"/>
+              <text x="136" y="278" text-anchor="middle" class="eq-title" font-size="9.5">8 · ԿԱՂԱՊԱՐՈՒՄ</text>
+              <text x="136" y="294" text-anchor="middle" class="eq-label" font-size="8">900 մ²</text>
+
+              <rect x="232" y="250" width="146" height="64" fill="rgba(77,166,201,.10)" stroke="#4DA6C9" stroke-width="1.2"/>
+              <text x="305" y="278" text-anchor="middle" class="eq-title" font-size="9.5">9 · ՈՐԱԿԻ ՎԵՐԱՀՍԿ.</text>
+              <text x="305" y="294" text-anchor="middle" class="eq-label" font-size="8">200 մ²</text>
+
+              <rect x="380" y="250" width="158" height="64" fill="rgba(54,214,107,.07)" stroke="#36D66B" stroke-width="1.2"/>
+              <text x="459" y="278" text-anchor="middle" class="eq-title" font-size="9.5">10 · ՊԱՏՐԱՍՏԻ ՊԱՀԵՍՏ</text>
+              <text x="459" y="294" text-anchor="middle" class="eq-label" font-size="8">1100 մ²</text>
+
+              <rect x="42" y="316" width="158" height="62" fill="rgba(169,183,176,.08)" stroke="#6E8077" stroke-width="1.2"/>
+              <text x="121" y="342" text-anchor="middle" class="eq-title" font-size="9">11 · ԱՌԱՔՈՒՄ</text>
+              <text x="121" y="357" text-anchor="middle" class="eq-label" font-size="8">400 մ²</text>
+
+              <rect x="202" y="316" width="118" height="62" fill="rgba(169,183,176,.08)" stroke="#6E8077" stroke-width="1.2"/>
+              <text x="261" y="342" text-anchor="middle" class="eq-title" font-size="9">12 · ՕՖԻՍ</text>
+              <text x="261" y="357" text-anchor="middle" class="eq-label" font-size="8">350 մ²</text>
+
+              <rect x="322" y="316" width="108" height="62" fill="rgba(230,161,0,.09)" stroke="#E6A100" stroke-width="1.2"/>
+              <text x="376" y="342" text-anchor="middle" class="eq-title" font-size="9">13 · ԷՆԵՐԳԻԱ</text>
+              <text x="376" y="357" text-anchor="middle" class="eq-label" font-size="8">300 մ²</text>
+
+              <rect x="432" y="316" width="106" height="62" fill="rgba(77,166,201,.09)" stroke="#4DA6C9" stroke-width="1.2"/>
+              <text x="485" y="342" text-anchor="middle" class="eq-title" font-size="9">14 · ՋՐԻ ՄԱՔՐՈՒՄ</text>
+              <text x="485" y="357" text-anchor="middle" class="eq-label" font-size="8">350 մ²</text>
+
+              <path class="flowline dash-anim" d="M248 84 L250 84"/>
+              <path class="flowline dash-anim" d="M210 150 L212 150"/>
+              <path class="flowline dash-anim" d="M378 150 L380 150"/>
+              <path class="flowline dash-anim" d="M340 216 L342 216"/>
+              <path class="flowline dash-anim" d="M230 282 L232 282"/>
+              <path class="flowline dash-anim" d="M378 282 L380 282"/>
+              <text x="290" y="392" text-anchor="middle" class="eq-label" fill="#36D66B" font-size="8.5">→ ՆՅՈՒԹԻ ՀՈՍՔԸ՝ 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 → 9 → 10 → 11</text>
+            </svg>
+          </div>
+        </div>
+
+        <div class="grid4 rise" style="--d:.4s">
+          <div class="panel panel-pad hud-corner"><div class="metric"><div class="lbl">Էլեկտրականություն</div><div class="val green" style="font-size:17px">450 կՎտ</div><div class="tiny dim">դրվածքային · 180–260 կՎտ աշխատանքային</div></div></div>
+          <div class="panel panel-pad hud-corner"><div class="metric"><div class="lbl">Ջուր</div><div class="val green" style="font-size:17px">15 մ³/ժ</div><div class="tiny dim">85% շրջանառությամբ</div></div></div>
+          <div class="panel panel-pad hud-corner"><div class="metric"><div class="lbl">Գոլորշի / ջերմություն</div><div class="val" style="font-size:17px">~1.2 տ/ժ</div><div class="tiny dim">էքստրուզիայի և լվացման համար</div></div></div>
+          <div class="panel panel-pad hud-corner"><div class="metric"><div class="lbl">Սեղմված օդ</div><div class="val" style="font-size:17px">6 բար</div><div class="tiny dim">օդաճնշական · ավտոմատիկա</div></div></div>
+          <div class="panel panel-pad hud-corner"><div class="metric"><div class="lbl">Աշխատակիցներ</div><div class="val" style="font-size:17px">45–60</div><div class="tiny dim">2 հերթափոխ</div></div></div>
+          <div class="panel panel-pad hud-corner"><div class="metric"><div class="lbl">Հզորությունը</div><div class="val green" style="font-size:17px">100–500 տ/ամիս</div><div class="tiny dim">ըստ հումքի հոսքի</div></div></div>
+          <div class="panel panel-pad hud-corner"><div class="metric"><div class="lbl">Պահեստային տարողություն</div><div class="val" style="font-size:17px">~1 200 տ</div><div class="tiny dim">հումք + պատրաստի</div></div></div>
+          <div class="panel panel-pad hud-corner"><div class="metric"><div class="lbl">Ընդարձակման պահուստ</div><div class="val" style="font-size:17px">3 600 մ²</div><div class="tiny dim">ազատ տարածք հողամասում</div></div></div>
+        </div>
+
+        <div class="grid2 rise" style="--d:.5s">
+          <div class="panel panel-pad hud-corner">
+            <div class="mono tiny green" style="letter-spacing:.14em;margin-bottom:8px">ՍԱՐՔԱՎՈՐՈՒՄԸ ԸՍՏ ԳՈՏԻՆԵՐԻ</div>
+            <div class="kv"><span class="k">1 · Ընդունում</span><span class="v">ավտոմեքենային կշեռք · ընդունման գիծ · նմուշառման սեղան</span></div>
+            <div class="kv"><span class="k">2 · Պահեստ</span><span class="v">բունկերներ · ճակատային բեռնիչ</span></div>
+            <div class="kv"><span class="k">3 · Տեսակավորում</span><span class="v">փոխակրիչ · օպտիկական տեսակավորիչ (NIR) · մագնիս</span></div>
+            <div class="kv"><span class="k">4 · Լվացում</span><span class="v">նախնական և ինտենսիվ բաղնիքներ · ֆրիկցիոն լվացիչ</span></div>
+            <div class="kv"><span class="k">5 · Տարանջատում</span><span class="v">ֆլոտացիոն բաք · ցենտրիֆուգ · չորանոց</span></div>
+            <div class="kv"><span class="k">6 · Էքստրուզիա</span><span class="v">էքստրուդեր · հալույթի ֆիլտր · գրանուլյատոր</span></div>
+            <div class="kv"><span class="k">7 · Կոմպաունդավորում</span><span class="v">խառնիչ · ադիտիվների դոզավորիչ</span></div>
+            <div class="kv"><span class="k">8 · Կաղապարում</span><span class="v">ներարկման մեքենա · կոմպրեսիոն մամուլ</span></div>
+            <div class="kv"><span class="k">9 · Որակի վերահսկում</span><span class="v">լաբորատորիա (MFI · խտություն · խոնավություն)</span></div>
+            <div class="kv"><span class="k">10 · Պահեստ</span><span class="v">դարակաշարեր · փաթեթավորման գիծ</span></div>
+          </div>
+          <div class="panel panel-pad hud-corner">
+            <div class="mono tiny lime" style="letter-spacing:.14em;margin-bottom:8px">ԻՆՉՈՒ ՀԵՆՑ ԱՅՍՏԵՂ</div>
+            <div class="col" style="gap:10px">
+              <div class="row" style="gap:10px"><span class="dot"></span><span class="small">Մոտ է հումքի հավաքման ցանցին՝ Երևան, Կոտայք, Արմավիր</span></div>
+              <div class="row" style="gap:10px"><span class="dot"></span><span class="small">Մ2 մայրուղուն մոտ՝ ծանր բեռնատարների մուտքի համար</span></div>
+              <div class="row" style="gap:10px"><span class="dot"></span><span class="small">Բնակելի գոտուց &gt; 1.5 կմ՝ աղմուկ, փոշի և հոտ բացառելու համար</span></div>
+              <div class="row" style="gap:10px"><span class="dot"></span><span class="small">Սանիտարական պաշտպանիչ գոտի՝ ըստ նախագծային ենթադրության</span></div>
+              <div class="row" style="gap:10px"><span class="dot"></span><span class="small">Բավարար հողամաս՝ արտադրամաս + պահեստ + ընդարձակում</span></div>
+              <div class="row" style="gap:10px"><span class="dot"></span><span class="small">Հնարավորություն՝ ջրի շրջանառության և արևային էներգիայի</span></div>
+            </div>
+            <p class="small dim mono" style="margin-top:12px">ԲՈԼՈՐ ԹՎԵՐԸ՝ ԻԼՅՈՒՍՏՐԱՏԻՎ ՆԱԽԱԳԾԱՅԻՆ ԵՆԹԱԴՐՈՒԹՅՈՒՆՆԵՐ</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== ՍԼԱՅԴ 07 · RECEIVING & SORTING ===================== -->
+    <section class="slide" id="slide-7">
+      <div class="slide-inner">
+        <div class="rise" style="--d:.05s">
+          <div class="eyebrow">ՍԼԱՅԴ 07 <span class="sep">//</span> ԸՆԴՈՒՆՈՒՄ ԵՎ ՏԵՍԱԿԱՎՈՐՈՒՄ</div>
+          <h2 style="margin-top:6px">Վերամշակման առաջին կանոնը՝ <span class="grad-text">ճիշտ հումք</span></h2>
+        </div>
+
+        <div class="split">
+          <div class="panel panel-pad hud-corner rise" style="--d:.18s">
+            <div class="mono tiny green" style="letter-spacing:.14em;margin-bottom:8px">ԸՆԴՈՒՆՄԱՆ ԵՎ ՏԵՍԱԿԱՎՈՐՄԱՆ ԳԻԾ</div>
+            <svg viewBox="0 0 640 300" class="diagram">
+              <!-- truck -->
+              <g class="eq">
+                <rect x="20" y="150" width="88" height="34" rx="6"/>
+                <rect x="12" y="184" width="30" height="34" rx="4"/>
+                <rect x="66" y="184" width="30" height="34" rx="4"/>
+                <path d="M20 150 L52 126 L120 126 L108 150 Z" fill="#12221B"/>
+                <circle cx="30" cy="222" r="9" fill="#07100C" stroke="#6E8077"/><circle cx="82" cy="222" r="9" fill="#07100C" stroke="#6E8077"/>
+              </g>
+              <text x="70" y="116" text-anchor="middle" class="eq-title">Բեռնատար</text>
+              <path class="flowline dash-anim" d="M120 160 L150 160"/>
+
+              <!-- receiving / weighing -->
+              <g class="eq">
+                <rect x="150" y="140" width="70" height="44" rx="6"/>
+                <rect x="158" y="184" width="54" height="10" rx="2"/>
+                <text x="185" y="168" text-anchor="middle" class="eq-label" font-size="9">ԿՇԵՌՔ</text>
+              </g>
+              <text x="185" y="210" text-anchor="middle" class="eq-label">Կշռում</text>
+              <path class="flowline dash-anim" d="M220 162 L250 162"/>
+
+              <!-- inspection -->
+              <g class="eq">
+                <rect x="250" y="138" width="66" height="46" rx="6"/>
+                <circle cx="283" cy="152" r="7" fill="none" stroke="#E6A100"/>
+                <text x="283" y="182" text-anchor="middle" class="eq-label" font-size="8.5">ՍՏՈՒԳՈՒՄ</text>
+              </g>
+              <path class="flowline dash-anim" d="M316 161 L346 161"/>
+
+              <!-- sorting conveyor -->
+              <g>
+                <rect x="346" y="148" width="270" height="26" rx="4" fill="#0B1711" stroke="#6E8077"/>
+                <rect x="346" y="148" width="270" height="26" rx="4" fill="url(#coreGrad)" opacity=".06"/>
+                <g class="belt">
+                  <rect x="352" y="158" width="258" height="8" fill="rgba(54,214,107,.12)"/>
+                </g>
+                <circle cx="356" cy="161" r="5" fill="#07100C" stroke="#6E8077"/>
+                <circle cx="606" cy="161" r="5" fill="#07100C" stroke="#6E8077"/>
+                <text x="481" y="142" text-anchor="middle" class="eq-title">Տեսակավորման փոխակրիչ</text>
+                <!-- items on belt -->
+                <g class="bob"><rect x="380" y="152" width="12" height="8" rx="2" fill="#4DA6C9"/></g>
+                <g class="bob" style="animation-delay:.4s"><rect x="430" y="152" width="12" height="8" rx="2" fill="#B7F36B"/></g>
+                <g class="bob" style="animation-delay:.8s"><rect x="490" y="152" width="12" height="8" rx="2" fill="#E6A100"/></g>
+                <g class="bob" style="animation-delay:1.1s"><rect x="550" y="152" width="12" height="8" rx="2" fill="#36D66B"/></g>
+              </g>
+
+              <!-- optical sorter above belt -->
+              <g class="eq">
+                <rect x="420" y="96" width="52" height="26" rx="4"/>
+                <path d="M446 122 L446 148" class="flowline" stroke="#36D66B"/>
+                <text x="446" y="86" text-anchor="middle" class="eq-label" font-size="8.5">ՕՊՏԻԿԱԿԱՆ</text>
+              </g>
+              <!-- magnet -->
+              <g class="eq">
+                <rect x="540" y="96" width="34" height="24" rx="4"/>
+                <path d="M557 120 L557 148" class="flowline" stroke="#E6A100"/>
+                <text x="557" y="88" text-anchor="middle" class="eq-label" font-size="8">ՄԱԳՆԻՍ</text>
+              </g>
+              <text x="420" y="80" text-anchor="middle" class="eq-label" fill="#36D66B">Օպերատոր + NIR</text>
+
+              <!-- bins -->
+              <g>
+                <rect x="360" y="196" width="40" height="40" rx="4" fill="#0B1711" stroke="#4DA6C9"/><text x="380" y="218" text-anchor="middle" class="eq-label" font-size="8">PET</text>
+                <rect x="410" y="196" width="40" height="40" rx="4" fill="#0B1711" stroke="#B7F36B"/><text x="430" y="218" text-anchor="middle" class="eq-label" font-size="8">HDPE</text>
+                <rect x="460" y="196" width="40" height="40" rx="4" fill="#0B1711" stroke="#E6A100"/><text x="480" y="218" text-anchor="middle" class="eq-label" font-size="8">PP</text>
+                <rect x="510" y="196" width="40" height="40" rx="4" fill="#0B1711" stroke="#36D66B"/><text x="530" y="218" text-anchor="middle" class="eq-label" font-size="8">LDPE</text>
+                <rect x="560" y="196" width="46" height="40" rx="4" fill="#0B1711" stroke="#FF5A5A"/><text x="583" y="212" text-anchor="middle" class="eq-label" font-size="7.5">ԹԱՓՈՆ</text>
+              </g>
+              <text x="360" y="254" class="eq-label" fill="#6E8077">Տեսակավորումից հետո՝ PET · HDPE · PP · LDPE + մերժում</text>
+            </svg>
+          </div>
+
+          <div class="col rise" style="--d:.3s">
+            <div class="panel panel-pad hud-corner">
+              <div class="mono tiny lime" style="letter-spacing:.14em;margin-bottom:10px">ՏԵՍԱԿԱՎՈՐՄԱՆ ՉԱՓԱՆԻՇՆԵՐ</div>
+              <div class="col" style="gap:8px">
+                <div class="row" style="justify-content:space-between"><span class="small">1. Պոլիմերի տեսակ</span><span class="tag green">NIR / FTIR</span></div>
+                <div class="row" style="justify-content:space-between"><span class="small">2. Գույն</span><span class="tag blue">Օպտիկական</span></div>
+                <div class="row" style="justify-content:space-between"><span class="small">3. Աղտոտվածություն</span><span class="tag amber">Տեսողական</span></div>
+                <div class="row" style="justify-content:space-between"><span class="small">4. Չափ / ձև</span><span class="tag">Մաղ</span></div>
+              </div>
+            </div>
+            <div class="panel panel-pad hud-corner">
+              <div class="mono tiny red" style="letter-spacing:.14em;margin-bottom:8px">ՀԵՌԱՑՎՈՂ ԽԱՌՆՈՒՐԴՆԵՐ</div>
+              <div class="flow" style="gap:5px">
+                <span class="node">Մետաղ</span><span class="node">Ապակի</span><span class="node">Թուղթ</span>
+                <span class="node">Ստվարաթուղթ</span><span class="node">Օրգանիկա</span>
+              </div>
+            </div>
+            <div class="panel panel-pad hud-corner">
+              <div class="mono tiny dim" style="margin-bottom:6px">CORE-Ի ԿԱՐԳԱՎԻՃԱԿԸ</div>
+              <p class="small lead">REPLAST CORE-ն անցնում է փոխակրիչով և <b style="color:#fff">բաժանվում ըստ նյութի տեսակի</b>՝ քաոսային խառնուրդից մոնոհոսքերի։</p>
+            </div>
+          </div>
+        </div>
+        <div class="rise" style="--d:.5s">
+        <div class="spread" style="margin-bottom:8px">
+        <div class="mono tiny red" style="letter-spacing:.14em">ՏԵՍԱՆՅՈՒԹ՝ ՍԱՐՔԱՎՈՐՄԱՆ ԱՇԽԱՏԱՆՔԸ</div>
+        <div class="mono tiny dim vnote">YouTube · արտաքին աղբյուր</div>
+        </div>
+        <div class="vidrow" style="grid-template-columns:1fr">
+          <div class="vcard" data-vid="rpBpMXlafL0" onclick="playVideo(this)">
+            <img class="vthumb" src="https://img.youtube.com/vi/rpBpMXlafL0/hqdefault.jpg" alt="" loading="lazy">
+            <div class="vplay"></div>
+            <div class="vcap"><span class="mono tag red">ՏԵՍԱՆՅՈՒԹ</span><span>Օպտիկական տեսակավորիչի աշխատանքը (NIR)</span></div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== ՍԼԱՅԴ 08 · SHREDDER ===================== -->
+    <section class="slide" id="slide-8">
+      <div class="slide-inner">
+        <div class="rise" style="--d:.05s">
+          <div class="eyebrow">ՍԼԱՅԴ 08 <span class="sep">//</span> ՄԱՆՐԱՑՈՒՄ</div>
+          <h2 style="margin-top:6px">Ինչպե՞ս է արտադրանքը վերածվում <span class="grad-text">flakes-ի</span></h2>
+        </div>
+
+        <div class="split">
+          <div class="panel panel-pad hud-corner rise" style="--d:.18s">
+            <div class="mono tiny green" style="letter-spacing:.14em;margin-bottom:8px">ՄԱՆՐԱՑՈՒՉԻ / ԳՐԱՆՈՒԼՅԱՏՈՐԻ ԿՏՐՎԱԾՔ</div>
+            <svg viewBox="0 0 640 340" class="diagram">
+              <!-- hopper -->
+              <path d="M180 30 L250 30 L300 110 L130 110 Z" fill="rgba(13,23,18,.8)" stroke="#6E8077" stroke-width="1.6"/>
+              <text x="215" y="74" text-anchor="middle" class="eq-title">ԲՈՒՆԿԵՐ</text>
+              <!-- plastic item entering -->
+              <rect x="204" y="6" width="26" height="22" rx="3" fill="#4DA6C9" class="bob"/>
+              <path class="flowline dash-anim" d="M217 30 L217 60"/>
+
+              <!-- chamber -->
+              <rect x="120" y="110" width="250" height="130" rx="14" fill="rgba(13,23,18,.8)" stroke="#6E8077" stroke-width="1.6"/>
+              <text x="245" y="126" text-anchor="middle" class="eq-title">ԽՑԻԿ</text>
+
+              <!-- rotor -->
+              <circle cx="215" cy="190" r="52" fill="#0B1711" stroke="#36D66B" stroke-width="2" class="spin" style="transform-origin:215px 190px"/>
+              <circle cx="215" cy="190" r="10" fill="#36D66B"/>
+              <!-- knives -->
+              <g class="spin" style="transform-origin:215px 190px">
+                <rect x="212" y="130" width="6" height="26" fill="#B7F36B" rx="2"/>
+                <rect x="212" y="224" width="6" height="26" fill="#B7F36B" rx="2"/>
+                <rect x="152" y="187" width="26" height="6" fill="#B7F36B" rx="2"/>
+                <rect x="252" y="187" width="26" height="6" fill="#B7F36B" rx="2"/>
+              </g>
+              <text x="215" y="200" text-anchor="middle" class="eq-label" fill="#fff" font-size="9">ՌՈՏՈՐ</text>
+              <text x="150" y="178" class="eq-label" fill="#B7F36B">ԴԱՆԱԿՆԵՐ</text>
+
+              <!-- screen -->
+              <path d="M130 250 Q245 292 360 250" fill="none" stroke="#E6A100" stroke-width="2.4" stroke-dasharray="5 3"/>
+              <text x="360" y="262" class="eq-label" fill="#E6A100">ՄԱՂ</text>
+
+              <!-- flakes falling out -->
+              <g fill="#36D66B" class="bob">
+                <rect x="250" y="290" width="10" height="7" rx="1.5" transform="rotate(20 255 293)"/>
+                <rect x="270" y="300" width="10" height="7" rx="1.5" transform="rotate(-16 275 303)"/>
+                <rect x="238" y="306" width="9" height="6" rx="1.5" transform="rotate(30 242 309)"/>
+              </g>
+              <text x="268" y="330" text-anchor="middle" class="eq-label" fill="#36D66B">ԹԵՓՈՒՂՆԵՐ</text>
+
+              <!-- motor + gearbox -->
+              <g class="eq">
+                <rect x="410" y="150" width="70" height="44" rx="6"/>
+                <text x="445" y="176" text-anchor="middle" class="eq-label" font-size="9">ՇԱՐԺԻՉ</text>
+                <rect x="380" y="166" width="30" height="22" rx="3" fill="#0B1711"/>
+                <path class="flowline dash-anim" d="M370 177 L340 177"/>
+              </g>
+              <g class="eq">
+                <rect x="410" y="210" width="70" height="40" rx="6"/>
+                <text x="445" y="234" text-anchor="middle" class="eq-label" font-size="9">ՓՈԽԱՆՑՈՒՑԻՉ</text>
+              </g>
+              <text x="445" y="290" text-anchor="middle" class="eq-label">ԲԵՌՆԱԹԱՓՈՒՄ ↓</text>
+            </svg>
+          </div>
+
+          <div class="col rise" style="--d:.3s">
+            <div class="panel panel-pad hud-corner">
+              <div class="mono tiny lime" style="letter-spacing:.14em;margin-bottom:8px">ՆՅՈՒԹԻ ԵՐԹՈՒՂԻՆ</div>
+              <div class="flow" style="flex-direction:column;align-items:flex-start;gap:6px">
+                <div class="row"><span class="node hot">Արտադրանք</span><span class="arrow">→</span><span class="node">Բունկեր</span></div>
+                <div class="row"><span class="node">Ռոտոր + դանակներ</span><span class="arrow">→</span><span class="node">Կտրող խցիկ</span></div>
+                <div class="row"><span class="node">Մանրացում</span><span class="arrow">→</span><span class="node hot">Մաղ (ֆրակցիա)</span></div>
+                <div class="row"><span class="node">Բեռնաթափում</span><span class="arrow">→</span><span class="node hot">Թեփուկներ</span></div>
+              </div>
+            </div>
+            <div class="panel panel-pad hud-corner">
+              <div class="mono tiny green" style="letter-spacing:.14em;margin-bottom:8px">ՇՐԵԴԵՐԸ vs ԳՐԱՆՈՒԼՅԱՏՈՐԸ</div>
+              <p class="small lead"><b style="color:#fff">Շրեդերը</b> — խոշոր հումքի կոպիտ առաջնային մանրացում։</p>
+              <p class="small lead" style="margin-top:6px"><b style="color:#fff">Գրանուլյատորը</b> — վերահսկվող մանրացում մինչև կայուն ֆրակցիա։</p>
+              <p class="small dim" style="margin-top:8px">Թեփուկների չափը ազդում է լվացման, չորացման և էքստրուզիայի վրա. չափազանց խոշոր ֆրակցիան վատ է լվացվում, չափազանց մանրը՝ տարվում է հոսքով։</p>
+            </div>
+            <div class="panel panel-pad hud-corner">
+              <div class="mono tiny dim">CORE-Ի ԿԱՐԳԱՎԻՃԱԿԸ</div>
+              <div class="core-wrap" style="margin-top:6px"><svg class="core-idle" style="width:120px"><use href="#core-flakes"/></svg></div>
+            </div>
+          </div>
+        </div>
+        <div class="rise" style="--d:.5s">
+        <div class="spread" style="margin-bottom:8px">
+        <div class="mono tiny red" style="letter-spacing:.14em">ՏԵՍԱՆՅՈՒԹ՝ ՍԱՐՔԱՎՈՐՄԱՆ ԱՇԽԱՏԱՆՔԸ</div>
+        <div class="mono tiny dim vnote">YouTube · արտաքին աղբյուր</div>
+        </div>
+        <div class="vidrow" style="grid-template-columns:repeat(2,1fr)">
+          <div class="vcard" data-vid="Dkh112ItE00" onclick="playVideo(this)">
+            <img class="vthumb" src="https://img.youtube.com/vi/Dkh112ItE00/hqdefault.jpg" alt="" loading="lazy">
+            <div class="vplay"></div>
+            <div class="vcap"><span class="mono tag red">ՏԵՍԱՆՅՈՒԹ</span><span>Ինչպես է աշխատում մանրացուցիչը</span></div>
+          </div>
+          <div class="vcard" data-vid="Q2H1biLes14" onclick="playVideo(this)">
+            <img class="vthumb" src="https://img.youtube.com/vi/Q2H1biLes14/hqdefault.jpg" alt="" loading="lazy">
+            <div class="vplay"></div>
+            <div class="vcap"><span class="mono tag red">ՏԵՍԱՆՅՈՒԹ</span><span>Երկռոտոր մանրացուցիչը գործողության մեջ</span></div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== ՍԼԱՅԴ 09 · WASHING ===================== -->
+    <section class="slide" id="slide-9">
+      <div class="slide-inner">
+        <div class="rise" style="--d:.05s">
+          <div class="eyebrow">ՍԼԱՅԴ 09 <span class="sep">//</span> ԼՎԱՑՄԱՆ ԳԻԾ</div>
+          <h2 style="margin-top:6px">Մաքրությունը որոշում է <span class="grad-text">նյութի որակը</span></h2>
+        </div>
+
+        <div class="split">
+          <div class="panel panel-pad hud-corner rise" style="--d:.18s">
+            <div class="mono tiny green" style="letter-spacing:.14em;margin-bottom:8px">ԵՐԿԱՐ ԼՎԱՑՄԱՆ ԳԻԾ</div>
+            <svg viewBox="0 0 640 300" class="diagram">
+              <!-- five stages -->
+              <g class="eq">
+                <rect x="16" y="60" width="106" height="120" rx="10"/>
+                <text x="69" y="50" text-anchor="middle" class="eq-title">ՆԱԽՆ. ԼՎԱՑՈՒՄ</text>
+                <path class="stream" stroke="#4DA6C9" d="M26 150 q20 -12 40 0 q20 12 40 0 q20 -12 36 0"/>
+                <rect x="34" y="120" width="12" height="9" rx="2" fill="#7a6a55" class="bob"/>
+              </g>
+              <g class="eq">
+                <rect x="132" y="60" width="106" height="120" rx="10"/>
+                <text x="185" y="50" text-anchor="middle" class="eq-title">ԻՆՏԵՆՍԻՎ</text>
+                <path class="stream" stroke="#4DA6C9" d="M142 150 q20 -12 40 0 q20 12 40 0 q20 -12 36 0"/>
+                <rect x="150" y="120" width="12" height="9" rx="2" fill="#8a7a55" class="bob"/>
+              </g>
+              <g class="eq">
+                <rect x="248" y="60" width="106" height="120" rx="10"/>
+                <text x="301" y="50" text-anchor="middle" class="eq-title">ՖՐԻԿՑԻՈՆ</text>
+                <path class="stream" stroke="#4DA6C9" d="M258 150 q20 -12 40 0 q20 12 40 0 q20 -12 36 0"/>
+                <rect x="266" y="122" width="12" height="9" rx="2" fill="#9a8a55" class="bob"/>
+              </g>
+              <g class="eq">
+                <rect x="364" y="60" width="106" height="120" rx="10"/>
+                <text x="417" y="50" text-anchor="middle" class="eq-title">ՈՂՈՂՈՒՄ</text>
+                <path class="stream" stroke="#4DA6C9" d="M374 150 q20 -12 40 0 q20 12 40 0 q20 -12 36 0"/>
+                <rect x="382" y="122" width="12" height="9" rx="2" fill="#5aa06a" class="bob"/>
+              </g>
+              <g class="eq">
+                <rect x="480" y="60" width="106" height="120" rx="10"/>
+                <text x="533" y="50" text-anchor="middle" class="eq-title">ՋՐԻ ԱՌԱՆՋ.</text>
+                <path class="stream" stroke="#4DA6C9" d="M490 150 q20 -12 40 0 q20 12 40 0 q20 -12 36 0"/>
+                <rect x="500" y="124" width="12" height="9" rx="2" fill="#36D66B" class="bob"/>
+              </g>
+              <!-- water drain -->
+              <path class="flowline blue dash-anim" d="M520 184 L520 230 L560 230"/>
+              <text x="552" y="252" class="eq-label" fill="#4DA6C9">ՋՈՒՐ → ՄԱՔՐՈՒՄ</text>
+              <!-- dirty → clean -->
+              <path class="flowline dash-anim" d="M122 120 L132 120"/>
+              <path class="flowline dash-anim" d="M238 120 L248 120"/>
+              <path class="flowline dash-anim" d="M354 120 L364 120"/>
+              <path class="flowline dash-anim" d="M470 120 L480 120"/>
+              <path class="flowline dash-anim" d="M586 120 L606 120"/>
+              <g fill="#36D66B" class="bob"><rect x="606" y="116" width="12" height="9" rx="2"/><rect x="612" y="128" width="11" height="8" rx="2" style="animation-delay:.3s"/></g>
+              <text x="580" y="292" text-anchor="middle" class="eq-label" fill="#36D66B">ՄԱՔՈՒՐ ԹԵՓՈՒՂՆԵՐ →</text>
+              <text x="70" y="296" text-anchor="middle" class="eq-label" fill="#7a6a55">ԿԵՂՏՈՏ ԹԵՓՈՒՂՆԵՐ →</text>
+            </svg>
+          </div>
+
+          <div class="col rise" style="--d:.3s">
+            <div class="panel panel-pad hud-corner">
+              <div class="mono tiny amber" style="letter-spacing:.14em;margin-bottom:8px">ՀԵՌԱՑՎՈՂ ԱՂՏՈՏՎԱԾՈՒԹՅՈՒՆՆԵՐ</div>
+              <div class="flow" style="gap:5px">
+                <span class="node">Կեղտ</span><span class="node">Փոշի</span><span class="node">Ավազ</span>
+                <span class="node">Սննդի մնացորդներ</span><span class="node">Յուղեր</span><span class="node">Սոսինձներ</span><span class="node">Պիտակներ</span>
+              </div>
+            </div>
+            <div class="panel panel-pad hud-corner">
+              <div class="mono tiny green" style="letter-spacing:.14em;margin-bottom:8px">ՔԻՄԻԱԿԱՆ ՄԱՍԸ</div>
+              <p class="small lead">Կախված <b>աղտոտվածության տեսակից</b> և <b>պոլիմերից</b>՝ կիրառվում են լվացող և թույլ ալկալային համակարգեր։ Համընդհանուր բաղադրատոմս գոյություն չունի — կազմը ընտրվում է հոսքի համար։</p>
+            </div>
+            <div class="panel panel-pad hud-corner">
+              <div class="mono tiny dim" style="margin-bottom:6px">CORE-Ի ԿԱՐԳԱՎԻՃԱԿԸ</div>
+              <p class="small lead">Կեղտոտ թեփուկները անցնում է ջրի և սարքավորման միջով — և տեսողականորեն դառնում է <b style="color:#36D66B">մաքուր</b>։</p>
+            </div>
+          </div>
+        </div>
+        <div class="rise" style="--d:.5s">
+        <div class="spread" style="margin-bottom:8px">
+        <div class="mono tiny red" style="letter-spacing:.14em">ՏԵՍԱՆՅՈՒԹ՝ ՍԱՐՔԱՎՈՐՄԱՆ ԱՇԽԱՏԱՆՔԸ</div>
+        <div class="mono tiny dim vnote">YouTube · արտաքին աղբյուր</div>
+        </div>
+        <div class="vidrow" style="grid-template-columns:repeat(2,1fr)">
+          <div class="vcard" data-vid="bBx5TrV_zAA" onclick="playVideo(this)">
+            <img class="vthumb" src="https://img.youtube.com/vi/bBx5TrV_zAA/hqdefault.jpg" alt="" loading="lazy">
+            <div class="vplay"></div>
+            <div class="vcap"><span class="mono tag red">ՏԵՍԱՆՅՈՒԹ</span><span>ՊԵՏ շշերի լվացման գիծ (7000 կգ/ժ)</span></div>
+          </div>
+          <div class="vcard" data-vid="LlZd7yl_4hc" onclick="playVideo(this)">
+            <img class="vthumb" src="https://img.youtube.com/vi/LlZd7yl_4hc/hqdefault.jpg" alt="" loading="lazy">
+            <div class="vplay"></div>
+            <div class="vcap"><span class="mono tag red">ՏԵՍԱՆՅՈՒԹ</span><span>Լվացման գիծ՝ ներառյալ ֆլոտացիոն բաքը</span></div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== ՍԼԱՅԴ 10 · SEPARATION ===================== -->
+    <section class="slide" id="slide-10">
+      <div class="slide-inner">
+        <div class="rise" style="--d:.05s">
+          <div class="eyebrow">ՍԼԱՅԴ 10 <span class="sep">//</span> ՏԱՐԱՆՋԱՏՈՒՄ</div>
+          <h2 style="margin-top:6px">Ինչպե՞ս տարանջատել նյութերը <span class="grad-text">մանրացումից հետո</span></h2>
+        </div>
+
+        <div class="split">
+          <div class="panel panel-pad hud-corner rise" style="--d:.18s">
+            <div class="mono tiny green" style="letter-spacing:.14em;margin-bottom:8px">ԻՆՏԵՐԱԿՏԻՎ ՖԼՈՏԱՑԻՈՆ ԲԱՔ (ԼՈՂԱՑՈՂ-ՍՈՒԶՎՈՂ)</div>
+            <svg viewBox="0 0 640 320" class="diagram">
+              <!-- tank -->
+              <path d="M60 150 L580 150 L540 290 L100 290 Z" fill="rgba(13,23,18,.8)" stroke="#6E8077" stroke-width="1.6"/>
+              <!-- water -->
+              <path d="M64 190 L576 190 L540 288 L100 288 Z" fill="rgba(77,166,201,.18)" stroke="#4DA6C9" stroke-width="1.2"/>
+              <path class="stream" stroke="#4DA6C9" d="M80 220 q30 -10 60 0 q30 10 60 0 q30 -10 60 0 q30 10 60 0 q30 -10 60 0 q30 10 60 0"/>
+              <text x="90" y="240" class="eq-label" fill="#4DA6C9">ՋՈՒՐ</text>
+              <!-- floating material B -->
+              <g class="bob" fill="#B7F36B"><rect x="180" y="176" width="16" height="11" rx="2"/><rect x="204" y="180" width="14" height="10" rx="2"/><rect x="240" y="174" width="15" height="11" rx="2"/></g>
+              <text x="210" y="166" text-anchor="middle" class="eq-label" fill="#B7F36B">ՆՅՈՒԹ B — լողում է</text>
+              <!-- sinking material A -->
+              <g class="bob" fill="#E6A100"><rect x="360" y="252" width="16" height="11" rx="2"/><rect x="384" y="256" width="14" height="10" rx="2"/><rect x="340" y="258" width="15" height="11" rx="2"/></g>
+              <text x="370" y="308" text-anchor="middle" class="eq-label" fill="#E6A100">ՆՅՈՒԹ A — սուզվում է</text>
+              <!-- in feed -->
+              <rect x="300" y="86" width="30" height="22" rx="4" fill="#0B1711" stroke="#6E8077"/>
+              <path class="flowline dash-anim" d="M315 108 L315 150"/>
+              <text x="315" y="78" text-anchor="middle" class="eq-title">ԽԱՌՆՈՒՐԴ</text>
+              <!-- outlet arrows -->
+              <path class="flowline" stroke="#B7F36B" d="M60 180 L30 180 L30 120"/>
+              <text x="24" y="108" class="eq-label" fill="#B7F36B" font-size="8.5">ԼՈՂԱՑՈՂ</text>
+              <path class="flowline amber" d="M100 290 L60 290 L60 320"/>
+            </svg>
+          </div>
+
+          <div class="col rise" style="--d:.3s">
+            <div class="mono tiny lime" style="letter-spacing:.14em">ՏԱՐԱՆՋԱՏՄԱՆ ՄԵԹՈԴՆԵՐԸ — ՈՒՂՂԵՔ ԲԱՑԱՏՐՈՒԹՅԱՆ ՀԱՄԱՐ</div>
+            <div class="panel panel-pad hud-corner">
+              <div class="col" style="gap:10px">
+                <div class="row" style="justify-content:space-between"><span class="small" data-tip="Սև մետաղների հեռացում մագնիսական դաշտով">Մագնիսական տարանջատում</span><span class="tag green">Fe</span></div>
+                <div class="row" style="justify-content:space-between"><span class="small" data-tip="Տարանջատում ըստ աերոդինամիկ դիմադրության օդի հոսքում">Օդային տարանջատում</span><span class="tag blue">ՕԴ</span></div>
+                <div class="row" style="justify-content:space-between"><span class="small" data-tip="Տարանջատում ըստ խտության ջրային միջավայրում">Խտությամբ տարանջատում</span><span class="tag lime">ԽՏՈՒԹՅՈՒՆ</span></div>
+                <div class="row" style="justify-content:space-between"><span class="small" data-tip="Մեկ պոլիմերը սուզվում է, մյուսը՝ լողում">ԼՈՂԱՑՈՂ-ՍՈՒԶՎՈՂ</span><span class="tag amber">H₂O</span></div>
+                <div class="row" style="justify-content:space-between"><span class="small" data-tip="Պոլիմերի սպեկտրալ նույնականացում ըստ անդրադարձի">Օպտիկական տեսակավորում</span><span class="tag blue">NIR</span></div>
+                <div class="row" style="justify-content:space-between"><span class="small" data-tip="Օպերատորի վերջնական տեսողական ստուգում">Ձեռքով QC</span><span class="tag">ՁԵՌՔՈՎ</span></div>
+              </div>
+            </div>
+            <p class="small lead">Մեթոդը ընտրվում է <b>կոնկրետ խառնուրդի</b> և նյութերի ֆիզիկական հատկությունների համար։ HDPE-ն և PP-ն լողում են (ρ&lt;1), PET-ը և PVC-ն սուզվում են (ρ&gt;1) — սա տարանջատման հիմքն է։</p>
+          </div>
+        </div>
+        <div class="rise" style="--d:.5s">
+        <div class="spread" style="margin-bottom:8px">
+        <div class="mono tiny red" style="letter-spacing:.14em">ՏԵՍԱՆՅՈՒԹ՝ ՍԱՐՔԱՎՈՐՄԱՆ ԱՇԽԱՏԱՆՔԸ</div>
+        <div class="mono tiny dim vnote">YouTube · արտաքին աղբյուր</div>
+        </div>
+        <div class="vidrow" style="grid-template-columns:repeat(2,1fr)">
+          <div class="vcard" data-vid="LlZd7yl_4hc" data-start="27" onclick="playVideo(this)">
+            <img class="vthumb" src="https://img.youtube.com/vi/LlZd7yl_4hc/hqdefault.jpg" alt="" loading="lazy">
+            <div class="vplay"></div>
+            <div class="vcap"><span class="mono tag red">ՏԵՍԱՆՅՈՒԹ</span><span>Ֆլոտացիոն (լողացող-սուզվող) բաքը</span></div>
+          </div>
+          <div class="vcard" data-vid="Kx6GwepF9ew" onclick="playVideo(this)">
+            <img class="vthumb" src="https://img.youtube.com/vi/Kx6GwepF9ew/hqdefault.jpg" alt="" loading="lazy">
+            <div class="vplay"></div>
+            <div class="vcap"><span class="mono tag red">ՏԵՍԱՆՅՈՒԹ</span><span>Ավտոմատ լվացման և տարանջատման գիծ</span></div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== ՍԼԱՅԴ 11 · DRYING ===================== -->
+    <section class="slide" id="slide-11">
+      <div class="slide-inner">
+        <div class="rise" style="--d:.05s">
+          <div class="eyebrow">ՍԼԱՅԴ 11 <span class="sep">//</span> ՉՈՐԱՑՈՒՄ</div>
+          <h2 style="margin-top:6px">Ջուրը պետք է հեռանա <span class="grad-text">հաջորդ փուլից առաջ</span></h2>
+        </div>
+
+        <div class="split">
+          <div class="panel panel-pad hud-corner rise" style="--d:.18s">
+            <div class="mono tiny green" style="letter-spacing:.14em;margin-bottom:8px">ՉՈՐԱՑՄԱՆ ՍԽԵՄԱ</div>
+            <svg viewBox="0 0 640 300" class="diagram">
+              <!-- centrifuge -->
+              <g class="eq">
+                <rect x="40" y="90" width="120" height="120" rx="14"/>
+                <ellipse cx="100" cy="150" rx="38" ry="46" fill="none" stroke="#36D66B" stroke-width="1.6" class="spin" style="transform-origin:100px 150px"/>
+                <text x="100" y="230" text-anchor="middle" class="eq-title">ՑԵՆՏՐԻՖՈՒԳ</text>
+                <path class="flowline blue dash-anim" d="M160 140 L200 120"/>
+                <text x="176" y="112" class="eq-label" fill="#4DA6C9" font-size="8.5">ՋՈՒՐ</text>
+              </g>
+              <!-- air drying -->
+              <g class="eq">
+                <rect x="220" y="90" width="120" height="120" rx="14"/>
+                <path class="flowline blue" stroke="#4DA6C9" d="M230 180 q20 -14 40 0 q20 14 40 0 q20 -14 40 0"/>
+                <text x="280" y="230" text-anchor="middle" class="eq-title">ՕԴԱՉՈՐԱՑՈՒՄ</text>
+              </g>
+              <!-- thermal drying -->
+              <g class="eq">
+                <rect x="400" y="90" width="120" height="120" rx="14"/>
+                <path class="flowline amber" d="M410 150 h100" stroke-dasharray="4 6"/>
+                <text x="460" y="140" text-anchor="middle" class="eq-label" fill="#E6A100">T°C</text>
+                <text x="460" y="230" text-anchor="middle" class="eq-title">ՋԵՐՄԱՅԻՆ ՉՈՐԱՑՈՒՄ</text>
+              </g>
+              <!-- moisture sensor -->
+              <g class="eq">
+                <rect x="560" y="100" width="56" height="30" rx="6"/>
+                <circle cx="588" cy="115" r="6" fill="#B7F36B" class="led"/>
+                <text x="588" y="150" text-anchor="middle" class="eq-label" font-size="8.5">ՍԵՆՍՈՐ</text>
+              </g>
+              <!-- flow arrows -->
+              <path class="flowline dash-anim" d="M160 150 L220 150"/>
+              <path class="flowline dash-anim" d="M340 150 L400 150"/>
+              <path class="flowline dash-anim" d="M520 150 L560 150"/>
+              <!-- labels -->
+              <text x="40" y="70" text-anchor="middle" class="eq-label" fill="#4DA6C9">ԹԱՑ ԹԵՓՈՒՂՆԵՐ</text>
+              <text x="560" y="70" text-anchor="middle" class="eq-label" fill="#36D66B">ՉՈՐ ԹԵՓՈՒՂՆԵՐ</text>
+              <!-- water leaving -->
+              <g fill="#4DA6C9" class="bob"><circle cx="180" cy="260" r="3"/><circle cx="192" cy="272" r="2.5" style="animation-delay:.4s"/></g>
+              <text x="186" y="288" text-anchor="middle" class="eq-label" fill="#4DA6C9">ԽՈՆԱՎՈՒԹՅՈՒՆԸ ԱՌԱՆՁՆԱՆՈՒՄ Է</text>
+            </svg>
+          </div>
+
+          <div class="col rise" style="--d:.3s">
+            <div class="panel panel-pad hud-corner">
+              <div class="mono tiny lime" style="letter-spacing:.14em;margin-bottom:10px">ԽՈՆԱՎՈՒԹՅԱՆ ԻՆՏԵՐԱԿՏԻՎ ՍԵՆՍՈՐ</div>
+              <div class="row" style="align-items:center;justify-content:space-between">
+                <span class="small dim">Մնացորդային խոնավություն</span>
+                <span class="metric mono" style="font-size:20px;font-weight:700" id="moist-val">0.12%</span>
+              </div>
+              <div style="height:10px;background:var(--graphite-3);border-radius:6px;overflow:hidden;margin:10px 0">
+                <div id="moist-bar" style="height:100%;width:16%;background:linear-gradient(90deg,var(--deep),var(--green));transition:width .3s"></div>
+              </div>
+              <input type="range" min="0" max="0.5" step="0.01" value="0.12" oninput="setMoisture(+this.value)" style="width:100%;accent-color:#36D66B">
+              <div id="moist-box" class="panel" style="padding:10px;border-radius:8px;margin-top:10px;font-size:12px"></div>
+            </div>
+            <div class="panel panel-pad hud-corner">
+              <div class="mono tiny amber" style="letter-spacing:.14em;margin-bottom:8px">ԻՆՉՈՒ Է ԽՈՆԱՎՈՒԹՅՈՒՆԸ ՎՏԱՆԳԱՎՈՐ</div>
+              <p class="small lead">Մնացորդային խոնավությունը էքստրուդերում տաքանալիս գոլորշիանում է՝ ստեղծելով <b>պղպջակներ և ծակոտիներ</b>, իսկ PET-ի համար առաջացնում է <b>հիդրոլիտիկ դեստրուկցիա</b> — մոլեկուլային զանգվածի և ամրության անկում։</p>
+            </div>
+          </div>
+        </div>
+        <div class="rise" style="--d:.5s">
+        <div class="spread" style="margin-bottom:8px">
+        <div class="mono tiny red" style="letter-spacing:.14em">ՏԵՍԱՆՅՈՒԹ՝ ՍԱՐՔԱՎՈՐՄԱՆ ԱՇԽԱՏԱՆՔԸ</div>
+        <div class="mono tiny dim vnote">YouTube · արտաքին աղբյուր</div>
+        </div>
+        <div class="vidrow" style="grid-template-columns:repeat(2,1fr)">
+          <div class="vcard" data-vid="omaWCOUVVfo" onclick="playVideo(this)">
+            <img class="vthumb" src="https://img.youtube.com/vi/omaWCOUVVfo/hqdefault.jpg" alt="" loading="lazy">
+            <div class="vplay"></div>
+            <div class="vcap"><span class="mono tag red">ՏԵՍԱՆՅՈՒԹ</span><span>Պլաստիկի չորացման սարքը</span></div>
+          </div>
+          <div class="vcard" data-vid="58cxS_QEnV8" onclick="playVideo(this)">
+            <img class="vthumb" src="https://img.youtube.com/vi/58cxS_QEnV8/hqdefault.jpg" alt="" loading="lazy">
+            <div class="vplay"></div>
+            <div class="vcap"><span class="mono tag red">ՏԵՍԱՆՅՈՒԹ</span><span>Լվացում և ճզմող չորանոց</span></div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== ՍԼԱՅԴ 12 · EXTRUDER ===================== -->
+    <section class="slide" id="slide-12">
+      <div class="slide-inner">
+        <div class="rise" style="--d:.05s">
+          <div class="eyebrow">ՍԼԱՅԴ 12 <span class="sep">//</span> ԳԾԻ ՍԻՐՏԸ</div>
+          <h2 style="margin-top:6px">Գծի սիրտը՝ <span class="grad-text">էքստրուդերը</span></h2>
+          <p class="lead" style="margin-top:6px">Չոր flakes-ը անցնում է <b>ՊԻՆԴ → ՓԱՓՈՒԿ → ՀԱԼՈՒՅԹ</b> ուղին պտուտակի երկայնքով՝ տաքացվող գլանում։ Ջերմաստիճանները իլյուստրատիվ են և կախված են պոլիմերից։</p>
+        </div>
+
+        <div class="panel panel-pad hud-corner rise" style="--d:.18s">
+          <div class="mono tiny green" style="letter-spacing:.14em;margin-bottom:8px">ԷՔՍՏՐՈՒԴԵՐԻ 3D ԿՏՐՎԱԾՔ</div>
+          <svg viewBox="0 0 640 330" class="diagram">
+            <!-- hopper -->
+            <path d="M150 28 L220 28 L260 92 L110 92 Z" fill="rgba(13,23,18,.85)" stroke="#6E8077" stroke-width="1.6"/>
+            <text x="185" y="64" text-anchor="middle" class="eq-title">ԲՈՒՆԿԵՐ</text>
+            <!-- flakes entering -->
+            <g class="bob"><rect x="176" y="6" width="13" height="10" rx="2" fill="#4DA6C9"/><rect x="196" y="12" width="12" height="9" rx="2" fill="#36D66B" style="animation-delay:.3s"/></g>
+
+            <!-- barrel -->
+            <rect x="120" y="92" width="420" height="74" rx="18" fill="rgba(13,23,18,.85)" stroke="#6E8077" stroke-width="1.8"/>
+            <!-- barrel inner -->
+            <rect x="134" y="104" width="392" height="50" rx="14" fill="#07100C"/>
+
+            <!-- screw (helix) -->
+            <path d="M150 129 L190 118 L230 140 L270 120 L310 138 L350 122 L390 136 L430 122 L470 134 L505 122" fill="none" stroke="#B7F36B" stroke-width="4" stroke-linecap="round"/>
+            <path d="M150 129 L190 140 L230 120 L270 138 L310 122 L350 136 L390 122 L430 134 L470 122 L505 134" fill="none" stroke="#36D66B" stroke-width="2" stroke-linecap="round" opacity=".5"/>
+
+            <!-- material state transition -->
+            <g class="bob"><rect x="150" y="120" width="11" height="8" rx="2" fill="#4DA6C9"/><rect x="168" y="128" width="10" height="7" rx="2" fill="#4DA6C9"/></g>
+            <g class="bob" style="animation-delay:.3s"><rect x="215" y="126" width="11" height="8" rx="2" fill="#7fb3d9"/><rect x="232" y="120" width="10" height="7" rx="2" fill="#8fb9d6"/></g>
+            <g class="bob" style="animation-delay:.6s"><rect x="285" y="122" width="11" height="8" rx="2" fill="#9ac98f"/><rect x="302" y="130" width="10" height="7" rx="2" fill="#7dc07a"/></g>
+            <g class="bob" style="animation-delay:.9s"><ellipse cx="360" cy="129" rx="10" ry="8" fill="#B7F36B"/><ellipse cx="380" cy="126" rx="9" ry="7" fill="#36D66B"/></g>
+            <ellipse cx="430" cy="129" rx="12" ry="10" fill="#36D66B"/>
+            <ellipse cx="462" cy="129" rx="13" ry="11" fill="#0A8F55"/>
+
+            <!-- zone labels -->
+            <g>
+              <line x1="180" y1="92" x2="180" y2="80" stroke="#4DA6C9"/><text x="180" y="74" text-anchor="middle" class="eq-label" fill="#4DA6C9" font-size="8">ՍՆՈՒՑՄԱՆ ԳՈՏԻ</text>
+              <line x1="290" y1="92" x2="290" y2="80" stroke="#E6A100"/><text x="290" y="74" text-anchor="middle" class="eq-label" fill="#E6A100" font-size="8">ՍԵՂՄՈՒՄ</text>
+              <line x1="400" y1="92" x2="400" y2="80" stroke="#B7F36B"/><text x="400" y="74" text-anchor="middle" class="eq-label" fill="#B7F36B" font-size="8">ԴՈԶԱՎՈՐՈՒՄ</text>
+              <line x1="500" y1="92" x2="500" y2="80" stroke="#36D66B"/><text x="500" y="74" text-anchor="middle" class="eq-label" fill="#36D66B" font-size="8">ՀԱԼՄԱՆ ԳՈՏԻ</text>
+            </g>
+            <!-- heater bands -->
+            <g fill="#E6A100" opacity=".8">
+              <rect x="180" y="166" width="16" height="18" rx="3"/><rect x="240" y="166" width="16" height="18" rx="3"/>
+              <rect x="300" y="166" width="16" height="18" rx="3"/><rect x="360" y="166" width="16" height="18" rx="3"/>
+              <rect x="420" y="166" width="16" height="18" rx="3"/><rect x="470" y="166" width="16" height="18" rx="3"/>
+            </g>
+            <text x="325" y="200" text-anchor="middle" class="eq-label" fill="#E6A100">ՋԵՐՄԱՑՄԱՆ ԳՈՏԻՆԵՐ (T1..T6)</text>
+
+            <!-- barrel + screw label -->
+            <text x="150" y="102" class="eq-label" fill="#6E8077" font-size="8.5">ԳԼԱՆ</text>
+            <text x="420" y="114" class="eq-label" fill="#B7F36B" font-size="8.5">ՊՏՈՒՏԱԿ</text>
+
+            <!-- filter + die -->
+            <g class="eq">
+              <rect x="540" y="104" width="34" height="50" rx="6"/>
+              <text x="557" y="96" text-anchor="middle" class="eq-title" font-size="9">ՖԻԼՏՐ</text>
+              <rect x="586" y="112" width="42" height="34" rx="8"/>
+              <text x="607" y="96" text-anchor="middle" class="eq-title" font-size="9">ԴԻԶ</text>
+              <path class="flowline dash-anim" d="M574 129 L586 129"/>
+              <path class="flowline" stroke="#0A8F55" d="M628 129 L636 129"/>
+            </g>
+            <text x="632" y="150" text-anchor="middle" class="eq-label" fill="#36D66B" font-size="8.5">ՀԱԼՈՒՅԹ →</text>
+          </svg>
+        </div>
+
+        <div class="split">
+          <div class="panel panel-pad hud-corner rise" style="--d:.3s">
+            <div class="mono tiny lime" style="letter-spacing:.14em;margin-bottom:10px">ՋԵՐՄԱՍՏԻՃԱՆԱՅԻՆ ԳՈՏԻՆԵՐ (ԻԼՅՈՒՍՏՐԱՏԻՎ)</div>
+            <div class="grid4" style="grid-template-columns:repeat(3,1fr)">
+              <div class="metric"><div class="lbl">ՍՆՈՒՑՈՒՄ</div><div class="val green" style="font-size:18px">~180°C</div></div>
+              <div class="metric"><div class="lbl">ՍԵՂՄՈՒՄ</div><div class="val green" style="font-size:18px">~210°C</div></div>
+              <div class="metric"><div class="lbl">ԴՈԶԱՎՈՐՈՒՄ</div><div class="val green" style="font-size:18px">~230°C</div></div>
+            </div>
+            <p class="small dim mono" style="margin-top:10px">ԻԼՅՈՒՍՏՐԱՏԻՎ ԻՆԺԵՆԵՐԱԿԱՆ ԱՐԺԵՔՆԵՐ — մեկ ջերմաստիճանը բոլոր պոլիմերների համար հարմար չէ։</p>
+          </div>
+          <div class="panel panel-pad hud-corner rise" style="--d:.4s">
+            <div class="mono tiny green" style="letter-spacing:.14em;margin-bottom:8px">ՄՈՒՏՔ → ԳՈՐԾԸՆԹԱՑ → ԵԼՔ</div>
+            <div class="kv"><span class="k">Մուտք</span><span class="v">Չոր թեփուկներ / վերամանրացված</span></div>
+            <div class="kv"><span class="k">Գործընթաց</span><span class="v">Սնուցում + տաքացում + հալում + խառնում + համասեռացում</span></div>
+            <div class="kv"><span class="k">Ելք</span><span class="v green">Պոլիմերային հալույթ</span></div>
+          </div>
+        </div>
+        <div class="rise" style="--d:.5s">
+        <div class="spread" style="margin-bottom:8px">
+        <div class="mono tiny red" style="letter-spacing:.14em">ՏԵՍԱՆՅՈՒԹ՝ ՍԱՐՔԱՎՈՐՄԱՆ ԱՇԽԱՏԱՆՔԸ</div>
+        <div class="mono tiny dim vnote">YouTube · արտաքին աղբյուր</div>
+        </div>
+        <div class="vidrow" style="grid-template-columns:repeat(2,1fr)">
+          <div class="vcard" data-vid="sbtAnKEIyME" onclick="playVideo(this)">
+            <img class="vthumb" src="https://img.youtube.com/vi/sbtAnKEIyME/hqdefault.jpg" alt="" loading="lazy">
+            <div class="vplay"></div>
+            <div class="vcap"><span class="mono tag red">ՏԵՍԱՆՅՈՒԹ</span><span>Էքստրուդեր և գրանուլացման համակարգ</span></div>
+          </div>
+          <div class="vcard" data-vid="fFHr8-dqTpw" onclick="playVideo(this)">
+            <img class="vthumb" src="https://img.youtube.com/vi/fFHr8-dqTpw/hqdefault.jpg" alt="" loading="lazy">
+            <div class="vplay"></div>
+            <div class="vcap"><span class="mono tag red">ՏԵՍԱՆՅՈՒԹ</span><span>Վերամշակված պլաստիկի էքստրուդեր</span></div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== ՍԼԱՅԴ 13 · FILTRATION & PELLETIZATION ===================== -->
+    <section class="slide" id="slide-13">
+      <div class="slide-inner">
+        <div class="rise" style="--d:.05s">
+          <div class="eyebrow">ՍԼԱՅԴ 13 <span class="sep">//</span> ԳՐԱՆՈՒԼԱՑՈՒՄ</div>
+          <h2 style="margin-top:6px">Հալույթից՝ <span class="grad-text">ստանդարտ հումք</span></h2>
+        </div>
+
+        <div class="split">
+          <div class="panel panel-pad hud-corner rise" style="--d:.18s">
+            <div class="mono tiny green" style="letter-spacing:.14em;margin-bottom:8px">ՇԱՐՈՒՆԱԿԱԿԱՆ ՀՈՍՔ՝ ՀԱԼՈՒՅԹ → ԺԳՈՒՏՆԵՐ → ԳՐԱՆՈՒԼՆԵՐ</div>
+            <svg viewBox="0 0 640 330" class="diagram">
+              <!-- melt + filter -->
+              <g class="eq">
+                <ellipse cx="70" cy="80" rx="40" ry="24" fill="#0A8F55"/>
+                <text x="70" y="126" text-anchor="middle" class="eq-title">ՊՈԼԻՄԵՐԱՅԻՆ ՀԱԼՈՒՅԹ</text>
+                <rect x="120" y="56" width="44" height="48" rx="6"/>
+                <text x="142" y="130" text-anchor="middle" class="eq-title" font-size="9">ՖԻԼՏՐ</text>
+                <rect x="176" y="60" width="40" height="40" rx="8"/>
+                <text x="196" y="126" text-anchor="middle" class="eq-title" font-size="9">ԴԻԶ</text>
+              </g>
+              <!-- strands -->
+              <g stroke="#0A8F55" stroke-width="3" fill="none">
+                <path d="M196 80 C230 80 240 120 250 190"/>
+                <path d="M196 88 C236 88 248 124 258 190"/>
+                <path d="M196 96 C242 96 256 128 266 190"/>
+              </g>
+              <text x="230" y="160" text-anchor="middle" class="eq-label" fill="#36D66B" font-size="8.5">ԺԳՈՒՏՆԵՐ</text>
+              <!-- cooling bath -->
+              <rect x="246" y="186" width="120" height="44" rx="10" fill="rgba(77,166,201,.14)" stroke="#4DA6C9"/>
+              <path class="stream" stroke="#4DA6C9" d="M252 206 q20 -8 40 0 q20 8 40 0 q20 -8 40 0"/>
+              <text x="306" y="248" text-anchor="middle" class="eq-title" font-size="9">ՀՈՎԱՑՈՒՄ</text>
+              <!-- pelletizer -->
+              <g class="eq">
+                <rect x="382" y="186" width="76" height="52" rx="8"/>
+                <circle cx="412" cy="212" r="16" fill="#0B1711" stroke="#36D66B" stroke-width="2" class="spin" style="transform-origin:412px 212px"/>
+                <text x="420" y="258" text-anchor="middle" class="eq-title" font-size="9">ԳՐԱՆՈՒԼՅԱՏՈՐ</text>
+              </g>
+              <!-- pellets out -->
+              <g fill="url(#coreGrad)">
+                <ellipse cx="478" cy="206" rx="9" ry="6" class="bob"/>
+                <ellipse cx="496" cy="212" rx="8" ry="5.5" class="bob" style="animation-delay:.2s"/>
+                <ellipse cx="514" cy="204" rx="8" ry="5.5" class="bob" style="animation-delay:.4s"/>
+                <ellipse cx="530" cy="210" rx="7" ry="5" class="bob" style="animation-delay:.6s"/>
+              </g>
+              <text x="505" y="238" text-anchor="middle" class="eq-label" fill="#36D66B">ԳՐԱՆՈՒԼՆԵՐ →</text>
+              <!-- pressure gauge -->
+              <g class="eq">
+                <circle cx="90" cy="200" r="22" fill="#0B1711" stroke="#E6A100" stroke-width="2"/>
+                <path d="M90 200 L100 188" stroke="#E6A100" stroke-width="2"/>
+                <text x="90" y="240" text-anchor="middle" class="eq-label" fill="#E6A100" font-size="8">ՃՆՇՈՒՄ</text>
+              </g>
+            </svg>
+          </div>
+
+          <div class="col rise" style="--d:.3s">
+            <div class="grid2">
+              <div class="panel panel-pad hud-corner">
+                <div class="mono tiny amber" style="margin-bottom:6px">ՃՆՇՈՒՄ</div>
+                <div class="metric"><div class="val green" style="font-size:22px">120 բար</div><div class="lbl">ֆիլտրի գոտում</div></div>
+              </div>
+              <div class="panel panel-pad hud-corner">
+                <div class="mono tiny green" style="margin-bottom:6px">ՖԻԼՏՐ</div>
+                <div class="metric"><div class="val" style="font-size:16px;color:var(--lime)"><span class="dot"></span> ՆՈՐՄԱ</div><div class="lbl">անկումը նորմայում</div></div>
+              </div>
+              <div class="panel panel-pad hud-corner">
+                <div class="mono tiny blue" style="margin-bottom:6px">ԳՐԱՆՈՒԼՆԵՐԻ ՉԱՓ</div>
+                <div class="metric"><div class="val green" style="font-size:22px">3.2 մմ</div><div class="lbl">± 0.15 թույլատրելիք</div></div>
+              </div>
+              <div class="panel panel-pad hud-corner">
+                <div class="mono tiny lime" style="margin-bottom:6px">ԽՄԲԱՔԱՆԱԿԻ ՀԱՇՎԻՉ</div>
+                <div class="metric"><div class="val" id="pellet-count" style="font-size:20px">1 428 900</div><div class="lbl">գրանուլ</div></div>
+                <button class="btn" style="margin-top:8px;padding:6px 10px;font-size:10px" onclick="addPellets()">+25 000</button>
+              </div>
+            </div>
+            <div class="panel panel-pad hud-corner">
+              <div class="mono tiny green" style="letter-spacing:.14em;margin-bottom:8px">ՀԱՋՈՐԴԱԿԱՆՈՒԹՅՈՒՆ</div>
+              <div class="flow">
+                <span class="node">Հալույթ</span><span class="arrow">→</span><span class="node">Ֆիլտր</span><span class="arrow">→</span>
+                <span class="node">Դիզ</span><span class="arrow">→</span><span class="node">Ժգուտներ</span><span class="arrow">→</span>
+                <span class="node">Հովացում</span><span class="arrow">→</span><span class="node hot">Գրանուլներ</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="rise" style="--d:.5s">
+        <div class="spread" style="margin-bottom:8px">
+        <div class="mono tiny red" style="letter-spacing:.14em">ՏԵՍԱՆՅՈՒԹ՝ ՍԱՐՔԱՎՈՐՄԱՆ ԱՇԽԱՏԱՆՔԸ</div>
+        <div class="mono tiny dim vnote">YouTube · արտաքին աղբյուր</div>
+        </div>
+        <div class="vidrow" style="grid-template-columns:repeat(2,1fr)">
+          <div class="vcard" data-vid="GphgACe4OuA" onclick="playVideo(this)">
+            <img class="vthumb" src="https://img.youtube.com/vi/GphgACe4OuA/hqdefault.jpg" alt="" loading="lazy">
+            <div class="vplay"></div>
+            <div class="vcap"><span class="mono tag red">ՏԵՍԱՆՅՈՒԹ</span><span>Ժգուտային գրանուլյատոր</span></div>
+          </div>
+          <div class="vcard" data-vid="m1ckEZ8snZc" onclick="playVideo(this)">
+            <img class="vthumb" src="https://img.youtube.com/vi/m1ckEZ8snZc/hqdefault.jpg" alt="" loading="lazy">
+            <div class="vplay"></div>
+            <div class="vcap"><span class="mono tag red">ՏԵՍԱՆՅՈՒԹ</span><span>Գրանուլների արտադրության գիծ</span></div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== ՍԼԱՅԴ 14 · POLYMER CHEMISTRY ===================== -->
+    <section class="slide" id="slide-14">
+      <div class="slide-inner">
+        <div class="rise" style="--d:.05s">
+          <div class="eyebrow">ՍԼԱՅԴ 14 <span class="sep">//</span> ՊՈԼԻՄԵՐԱՅԻՆ ՔԻՄԻԱ</div>
+          <h2 style="margin-top:6px">Քիմիան չի փոխարինում տեսակավորումը՝ <span class="grad-text">այն կարգավորում է նյութը</span></h2>
+        </div>
+
+        <div class="split">
+          <div class="col rise" style="--d:.18s">
+            <div class="panel panel-pad hud-corner">
+              <div class="mono tiny green" style="letter-spacing:.14em;margin-bottom:8px">ՊՈԼԻՄԵՐԱՅԻՆ ՇՂԹԱ</div>
+              <svg viewBox="0 0 400 90" class="diagram">
+                <polyline points="10,55 30,30 50,55 70,30 90,55 110,30 130,55 150,30 170,55 190,30 210,55 230,30 250,55 270,30 290,55 310,30 330,55 350,30 370,55 390,30" fill="none" stroke="#36D66B" stroke-width="2.5"/>
+                <circle cx="10" cy="55" r="4" fill="#B7F36B"/><circle cx="390" cy="30" r="4" fill="#B7F36B"/>
+                <text x="200" y="78" text-anchor="middle" class="eq-label" fill="#6E8077">ԵՐԿԱՐ ՄԱԿՐՈՄՈԼԵԿՈՒԼ (թերմոպլաստ)</text>
+              </svg>
+              <div class="flow" style="gap:5px;margin-top:10px">
+                <span class="node" data-tip="Բազմիցս հալվելու և պնդանալու ունակություն">Թերմոպլաստիկություն</span>
+                <span class="node" data-tip="Հալույթի հոսքին դիմադրություն">Մածուցիկություն</span>
+                <span class="node" data-tip="Հալույթի հոսունության ինդեքս՝ մածուցիկության չափ">Հալույթի հոսունություն (MFI)</span>
+              </div>
+            </div>
+            <div class="panel panel-pad hud-corner">
+              <div class="mono tiny amber" style="letter-spacing:.14em;margin-bottom:8px">ԴԵԳՐԱԴԱՑԻԱ ՎԵՐԱՄՇԱԿՄԱՆ ԺԱՄԱՆԱԿ</div>
+              <div class="col" style="gap:6px">
+                <div class="row" style="justify-content:space-between"><span class="small">Ջերմաօքսիդացում</span><span class="tag red">O₂ + T°C</span></div>
+                <div class="row" style="justify-content:space-between"><span class="small">Շղթայի խզում</span><span class="tag red">↓ Mw</span></div>
+                <div class="row" style="justify-content:space-between"><span class="small">Ջերմային պատմություն</span><span class="tag amber">Ցիկլեր</span></div>
+                <div class="row" style="justify-content:space-between"><span class="small">Մածուցիկության նվազում</span><span class="tag amber">Δ MFI</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col rise" style="--d:.3s">
+            <div class="panel panel-pad hud-corner">
+              <div class="mono tiny lime" style="letter-spacing:.14em;margin-bottom:8px">ԱԴԻՏԻՎՆԵՐԻ ԽՄԲԵՐ</div>
+              <div class="flow" style="gap:5px">
+                <span class="node">Հակաօքսիդանտներ</span><span class="node">Ուլտրամանուշակագույն կայունացուցիչներ</span>
+                <span class="node">Պիգմենտներ</span><span class="node">Լցանյութեր</span>
+                <span class="node">Մոդիֆիկատորներ</span><span class="node">Համատեղելիացնողներ</span>
+              </div>
+            </div>
+            <div class="panel panel-pad hud-corner">
+              <div class="mono tiny green" style="letter-spacing:.14em;margin-bottom:10px">ԿՈՄՊԱՈՒՆԴԻ ԲԱՆԱՁԵՎԸ</div>
+              <div class="panel" style="background:rgba(7,16,12,.7);padding:14px;border-radius:10px;font-family:var(--mono);text-align:center">
+                <div style="color:var(--steel-3);font-size:12px">100 կգ ՎԵՐԱՄՇԱԿՎԱԾ ՊՈԼԻՄԵՐ</div>
+                <div style="color:var(--green);margin:4px 0">+</div>
+                <div style="color:var(--steel-3);font-size:12px">ՎԵՐԱՀՍԿՎՈՂ ԱԴԻՏԻՎՆԵՐԻ ՓԱԹԵԹ</div>
+                <div style="border-top:1px solid var(--graphite-4);margin:8px 0"></div>
+                <div style="color:var(--lime);font-weight:700;font-size:13px">ԿՈՄՊԱՈՒՆԴ</div>
+              </div>
+              <p class="small dim mono" style="margin-top:8px">ԻԼՅՈՒՍՏՐԱՏԻՎ ՁԵՎԱԿԵՐՊՈՒՄ — ՊԱՀԱՆՋՎՈՒՄ Է ԼԱԲՈՐԱՏՈՐ ՎԱՎԵՐԱՑՈՒՄ</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel panel-pad hud-corner rise" style="--d:.42s">
+          <div class="mono tiny blue" style="letter-spacing:.14em;margin-bottom:8px">ՄԵԽԱՆԻԿԱԿԱՆ ԵՒ ՔԻՄԻԱԿԱՆ ՎԵՐԱՄՇԱԿՈՒՄ</div>
+          <div class="grid2">
+            <div class="panel" style="background:rgba(7,16,12,.7);padding:12px;border-radius:10px;border-left:3px solid var(--green)">
+              <div style="font-weight:800;color:#fff;font-size:14px">Մեխանիկական վերամշակում</div>
+              <p class="small lead" style="margin-top:6px">Մանրացում, լվացում, հալում, գրանուլացում։ <b>Պոլիմերային շղթան պահպանվում է</b> — սա ֆիզիկական գործընթաց է։ Հենց այն է իրականացնում REPLAST-ը։</p>
+            </div>
+            <div class="panel" style="background:rgba(7,16,12,.7);padding:12px;border-radius:10px;border-left:3px solid var(--blue)">
+              <div style="font-weight:800;color:#fff;font-size:14px">Քիմիական վերամշակում</div>
+              <p class="small lead" style="margin-top:6px">Պոլիմերի քայքայում մինչև <b>մոնոմերներ</b> կամ հումք (պիրոլիզ, դեպոլիմերացում)։ Տեխնոլոգիաների այլ դաս է, հավասար չէ մեխանիկական վերամշակմանը։</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== ՍԼԱՅԴ 15 · QUALITY CONTROL ===================== -->
+    <section class="slide" id="slide-15">
+      <div class="slide-inner">
+        <div class="rise" style="--d:.05s">
+          <div class="eyebrow">ՍԼԱՅԴ 15 <span class="sep">//</span> ԼԱԲՈՐԱՏՈՐԻԱ</div>
+          <h2 style="margin-top:6px">Վերամշակված նյութը պետք է <span class="grad-text">կանխատեսելի լինի</span></h2>
+        </div>
+
+        <div class="split">
+          <div class="panel panel-pad hud-corner rise" style="--d:.18s">
+            <div class="mono tiny green" style="letter-spacing:.14em;margin-bottom:10px">ԼԱԲՈՐԱՏՈՐ ՎԱՀԱՆԱԿ — CORE-Ը ԿԵՆՏՐՈՆՈՒՄ</div>
+            <div class="core-wrap" style="margin-bottom:12px">
+              <svg class="core-idle" style="width:150px"><use href="#core-idle"/></svg>
+            </div>
+            <div class="grid2">
+              <div class="kv"><span class="k">ԽՈՆԱՎՈՒԹՅՈՒՆ</span><span class="v green" data-count="0.08" data-dec="2" data-suffix="%">0%</span></div>
+              <div class="kv"><span class="k">ԽՏՈՒԹՅՈՒՆ</span><span class="v" data-count="0.95" data-dec="2" data-suffix=" գ/սմ³">0</span></div>
+              <div class="kv"><span class="k">ՀԱԼՈՒՅԹԻ ՀՈՍՈՒՆՈՒԹՅՈՒՆ (MFI)</span><span class="v green" data-count="8.4" data-dec="1" data-suffix=" գ/10ր">0</span></div>
+              <div class="kv"><span class="k">ԳՈՒՅՆ ΔE</span><span class="v" data-count="1.6" data-dec="1">0</span></div>
+              <div class="kv"><span class="k">ԱՂՏՈՏՎԱԾՈՒԹՅՈՒՆ</span><span class="v green">&lt; 0.1%</span></div>
+              <div class="kv"><span class="k">ԱՌԱՁԳԱԿԱՆՈՒԹՅՈՒՆ (ՄՊա)</span><span class="v" data-count="22" data-dec="0">0</span></div>
+              <div class="kv"><span class="k">ՉԱՓԱՅԻՆ ԿԱՅՈՒՆՈՒԹՅՈՒՆ</span><span class="v green">ԱՆՑՈՒՄ</span></div>
+            </div>
+            <p class="small dim mono" style="margin-top:10px">ՑՈՒՑԱԴՐԱԿԱՆ ՏՎՅԱԼՆԵՐ — ԻՐԱԿԱՆ REPLAST ՉԱՓՈՒՄՆԵՐ ՉԵՆ</p>
+          </div>
+
+          <div class="col rise" style="--d:.3s">
+            <div class="panel panel-pad hud-corner">
+              <div class="mono tiny lime" style="letter-spacing:.14em;margin-bottom:10px">ԽՄԲԱՔԱՆԱԿԻ ՕՐԻՆԱԿ</div>
+              <div class="spread" style="margin-bottom:8px">
+                <span class="tag green">ԽՄԲԱՔԱՆԱԿ #001</span><span class="tag">rPP</span>
+              </div>
+              <div class="col" style="gap:6px">
+                <div class="row" style="justify-content:space-between"><span class="small">ԽՈՆԱՎՈՒԹՅՈՒՆ</span><span class="tag green">ԱՆՑՈՒՄ</span></div>
+                <div class="row" style="justify-content:space-between"><span class="small">MFI</span><span class="tag green">ԱՆՑՈՒՄ</span></div>
+                <div class="row" style="justify-content:space-between"><span class="small">ԳՈՒՅՆ</span><span class="tag green">ԱՆՑՈՒՄ</span></div>
+                <div class="row" style="justify-content:space-between"><span class="small">ԱՂՏՈՏՎԱԾՈՒԹՅՈՒՆ</span><span class="tag green">ԱՆՑՈՒՄ</span></div>
+              </div>
+            </div>
+            <div class="panel panel-pad hud-corner">
+              <div class="mono tiny green" style="letter-spacing:.14em;margin-bottom:8px">ԻՆՉ Է ՎԵՐԱՀՍԿՎՈՒՄ</div>
+              <p class="small lead">Խոնավություն, խտություն, հալույթի հոսունություն, գույն, աղտոտվածություն, մեխանիկական հատկություններ և չափային կայունություն — յուրաքանչյուր խմբաքանակ ստանում է որակի անձնագիր նախքան առաքումը։</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== ՍԼԱՅԴ 16 · FORMING ===================== -->
+    <section class="slide" id="slide-16">
+      <div class="slide-inner">
+        <div class="rise" style="--d:.05s">
+          <div class="eyebrow">ՍԼԱՅԴ 16 <span class="sep">//</span> ԿԱՂԱՊԱՐՈՒՄ</div>
+          <h2 style="margin-top:6px">Ինչպե՞ս են գրանուլները դառնում <span class="grad-text">արտադրանք</span></h2>
+        </div>
+
+        <div class="split">
+          <div class="panel panel-pad hud-corner rise" style="--d:.18s">
+            <div class="mono tiny green" style="letter-spacing:.14em;margin-bottom:10px">ԿԱՂԱՊԱՐՄԱՆ ՀԻՄՆԱԿԱՆ ՍԽԵՄԱՆ</div>
+            <svg viewBox="0 0 560 200" class="diagram">
+              <g fill="url(#coreGrad)"><ellipse cx="40" cy="80" rx="14" ry="10"/><ellipse cx="60" cy="86" rx="12" ry="9"/><ellipse cx="46" cy="98" rx="12" ry="8"/></g>
+              <text x="52" y="122" text-anchor="middle" class="eq-title" font-size="9">ԳՐԱՆՈՒԼՆԵՐ</text>
+              <path class="flowline dash-anim" d="M80 84 L120 84"/>
+              <g class="eq"><rect x="120" y="62" width="60" height="44" rx="8"/><text x="150" y="72" text-anchor="middle" class="eq-label" fill="#E6A100" font-size="8">T°C</text><text x="150" y="96" text-anchor="middle" class="eq-title" font-size="9">ՏԱՔԱՑՈՒՄ</text></g>
+              <path class="flowline dash-anim" d="M180 84 L220 84"/>
+              <g class="eq"><rect x="220" y="56" width="70" height="56" rx="10"/><rect x="230" y="66" width="50" height="36" rx="6" fill="#0A8F55" opacity=".5"/><text x="255" y="128" text-anchor="middle" class="eq-title" font-size="9">ԿԱՂԱՊԱՐՈՒՄ</text></g>
+              <path class="flowline dash-anim" d="M290 84 L330 84"/>
+              <g class="eq"><rect x="330" y="62" width="60" height="44" rx="8"/><path class="stream" stroke="#4DA6C9" d="M340 76 q10 -6 20 0 q10 6 20 0"/><text x="360" y="122" text-anchor="middle" class="eq-title" font-size="9">ՀՈՎԱՑՈՒՄ</text></g>
+              <path class="flowline dash-anim" d="M390 84 L430 84"/>
+              <g class="eq"><rect x="430" y="62" width="46" height="44" rx="8"/><text x="453" y="88" text-anchor="middle" class="eq-label" font-size="7.5">ԿՏՐՈՒՄ</text></g>
+              <path class="flowline dash-anim" d="M476 84 L500 84"/>
+              <g><rect x="500" y="66" width="40" height="36" rx="8" fill="url(#shellGrad)" stroke="#36D66B" stroke-width="1.6"/><circle cx="520" cy="84" r="6" fill="#B7F36B"/></g>
+              <text x="520" y="122" text-anchor="middle" class="eq-title" fill="#36D66B">ԱՐՏԱԴՐԱՆՔ</text>
+            </svg>
+            <div class="flow" style="margin-top:6px">
+              <span class="node">ԳՐԱՆՈՒԼՆԵՐ</span><span class="arrow">→</span><span class="node">ՏԱՔԱՑՈՒՄ</span><span class="arrow">→</span>
+              <span class="node">ԿԱՂԱՊԱՐՈՒՄ</span><span class="arrow">→</span><span class="node">ՀՈՎԱՑՈՒՄ</span><span class="arrow">→</span>
+              <span class="node">ԿՏՐՈՒՄ</span><span class="arrow">→</span><span class="node">ՈՐԱԿԻ ՎԵՐԱՀՍԿՈՒՄ</span><span class="arrow">→</span><span class="node hot">ԱՐՏԱԴՐԱՆՔ</span>
+            </div>
+          </div>
+
+          <div class="col rise" style="--d:.3s">
+            <div class="mono tiny lime" style="letter-spacing:.14em">ՉՈՐՍ ՏԵԽՆՈԼՈԳԻԱ</div>
+            <div class="acc-item open">
+              <div class="acc-head" onclick="toggleAcc(this)"><span class="t">Ներարկման կաղապարում</span><span class="caret">▾</span></div>
+              <div class="acc-body" style="max-height:500px"><div class="acc-body-in">Հալույթը ներարկվում է փակ կաղապարի մեջ բարձր ճնշման տակ։ <b>Արտադրանք.</b> արկղեր, պալետներ, տեխնիկական մասեր։ <b>Սահմանափակում.</b> թանկ կաղապար։</div></div>
+            </div>
+            <div class="acc-item">
+              <div class="acc-head" onclick="toggleAcc(this)"><span class="t">Էքստրուզիա</span><span class="caret">▾</span></div>
+              <div class="acc-body"><div class="acc-body-in">Պրոֆիլի շարունակական դուրս մղում ֆիլերայի միջով։ <b>Արտադրանք.</b> թերթեր, խողովակներ, պրոֆիլներ։ <b>Սահմանափակում.</b> հաստատուն կտրվածք։</div></div>
+            </div>
+            <div class="acc-item">
+              <div class="acc-head" onclick="toggleAcc(this)"><span class="t">Կոմպրեսիոն մամլում</span><span class="caret">▾</span></div>
+              <div class="acc-body"><div class="acc-body-in">Նյութը սեղմվում է տաքացված կաղապարում։ <b>Արտադրանք.</b> մայթի տարրեր, սալեր։ <b>Սահմանափակում.</b> ավելի դանդաղ է, քան ներարկումը։</div></div>
+            </div>
+            <div class="acc-item">
+              <div class="acc-head" onclick="toggleAcc(this)"><span class="t">Թերմոձևավորում</span><span class="caret">▾</span></div>
+              <div class="acc-body"><div class="acc-body-in">Տաքացված թերթը ձևավորվում է վակուումով։ <b>Արտադրանք.</b> փաթեթավորում, պանելներ։ <b>Սահմանափակում.</b> բարակ պատերով արտադրանք։</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="rise" style="--d:.5s">
+        <div class="spread" style="margin-bottom:8px">
+        <div class="mono tiny red" style="letter-spacing:.14em">ՏԵՍԱՆՅՈՒԹ՝ ՍԱՐՔԱՎՈՐՄԱՆ ԱՇԽԱՏԱՆՔԸ</div>
+        <div class="mono tiny dim vnote">YouTube · արտաքին աղբյուր</div>
+        </div>
+        <div class="vidrow" style="grid-template-columns:repeat(2,1fr)">
+          <div class="vcard" data-vid="pJE6bV_RKBU" onclick="playVideo(this)">
+            <img class="vthumb" src="https://img.youtube.com/vi/pJE6bV_RKBU/hqdefault.jpg" alt="" loading="lazy">
+            <div class="vplay"></div>
+            <div class="vcap"><span class="mono tag red">ՏԵՍԱՆՅՈՒԹ</span><span>Ներարկման կաղապարման մեքենան ներսից</span></div>
+          </div>
+          <div class="vcard" data-vid="8sisjQH0aV0" onclick="playVideo(this)">
+            <img class="vthumb" src="https://img.youtube.com/vi/8sisjQH0aV0/hqdefault.jpg" alt="" loading="lazy">
+            <div class="vplay"></div>
+            <div class="vcap"><span class="mono tag red">ՏԵՍԱՆՅՈՒԹ</span><span>Ներարկման կաղապարման աշխատանքը</span></div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== ՍԼԱՅԴ 17 · PRODUCTS ===================== -->
+    <section class="slide" id="slide-17">
+      <div class="slide-inner">
+        <div class="rise" style="--d:.05s">
+          <div class="eyebrow">ՍԼԱՅԴ 17 <span class="sep">//</span> ԱՐՏԱԴՐԱՆՔԻ ՊՈՐՏՖԵԼ</div>
+          <h2 style="margin-top:6px">Ի՞նչ կարելի է <span class="grad-text">արտադրել</span></h2>
+          <p class="lead" style="margin-top:6px">Ուղղեք ակնարկի համար, սեղմեք ամբողջական տեխբնութագրի համար։</p>
+        </div>
+
+        <div class="grid4 rise" style="--d:.18s">
+          <div class="hcard" onclick="showProduct('paving')">
+            <div class="mono tag green" style="margin-bottom:8px">ՄԱՅԹ</div>
+            <div style="font-weight:800;font-size:15px;color:#fff">Մայթի տարրեր</div>
+            <p class="small dim">rHDPE + ավազ · կոմպրեսիոն մամլում</p>
+          </div>
+          <div class="hcard" onclick="showProduct('panels')">
+            <div class="mono tag blue" style="margin-bottom:8px">ՊԱՆԵԼ</div>
+            <div style="font-weight:800;font-size:15px;color:#fff">Դեկորատիվ պանելներ</div>
+            <p class="small dim">rPP / rPS · ներարկում և մամլում</p>
+          </div>
+          <div class="hcard" onclick="showProduct('crates')">
+            <div class="mono tag lime" style="margin-bottom:8px">ԼՈԳԻՍՏԻԿԱ</div>
+            <div style="font-weight:800;font-size:15px;color:#fff">Լոգիստիկ արկղեր</div>
+            <p class="small dim">100% rPP · ներարկման կաղապարում</p>
+          </div>
+          <div class="hcard" onclick="showProduct('pallets')">
+            <div class="mono tag amber" style="margin-bottom:8px">ՊԱԼԵՏ</div>
+            <div style="font-weight:800;font-size:15px;color:#fff">Պալետներ</div>
+            <p class="small dim">rHDPE ամրացված · ներարկում</p>
+          </div>
+          <div class="hcard" onclick="showProduct('containers')">
+            <div class="mono tag green" style="margin-bottom:8px">ԿՈՆՏԵՅՆԵՐ</div>
+            <div style="font-weight:800;font-size:15px;color:#fff">Կոնտեյներներ</div>
+            <p class="small dim">rHDPE / rPP · ռոտացիոն կաղապարում</p>
+          </div>
+          <div class="hcard" onclick="showProduct('sheets')">
+            <div class="mono tag blue" style="margin-bottom:8px">ԹԵՐԹ</div>
+            <div style="font-weight:800;font-size:15px;color:#fff">Պլաստիկ թերթեր</div>
+            <p class="small dim">rLDPE / rPE · էքստրուզիա</p>
+          </div>
+          <div class="hcard" onclick="showProduct('parts')">
+            <div class="mono tag lime" style="margin-bottom:8px">ՏԵԽՆԻԿԱԿԱՆ</div>
+            <div style="font-weight:800;font-size:15px;color:#fff">Տեխնիկական մասեր</div>
+            <p class="small dim">rPP կոմպաունդ · ներարկում</p>
+          </div>
+          <div class="hcard" onclick="showProduct('custom')">
+            <div class="mono tag amber" style="margin-bottom:8px">ԱՆՀԱՏԱԿԱՆ</div>
+            <div style="font-weight:800;font-size:15px;color:#fff">Անհատական արտադրանք</div>
+            <p class="small dim">ըստ ՏԱ · նյութի ընտրություն</p>
+          </div>
+        </div>
+
+        <div class="panel panel-pad hud-corner rise" style="--d:.3s">
+          <div class="mono tiny dim" style="margin-bottom:6px">CORE-Ի ԿԱՐԳԱՎԻՃԱԿԸ</div>
+          <div class="row" style="align-items:center;gap:18px">
+            <div class="core-wrap"><svg class="core-idle" style="width:90px"><use href="#core-product"/></svg></div>
+            <p class="small lead">REPLAST CORE-ը դառնում է պատրաստի արտադրանքի մաս — նյութը ստանում է ձև և գործառույթ։</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== ՍԼԱՅԴ 18 · COMPLETE FACTORY ===================== -->
+    <section class="slide" id="slide-18">
+      <div class="slide-inner">
+        <div class="rise" style="--d:.05s">
+          <div class="eyebrow">ՍԼԱՅԴ 18 <span class="sep">//</span> ԱՄԲՈՂՋԱԿԱՆ ԳՈՐԾԱՐԱՆ</div>
+          <h2 style="margin-top:6px">Մեկ <span class="grad-text">շարունակական արտադրական համակարգ</span></h2>
+          <p class="lead" style="margin-top:6px">Ընտրեք հանգույց — մեքենան կառանձնանա, աջում կբացվի տեխնիկական նկարագրությունը։</p>
+        </div>
+
+        <div class="panel panel-pad hud-corner rise" style="--d:.18s">
+          <div class="mono tiny green" style="letter-spacing:.14em;margin-bottom:8px">ՆՅՈՒԹԻ ՀՈՍՔԸ ԳԾՈՎ</div>
+          <div class="flow" style="gap:4px">
+            <span class="node" style="color:#4DA6C9">Շշեր</span><span class="arrow">→</span>
+            <span class="node" style="color:#9ac98f">Թեփուկներ</span><span class="arrow">→</span>
+            <span class="node" style="color:#36D66B">Մաքուր թեփուկներ</span><span class="arrow">→</span>
+            <span class="node" style="color:#0A8F55">Հալույթ</span><span class="arrow">→</span>
+            <span class="node" style="color:#B7F36B">Ժգուտներ</span><span class="arrow">→</span>
+            <span class="node hot">Գրանուլներ</span><span class="arrow">→</span>
+            <span class="node hot">Արտադրանք</span>
+          </div>
+        </div>
+
+        <div class="split">
+          <div class="panel panel-pad hud-corner rise" style="--d:.28s">
+            <div class="mono tiny lime" style="letter-spacing:.14em;margin-bottom:10px">ԱՐՏԱԴՐԱԿԱՆ ԳԻԾ — 14 ՀԱՆԳՈՒՅՑ</div>
+            <div class="grid4" style="grid-template-columns:repeat(2,1fr)">
+              <button class="machine-node hcard" data-m="1" onclick="highlightMachine(1)" style="text-align:left"><span class="mono tag">01</span><div class="small" style="color:#fff;font-weight:700;margin-top:6px">Ընդունում</div></button>
+              <button class="machine-node hcard" data-m="2" onclick="highlightMachine(2)" style="text-align:left"><span class="mono tag">02</span><div class="small" style="color:#fff;font-weight:700;margin-top:6px">Տեսակավորում</div></button>
+              <button class="machine-node hcard" data-m="3" onclick="highlightMachine(3)" style="text-align:left"><span class="mono tag">03</span><div class="small" style="color:#fff;font-weight:700;margin-top:6px">Մանրացուցիչ</div></button>
+              <button class="machine-node hcard" data-m="4" onclick="highlightMachine(4)" style="text-align:left"><span class="mono tag">04</span><div class="small" style="color:#fff;font-weight:700;margin-top:6px">Լվացում</div></button>
+              <button class="machine-node hcard" data-m="5" onclick="highlightMachine(5)" style="text-align:left"><span class="mono tag">05</span><div class="small" style="color:#fff;font-weight:700;margin-top:6px">Տարանջատում</div></button>
+              <button class="machine-node hcard" data-m="6" onclick="highlightMachine(6)" style="text-align:left"><span class="mono tag">06</span><div class="small" style="color:#fff;font-weight:700;margin-top:6px">Չորացում</div></button>
+              <button class="machine-node hcard" data-m="7" onclick="highlightMachine(7)" style="text-align:left"><span class="mono tag">07</span><div class="small" style="color:#fff;font-weight:700;margin-top:6px">Էքստրուդեր</div></button>
+              <button class="machine-node hcard" data-m="8" onclick="highlightMachine(8)" style="text-align:left"><span class="mono tag">08</span><div class="small" style="color:#fff;font-weight:700;margin-top:6px">Ֆիլտրացիա</div></button>
+              <button class="machine-node hcard" data-m="9" onclick="highlightMachine(9)" style="text-align:left"><span class="mono tag">09</span><div class="small" style="color:#fff;font-weight:700;margin-top:6px">Գրանուլյատոր</div></button>
+              <button class="machine-node hcard" data-m="10" onclick="highlightMachine(10)" style="text-align:left"><span class="mono tag">10</span><div class="small" style="color:#fff;font-weight:700;margin-top:6px">Կոմպաունդավորում</div></button>
+              <button class="machine-node hcard" data-m="11" onclick="highlightMachine(11)" style="text-align:left"><span class="mono tag">11</span><div class="small" style="color:#fff;font-weight:700;margin-top:6px">Կաղապարում</div></button>
+              <button class="machine-node hcard" data-m="12" onclick="highlightMachine(12)" style="text-align:left"><span class="mono tag">12</span><div class="small" style="color:#fff;font-weight:700;margin-top:6px">Որակի վերահսկում</div></button>
+              <button class="machine-node hcard" data-m="13" onclick="highlightMachine(13)" style="text-align:left"><span class="mono tag">13</span><div class="small" style="color:#fff;font-weight:700;margin-top:6px">Պահեստավորում</div></button>
+              <button class="machine-node hcard" data-m="14" onclick="highlightMachine(14)" style="text-align:left"><span class="mono tag">14</span><div class="small" style="color:#fff;font-weight:700;margin-top:6px">Բաշխում</div></button>
+            </div>
+          </div>
+
+          <div class="col rise" style="--d:.38s">
+            <div class="panel panel-pad hud-corner" id="machine-panel" style="min-height:180px"></div>
+            <div class="panel panel-pad hud-corner">
+              <div class="mono tiny dim" style="margin-bottom:6px">CORE-Ի ԿԱՐԳԱՎԻՃԱԿԸ</div>
+              <div class="core-wrap"><svg class="core-idle" style="width:120px"><use href="#core-loop"/></svg></div>
+            </div>
+          </div>
+        </div>
+        <div class="rise" style="--d:.5s">
+        <div class="spread" style="margin-bottom:8px">
+        <div class="mono tiny red" style="letter-spacing:.14em">ՏԵՍԱՆՅՈՒԹ՝ ՍԱՐՔԱՎՈՐՄԱՆ ԱՇԽԱՏԱՆՔԸ</div>
+        <div class="mono tiny dim vnote">YouTube · արտաքին աղբյուր</div>
+        </div>
+        <div class="vidrow" style="grid-template-columns:repeat(2,1fr)">
+          <div class="vcard" data-vid="l7CsQV1fmsc" onclick="playVideo(this)">
+            <img class="vthumb" src="https://img.youtube.com/vi/l7CsQV1fmsc/hqdefault.jpg" alt="" loading="lazy">
+            <div class="vplay"></div>
+            <div class="vcap"><span class="mono tag red">ՏԵՍԱՆՅՈՒԹ</span><span>Ամբողջական վերամշակման գիծ</span></div>
+          </div>
+          <div class="vcard" data-vid="sKpcALVRYqo" onclick="playVideo(this)">
+            <img class="vthumb" src="https://img.youtube.com/vi/sKpcALVRYqo/hqdefault.jpg" alt="" loading="lazy">
+            <div class="vplay"></div>
+            <div class="vcap"><span class="mono tag red">ՏԵՍԱՆՅՈՒԹ</span><span>Գործարանային գրանուլացման գիծը</span></div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== ՍԼԱՅԴ 19 · ECONOMIC MODEL ===================== -->
+    <section class="slide" id="slide-19">
+      <div class="slide-inner">
+        <div class="rise" style="--d:.05s">
+          <div class="eyebrow">ՍԼԱՅԴ 19 <span class="sep">//</span> ՏՆՏԵՍՈՒԹՅՈՒՆ</div>
+          <h2 style="margin-top:6px">Ինչպե՞ս է աշխատում <span class="grad-text">տնտեսական մոդելը</span></h2>
+          <p class="lead" style="margin-top:6px">REPLAST CORE-ը նյութական հոսքի միավորի <b>տեսողական փոխաբերություն է</b>, ոչ թե իրական չափման միավոր։</p>
+        </div>
+
+        <div class="split">
+          <div class="panel panel-pad hud-corner rise" style="--d:.18s">
+            <div class="mono tiny green" style="letter-spacing:.14em;margin-bottom:12px">ՊԼԱՍՏԻԿԻ ՄՈՒՏՔ / ԱՄԻՍ</div>
+            <div class="row" style="gap:8px;margin-bottom:14px">
+              <button class="btn scen-btn active" data-v="100" onclick="calcModel(100)">100 տ</button>
+              <button class="btn scen-btn" data-v="200" onclick="calcModel(200)">200 տ</button>
+              <button class="btn scen-btn" data-v="500" onclick="calcModel(500)">500 տ</button>
+            </div>
+            <input type="range" min="100" max="500" step="50" value="200" oninput="calcModel(+this.value)" style="width:100%;accent-color:#36D66B">
+            <div class="metric" style="margin-top:12px"><div class="lbl">Մուտքային հոսք</div><div class="val green" style="font-size:32px" id="calc-input">200 տ</div></div>
+
+            <div class="mono tiny lime" style="letter-spacing:.14em;margin:16px 0 10px">ԳՈՐԾԸՆԹԱՑԻ ԵԼՔԵՐԸ</div>
+            <div class="col" style="gap:10px">
+              <div>
+                <div class="spread small"><span>Կորուստներ (18%)</span><span class="mono red" id="calc-loss">−36 տ</span></div>
+                <div style="height:8px;background:var(--graphite-3);border-radius:6px;overflow:hidden"><div id="bar-loss" style="height:100%;width:18%;background:#FF5A5A;transition:width .4s"></div></div>
+              </div>
+              <div>
+                <div class="spread small"><span>Գրանուլների ելք</span><span class="mono green" id="calc-pellets">164 տ</span></div>
+                <div style="height:8px;background:var(--graphite-3);border-radius:6px;overflow:hidden"><div id="bar-pellets" style="height:100%;width:82%;background:var(--green);transition:width .4s"></div></div>
+              </div>
+              <div>
+                <div class="spread small"><span>Պատրաստի արտադրանք</span><span class="mono lime" id="calc-product">161 տ</span></div>
+                <div style="height:8px;background:var(--graphite-3);border-radius:6px;overflow:hidden"><div id="bar-product" style="height:100%;width:80.4%;background:var(--lime);transition:width .4s"></div></div>
+              </div>
+            </div>
+            <p class="small dim mono" style="margin-top:14px">ԻԼՅՈՒՍՏՐԱՏԻՎ ՆԱԽԱԳԾԱՅԻՆ ՄՈԴԵԼ — իրական շահույթի ցուցանիշներ չեն օգտագործվում։</p>
+          </div>
+
+          <div class="panel panel-pad hud-corner rise" style="--d:.3s">
+            <div class="mono tiny amber" style="letter-spacing:.14em;margin-bottom:10px">ԾԱԽՍԵՐԻ ԿԱՌՈՒՑՎԱԾՔ (ԻԼՅՈՒՍՏՐԱՏԻՎ)</div>
+            <div class="col" style="gap:0">
+              <div class="kv"><span class="k">Էներգիա</span><span class="v" id="cost-energy">—</span></div>
+              <div class="kv"><span class="k">Ջուր</span><span class="v" id="cost-water">—</span></div>
+              <div class="kv"><span class="k">Աշխատանք</span><span class="v" id="cost-labour">—</span></div>
+              <div class="kv"><span class="k">Սպասարկում</span><span class="v">ըստ կանոնակարգի</span></div>
+              <div class="kv"><span class="k">Լոգիստիկա</span><span class="v">ցանցային</span></div>
+              <div class="kv"><span class="k">Փաթեթավորում</span><span class="v">խմբաքանակներով</span></div>
+              <div class="kv"><span class="k">Ամորտիզացիա</span><span class="v">գծային</span></div>
+            </div>
+            <div class="panel" style="background:rgba(7,16,12,.7);padding:12px;border-radius:10px;margin-top:12px">
+              <div class="mono tiny dim" style="margin-bottom:4px">ՀՈՍՔԻ ՄԻԱՎՈՐԸ</div>
+              <p class="small lead">Սխեմայի յուրաքանչյուր «CORE»-ը նյութի պայմանական բաժին է, որը թափոնից շարժվում է դեպի արտադրանք։ Սա փոխաբերություն է, ոչ թե չափման միավոր։</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== ՍԼԱՅԴ 20 · CIRCULAR ECONOMY ===================== -->
+    <section class="slide" id="slide-20">
+      <div class="slide-inner">
+        <div class="rise" style="--d:.05s">
+          <div class="eyebrow">ՍԼԱՅԴ 20 <span class="sep">//</span> ՑԻԿԼ</div>
+          <h2 style="margin-top:6px">Արտադրանքի ավարտը՝ <span class="grad-text">նոր ցիկլի սկիզբ</span></h2>
+        </div>
+
+        <div class="split" style="align-items:center">
+          <div class="panel panel-pad hud-corner rise" style="--d:.18s">
+            <div class="mono tiny green" style="letter-spacing:.14em;margin-bottom:8px">ՇՐՋԱՆԱՅԻՆ ԱՆԻՄԱՑԻԱ</div>
+            <svg viewBox="0 0 460 460" class="diagram">
+              <!-- stage ring -->
+              <circle cx="230" cy="230" r="180" fill="none" stroke="#0A8F55" stroke-width="2" stroke-dasharray="3 7" opacity=".6"/>
+              <circle cx="230" cy="230" r="120" fill="none" stroke="#1B3329" stroke-width="1"/>
+              <!-- particles moving along circle -->
+              <circle r="6" fill="#36D66B"><animateMotion dur="14s" repeatCount="indefinite" path="M230,50 A180,180 0 1,1 229.9,50"/></circle>
+              <circle r="4.5" fill="#B7F36B"><animateMotion dur="14s" begin="-4.7s" repeatCount="indefinite" path="M230,50 A180,180 0 1,1 229.9,50"/></circle>
+              <circle r="4.5" fill="#4DA6C9"><animateMotion dur="14s" begin="-9.3s" repeatCount="indefinite" path="M230,50 A180,180 0 1,1 229.9,50"/></circle>
+              <!-- center core -->
+              <g class="core-idle"><use href="#core-loop" x="30" y="30" width="400" height="400"/></g>
+              <!-- stage nodes -->
+              <g text-anchor="middle">
+                <g><circle cx="230" cy="50" r="5" fill="#36D66B"/><text x="230" y="34" class="eq-title" font-size="11">ԱՐՏԱԴՐԱՆՔ</text></g>
+                <g><circle cx="357" cy="103" r="5" fill="#4DA6C9"/><text x="392" y="100" class="eq-label" font-size="10">ՕԳՏԱԳՈՐԾՈՒՄ</text></g>
+                <g><circle cx="410" cy="230" r="5" fill="#FF5A5A"/><text x="432" y="234" class="eq-label" font-size="10">ԹԱՓՈՆ</text></g>
+                <g><circle cx="357" cy="357" r="5" fill="#E6A100"/><text x="392" y="360" class="eq-label" font-size="10">ՀԱՎԱՔՈՒՄ</text></g>
+                <g><circle cx="230" cy="410" r="5" fill="#9B7BFF"/><text x="230" y="430" class="eq-label" font-size="10">ՏԵՍԱԿԱՎՈՐՈՒՄ</text></g>
+                <g><circle cx="103" cy="357" r="5" fill="#0A8F55"/><text x="48" y="360" class="eq-label" font-size="10">ՎԵՐԱՄՇԱԿՈՒՄ</text></g>
+                <g><circle cx="50" cy="230" r="5" fill="#B7F36B"/><text x="16" y="234" class="eq-label" font-size="10">ՆՅՈՒԹ</text></g>
+                <g><circle cx="103" cy="103" r="5" fill="#36D66B"/><text x="48" y="100" class="eq-label" font-size="10">ՆՈՐ ԱՐՏԱԴՐԱՆՔ</text></g>
+              </g>
+            </svg>
+          </div>
+
+          <div class="col rise" style="--d:.3s">
+            <div class="mono tiny lime" style="letter-spacing:.14em">ՊՈՏԵՆՑԻԱԼ ԷՖԵԿՏՆԵՐ</div>
+            <div class="panel panel-pad hud-corner">
+              <div class="col" style="gap:12px">
+                <div class="row" style="gap:10px"><span class="dot"></span><span class="small">Նյութի վերադարձ տնտեսական ցիկլ</span></div>
+                <div class="row" style="gap:10px"><span class="dot"></span><span class="small">Հումքի կորուստների նվազում</span></div>
+                <div class="row" style="gap:10px"><span class="dot"></span><span class="small">Թափոնների հոսքի մի մասի կրճատում</span></div>
+                <div class="row" style="gap:10px"><span class="dot"></span><span class="small">Արտադրական շղթայի մի մասի տեղայնացում</span></div>
+              </div>
+            </div>
+            <p class="small dim">Կոնկրետ էկոլոգիական տոկոսներ չեն նշվում առանց հաստատված աղբյուրների։</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== SLIDE 20 · FINAL ===================== -->
+    <section class="slide" id="slide-21">
+      <div class="slide-inner" style="justify-content:center;text-align:center;align-items:center">
+        <div class="core-wrap zoom" style="--d:.1s;margin-bottom:6px">
+          <div class="core-glow" style="width:300px;height:300px"></div>
+          <svg class="core-idle" style="width:min(260px,56vw)"><use href="#core-loop"/></svg>
+        </div>
+
+        <div class="col rise" style="--d:.3s;align-items:center;gap:10px">
+          <div class="eyebrow">ԵԶՐԱՓԱԿԻՉ ԱՆԻՄԱՑԻԱ · ԳՐԱՆՈՒԼՆԵՐ → ՑԻԿԼ → ՆՅՈՒԹ → ԱՐՏԱԴՐԱՆՔ → ՆՈՐ ՑԻԿԼ</div>
+          <h2 style="font-size:clamp(30px,5vw,54px)">ԹԱՓՈՆԻՑ<br>ԴԵՊԻ <span class="grad-text">ԱՐԺԵՔ</span></h2>
+          <p class="lead" style="font-size:17px;color:var(--steel-3)">Այսօրվա թափոնը՝ վաղվա հումք։</p>
+        </div>
+
+        <div class="panel panel-pad hud-corner rise" style="--d:.5s;max-width:620px;width:100%">
+          <div class="flow" style="justify-content:center;gap:6px;margin-bottom:14px">
+            <span class="node hot">ԹԱՓՈՆ</span><span class="arrow">→</span>
+            <span class="node hot">ՆՅՈՒԹ</span><span class="arrow">→</span>
+            <span class="node hot">ԱՐՏԱԴՐԱՆՔ</span><span class="arrow">→</span>
+            <span class="node hot">ՆՈՐ ԿՅԱՆՔ</span>
+          </div>
+          <div style="font-weight:900;font-size:22px;letter-spacing:.02em">REPLAST <span style="color:var(--green)">ARMENIA</span></div>
+          <div class="small dim" style="margin-top:4px">Արդյունաբերական վերամշակում և շրջանային արտադրություն · Ակադեմիական բիզնես նախագիծ — Հայաստան</div>
+          <div class="mono tiny" style="margin-top:12px;color:var(--steel-3)">Հայաստանի ազգային պոլիտեխնիկական համալսարան (NPUA)</div>
+          <div class="mono tiny green" style="margin-top:4px">3-րդ կուրս</div>
+        </div>
+
+        <button class="btn primary rise" style="--d:.7s" onclick="goToSlide(1)">↺ ՎԵՐԱՄԵԿՆԱՐԿԵԼ ԳՈՐԾԱՐԱՆԻ ՑԻԿԼԸ</button>
+      </div>
+    </section>
+
+    <!-- ===================== SLIDE 21 · ԴՐՈՒՅՔ 01 · URBAN ===================== -->
+    <section class="slide" id="slide-22">
+      <div class="slide-inner">
+        <div class="rise" style="--d:.05s">
+          <div class="eyebrow">ԴՐՈՒՅՔ 01 <span class="sep">//</span> ՔԱՂԱՔԱՅԻՆ ԲԱՐԵԿԱՐԳՈՒՄ</div>
+          <h2 style="margin-top:6px">Պատրաստի <span class="grad-text">արտադրանք</span></h2>
+          <p class="lead" style="margin-top:6px">Ուղղեք մկնիկը նկարի վրա՝ մոտիկից տեսնելու համար, սեղմեք՝ ամբողջական չափով բացելու համար։</p>
+        </div>
+        <div class="gallery rise" style="--d:.18s">
+          <div class="gcard" onclick="openLightbox('assets/products/01-paving.jpg','Մայթի տարրեր')">
+            <div class="gimg"><img src="assets/products/01-paving.jpg" alt="Մայթի տարրեր" loading="lazy"></div>
+            <div class="gcap"><span class="mono tag green">ՄԱՅԹ</span><span>Մայթի տարրեր</span></div>
+            <div class="zoomhint">⤢</div>
+          </div>
+          <div class="gcard" onclick="openLightbox('assets/products/04-curbs.jpg','Եզրաքարեր և այգու ցանկապատեր')">
+            <div class="gimg"><img src="assets/products/04-curbs.jpg" alt="Եզրաքարեր և այգու ցանկապատեր" loading="lazy"></div>
+            <div class="gcap"><span class="mono tag lime">ԵԶՐԱՔԱՐ</span><span>Եզրաքարեր և այգու ցանկապատեր</span></div>
+            <div class="zoomhint">⤢</div>
+          </div>
+          <div class="gcard" onclick="openLightbox('assets/products/05-benches.jpg','Նստարաններ և սեղաններ')">
+            <div class="gimg"><img src="assets/products/05-benches.jpg" alt="Նստարաններ և սեղաններ" loading="lazy"></div>
+            <div class="gcap"><span class="mono tag amber">ԿԱՀՈՒՅՔ</span><span>Նստարաններ և սեղաններ</span></div>
+            <div class="zoomhint">⤢</div>
+          </div>
+          <div class="gcard" onclick="openLightbox('assets/products/06-bins.jpg','Աղբամաններ')">
+            <div class="gimg"><img src="assets/products/06-bins.jpg" alt="Աղբամաններ" loading="lazy"></div>
+            <div class="gcap"><span class="mono tag blue">ԱՂԲԱՄԱՆ</span><span>Աղբամաններ</span></div>
+            <div class="zoomhint">⤢</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== SLIDE 22 · ԴՐՈՒՅՔ 02 · CONSTRUCTION ===================== -->
+    <section class="slide" id="slide-23">
+      <div class="slide-inner">
+        <div class="rise" style="--d:.05s">
+          <div class="eyebrow">ԴՐՈՒՅՔ 02 <span class="sep">//</span> ՇԻՆԱՐԱՐԱԿԱՆ ՆՅՈՒԹԵՐ</div>
+          <h2 style="margin-top:6px">Պանելներ և <span class="grad-text">թերթեր</span></h2>
+          <p class="lead" style="margin-top:6px">Երկարակյաց թերթային և պանելային նյութեր երկրորդային պոլիմերներից։</p>
+        </div>
+        <div class="gallery rise" style="--d:.18s">
+          <div class="gcard" onclick="openLightbox('assets/products/07-road.jpg','Ճանապարհային տարրեր')">
+            <div class="gimg"><img src="assets/products/07-road.jpg" alt="Ճանապարհային տարրեր" loading="lazy"></div>
+            <div class="gcap"><span class="mono tag amber">ՃԱՆԱՊԱՐՀ</span><span>Ճանապարհային տարրեր</span></div>
+            <div class="zoomhint">⤢</div>
+          </div>
+          <div class="gcard" onclick="openLightbox('assets/products/14-construction-panels.jpg','Շինարարական պանելներ')">
+            <div class="gimg"><img src="assets/products/14-construction-panels.jpg" alt="Շինարարական պանելներ" loading="lazy"></div>
+            <div class="gcap"><span class="mono tag green">ՇԻՆԱՐԱՐՈՒԹՅՈՒՆ</span><span>Շինարարական պանելներ</span></div>
+            <div class="zoomhint">⤢</div>
+          </div>
+          <div class="gcard" onclick="openLightbox('assets/products/15-sheets.jpg','Պլաստիկ թերթեր')">
+            <div class="gimg"><img src="assets/products/15-sheets.jpg" alt="Պլաստիկ թերթեր" loading="lazy"></div>
+            <div class="gcap"><span class="mono tag blue">ԹԵՐԹ</span><span>Պլաստիկ թերթեր</span></div>
+            <div class="zoomhint">⤢</div>
+          </div>
+          <div class="gcard" onclick="openLightbox('assets/products/16-decorative-panels.jpg','Դեկորատիվ պանելներ')">
+            <div class="gimg"><img src="assets/products/16-decorative-panels.jpg" alt="Դեկորատիվ պանելներ" loading="lazy"></div>
+            <div class="gcap"><span class="mono tag lime">ԴԵԿՈՐ</span><span>Դեկորատիվ պանելներ</span></div>
+            <div class="zoomhint">⤢</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== SLIDE 23 · ԴՐՈՒՅՔ 03 · LOGISTICS ===================== -->
+    <section class="slide" id="slide-24">
+      <div class="slide-inner">
+        <div class="rise" style="--d:.05s">
+          <div class="eyebrow">ԴՐՈՒՅՔ 03 <span class="sep">//</span> ԼՈԳԻՍՏԻԿԱ ԵՎ ՏԱՐԱՆԵՐ</div>
+          <h2 style="margin-top:6px">Լոգիստիկա և <span class="grad-text">տարաներ</span></h2>
+          <p class="lead" style="margin-top:6px">Բազմակի օգտագործման պալետներ, արկղեր և տարաներ արդյունաբերության համար։</p>
+        </div>
+        <div class="gallery rise" style="--d:.18s">
+          <div class="gcard" onclick="openLightbox('assets/products/11-pallets.jpg','Պալետներ')">
+            <div class="gimg"><img src="assets/products/11-pallets.jpg" alt="Պալետներ" loading="lazy"></div>
+            <div class="gcap"><span class="mono tag amber">ՊԱԼԵՏ</span><span>Պալետներ</span></div>
+            <div class="zoomhint">⤢</div>
+          </div>
+          <div class="gcard" onclick="openLightbox('assets/products/13-crates.jpg','Լոգիստիկ արկղեր')">
+            <div class="gimg"><img src="assets/products/13-crates.jpg" alt="Լոգիստիկ արկղեր" loading="lazy"></div>
+            <div class="gcap"><span class="mono tag green">ԱՐԿՂ</span><span>Լոգիստիկ արկղեր</span></div>
+            <div class="zoomhint">⤢</div>
+          </div>
+          <div class="gcard" onclick="openLightbox('assets/products/12-containers.jpg','Կոնտեյներներ և բոքսեր')">
+            <div class="gimg"><img src="assets/products/12-containers.jpg" alt="Կոնտեյներներ և բոքսեր" loading="lazy"></div>
+            <div class="gcap"><span class="mono tag blue">ԿՈՆՏԵՅՆԵՐ</span><span>Կոնտեյներներ և բոքսեր</span></div>
+            <div class="zoomhint">⤢</div>
+          </div>
+          <div class="gcard" onclick="openLightbox('assets/products/08-barrels.jpg','Տարաներ և տակառներ')">
+            <div class="gimg"><img src="assets/products/08-barrels.jpg" alt="Տարաներ և տակառներ" loading="lazy"></div>
+            <div class="gcap"><span class="mono tag lime">ՏԱԿԱՌ</span><span>Տարաներ և տակառներ</span></div>
+            <div class="zoomhint">⤢</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== SLIDE 24 · ԴՐՈՒՅՔ 04 · TECHNICAL ===================== -->
+    <section class="slide" id="slide-25">
+      <div class="slide-inner">
+        <div class="rise" style="--d:.05s">
+          <div class="eyebrow">ԴՐՈՒՅՔ 04 <span class="sep">//</span> ՏԵԽՆԻԿԱԿԱՆ ԼՈՒԾՈՒՄՆԵՐ</div>
+          <h2 style="margin-top:6px">Տեխնիկական <span class="grad-text">լուծումներ</span></h2>
+          <p class="lead" style="margin-top:6px">Ճշգրիտ տեխնիկական մասեր և անհատական արտադրանք ըստ պատվիրատուի առաջադրանքի։</p>
+        </div>
+        <div class="gallery rise" style="--d:.18s">
+          <div class="gcard" onclick="openLightbox('assets/products/10-technical.jpg','Տեխնիկական մասեր')">
+            <div class="gimg"><img src="assets/products/10-technical.jpg" alt="Տեխնիկական մասեր" loading="lazy"></div>
+            <div class="gcap"><span class="mono tag green">ՏԵԽՆԻԿԱԿԱՆ</span><span>Տեխնիկական մասեր</span></div>
+            <div class="zoomhint">⤢</div>
+          </div>
+          <div class="gcard" onclick="openLightbox('assets/products/09-custom.jpg','Անհատական արտադրանք')">
+            <div class="gimg"><img src="assets/products/09-custom.jpg" alt="Անհատական արտադրանք" loading="lazy"></div>
+            <div class="gcap"><span class="mono tag amber">ԱՆՀԱՏԱԿԱՆ</span><span>Անհատական արտադրանք</span></div>
+            <div class="zoomhint">⤢</div>
+          </div>
+          <div class="gcard" onclick="openLightbox('assets/products/03-enclosures.jpg','Կորպուսներ և պատյաններ')">
+            <div class="gimg"><img src="assets/products/03-enclosures.jpg" alt="Կորպուսներ և պատյաններ" loading="lazy"></div>
+            <div class="gcap"><span class="mono tag blue">ԿՈՐՊՈՒՍ</span><span>Կորպուսներ և պատյաններ</span></div>
+            <div class="zoomhint">⤢</div>
+          </div>
+          <div class="gcard" onclick="openLightbox('assets/products/02-general.jpg','Արտադրանքի ընդհանուր տեսք')">
+            <div class="gimg"><img src="assets/products/02-general.jpg" alt="Արտադրանքի ընդհանուր տեսք" loading="lazy"></div>
+            <div class="gcap"><span class="mono tag lime">ԸՆԴՀԱՆՈՒՐ</span><span>Արտադրանքի ընդհանուր տեսք</span></div>
+            <div class="zoomhint">⤢</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer id="footer">
+    <div id="dots" class="scroll-x" style="max-width:52%;flex:1;min-width:0"></div>
+    <div class="row" style="gap:8px">
+      <button class="btn" id="btn-prev" onclick="prevSlide()" aria-label="Նախորդ սլայդ">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 19l-7-7 7-7"/></svg>
+        <span class="hide-sm">ՀԵՏ</span>
+      </button>
+      <button class="btn primary" id="btn-next" onclick="nextSlide()" aria-label="Հաջորդ սլայդ">
+        <span class="hide-sm">ԱՌԱՋ</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+  </footer>
+</div>
+
+<!-- ===================== MODAL ===================== -->
+<div id="modal" class="hidden" onclick="if(event.target===this)closeModal()">
+  <div id="modal-card" class="hud-corner">
+    <div class="spread" style="margin-bottom:12px">
+      <div id="modal-title" style="font-weight:800;font-size:17px;color:#fff">—</div>
+      <button class="btn ghost" onclick="closeModal()" style="padding:6px 10px">✕</button>
+    </div>
+    <div id="modal-body" class="lead" style="font-size:13px"></div>
+  </div>
+</div>
+
+<!-- ===================== LIGHTBOX (product gallery) ===================== -->
+<div id="lightbox" class="hidden" onclick="closeLightbox()">
+  <img id="lightbox-img" src="" alt="">
+  <div id="lightbox-cap"></div>
+  <div id="lightbox-hint">ESC / ՍԵՂՄՈՒՄ — ՓԱԿԵԼ</div>
+</div>
+
+<script>
+/* ============================================================
+   REPLAST ARMENIA — Slide Engine & Interactions (Vanilla JS)
+   ============================================================ */
+const TOTAL = 25;
+let current = 1;
+
+const slideTitles = [
+
+  "01 · Վերնագիր — վիրտուալ գործարան",
+  "02 · Խնդիրը՝ թափոն, թե՞ հումք",
+  "03 · Բիզնես հայեցակարգ և արժեք",
+  "04 · Պլաստիկի վեց տեսակները",
+  "05 · Հումքի հավաքում — Հայաստանի քարտեզ",
+  "06 · Գործարանի տեղը և հատակագիծը",
+  "07 · Ընդունում և տեսակավորում",
+  "08 · Մանրացուցիչ / գրանուլյատոր",
+  "09 · Լվացման գիծ",
+  "10 · Նյութերի տարանջատում",
+  "11 · Չորացում և խոնավություն",
+  "12 · Էքստրուդեր — գծի սիրտը",
+  "13 · Ֆիլտրացիա և գրանուլացում",
+  "14 · Պոլիմերային քիմիա",
+  "15 · Որակի վերահսկում",
+  "16 · Արտադրանքի կաղապարում",
+  "17 · Արտադրանքի պորտֆել",
+  "18 · Ամբողջական գործարան",
+  "19 · Տնտեսական մոդել",
+  "20 · Շրջանային տնտեսություն",
+  "21 · Եզրափակում — թափոնից դեպի արժեք",
+  "22 · Պատրաստի արտադրանք — քաղաքային միջավայր",
+  "23 · Պատրաստի արտադրանք — շինարարական նյութեր",
+  "24 · Պատրաստի արտադրանք — լոգիստիկա և տարաներ",
+  "25 · Պատրաստի արտադրանք — տեխնիկական լուծումներ"
+
+];
+
+function initDots(){
+  const c = document.getElementById('dots');
+  c.innerHTML = '';
+  for(let i=1;i<=TOTAL;i++){
+    const b = document.createElement('button');
+    b.className = 'dot-btn';
+    b.title = slideTitles[i-1];
+    b.setAttribute('aria-label', 'Սլայդ ' + i);
+    b.onclick = () => goToSlide(i);
+    c.appendChild(b);
+  }
+  const st = document.createElement('style');
+  st.textContent = `
+    .dot-btn{width:9px;height:9px;border-radius:99px;border:none;background:var(--graphite-4);cursor:pointer;transition:all .3s var(--ease);flex:0 0 auto}
+    .dot-btn:hover{background:var(--steel-2)}
+    .dot-btn.on{width:24px;background:var(--green);box-shadow:0 0 10px rgba(54,214,107,.7)}
+  `;
+  document.head.appendChild(st);
+}
+
+function updateUI(){
+  for(let i=1;i<=TOTAL;i++){
+    const s = document.getElementById('slide-'+i);
+    if(s) s.classList.remove('active');
+  }
+  const act = document.getElementById('slide-'+current);
+  if(act){ act.classList.add('active'); act.scrollTop = 0; }
+  document.getElementById('progress-bar').style.width = (current/TOTAL*100)+'%';
+  document.getElementById('cur-num').textContent = String(current).padStart(2,'0');
+  document.getElementById('header-title').textContent = slideTitles[current-1] || '';
+  document.querySelectorAll('#dots .dot-btn').forEach((d,i)=> d.classList.toggle('on', i===current-1));
+  document.getElementById('btn-prev').disabled = current===1;
+  document.getElementById('btn-next').disabled = current===TOTAL;
+  runCounters(act);
+}
+
+function goToSlide(n){ if(n>=1 && n<=TOTAL){ current=n; updateUI(); } }
+function nextSlide(){ if(current<TOTAL){ current++; updateUI(); } }
+function prevSlide(){ if(current>1){ current--; updateUI(); } }
+
+document.addEventListener('keydown', e=>{
+  const lb = document.getElementById('lightbox');
+  if(lb && !lb.classList.contains('hidden')){
+    if(e.key==='Escape') closeLightbox();
+    return;
+  }
+  const t = e.target;
+  if(t && (t.tagName==='INPUT'||t.tagName==='TEXTAREA')) return;
+  if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' '){ e.preventDefault(); nextSlide(); }
+  else if(e.key==='ArrowLeft'||e.key==='PageUp'){ e.preventDefault(); prevSlide(); }
+  else if(e.key==='Home'){ goToSlide(1); }
+  else if(e.key==='End'){ goToSlide(TOTAL); }
+});
+
+let tx=0, ty=0;
+const vp = document.getElementById('viewport');
+vp.addEventListener('touchstart', e=>{ tx=e.changedTouches[0].screenX; ty=e.changedTouches[0].screenY; }, {passive:true});
+vp.addEventListener('touchend', e=>{
+  const dx = e.changedTouches[0].screenX - tx;
+  const dy = e.changedTouches[0].screenY - ty;
+  if(Math.abs(dx)>60 && Math.abs(dx)>Math.abs(dy)){ dx<0 ? nextSlide() : prevSlide(); }
+}, {passive:true});
+
+/* Animated counters — run when their slide becomes active */
+function runCounters(slide){
+  if(!slide) return;
+  slide.querySelectorAll('[data-count]').forEach(el=>{
+    const target = parseFloat(el.getAttribute('data-count'));
+    const dec = parseInt(el.getAttribute('data-dec')||'0');
+    const suf = el.getAttribute('data-suffix')||'';
+    const dur = 1400; const t0 = performance.now();
+    function tick(t){
+      const p = Math.min((t-t0)/dur, 1);
+      const e = 1 - Math.pow(1-p, 3);
+      const v = target * e;
+      el.textContent = (dec? v.toFixed(dec) : Math.round(v).toLocaleString('hy-AM')) + suf;
+      if(p<1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  });
+}
+
+/* Modal */
+function openModal(title, html){
+  document.getElementById('modal-title').textContent = title;
+  document.getElementById('modal-body').innerHTML = html;
+  document.getElementById('modal').classList.remove('hidden');
+}
+function closeModal(){ document.getElementById('modal').classList.add('hidden'); }
+
+/* Lightbox — product gallery close-up */
+function openLightbox(src, cap){
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox-cap').textContent = cap || '';
+  document.getElementById('lightbox').classList.remove('hidden');
+}
+function closeLightbox(){
+  document.getElementById('lightbox').classList.add('hidden');
+  document.getElementById('lightbox-img').src = '';
+}
+
+/* Video player for machine demo cards */
+function playVideo(el){
+  if(el.classList.contains('playing')) return;
+  var id = el.getAttribute('data-vid');
+  var st = el.getAttribute('data-start');
+  var watch = 'https://www.youtube.com/watch?v=' + id + (st ? '&t=' + st + 's' : '');
+  // YouTube refuses to run its embedded player when the page is opened straight
+  // from disk (file:// origin) and returns "Error 153". In that case we open the
+  // video on YouTube in a new tab; over http(s) the player runs right in the slide.
+  if(location.protocol === 'file:'){
+    window.open(watch, '_blank', 'noopener');
+    return;
+  }
+  var url = 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0' + (st ? '&start=' + st : '');
+  el.classList.add('playing');
+  el.innerHTML = '<iframe src="' + url + '" title="video" referrerpolicy="strict-origin-when-cross-origin" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>';
+  el.onclick = null;
+}
+
+
+/* Accordion (generic) */
+function toggleAcc(el){
+  const item = el.closest('.acc-item');
+  const body = item.querySelector('.acc-body');
+  const open = item.classList.toggle('open');
+  body.style.maxHeight = open ? body.scrollHeight+'px' : '0px';
+}
+
+/* ---------- Slide 3 · Business pillars ---------- */
+const pillars = {
+  1:{n:'01',t:'Թափոնների կառավարում',s:'ՀՈՒՄՔԻ ՀԱՎԱՔՈՒՄ',d:'HDPE, LDPE և PP թափոնների կայուն հավաքում և նախնական պատրաստում՝ մանրածախի, ձեռնարկությունների և լոգիստիկ կենտրոնների հետ պայմանագրային կետերով։ Ապահովում է երաշխավորված մուտքային հոսք։'},
+  2:{n:'02',t:'Նյութի վերականգնում',s:'ՎԵՐԱԿԱՆԳՆՄԱՆ ԳՈՐԾԸՆԹԱՑ',d:'Խորը մաքրում, տարանջատում ըստ խտության, էքստրուզիա և գրանուլացում՝ խառը թափոններից ստանդարտացված rHDPE / rPP / rLDPE մակնիշների ստացում։'},
+  3:{n:'03',t:'Արտադրություն',s:'ՊԱՏՐԱՍՏԻ ԱՐՏԱԴՐԱՆՔ',d:'Պատրաստի արտադրանքի ուղղակի կաղապարում՝ մայթի տարրեր, լոգիստիկ արկղեր, պալետներ, թերթեր և տեխնիկական մասեր։ Նյութի մոնետիզացիա։'}
+};
+function selectPillar(n){
+  const p = pillars[n];
+  document.getElementById('pillar-num').textContent = p.n;
+  document.getElementById('pillar-title').textContent = p.t;
+  document.getElementById('pillar-status').textContent = p.s;
+  document.getElementById('pillar-desc').textContent = p.d;
+  document.querySelectorAll('.pillar-btn').forEach(b=> b.classList.toggle('active', +b.dataset.p===n));
+  document.getElementById('core-state-label').textContent =
+    n===1 ? 'CORE → ԹԱՓՈՆ' : n===2 ? 'CORE → ՆՅՈՒԹ' : 'CORE → ԱՐՏԱԴՐԱՆՔ';
+}
+
+/* ---------- Slide 4 · Polymers ---------- */
+const polymers = {
+  pet:{name:'PET — Պոլիէթիլենտերեֆտալատ',d:'1.34–1.38 գ/սմ³',t:'250–260 °C',s:'Ըմպելիքների շշեր, տարաներ, ջերմաձևավորված թաղանթ',p:'Պահանջում է խորը չորացում (<0.05% խոնավություն) — հակառակ դեպքում հիդրոլիզ; զգայուն է տաքացման նկատմամբ',pr:'Մանրաթել, թաղանթ, bottle-to-bottle գրանուլ',lim:'Կատեգորիկ անհամատեղելի է PVC-ի հետ (դեստրուկցիա + HCl)'},
+  hdpe:{name:'HDPE — Բարձր խտության պոլիէթիլեն',d:'0.94–0.96 գ/սմ³',t:'130–145 °C',s:'Տարաներ, սրվակներ, խողովակներ, արկղեր, կափարիչներ',p:'Հեշտությամբ տարանջատվում է ֆլոտացիայով (լողում է ջրում); կայուն է վերամշակման ժամանակ',pr:'Պալետներ, մայթի տարրեր, խողովակներ, արկղեր',lim:'Կրկնվող ցիկլերում կորցնում է հարվածային ամրությունը'},
+  ldpe:{name:'LDPE — Ցածր խտության պոլիէթիլեն',d:'0.91–0.93 գ/սմ³',t:'110–120 °C',s:'Թաղանթ, տոպրակներ, ագրոթաղանթ, փաթեթավորում',p:'Նախքան էքստրուզիան անհրաժեշտ է ագլոմերացիա և ճզմում; թաղանթը խցանում է պտուտակը',pr:'Ջրամեկուսիչ թերթեր, թաղանթ, խողովակներ',lim:'Ցածր ամրություն, պահանջում է մոդիֆիկատորներ'},
+  pp:{name:'PP — Պոլիպրոպիլեն',d:'0.90–0.91 գ/սմ³',t:'160–170 °C',s:'Բամպերներ, բաժակներ, արկղեր, դույլեր, կափարիչներ',p:'Բարձր ջերմակայունություն; գերազանց ձևավորվողություն; զգայուն է օքսիդացման նկատմամբ',pr:'Ավտոմասեր, ագրոարկղեր, տեխնիկական պատյաններ',lim:'Օքսիդացում՝ կրկնվող ջերմային ցիկլերում առանց կայունացուցիչների'},
+  ps:{name:'PS — Պոլիստիրոլ',d:'1.04–1.07 գ/սմ³',t:'180–200 °C',s:'Միանգամյա սպասք, փրփրված փաթեթավորում',p:'Փխրուն; պահանջում է հարվածադիմացկուն մոդիֆիկատորներ; փրփրված PS-ը ծավալուն է',pr:'Դեկորատիվ պրոֆիլներ, մեկուսիչ սալեր',lim:'Ցածր հարվածային ամրություն առանց մոդիֆիկացիայի'},
+  pvc:{name:'PVC — Պոլիվինիլքլորիդ',d:'1.38–1.42 գ/սմ³',t:'160–190 °C',s:'Պատուհանների պրոֆիլներ, լինոլեում, խողովակներ, մեկուսացում',p:'Դեստրուկցիայի ժամանակ անջատում է HCl; թունավոր է PET հոսքում; պահանջում է խիստ վերահսկողություն',pr:'Շինարարական պրոֆիլներ, դրենաժ',lim:'Վտանգավոր է որպես օտար հոսքերի աղտոտիչ'}
+};
+function switchPolymer(key){
+  document.querySelectorAll('.poly-tab').forEach(b=> b.classList.toggle('active', b.dataset.p===key));
+  const d = polymers[key];
+  document.getElementById('poly-content').innerHTML = `
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      <div class="col" style="gap:8px">
+        <div style="font-weight:800;font-size:18px;color:#fff">${d.name}</div>
+        <div class="kv"><span class="k">Խտություն</span><span class="v green">${d.d}</span></div>
+        <div class="kv"><span class="k">Հալում</span><span class="v">${d.t}</span></div>
+        <div class="kv"><span class="k">Աղբյուրներ</span><span class="v">${d.s}</span></div>
+      </div>
+      <div class="col" style="gap:8px">
+        <div class="tag lime">Պատրաստման առանձնահատկություններ</div>
+        <p class="small lead">${d.p}</p>
+        <div class="tag green">Պոտենցիալ արտադրանք</div>
+        <p class="small" style="color:#fff;font-weight:600">${d.pr}</p>
+        <div class="tag red">Սահմանափակումներ</div>
+        <p class="small lead">${d.lim}</p>
+      </div>
+    </div>`;
+}
+
+/* ---------- Slide 5 · Regions ---------- */
+const regions = {
+  yerevan:{n:'Երևանի կենտրոնական հանգույց',t:'ԲԱՐՁՐ ԼՈԳԻՍՏԻԿ ԽՏՈՒԹՅՈՒՆ',w:'PET, HDPE, LDPE փաթեթավորում',v:'180–250 տ/ամիս',d:'Մանրածախ, պահեստներ, ընդունման կետեր'},
+  kotayk:{n:'Կոտայք — արդյունաբերական գոտի',t:'ԱՐԴՅՈՒՆԱԲԵՐԱԿԱՆ + ԱԳՐՈ',w:'LDPE թաղանթ, PP արկղեր',v:'60–90 տ/ամիս',d:'Աբովյան, Հրազդան, ձեռնարկություններ'},
+  armavir:{n:'Արմավիր — ագրոսեկտոր',t:'ԱԳՐՈ-ՎԵՐԱԿԱՆԳՆՈՒՄ',w:'Կաթիլային ժապավեններ, ագրոթաղանթ',v:'40–70 տ/ամիս',d:'Արարատյան դաշտ, ֆերմերներ'},
+  ararat:{n:'Արարատ — արտադրական',t:'ԱՐԴՅՈՒՆԱԲԵՐԱԿԱՆ',w:'HDPE տարաներ, տեխնիկական պլաստիկ',v:'50–80 տ/ամիս',d:'Արտադրությունների կտրվածքներ և խոտան'}
+};
+function selectRegion(key){
+  const r = regions[key];
+  document.getElementById('region-name').textContent = r.n;
+  document.getElementById('region-type').textContent = r.t;
+  document.getElementById('region-waste').textContent = r.w;
+  document.getElementById('region-vol').textContent = r.v;
+  document.getElementById('region-desc').textContent = r.d;
+  document.querySelectorAll('.region-node').forEach(n=> n.classList.toggle('active', n.dataset.r===key));
+}
+
+/* ---------- Slide 10 · Moisture ---------- */
+function setMoisture(v){
+  document.getElementById('moist-val').textContent = v.toFixed(1)+'%';
+  document.getElementById('moist-bar').style.width = Math.min(v*140,100)+'%';
+  const box = document.getElementById('moist-box');
+  if(v> 0.2){
+    box.innerHTML = '<span class="dot red"></span> ԳԵՐԱԶԱՆՑՈՒՄ — հիդրոլիտիկ դեստրուկցիայի և էքստրուդերում պղպջակների ռիսկ';
+    box.style.borderColor = 'rgba(255,90,90,.5)'; box.style.color = '#ffb3b3';
+  } else {
+    box.innerHTML = '<span class="dot"></span> ԱՆՎՏԱՆԳ ՌԵԺԻՄ — խոնավությունը չի խախտի հալույթի կայունությունը';
+    box.style.borderColor = 'rgba(54,214,107,.5)'; box.style.color = '#c9f5d6';
+  }
+}
+
+/* ---------- Slide 12 · Pellet counter ---------- */
+let pellets = 1428900;
+function addPellets(){ pellets += 25000; document.getElementById('pellet-count').textContent = pellets.toLocaleString('hy-AM'); }
+
+/* ---------- Slide 17 · Factory machines ---------- */
+const machines = {
+  1:{n:'01 · Ընդունում',d:'Ավտոմեքենային կշեռքներ, մուտքային ստուգում, խմբաքանակի գրանցում, նմուշառում և բունկերային պահեստ։',io:'Բեռնատար հումքով → կշռված խմբաքանակ → տեսակավորման գիծ'},
+  2:{n:'02 · Տեսակավորում',d:'Օպտիկական NIR սկաներ, մագնիս, ձեռքով հաստիք։ Տարանջատում ըստ պոլիմերի տեսակի, գույնի, աղտոտվածության։',io:'Խառը թափոններ → PET/HDPE/PP/LDPE մոնոհոսքեր'},
+  3:{n:'03 · Մանրացուցիչ',d:'Երկռոտոր մանրացուցիչ՝ կոպիտ մանրացման համար մինչև 20–40 մմ կտորների։',io:'Խոշոր արտադրանք → կոպիտ կտորներ'},
+  4:{n:'04 · Լվացում',d:'Ինտենսիվ տաք ալկալային լվացում, ֆրիկցիոն լվացում, ողողում։',io:'Կեղտոտ թեփուկներ → մաքուր թեփուկներ'},
+  5:{n:'05 · Տարանջատում',d:'Ֆլոտացիոն բաք ըստ խտության + օդային տարանջատիչ. պոլիմերների և խառնուրդների առանձնացում։',io:'Խառնուրդ → տարանջատված հոսքեր'},
+  6:{n:'06 · Չորացում',d:'Ցենտրիֆուգ + օդաչորացում + ջերմային չորացում մինչև < 0.2% մնացորդային խոնավություն։',io:'Թաց թեփուկներ → չոր թեփուկներ'},
+  7:{n:'07 · Էքստրուդեր',d:'Միապտուտակ էքստրուդեր գազազերծմամբ. սնուցման, սեղմման, դոզավորման, հալման գոտիներ։',io:'Չոր թեփուկներ → համասեռ հալույթ'},
+  8:{n:'08 · Ֆիլտրացիա',d:'Սկավառակային/մխոցային melt-ֆիլտրը ճնշման տակ հեռացնում է աղտոտիչները հալույթից։',io:'Հալույթ → մաքրված հալույթ'},
+  9:{n:'09 · Գրանուլյատոր',d:'Ստորջրյա կամ ժգուտային գրանուլյատոր. ժգուտների հովացում և կտրում գրանուլների։',io:'Ժգուտներ → գրանուլներ'},
+  10:{n:'10 · Կոմպաունդավորում',d:'Ադիտիվների փաթեթի ներմուծում (կայունացուցիչներ, պիգմենտներ, լցանյութեր) հալույթ։',io:'Գրանուլներ + հավելումներ → կոմպաունդ'},
+  11:{n:'11 · Կաղապարում',d:'Ներարկման կաղապարում և կոմպրեսիոն մամլում պատրաստի արտադրանքի համար։',io:'Կոմպաունդ → արտադրանք'},
+  12:{n:'12 · Որակի վերահսկում',d:'Լաբորատորիա. MFI, խտություն, խոնավություն, գույն, մեխանիկական հատկություններ։',io:'Արտադրանք → հավաստագրված խմբաքանակ'},
+  13:{n:'13 · Պահեստավորում',d:'Պատրաստի գրանուլների և արտադրանքի պահեստ, փաթեթավորում, խմբաքանակների մակնշում։',io:'Արտադրանք → պահեստային միավոր'},
+  14:{n:'14 · Բաշխում',d:'Առաքում հաճախորդներին, տարաների վերադարձ, թափոնների հակադարձ լոգիստիկա դեպի ցիկլ։',io:'Պահեստ → հաճախորդ → հավաքում'}
+};
+function highlightMachine(n){
+  const m = machines[n];
+  document.getElementById('machine-panel').innerHTML =
+    `<div class="tag green" style="margin-bottom:8px">ԸՆՏՐՎԱԾ ՀԱՆԳՈՒՅՑ</div>
+     <div style="font-weight:800;font-size:16px;color:#fff">${m.n}</div>
+     <p class="small lead" style="margin-top:6px">${m.d}</p>
+     <div class="kv" style="margin-top:10px"><span class="k">Հոսք</span><span class="v">${m.io}</span></div>`;
+  document.querySelectorAll('.machine-node').forEach(el=> el.classList.toggle('active', +el.dataset.m===n));
+}
+
+/* ---------- Slide 18 · Economics ---------- */
+function calcModel(v){
+  document.getElementById('calc-input').textContent = v.toLocaleString('hy-AM')+' տ';
+  const loss = Math.round(v*0.18);
+  const pellets = Math.round(v*0.82);
+  const product = Math.round(pellets*0.98);
+  document.getElementById('calc-loss').textContent = '−'+loss.toLocaleString('hy-AM')+' տ';
+  document.getElementById('calc-pellets').textContent = pellets.toLocaleString('hy-AM')+' տ';
+  document.getElementById('calc-product').textContent = product.toLocaleString('hy-AM')+' տ';
+  const energy = v*0.42, water = v*0.6, labour = 14+ v*0.02;
+  document.getElementById('cost-energy').textContent = energy.toFixed(0)+' ՄՎտ·ժ';
+  document.getElementById('cost-water').textContent = water.toFixed(0)+' մ³';
+  document.getElementById('cost-labour').textContent = Math.round(labour).toLocaleString('hy-AM')+' մարդ-հերթափոխ';
+  // bar widths
+  document.getElementById('bar-loss').style.width = (18)+'%';
+  document.getElementById('bar-pellets').style.width = (82)+'%';
+  document.getElementById('bar-product').style.width = (80.4)+'%';
+  document.querySelectorAll('.scen-btn').forEach(b=> b.classList.toggle('active', +b.dataset.v===v));
+}
+
+/* ---------- Slide 16 · Products ---------- */
+const products = {
+  paving:{t:'Մայթի տարրեր',mat:'rHDPE + ֆրակցիոն ավազ',proc:'Կոմպրեսիոն մամլում',pur:'Հետիոտնային գոտիներ, հրապարակներ, բակեր',prop:'Զրո ջրակլանում, ցրտակայունություն F300+, ծառայության ժամկետ> 25 տարի',lim:'Հաստությունը սահմանափակվում է կաղապարով',re:'Ամբողջական կրկնակի վերամշակում նույն արտադրանքի մեջ'},
+  panels:{t:'Դեկորատիվ պանելներ',mat:'rPP / rPS կոմպաունդ',proc:'Ներարկում + մամլում',pur:'Ճակատներ, միջնապատեր, հարդարում',prop:'Հարվածադիմացկունություն, խոնավակայունություն, ձևակայունություն',lim:'Բացօթյա օգտագործման համար պահանջում է ուլտրամանուշակագույն կայունացուցիչներ',re:'Մանրացում և վերադարձ հոսք'},
+  crates:{t:'Լոգիստիկ արկղեր',mat:'100% rPP High Impact',proc:'Ներարկման կաղապարում',pur:'Ագրո-լոգիստիկա, մանրածախ, պահեստ',prop:'Բազմակի օգտագործման, շտապելի, լվացվող',lim:'Պահանջում է ճշգրիտ կաղապար',re:'Բազմակի օգտագործման → կրկնվող ցիկլ'},
+  pallets:{t:'Պալետներ',mat:'rHDPE ամրացված',proc:'Ներարկման կաղապարում',pur:'Ծանր լոգիստիկա',prop:'Ստատիկ բեռնվածություն մինչև 4000 կգ, խոնավակայուն',lim:'Քաշը ավելի մեծ է փայտե անալոգներից',re:'Ամբողջովին վերադարձելի'},
+  containers:{t:'Կոնտեյներներ',mat:'rHDPE / rPP',proc:'Ռոտացիոն կաղապարում',pur:'Պահեստավորում, թափոնների հավաքում',prop:'Քիմիակայունություն, հարվածադիմացկունություն',lim:'Խոշոր կաղապար',re:'Մաշվելուց հետո վերադարձ հումք'},
+  sheets:{t:'Պլաստիկ թերթեր',mat:'rLDPE / rPE',proc:'Էքստրուզիա',pur:'Կաղապարամած, պաշտպանություն, ջրամեկուսացում',prop:'Ճկունություն, հարվածային ամրություն',lim:'Ցածր կոշտություն',re:'Ուղղակի կրկնակի էքստրուզիա'},
+  parts:{t:'Տեխնիկական մասեր',mat:'rPP կոմպաունդ + լցանյութ',proc:'Ներարկման կաղապարում',pur:'Պատյաններ, ամրակներ, հավաքածուներ',prop:'Չափային ճշգրտություն, ամրություն',lim:'Կախված է պատվիրատուի տեխնիկական առաջադրանքից',re:'Տեսակավորված վերադարձ'},
+  custom:{t:'Անհատական արտադրանք',mat:'ընտրություն ըստ խնդրի',proc:'ըստ արտադրանքի տեխնոլոգիայի',pur:'Ըստ տեխնիկական առաջադրանքի',prop:'Նախագծային մշակում',lim:'Պահանջում է վավերացում',re:'Նախագծվում է ցիկլի համար'}
+};
+function showProduct(k){
+  const p = products[k];
+  if(!p) return;
+  openModal(p.t, `
+    <div class="col" style="gap:0">
+      <div class="kv"><span class="k">Նյութ</span><span class="v">${p.mat}</span></div>
+      <div class="kv"><span class="k">Գործընթաց</span><span class="v green">${p.proc}</span></div>
+      <div class="kv"><span class="k">Նշանակություն</span><span class="v">${p.pur}</span></div>
+      <div class="kv"><span class="k">Հատկություններ</span><span class="v">${p.prop}</span></div>
+      <div class="kv"><span class="k">Սահմանափակումներ</span><span class="v">${p.lim}</span></div>
+      <div class="kv"><span class="k">Հետագա վերամշակում</span><span class="v lime">${p.re}</span></div>
+    </div>`);
+}
+
+window.addEventListener('load', ()=>{
+  initDots();
+  switchPolymer('hdpe');
+  selectRegion('yerevan');
+  selectPillar(1);
+  setMoisture(0.12);
+  highlightMachine(1);
+  calcModel(200);
+  updateUI();
+  if(location.protocol === 'file:'){
+    document.body.classList.add('file-mode');
+    document.querySelectorAll('.vnote').forEach(function(n){
+      n.textContent = 'ԿԲԱՑՎԻ YouTube-ՈՒՄ՝ ՆՈՐ ՆԵՐԴԻՐՈՒՄ';
+    });
+  }
+});
+</script>
+</body>
+</html>
